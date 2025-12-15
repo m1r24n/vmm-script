@@ -1,5 +1,7 @@
 interfaces {
     {{ intf }} {
+        flexible-vlan-tagging;
+        encapsulation flexible-ethernet-services;
         unit {{ unit }} {
             vlan-id {{ unit }};
             encapsulation vlan-bridge;

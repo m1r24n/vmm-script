@@ -1,0 +1,29 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: pool1
+  namespace: metallb-system
+spec:
+  addresses:
+  - 172.16.1.0/24
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: external
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - pool1
+  aggregationLength: 32
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: gw
+  namespace: metallb-system
+spec:
+  myASN: 64512
+  peerASN: 64512
+  peerAddress: 172.16.12.1

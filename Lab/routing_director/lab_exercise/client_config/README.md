@@ -10,7 +10,7 @@
     apk add merge-usr
     merge-usr
     apk del merge-usr
-    apk add openssh
+    apk add openssh iperf
     passwd root
     cat << EOF | tee -a /etc/ssh/sshd_config
     PermitRootLogin yes
@@ -68,12 +68,12 @@
 # create client (w/o vlan)
 
 
-    export LXC=cl1ce4-cust2
-    export OVS=ce4_cust2_eth1
-    export IPV4=192.168.114.2/24
-    export GW4=192.168.114.1
-    export IPV6=fc00:Dead:beef:114::1000:1/64
-    export GW6=fc00:Dead:beef:114::1
+    export LXC=cl1ce3-cust2
+    export OVS=ce3_cust2_eth1
+    export IPV4=192.168.123.2/24
+    export GW4=192.168.123.1
+    export IPV6=fc00:Dead:beef:123::1000:1/64
+    export GW6=fc00:Dead:beef:123::1
 
     #!/bin/bash
     # create client LXC without VLAN
@@ -115,7 +115,8 @@
     lxc exec router sh
     apk add frr
     sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
-    rc-update add sshd
+    rc-update add frr
+    exit
     lxc stop router
 
 # create router
@@ -131,25 +132,27 @@
 
 # create router (with vlan)
 
-    export LXC=ce4-cust2
-    export OVS=pe4ge3
+    export LXC=ce3-cust2
+    export OVS=pe3ge0
     export IPV4WAN=192.168.255.3/31
     export IPV6WAN=fc00:Dead:beef:ffff::3/127
-    export IPV4LAN=192.168.114.1/24
-    export IPV6LAN=fc00:Dead:beef:114::1/64
+    export IPV4LAN=192.168.123.1/24
+    export IPV6LAN=fc00:Dead:beef:123::1/64
     export VLAN=1002
-    export LAN=ce4_cust2_eth1
-    export ASN=4200002004
+    export LAN=ce3_cust2_eth1
+    export ASN=4200002003
     export ASN_PEER=4200000001
     export IPV4PEER=192.168.255.2
     export IPV6PEER=fc00:dead:beef:ffff::2
-    export NETWORKV4=192.168.114.0/24
-    export NETWORKV6=fc00:Dead:beef:114::/64
+    export NETWORKV4=192.168.123.0/24
+    export NETWORKV6=fc00:Dead:beef:123::/64
 
 
 
     #!/bin/bash
     # create client LXC with VLAN
+    sudo ip link add dev ${LAN} type bridge
+    sudo ip link set dev ${LAN} up
     echo "create router ${LXC} "
     lxc copy router ${LXC}
     echo "changing container ${LXC}"
@@ -210,6 +213,6 @@
     echo "net.ipv6.conf.all.forwarding=1" > ipv6.conf
     lxc file push ipv6.conf ${LXC}/etc/sysctl.d/ipv6.conf
     lxc start ${LXC}
-
+    lxc exec ${LXC} sh
     sysctl -p /etc/sysctl.d/ipv6.conf
 

@@ -102,25 +102,25 @@
         create: true
         block: |
           #!/usr/bin/env bash
-          export CRPD_NAME=$1
-          export CRPD_VER=$2
-          if [ "${CRPD_NAME}" == "" ];
+          export NAME=$1
+          export VER=$2
+          if [ "${NAME}" == "" ];
           then
-            echo "variable CRPD_NAME is not defined"
+            echo "variable NAME is not defined"
             exit
           fi
-          if [ "${CRPD_VER}" == "" ];
+          if [ "${VER}" == "" ];
           then
-            echo "variable CRPD_VER is not defined"
+            echo "variable VER is not defined"
             exit
           fi
-          sudo podman volume create ${CRPD_NAME}-config
-          sudo podman volume create ${CRPD_NAME}-varlog
-          sudo podman run --rm --detach --name ${CRPD_NAME} -h ${CRPD_NAME} \
+          sudo podman volume create ${NAME}-config
+          sudo podman volume create ${NAME}-varlog
+          sudo podman run --rm --detach --name ${NAME} -h ${NAME} \
                 --net=host --privileged \
-                -v ${CRPD_NAME}-config:/config \
-                -v ${CRPD_NAME}-varlog:/var/log \
-                -it localhost/crpd:${CRPD_VER}
+                -v ${NAME}-config:/config \
+                -v ${NAME}-varlog:/var/log \
+                -it localhost/crpd:${VER}
     - name: chmod /home/ubuntu/install_crpd.sh
       ansible.builtin.file:
         path: /home/ubuntu/install_crpd.sh

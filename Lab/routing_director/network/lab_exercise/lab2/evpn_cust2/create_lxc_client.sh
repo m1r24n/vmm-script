@@ -4,10 +4,10 @@ do
 for ip1 in 1 2
 do
 LANBR=pe${i}ge0
-LXC=lab2cust2cl${i}${ip1}
-VLAN=103
+LXC=cl${i}${ip1}-cust2-l2
+VLAN=2002
 echo "create ${LXC} "
-lxc copy router ${LXC}
+lxc copy client ${LXC}
 echo "changing container ${LXC}"
 lxc query --request PATCH /1.0/instances/${LXC} --data "{
   \"devices\": {
@@ -41,29 +41,29 @@ lxc file push interfaces  ${LXC}/etc/network/interfaces
 # EOF
 # lxc file push resolv.conf ${LXC}/etc/resolv.conf
 
-lxc start ${LXC}
-
 cat << EOF | tee -a hosts
 127.0.0.1	localhost localhost.localdomain
 ::1		localhost localhost.localdomain
-172.16.220.11 lab2cust2cl11
-172.16.220.12 lab2cust2cl12
-172.16.220.21 lab2cust2cl21
-172.16.220.22 lab2cust2cl22
-172.16.220.31 lab2cust2cl31
-172.16.220.32 lab2cust2cl32
+172.16.220.11 cl11-cust2-l2
+172.16.220.12 cl12-cust2-l2
+172.16.220.21 cl21-cust2-l2
+172.16.220.22 cl22-cust2-l2
+172.16.220.31 cl31-cust2-l2
+172.16.220.32 cl32-cust2-l2
 
-fc00:dead:beef:a220::1000:11 lab2cust2cl11
-fc00:dead:beef:a220::1000:12 lab2cust2cl12
-fc00:dead:beef:a220::1000:21 lab2cust2cl21
-fc00:dead:beef:a220::1000:22 lab2cust2cl22
-fc00:dead:beef:a220::1000:31 lab2cust2cl31
-fc00:dead:beef:a220::1000:32 lab2cust2cl32
+fc00:dead:beef:a220::1000:11 cl11-cust2-l2
+fc00:dead:beef:a220::1000:12 cl12-cust2-l2
+fc00:dead:beef:a220::1000:21 cl21-cust2-l2
+fc00:dead:beef:a220::1000:22 cl22-cust2-l2
+fc00:dead:beef:a220::1000:31 cl31-cust2-l2
+fc00:dead:beef:a220::1000:32 cl32-cust2-l2
 
 EOF
 echo "push configuration into node ${LXC}"
 lxc file push hosts  ${LXC}/etc/hosts
 echo "file uploaded"
+
+lxc start ${LXC}
 
 done
 done

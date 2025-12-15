@@ -1,8 +1,9 @@
 ---
-name: rdnet2 # this is rdnet
+name: rdnet23 # this is rdnet
 pod: 
   type: vmm
-  vmmserver: q-pod35-vmm.englab.juniper.net
+  #vmmserver: q-pod35-vmm.englab.juniper.net
+  vmmserver: q-pod23-vmm.englab.juniper.net
   user: irzan
   # adpassword: ThisIsAnaMabokCoy
   home_dir : /vmm/data/user_disks/irzan
@@ -56,7 +57,7 @@ fabric:
 #   # bit 7 : delay_measurement_rpm
 wg:
   prefix_allowed:
-  - 172.16.13.0/24 
+  - 10.100.255.0/24
   - 172.16.10.0/24
 vm:
   gw:

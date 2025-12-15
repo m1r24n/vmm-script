@@ -1,0 +1,126 @@
+---
+name: k8s
+pod: 
+  type: vmm
+  vmmserver: q-pod25-vmm.englab.juniper.net
+  home_dir : /vmm/data/user_disks/irzan
+  user: irzan
+images:
+  gw: images/gw.qcow2
+  ubuntu: images/ubuntu24.04.qcow2
+junos_login:
+  login: admin
+  password: pass01
+wg:
+  prefix_allowed:
+  - 172.16.1.0/24 
+  - 172.16.11.0/24
+  - 172.16.12.0/24
+  - 172.16.13.0/24
+vm:
+  gw:
+    type: gw
+    os: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.1/24
+        dhcp_range: 172.16.11.5-172.16.11.100
+        mtu: 9000
+      em2: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.1/24
+        mtu: 9000
+      em3: 
+        bridge: lan3
+        family:
+          inet: 172.16.13.1/24
+        mtu: 9000
+        dhcp_range: 172.16.13.5-172.16.13.15
+  node0:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan1 
+        family:
+          inet: 172.16.11.10/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.10/24 
+        mtu: 9000
+  node1:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.11/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        inet: 172.16.12.11/24
+        mtu: 9000
+  node2:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.12/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.12/24 
+        mtu: 9000
+  node3:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.13/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.13/24 
+        mtu: 9000
+  node4:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.14/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.14/24 
+        mtu: 9000
+  registry:
+    type: pcmedium
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan3
+        family:
+          inet: 172.16.13.10/24 
+          gateway4: 172.16.13.1

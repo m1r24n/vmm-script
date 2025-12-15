@@ -1,0 +1,159 @@
+---
+- name: updating node with ubuntu OS
+  hosts: all
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+  - name: update and upgrade repository
+    ansible.builtin.apt:
+      update_cache: true
+      upgrade: yes
+      state: latest
+- name: install software on node gw
+  hosts: 
+  - gw
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+  - name: install software
+    ansible.builtin.apt:
+      pkg:
+      - novnc
+      - websockify
+      - wireguard-tools
+      - haproxy
+  - name: Add entries into /etc/haproxy/haproxy.cfg
+    tags:
+    - haproxy
+    ansible.builtin.blockinfile:
+      path: /etc/haproxy/haproxy.cfg
+      marker: "# {mark} ANSIBLE MANAGED BLOCK"
+      block: |
+        frontend k8s
+          bind 172.16.11.101:6443
+          mode tcp
+          option tcplog
+          default_backend k8smasters
+
+        backend k8smasters
+          mode tcp
+          balance roundrobin
+          option tcp-check
+          server node0 172.16.11.10:6443 check
+          server node1 172.16.11.11:6443 check
+          server node2 172.16.11.12:6443 check
+  - name: Create file /home/ubuntu/download.sh
+    ansible.builtin.copy:
+      dest: /home/ubuntu/install_k8s.sh
+      mode: '0755'
+      content: |
+        #!/usr/bin/env bash
+        # script to install k8s
+        curl -L -O https://github.com/containerd/containerd/releases/download/v2.2.0/containerd-2.2.0-linux-amd64.tar.gz
+        curl -L -O https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+        curl -L -O https://github.com/opencontainers/runc/releases/download/v1.4.0/runc.amd64
+        curl -L -O https://github.com/containernetworking/plugins/releases/download/v1.8.0/cni-plugins-linux-amd64-v1.8.0.tgz
+        for i in node{0..4}
+        do
+          scp containerd-2.2.0-linux-amd64.tar.gz ubuntu@${i}:~/
+          scp containerd.service ubuntu@${i}:~/
+          scp runc.amd64 ubuntu@${i}:~/
+          scp cni-plugins-linux-amd64-v1.8.0.tgz ubuntu@${i}:~/
+        done
+  # - name: Unconditionally reboot the machine with all defaults
+  #   tags:
+  #     - rebootgw
+  #   ansible.builtin.reboot:
+  #     msg: "Rebooting machine in 5 seconds"
+- name: install software on node registry
+  hosts: 
+  - registry
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+  - name: install software
+    ansible.builtin.apt:
+      pkg:
+      - podman
+      - containerd
+  - name: create file run_registry.sh
+    ansible.builtin.copy:
+      dest: /home/ubuntu/run_registry.sh
+      mode: '0755'
+      content: |
+        podman run --name registry \
+          -p 5000:5000 \
+          -v ~/registry/data:/var/lib/registry \
+          -v ~/registry/certs:/certs \
+          -e "REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt" \
+          -e "REGISTRY_HTTP_TLS_KEY=/certs/registry.key" \
+          --network podman \
+          -d registry
+  - name: create file upload_certs.sh
+    ansible.builtin.copy:
+      dest: /home/ubuntu/upload_certs
+      mode: '0755'
+      content: |
+        #!/bin/bash
+        for i in node{0..4}
+        do
+          scp ~/registry/certs/registry.crt ${i}:~/
+          ssh ${i} "sudo cp /home/ubuntu/registry.crt /etc/ssl/certs"
+        done
+- name: enable ipv4/ipv6 forwarding
+  hosts: k8s
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+  - name: Add entries into /etc/sysctl.conf
+    tags:
+    - sysctl
+    ansible.builtin.blockinfile:
+      path: /etc/sysctl.conf
+      marker: "; {mark} ANSIBLE MANAGED BLOCK"
+      block: |
+        net.ipv4.ip_forward = 1
+        net.ipv6.conf.all.forwarding = 1
+  - name: Create file /home/ubuntu/install_containerd.sh
+    ansible.builtin.copy:
+      dest: /home/ubuntu/install_containerd.sh
+      mode: '0755'
+      content: |
+        #!/usr/bin/env bash
+        export CTR="containerd-2.2.0-linux-amd64.tar.gz"
+        export CNI_PLUGINS="cni-plugins-linux-amd64-v1.8.0.tgz"
+        sudo tar Cxzvf /usr/local ${CTR}
+        sudo mkdir -p /usr/local/lib/systemd/system/
+        sudo cp ./containerd.service /usr/local/lib/systemd/system/
+        sudo systemctl daemon-reload
+        sudo systemctl enable --now containerd
+        sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+        sudo mkdir -p /opt/cni/bin
+        sudo tar Cxzvf /opt/cni/bin ${CNI_PLUGINS}
+        sudo mkdir -p /etc/containerd
+        containerd config default | sudo tee /etc/containerd/config.toml
+        sudo sed -i -e "s/SystemdCgroup = false/SystemdCgroup = true/" /etc/containerd/config.toml
+        sudo systemctl restart containerd
+  - name: Create file /home/ubuntu/install_kubeadm.sh
+    ansible.builtin.copy:
+      dest: /home/ubuntu/install_kubeadm.sh
+      mode: '0755'
+      content: |
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+        curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+        sudo apt -y update
+        sudo apt install -y kubelet kubeadm kubectl
+        sudo apt-mark hold kubelet kubeadm kubectl
+        sudo systemctl enable --now kubelet
+  - name: Unconditionally reboot the machine with all defaults
+    tags:
+      - reboot
+    ansible.builtin.reboot:
+      msg: "Rebooting machine in 5 seconds"
+

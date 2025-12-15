@@ -1,0 +1,23 @@
+---
+- name: deploy l3vpn
+  hosts:
+  - pe1
+  - pe3
+  connection: local
+  gather_facts: no
+  vars:
+    user: admin
+  tasks:
+    # - name: Generate a UUID using uuidgen
+    #   ansible.builtin.set_fact:
+    #     instance_uuid: "{{ lookup('pipe', 'uuidgen') }}"
+    # - name: Debug the generated UUID
+    #   ansible.builtin.debug:
+    #     msg: "The generated UUID is: {{ instance_uuid }}"
+    - name: load l3vpn configuration
+      juniper.device.config:  
+        template: set_l3vpn.j2
+        format: text
+        load: merge
+        vars: "{{ lookup('file', playbook_dir + '/vars_' + inventory_hostname + '.yaml') | from_yaml}}"
+

@@ -1,0 +1,37 @@
+## PE1
+
+set protocols mpls label-switched-path lsp1_via_p5 to 10.100.255.3
+set protocols mpls label-switched-path lsp1_via_p5 primary via_p5
+set protocols mpls path via_p5 10.100.0.1
+set protocols mpls path via_p5 10.100.255.15
+
+
+set protocols mpls label-switched-path lsp2 to 10.100.255.3
+
+
+
+
+
+## PE3
+set protocols mpls label-switched-path lsp1_via_p5 to 10.100.255.1
+set protocols mpls label-switched-path lsp1_via_p5 primary via_p5
+set protocols mpls path via_p5 10.100.0.9
+set protocols mpls path via_p5 10.100.255.15
+
+set protocols mpls label-switched-path lsp2 to 10.100.255.1
+
+
+
+set policy-options policy-statement cust1 term 1 then community add rt-cust1
+set policy-options policy-statement cust1 term 1 then accept
+set policy-options policy-statement cust2 term 1 then community add rt-cust2
+set policy-options policy-statement cust2 term 1 then accept
+set policy-options community rt-cust1 members target:25000:1001
+set policy-options community rt-cust2 members target:25000:2001
+
+set routing-instances cust1 vrf-export cust1
+set routing-instances cust2 vrf-export cust2
+
+set routing-options transport-class auto-create
+set routing-options transport-class name gold color 100
+set routing-options transport-class name silver color 200
