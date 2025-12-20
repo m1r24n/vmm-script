@@ -83,16 +83,14 @@ Configure HAproxy on node GW to allow load balance traffic to multiple master
        sudo mkdir -p /etc/containers/certs.d/172.16.13.10:5000/
        sudo cp ~/registry/certs/registry.crt /etc/containers/certs.d/172.16.13.10:5000/ca.crt
 
-8.  upload file ~/registry.crt into directory /etc/ssl/certs on every k8s node
+8. upload file ~/registry.crt into directory /etc/ssl/certs on every k8s node
 
        #!/bin/bash
        for i in node{0..4}
        do
-           scp ~/registry/certs/registry.crt ${i}:~/
-           ssh ${i} "sudo cp ~/registry.crt /etc/ssl/certs/; sudo reboot"
+         scp ~/registry/certs/registry.crt ${i}:~/
+         ssh ${i} "sudo cp ~/registry.crt /etc/ssl/certs/; sudo reboot"
        done
-
-       ssh ${i} "sudo cp ~/registry.crt /etc/ssl/certs/"
 
 
 ## installing containerd
@@ -101,11 +99,11 @@ Do the following on all k8s nodes
 
 1. Download containerd from [here](https://github.com/containerd/containerd/releases)
 
-       curl -L -O https://github.com/containerd/containerd/releases/download/v2.2.0/containerd-2.2.0-linux-amd64.tar.gz
+       curl -L -O https://github.com/containerd/containerd/releases/download/v2.2.0/containerd-2.2.1-linux-amd64.tar.gz
 
 2. extract the file 
 
-       sudo tar Cxzvf /usr/local containerd-2.2.0-linux-amd64.tar.gz
+       sudo tar Cxzvf /usr/local containerd-2.2.1-linux-amd64.tar.gz
 
 3. Download [containerd.service](https://raw.githubusercontent.com/containerd/containerd/main/containerd.service) into /usr/local/lib/systemd/system/containerd.service
 
@@ -137,12 +135,12 @@ Do the following on all k8s nodes
 
 1. Download CNI plugins from [here](https://github.com/containernetworking/plugins/releases)
 
-       curl -L -O https://github.com/containernetworking/plugins/releases/download/v1.8.0/cni-plugins-linux-amd64-v1.8.0.tgz
+       curl -L -O https://github.com/containernetworking/plugins/releases/download/v1.8.0/cni-plugins-linux-amd64-v1.9.0.tgz
 
 2. install CNI plugins
 
        sudo mkdir -p /opt/cni/bin
-       sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.8.0.tgz
+       sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.9.0.tgz
 
 ## edit config.toml 
 
@@ -226,7 +224,7 @@ Documentation can be found [here](https://docs.cilium.io/en/stable/gettingstarte
 
 2. install cilium 
 
-       cilium install --version 1.18.4
+       cilium install --version 1.18.5
 
 ## install metallb as loadbalancer for k8s cluster
 

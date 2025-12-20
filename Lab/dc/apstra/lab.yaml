@@ -42,26 +42,26 @@ vm:
         family:
           inet: 172.16.55.1/24 
           gateway4: 172.16.55.254
-  apstraw2:
-    type: pchpv1
-    os: aos
-    vnc: yes
-    interfaces: 
-      em0: 
-        bridge: ctrl
-        family:
-          inet: 172.16.55.2/24 
-          gateway4: 172.16.55.254
-  apstraw3:
-    type: pchpv1
-    os: aos
-    vnc: yes
-    interfaces: 
-      em0: 
-        bridge: ctrl
-        family:
-          inet: 172.16.55.3/24 
-          gateway4: 172.16.55.254
+  # apstraw2:
+  #   type: pchpv1
+  #   os: aos
+  #   vnc: yes
+  #   interfaces: 
+  #     em0: 
+  #       bridge: ctrl
+  #       family:
+  #         inet: 172.16.55.2/24 
+  #         gateway4: 172.16.55.254
+  # apstraw3:
+  #   type: pchpv1
+  #   os: aos
+  #   vnc: yes
+  #   interfaces: 
+  #     em0: 
+  #       bridge: ctrl
+  #       family:
+  #         inet: 172.16.55.3/24 
+  #         gateway4: 172.16.55.254
   ztp:
     type: pctiny
     os: aos_ztp

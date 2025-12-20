@@ -33,7 +33,7 @@ spec:
     spec:
       containers: 
       - name: webserver2b
-        image: 172.16.14.10:5000/webserver:0.1
+        image: 172.16.13.10:5000/webserver:0.1
         imagePullPolicy: Always
         securityContext:
            privileged: true

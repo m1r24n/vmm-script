@@ -1,7 +1,7 @@
 # node SVR
 #!/bin/bash
 VM=svr3
-MAC=56:04:1d:00:1d:1c
+MAC=56:04:1d:00:5f:d5
 IPv4=192.168.102.13/24
 IPv6=fc00:dead:beef:a102::1000:13/64
 GWv4=192.168.102.1
@@ -36,7 +36,7 @@ sudo netplan apply
 
 # node LXD
 #!/bin/bash
-MAC=56:04:1d:00:1d:1e
+MAC=56:04:1d:00:35:6e
 cat << EOF | sudo tee /etc/netplan/02_net.yaml
 network:
   ethernets:
@@ -83,17 +83,17 @@ EOF
 
 # container
 
-export LXC_NAME=alpine2
+export LXC_NAME=svr1lxd1
 export VLAN=101
 export OVS=ovs0
-export IPv4=192.168.101.112/24
+export IPv4=192.168.101.111/24
 export GWv4=192.168.101.1
 export IPv6=fc00:dead:beef:a101::1000:111/64
 export GWv6=fc00:dead:beef:a101::1
 
 
 echo "Creating VM ${LXC_NAME}"
-lxc copy client ${LXC_NAME}
+lxc copy svr ${LXC_NAME}
 lxc query --request PATCH /1.0/instances/${LXC_NAME} --data "{
   \"devices\": {
     \"eth0\" :{
