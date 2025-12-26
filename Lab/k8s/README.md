@@ -275,7 +275,7 @@ Documentation can be found [here](https://metallb.io/)
        spec:
          myASN: 64512
          peerASN: 64512
-         peerAddress: 172.16.11.1
+         peerAddress: 172.16.12.1
        EOF
        kubectl apply -f metallb_config.yaml
 
@@ -284,9 +284,9 @@ Documentation can be found [here](https://metallb.io/)
 1. configure frr with the following configuration
 
        router bgp 64512
-         neighbor 172.16.11.10 remote-as 64512
-         neighbor 172.16.11.11 remote-as 64512
-         neighbor 172.16.11.12 remote-as 64512
-         neighbor 172.16.11.13 remote-as 64512
-         neighbor 172.16.11.14 remote-as 64512
+         neighbor 172.16.12.10 remote-as 64512
+         neighbor 172.16.12.11 remote-as 64512
+         neighbor 172.16.12.12 remote-as 64512
+         neighbor 172.16.12.13 remote-as 64512
+         neighbor 172.16.12.14 remote-as 64512
        exit

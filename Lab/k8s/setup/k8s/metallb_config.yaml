@@ -21,7 +21,7 @@ spec:
 apiVersion: metallb.io/v1beta2
 kind: BGPPeer
 metadata:
-  name: gw
+  name: example
   namespace: metallb-system
 spec:
   myASN: 64512

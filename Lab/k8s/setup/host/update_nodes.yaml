@@ -27,10 +27,9 @@
   - name: Add entries into /etc/haproxy/haproxy.cfg
     tags:
     - haproxy
-    ansible.builtin.blockinfile:
-      path: /etc/haproxy/haproxy.cfg
-      marker: "# {mark} ANSIBLE MANAGED BLOCK"
-      block: |
+    ansible.builtin.copy:
+      dest: /etc/haproxy/haproxy.cfg
+      content: |
         frontend k8s
           bind 172.16.11.101:6443
           mode tcp
@@ -46,8 +45,10 @@
           server node2 172.16.11.12:6443 check
   - name: Create file /home/ubuntu/download.sh
     ansible.builtin.copy:
-      dest: /home/ubuntu/install_k8s.sh
+      dest: /home/ubuntu/download.sh
       mode: '0755'
+      tags:
+      - download
       content: |
         #!/usr/bin/env bash
         # script to install k8s
