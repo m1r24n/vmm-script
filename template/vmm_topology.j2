@@ -13,7 +13,7 @@ config "{{name}}" {
     bridge "{{br}}"{};
     {% endfor -%}
     bridge "reserved_bridge"{};
-    PRIVATE_BRIDGES
+    {# PRIVATE_BRIDGES #}
     {% for v in vm -%}
     {% if vm[v].disk == 'vmx' -%}
 

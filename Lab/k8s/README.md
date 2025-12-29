@@ -273,20 +273,24 @@ Documentation can be found [here](https://metallb.io/)
          name: example
          namespace: metallb-system
        spec:
-         myASN: 64512
-         peerASN: 64512
+         myASN: 65000
+         peerASN: 65000
          peerAddress: 172.16.12.1
        EOF
        kubectl apply -f metallb_config.yaml
+
+
+kubectl label nodes node0 --overwrite node.kubernetes.io/exclude-from-external-load-balancers=false
+
 
 ## configure frr on node GW
 
 1. configure frr with the following configuration
 
-       router bgp 64512
-         neighbor 172.16.12.10 remote-as 64512
-         neighbor 172.16.12.11 remote-as 64512
-         neighbor 172.16.12.12 remote-as 64512
-         neighbor 172.16.12.13 remote-as 64512
-         neighbor 172.16.12.14 remote-as 64512
+       router bgp 65000
+         neighbor 172.16.12.10 remote-as 65000
+         neighbor 172.16.12.11 remote-as 65000
+         neighbor 172.16.12.12 remote-as 65000
+         neighbor 172.16.12.13 remote-as 65000
+         neighbor 172.16.12.14 remote-as 65000
        exit

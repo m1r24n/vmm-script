@@ -11,7 +11,7 @@ images:
   gw: images/gw.qcow2
   ubuntu: images/ubuntu24.04.qcow2
   bridge: images/bridge.qcow2
-  vjunos_router: images/vJunos-router-25.2R1.9.qcow2
+  vjunos_router: images/vJunos-router-25.4R1.11.qcow2
 junos_login:
   login: admin
   password: pass01

@@ -36,6 +36,6 @@
 14. Now you can start playing around with Routing Director
 
 
-## Create Network Implementation Plan (NIP), onboarding device on Routing Director, using GUI
+## Create Network Implementation Plan (NIP), onboarding device on Routing Director, using API
 
 please follow this [document](./lab_exercise.md) to use API to create NIP 

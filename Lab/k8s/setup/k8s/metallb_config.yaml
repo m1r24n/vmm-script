@@ -6,7 +6,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 172.16.1.0/24
+  - 172.16.1.1 - 172.16.1.100
 ---
 apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
@@ -24,6 +24,6 @@ metadata:
   name: example
   namespace: metallb-system
 spec:
-  myASN: 64512
-  peerASN: 64512
+  myASN: 65000
+  peerASN: 65000
   peerAddress: 172.16.12.1
