@@ -19,14 +19,14 @@ isis_dm: yes
 fabric:
   subnet: 10.100.0.0/24
   topology:
-  - [ 0x7d, pe1, ge-0/0/1, p1, ge-0/0/0 ]
-  - [ 0x7d, pe1, ge-0/0/2, p2, ge-0/0/0 ]
-  - [ 0x7d, pe2, ge-0/0/1, p1, ge-0/0/1 ]
-  - [ 0x7d, pe2, ge-0/0/2, p2, ge-0/0/1 ]
-  - [ 0x7d, pe3, ge-0/0/1, p3, ge-0/0/0 ]
-  - [ 0x7d, pe3, ge-0/0/2, p4, ge-0/0/0 ]
-  - [ 0x7d, pe4, ge-0/0/1, p3, ge-0/0/1 ]
-  - [ 0x7d, pe4, ge-0/0/2, p4, ge-0/0/1 ]
+  - [ 0x7d, pe1, ge-0/0/0, p1, ge-0/0/0 ]
+  - [ 0x7d, pe1, ge-0/0/1, p2, ge-0/0/0 ]
+  - [ 0x7d, pe2, ge-0/0/0, p1, ge-0/0/1 ]
+  - [ 0x7d, pe2, ge-0/0/1, p2, ge-0/0/1 ]
+  - [ 0x7d, pe3, ge-0/0/0, p3, ge-0/0/0 ]
+  - [ 0x7d, pe3, ge-0/0/1, p4, ge-0/0/0 ]
+  - [ 0x7d, pe4, ge-0/0/0, p3, ge-0/0/1 ]
+  - [ 0x7d, pe4, ge-0/0/1, p4, ge-0/0/1 ]
   - [ 0x7d, p1, ge-0/0/2, p2, ge-0/0/2 ]
   - [ 0x7d, p3, ge-0/0/2, p4, ge-0/0/2 ]
   - [ 0x7d, p2, ge-0/0/3, p4, ge-0/0/3 ]
@@ -36,14 +36,18 @@ fabric:
   - [ 0x7d, p4, ge-0/0/4, p5, ge-0/0/3 ]
   - [ 0x7d, pe5, ge-0/0/1,p5, ge-0/0/4 ]
   - [ 0x15, p5, ge-0/0/5, crpd, em1 ]
-  - [ 0x0, pe1, ge-0/0/0, client, em1 ]
-  - [ 0x0, pe2, ge-0/0/0, client, em2 ]
-  - [ 0x0, pe3, ge-0/0/0, client, em3 ]
-  - [ 0x0, pe4, ge-0/0/0, client, em4 ]
+  - [ 0x0, pe1, ge-0/0/2, client, em1 ]
+  - [ 0x0, pe2, ge-0/0/2, client, em2 ]
+  - [ 0x0, pe3, ge-0/0/2, client, em3 ]
+  - [ 0x0, pe4, ge-0/0/2, client, em4 ]
   - [ 0x0, pe1, ge-0/0/3, client, em5 ]
   - [ 0x0, pe2, ge-0/0/3, client, em6 ]
   - [ 0x0, pe3, ge-0/0/3, client, em7 ]
   - [ 0x0, pe4, ge-0/0/3, client, em8 ]
+  - [ 0x0, pe1, ge-0/0/4, client, em9 ]
+  - [ 0x0, pe2, ge-0/0/4, client, em10 ]
+  - [ 0x0, pe3, ge-0/0/4, client, em11 ]
+  - [ 0x0, pe4, ge-0/0/4, client, em12 ]
 
 #   # there are five field: status, VM node A, interface of node A, VM node Z, interface of node Z
 #   # value for the field status:
@@ -285,19 +289,19 @@ vm:
           inet: 172.16.10.22/24
           gateway4: 172.16.10.254
       em1:
-        node: [pe1, ge-0/0/1, pe1p1 ]
+        node: [pe1, ge-0/0/0, pe1p1 ]
       em2:
         node: [p1, ge-0/0/0, pe1p1 ]
       em3:
-        node: [pe1, ge-0/0/2, pe1p2 ]
+        node: [pe1, ge-0/0/1, pe1p2 ]
       em4:
         node: [p2, ge-0/0/0, pe1p2 ]
       em5:
-        node: [pe2, ge-0/0/1, pe2p1 ]
+        node: [pe2, ge-0/0/0, pe2p1 ]
       em6:
         node: [p1, ge-0/0/1, pe2p1 ]
       em7:
-        node: [pe2, ge-0/0/2, pe2p2 ]
+        node: [pe2, ge-0/0/1, pe2p2 ]
       em8:
         node: [p2, ge-0/0/1, pe2p2 ]
   br3:
@@ -309,19 +313,19 @@ vm:
           inet: 172.16.10.23/24
           gateway4: 172.16.10.254
       em1:
-        node: [pe3, ge-0/0/1, pe3p3 ]
+        node: [pe3, ge-0/0/0, pe3p3 ]
       em2:
         node: [p3, ge-0/0/0, pe3p3 ]
       em3:
-        node: [pe3, ge-0/0/2, pe3p4 ]
+        node: [pe3, ge-0/0/1, pe3p4 ]
       em4:
         node: [p4, ge-0/0/0, pe3p4 ]
       em5:
-        node: [pe4, ge-0/0/1, pe4p3 ]
+        node: [pe4, ge-0/0/0, pe4p3 ]
       em6:
         node: [p3, ge-0/0/1, pe4p3 ]
       em7:
-        node: [pe4, ge-0/0/2, pe4p4 ]
+        node: [pe4, ge-0/0/1, pe4p4 ]
       em8:
         node: [p4, ge-0/0/1, pe4p4 ]
   client:

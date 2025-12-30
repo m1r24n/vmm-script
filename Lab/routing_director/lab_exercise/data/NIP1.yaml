@@ -1,0 +1,482 @@
+{
+  "infrastructure_ntw": {
+    "default_interface_profiles": [
+      "IP1"
+    ],
+    "default_node_profiles": [
+      "DP1"
+    ],
+    "default_port_profiles": [
+      "PP1"
+    ],
+    "interface_profiles": {
+      "interface_profile": [
+        {
+          "name": "IP1",
+          "templates": []
+        }
+      ]
+    },
+    "node_profiles": {
+      "node_profile": [
+        {
+          "analytics": {
+            "traffic_engineering": {}
+          },
+          "ipv6_tunneling": {
+            "enabled": false
+          },
+          "labels": [],
+          "name": "DP1",
+          "per_flow_load_balancing": {
+            "enabled": false
+          },
+          "templates": [],
+          "trust": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    "port_profiles": {
+      "port_profile": [
+        {
+          "name": "PP1"
+        }
+      ]
+    },
+    "labels": {
+      "label": []
+    },
+    "network_nodes": {
+      "network_node": [
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE1_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE1_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "PE1",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E5D8",
+          "site_id": "3eb1f156-bbbf-4512-89ce-6368eadc12ab",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE2_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE2_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "PE2",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E699",
+          "site_id": "1919d37f-9f59-4cc1-aba2-a8b573e2bd81",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE3_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE13_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "PE3",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1DF64",
+          "site_id": "efc232be-5a60-46a2-aeb4-0f7113a17656",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE4_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE4_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "PE4",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E2AD",
+          "site_id": "d8f1dec7-a710-4411-9439-720bbfa2c6e2",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE5_P5",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "PE5",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E4CC",
+          "site_id": "3cc0b463-6ac1-4088-bb2f-29f4255e6afb",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE1_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE2_P1",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P1_P2",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P1_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "P1",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1DE5C",
+          "site_id": "bbff2f62-19eb-426c-b3b8-1fead888b997",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE1_P2",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE2_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P1_P2",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P2_P4",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P2_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "P2",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E54F",
+          "site_id": "7700d36b-3a02-46b6-a415-fc757e73e636",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE3_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE4_P3",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P3_P4",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P3_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "P3",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E5F5",
+          "site_id": "dbb49ee7-3807-407c-a461-cca938055f97",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE3_P4",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE4_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P3_P4",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P2_P4",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P4_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "P4",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1DD23",
+          "site_id": "0bb9d0e2-cfaa-4dc5-8610-0a7cb2ce7995",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P1_P5",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P2_P5",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P3_P5",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_P4_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": []
+                },
+                "link": "Link_PE5_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "model": "vMX",
+          "name": "P5",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6953C1E2B6",
+          "site_id": "fcd2a7be-957c-4ff1-b72c-cbdc32e922b8",
+          "vendor": "Juniper Networks"
+        }
+      ]
+    }
+  }
+}

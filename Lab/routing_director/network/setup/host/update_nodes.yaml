@@ -45,19 +45,19 @@
         block: |
           network:
             bridges:
-              pe1ge0:
+              pe1ge2:
                 openvswitch: {}
                 interfaces:
                 - eth1
-              pe2ge0:
+              pe2ge2:
                 openvswitch: {}
                 interfaces:
                 - eth2
-              pe3ge0:
+              pe3ge2:
                 openvswitch: {}
                 interfaces:
                 - eth3
-              pe4ge0:
+              pe4ge2:
                 openvswitch: {}
                 interfaces:
                 - eth4
@@ -77,6 +77,22 @@
                 openvswitch: {}
                 interfaces:
                 - eth8
+              pe1ge4:
+                openvswitch: {}
+                interfaces:
+                - eth9
+              pe2ge4:
+                openvswitch: {}
+                interfaces:
+                - eth10
+              pe3ge4:
+                openvswitch: {}    
+                interfaces:
+                - eth11
+              pe4ge4:
+                openvswitch: {}
+                interfaces:
+                - eth12
     - name: chmod /etc/netplan/02_net.yaml
       ansible.builtin.file:
         path: /etc/netplan/02_net.yaml

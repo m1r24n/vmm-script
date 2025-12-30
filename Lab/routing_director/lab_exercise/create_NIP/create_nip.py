@@ -8,12 +8,18 @@ import os
 if len(sys.argv) < 2:
     print("where is the outfile name ?")
     exit(1)
-outfile=sys.argv[1]
+outfile=f"../data/{sys.argv[1]}"
 if not os.path.isfile("nodes.yaml"):
     print("file nodes.yaml is not available")
     exit(1)
 if not os.path.isfile("plan.yaml"):
     print("file plan.yaml is not available")
+    exit(1)
+if not os.path.isfile("../data/nodes_sernum.yaml"):
+    print("file ../data/nodes_sernum.yaml is not available")
+    exit(1)
+if not os.path.isfile("../data/sites_id.yaml"):
+    print("file .../data/sites_id.yaml is not available")
     exit(1)
 print(f"writing file {outfile}")
 with open("nodes.yaml") as f1:
@@ -22,10 +28,10 @@ nodes=yaml.load(data1_yaml,Loader=yaml.FullLoader)
 #pprint.pprint(nodes)
 # with open("nodes.yaml") as f1:
 #     data1_yaml = f1.read()}+"/"
-with open("../nodes_sernum.yaml") as f1:
+with open("../data/nodes_sernum.yaml") as f1:
     t1 = f1.read()
 sernum =yaml.load(t1,Loader=yaml.FullLoader)
-with open("../API/sites_id.yaml") as f1:
+with open("../data/sites_id.yaml") as f1:
     t1 = f1.read()
 site_id =yaml.load(t1,Loader=yaml.FullLoader)
 # pprint.pprint(sernum)

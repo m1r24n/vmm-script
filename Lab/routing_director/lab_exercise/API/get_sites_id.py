@@ -21,7 +21,7 @@ x = requests.get(url, headers=headers,verify=False)
 # print(x.text)
 y=json.loads(x.text)
 # pprint.pprint(y)
-with open("sites_id.yaml","w") as f1:
+with open("../data/sites_id.yaml","w") as f1:
     f1.write("---\n")
     for i in y:
         # if i['name']=='PE2' or i['name']=='PE3':
