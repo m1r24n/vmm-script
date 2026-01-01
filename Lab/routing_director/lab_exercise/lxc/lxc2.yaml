@@ -1,0 +1,137 @@
+---
+lxc_server:
+  host: 172.16.10.24
+  user: ubuntu
+  password: pass01
+  ssh_key: /Users/irzan/.ssh/rdnet23
+lxc:
+  cl11-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s1-cust2
+        ipv4: 192.168.10.11/24
+        gw4: 192.168.10.254
+        ipv6: fc00:dead:beef:aa10::1000:11/64 
+        gw6: fc00:dead:beef:aa10::1
+  cl12-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s1-cust2
+        ipv4: 192.168.10.12/24
+        gw4: 192.168.10.254
+        ipv6: fc00:dead:beef:aa10::1000:12/64 
+        gw6: fc00:dead:beef:aa10::1
+  ce1-cust2:
+    type: router
+    bgp: 
+      asn: 4200002001
+      peerasn: 4200000001
+      peerv4: 192.168.100.0
+      peerv6: fc00:dead:beef:a100::0
+      nd_prefix: fc00:dead:beef:aa10::/64
+      advv4:  192.168.10.0/24
+      advv6: fc00:dead:beef:aa10::/64
+    # dnsmasq:
+    #   range: "192.168.10.1,192.168.10.100"
+    #   router: 192.168.10.254
+    #   dns: 192.168.10.254
+    ports:
+      - port: eth0
+        ipv4: 192.168.100.1/31
+        ipv6: fc00:dead:beef:a100::1/127
+        bridge: pe1ge2
+        br_type: ovs
+        vlan: 1002
+      - port: eth1
+        ipv4: 192.168.10.254/24
+        ipv6: fc00:dead:beef:aa10::1/64
+        bridge: s1-cust2
+  cl21-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s2-cust2
+        ipv4: 192.168.20.11/24
+        gw4: 192.168.20.254
+        ipv6: fc00:dead:beef:aa20::1000:11/64 
+        gw6: fc00:dead:beef:aa20::1
+  cl22-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s2-cust2
+        ipv4: 192.168.20.12/24
+        gw4: 192.168.20.254
+        ipv6: fc00:dead:beef:aa20::1000:12/64 
+        gw6: fc00:dead:beef:aa20::1
+  ce2-cust2:
+    type: router
+    bgp: 
+      asn: 4200002002
+      peerasn: 4200000001
+      peerv4: 192.168.100.2
+      peerv6: fc00:dead:beef:a100::2
+      nd_prefix: fc00:dead:beef:aa20::/64
+      advv4:  192.168.20.0/24
+      advv6: fc00:dead:beef:aa20::/64
+    # dnsmasq:
+    #   range: "192.168.10.1,192.168.10.100"
+    #   router: 192.168.10.254
+    #   dns: 192.168.10.254
+    ports:
+      - port: eth0
+        ipv4: 192.168.100.3/31
+        ipv6: fc00:dead:beef:a100::3/127
+        bridge: pe2ge4
+        br_type: ovs
+        vlan: 1001
+      - port: eth1
+        ipv4: 192.168.20.254/24
+        ipv6: fc00:dead:beef:aa20::1/64
+        bridge: s2-cust2
+  cl41-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s4-cust2
+        ipv4: 192.168.40.41/24
+        gw4: 192.168.40.254
+        ipv6: fc00:dead:beef:aa40::1000:41/64 
+        gw6: fc00:dead:beef:aa40::1
+  cl42-cust2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s4-cust2
+        ipv4: 192.168.40.42/24
+        gw4: 192.168.40.254
+        ipv6: fc00:dead:beef:aa40::1000:42/64 
+        gw6: fc00:dead:beef:aa40::1
+  ce4-cust2:
+    type: router
+    bgp: 
+      asn: 4200002004
+      peerasn: 4200000001
+      peerv4: 192.168.100.4
+      peerv6: fc00:dead:beef:a100::4
+      nd_prefix: fc00:dead:beef:aa40::/64
+      advv4:  192.168.40.0/24
+      advv6: fc00:dead:beef:aa40::/64
+    # dnsmasq:
+    #   range: "192.168.30.1,192.168.30.100"
+    #   router: 192.168.30.254
+    #   dns: 192.168.30.254
+    ports:
+      - port: eth0
+        ipv4: 192.168.100.5/31
+        ipv6: fc00:dead:beef:a100::5/127
+        bridge: pe4ge3
+        br_type: ovs
+        vlan: 1001
+      - port: eth1
+        ipv4: 192.168.40.254/24
+        ipv6: fc00:dead:beef:aa40::1/64
+        bridge: s4-cust2
+  

@@ -1,0 +1,94 @@
+---
+lxc_server:
+  host: 172.16.10.24
+  user: ubuntu
+  password: pass01
+  ssh_key: /Users/irzan/.ssh/rdnet23
+lxc:
+  cl11-cust1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s1-cust1
+        ipv4: 192.168.10.11/24
+        gw4: 192.168.10.254
+        ipv6: fc00:dead:beef:aa10::1000:11/64 
+        gw6: fc00:dead:beef:aa10::1
+  cl12-cust1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s1-cust1
+        ipv4: 192.168.10.12/24
+        gw4: 192.168.10.254
+        ipv6: fc00:dead:beef:aa10::1000:12/64 
+        gw6: fc00:dead:beef:aa10::1
+  ce1-cust1:
+    type: router
+    bgp: 
+      asn: 4200001001
+      peerasn: 4200000001
+      peerv4: 192.168.100.0
+      peerv6: fc00:dead:beef:a100::0
+      nd_prefix: fc00:dead:beef:aa10::/64
+      advv4:  192.168.10.0/24
+      advv6: fc00:dead:beef:aa10::/64
+    # dnsmasq:
+    #   range: "192.168.10.1,192.168.10.100"
+    #   router: 192.168.10.254
+    #   dns: 192.168.10.254
+    ports:
+      - port: eth0
+        ipv4: 192.168.100.1/31
+        ipv6: fc00:dead:beef:a100::1/127
+        bridge: pe1ge3
+        br_type: ovs
+        vlan: 1001
+      - port: eth1
+        ipv4: 192.168.10.254/24
+        ipv6: fc00:dead:beef:aa10::1/64
+        bridge: s1-cust1
+  cl31-cust1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s3-cust1
+        ipv4: 192.168.30.31/24
+        gw4: 192.168.30.254
+        ipv6: fc00:dead:beef:aa30::1000:31/64 
+        gw6: fc00:dead:beef:aa30::1
+  cl32-cust1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: s3-cust1
+        ipv4: 192.168.30.32/24
+        gw4: 192.168.30.254
+        ipv6: fc00:dead:beef:aa30::1000:32/64 
+        gw6: fc00:dead:beef:aa30::1
+  ce3-cust1:
+    type: router
+    bgp: 
+      asn: 4200001003
+      peerasn: 4200000001
+      peerv4: 192.168.100.2
+      peerv6: fc00:dead:beef:a100::2
+      nd_prefix: fc00:dead:beef:aa30::/64
+      advv4:  192.168.30.0/24
+      advv6: fc00:dead:beef:aa30::/64
+    # dnsmasq:
+    #   range: "192.168.30.1,192.168.30.100"
+    #   router: 192.168.30.254
+    #   dns: 192.168.30.254
+    ports:
+      - port: eth0
+        ipv4: 192.168.100.3/31
+        ipv6: fc00:dead:beef:a100::3/127
+        bridge: pe3ge2
+        br_type: ovs
+        vlan: 1001
+      - port: eth1
+        ipv4: 192.168.30.254/24
+        ipv6: fc00:dead:beef:aa30::1/64
+        bridge: s3-cust1
+  
