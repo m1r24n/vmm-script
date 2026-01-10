@@ -1,0 +1,80 @@
+---
+- name: Updating system
+  hosts:
+    - all
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: apt -y update
+    apt:
+      update_cache: true
+      cache_valid_time: 3600
+      force_apt_get: true
+  - name: apt -y upgrade
+    apt:
+      update_cache: true
+      upgrade: dist
+      cache_valid_time: 3600
+      force_apt_get: true
+- name: configure k8s nodes
+  hosts:
+    - node0
+    - node1
+    - node2
+    - node3
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: edit ssh configuration
+    shell: | 
+      sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+      systemctl restart sshd
+- name: install software into node gw
+  hosts: 
+  - gw
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: install wireguard, novnc and websockify
+      ansible.builtin.apt:
+        pkg:
+        - wireguard-tools
+        - novnc
+        - websockify
+- name: install openvswitch on node client
+  hosts: 
+  - lxc
+  tags: lxc
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: install openvswitch-switch
+      ansible.builtin.apt:
+        pkg:
+        - openvswitch-switch
+    - name: install lxd
+      community.general.snap:
+        name:
+          - lxd
+- name: rebooting host
+  hosts:
+  - non_gw
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: reboot node
+    ansible.builtin.reboot:
+      msg: "Rebooting machine in 5 seconds"
+- name: rebooting gw
+  hosts:
+  - gw
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: reboot node gw
+    ansible.builtin.reboot:
+      msg: "Rebooting machine in 5 seconds"
+
+

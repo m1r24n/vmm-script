@@ -1,3 +1,0 @@
-echo 'hello line one'
-echo 'hello line 2'
-echo 'hello line 3'
