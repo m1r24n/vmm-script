@@ -42,6 +42,20 @@
         - wireguard-tools
         - novnc
         - websockify
+- name: install freeradius
+  hosts: 
+  - radius
+  tags: radius
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: install postgres freeradius freeradius-postgresql
+      ansible.builtin.apt:
+        pkg:
+        - postgresql
+        - freeradius
+        - freeradius-postgresql
 - name: install openvswitch on node client
   hosts: 
   - lxc

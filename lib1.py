@@ -1685,7 +1685,7 @@ def get_mac_vjunos(d1):
 	#print(d1['vm'].keys())
 	for i in d1['vm'].keys():
 		# if d1['vm'][i]['os'] == 'vjunos_switch':
-		if d1['vm'][i]['os'] == 'vjunos_router' or d1['vm'][i]['os'] == 'vjunos_switch' or d1['vm'][i]['os'] == 'evo' or d1['vm'][i]['os'] == 'vjunos_evolved' or d1['vm'][i]['os'] == 'vjunos_evolvedBX':
+		if d1['vm'][i]['type'] == 'vjunos_router' or d1['vm'][i]['type'] == 'vjunos_switch' or d1['vm'][i]['type'] == 'evo' or d1['vm'][i]['type'] == 'vjunos_evolved' or d1['vm'][i]['type'] == 'vjunos_evolvedBX':
 			print(f"Getting mac of {i}")
 			mac_vjunos[i]={}
 			mac_vjunos[i]['mac']=get_mac_vm(d1,i)
@@ -2041,6 +2041,8 @@ def create_lab_config(d1):
 		if 'efi' in d1['vm'][i].keys():
 			if d1['vm'][i]['efi'] == 'yes' or d1['vm'][i]['efi']:
 				d2['vm'][i]['efi'] = 1
+		if 'i2cid' in d1['vm'][i].keys():
+			d2['vm'][i]['i2cid'] = d1['vm'][i]['i2cid']
 				#print(f"host {i}  has efi, value of efi {d2['vm'][i]['efi']}")
 		#if d1['vm'][i]['type'] in param1.pc_type:
 		k = 0
@@ -2348,23 +2350,23 @@ def create_junos_config(d1,i):
 	dummy1['ssh_key']=d1['pod']['ssh_key_host']
 	#print(f"VM is {i}")
 	#dummy1['ntpserver']=d1['pod']['ntp']
-	if d1['vm'][i]['os'] == 'vmx':
+	if d1['vm'][i]['type'] == 'vmx':
 		dummy1['type']='vmx'
-	# elif d1['vm'][i]['os'] == 'vqfx':
+	# elif d1['vm'][i]['type'] == 'vqfx':
 	# 	dummy1['type']='vqfx'
-	elif d1['vm'][i]['os'] == 'vsrx':
+	elif d1['vm'][i]['type'] == 'vsrx':
 		dummy1['type']='vsrx'
-	# elif d1['vm'][i]['os'] == 'vrr':
+	# elif d1['vm'][i]['type'] == 'vrr':
 	# 	dummy1['type']='vrr'
-	elif d1['vm'][i]['os'] == 'vjunos_switch':
+	elif d1['vm'][i]['type'] == 'vjunos_switch':
 		dummy1['type']='vjunos_switch'
-	elif d1['vm'][i]['os'] == 'vjunos_router':
+	elif d1['vm'][i]['type'] == 'vjunos_router':
 		dummy1['type']='vjunos_router'
-	# elif d1['vm'][i]['os'] == 'evo':
+	# elif d1['vm'][i]['type'] == 'evo':
 	# 	dummy1['type']='evo'
-	elif d1['vm'][i]['os'] == 'vjunos_evolved':
+	elif d1['vm'][i]['type'] == 'vjunos_evolved':
 		dummy1['type']='vjunos_evolved'
-	elif d1['vm'][i]['os'] == 'vjunos_evolvedBX':
+	elif d1['vm'][i]['type'] == 'vjunos_evolvedBX':
 		dummy1['type']='vjunos_evolvedBX'
 	# dummy1['gateway4']=d1['vm']['gw']['interfaces']['em1']['family']['inet'].split('/')[0]
 	dummy1['gateway4'] = get_gateway4(d1,i)

@@ -25,15 +25,12 @@
     insert into nas (nasname,secret,shortname) values ('172.16.11.111','pass01','node1');
     insert into nas (nasname,secret,shortname) values ('172.16.11.112','pass01','node2');
     insert into nas (nasname,secret,shortname) values ('172.16.1.1','pass01','cups');
+    insert into nas (nasname,secret,shortname) values ('127.0.0.1','pass01','local');
 
     insert into radcheck (username,attribute,value,op) values ('cpe1','Cleartext-Password','pass01',':=');
-    insert into radcheck (username,attribute,value,op) values ('cpe1','Auth-Type','Accept',':=');
     insert into radcheck (username,attribute,value,op) values ('cpe2','Cleartext-Password','pass01',':=');
-    insert into radcheck (username,attribute,value,op) values ('cpe2','Auth-Type','Accept',':=');
     insert into radcheck (username,attribute,value,op) values ('cpe3','Cleartext-Password','pass01',':=');
-    insert into radcheck (username,attribute,value,op) values ('cpe3','Auth-Type','Accept',':=');
     insert into radcheck (username,attribute,value,op) values ('cpe4','Cleartext-Password','pass01',':=');
-    insert into radcheck (username,attribute,value,op) values ('cpe4','Auth-Type','Accept',':=');
 
     insert into radcheck (username,attribute,value,op) values ('cpe1','Simultaneous-Use','1',':=');
     insert into radcheck (username,attribute,value,op) values ('cpe2','Simultaneous-Use','1',':=');
@@ -141,3 +138,12 @@
         option ipv6 'auto'
 
 
+# test radius
+
+    echo "User-Name = cpe1,User-Password = pass01" | radclient -x -s 127.0.0.1:1812 auth pass01
+
+
+# license
+
+    S-VMX-100M-P-TRIAL
+    VBNG-PREF-1K_TRIAL

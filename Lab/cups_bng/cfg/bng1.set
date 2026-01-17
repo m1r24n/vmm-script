@@ -1,5 +1,7 @@
-set groups bng_common system configuration-database max-db-size 104857600
+set groups bng_common system configuration-database ephemeral
+set groups bng_common system configuration-database max-db-size 300m
 set groups bng_common system services subscriber-management enable
+set groups bng_common routing-options static route 172.16.11.0/24 next-hop 172.16.12.254
 set groups bng access-profile pppoe1_profile
 set groups bng access radius-server 172.16.11.201 port 1812
 set groups bng access radius-server 172.16.11.201 accounting-port 1813
@@ -15,7 +17,7 @@ set groups bng access profile pppoe1_profile accounting immediate-update
 set groups bng access profile pppoe1_profile accounting address-change-immediate-update
 set groups bng access profile pppoe1_profile accounting update-interval 10
 set groups bng access profile pppoe1_profile accounting statistics volume-time
-set groups bng dynamic-profiles pppoe1 routing-instances "$junos-routing-instance" interface "$junos-interface-name"
+set groups bng dynamic-profiles pppoe1 routing-instances "$junos-routing-instance" interface "$junos-interface-name" any
 set groups bng dynamic-profiles pppoe1 interfaces pp0 unit "$junos-interface-unit" ppp-options chap
 set groups bng dynamic-profiles pppoe1 interfaces pp0 unit "$junos-interface-unit" ppp-options pap
 set groups bng dynamic-profiles pppoe1 interfaces pp0 unit "$junos-interface-unit" pppoe-options underlying-interface "$junos-underlying-interface"
@@ -26,9 +28,17 @@ set groups bng dynamic-profiles pppoe1 protocols router-advertisement interface 
 set groups bng dynamic-profiles pppoe1 protocols router-advertisement interface "$junos-interface-name" prefix $junos-ipv6-ndra-prefix
 set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" vlan-id "$junos-vlan-id"
 set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" demux-options underlying-interface "$junos-interface-ifd-name"
-set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" family pppoe access-concentrator bng1
+set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" family pppoe access-concentrator vmmlab
 set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" family pppoe duplicate-protection
 set groups bng dynamic-profiles vlan-profile interfaces demux0 unit "$junos-interface-unit" family pppoe dynamic-profile pppoe1
+set groups bng interfaces ge-0/0/3 hierarchical-scheduler maximum-hierarchy-levels 2
+set groups bng interfaces ge-0/0/3 hierarchical-scheduler implicit-hierarchy
+set groups bng interfaces ge-0/0/3 flexible-vlan-tagging
+set groups bng interfaces ge-0/0/3 auto-configure vlan-ranges dynamic-profile vlan-profile accept pppoe
+set groups bng interfaces ge-0/0/3 auto-configure vlan-ranges dynamic-profile vlan-profile ranges 1-4094
+set groups bng interfaces ge-0/0/3 auto-configure remove-when-no-subscribers
+
+# configuration
 set groups ri interfaces lo0 unit 101 family inet address 10.100.1.11/32
 set groups ri interfaces lo0 unit 101 family inet6 address 2001:1010:dead:ffff::11/128
 set groups ri interfaces lo0 unit 102 family inet address 10.100.1.12/32
@@ -95,3 +105,5 @@ set groups ri routing-instances isp3 interface ge-0/0/4.103
 set apply-groups bng_common
 set apply-groups bng
 set apply-groups ri
+
+

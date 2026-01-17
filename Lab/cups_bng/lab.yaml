@@ -144,6 +144,26 @@ vm:
         family:
           inet: 172.16.11.113/24
           gateway4: 172.16.11.1
+  nms1:
+    type: pcmedium
+    os: ubuntu
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: cpnet
+        family:
+          inet: 172.16.11.121/24
+          gateway4: 172.16.11.1
+  nms2:
+    type: pcmedium
+    os: ubuntu
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: cpnet
+        family:
+          inet: 172.16.11.122/24
+          gateway4: 172.16.11.1
   lxc:
     type: pchpv1
     os: ubuntu
@@ -169,6 +189,7 @@ vm:
     os: vjunos_router
     ztp: yes
     srv6-locator: fc00:dead:beef:ff01::/64
+    i2cid: 48
     interfaces:
       mgmt: 
         bridge: mgmt
@@ -190,10 +211,6 @@ vm:
         bridge: acs1bng1
       ge-0/0/4:
         bridge: net3
-      ge-0/0/5:
-        bridge: net5
-        family: 
-          inet: 172.16.15.11/24
   bng2:
     type: vjunos_router
     os: vjunos_router
@@ -220,10 +237,6 @@ vm:
         bridge: acs1bng2
       ge-0/0/4:
         bridge: net3
-      ge-0/0/5:
-        bridge: net5
-        family:
-          inet: 172.16.15.12/24
   acs:
     type: vjunos_router
     os: vjunos_router
@@ -271,7 +284,7 @@ vm:
       lo0:
         family:
           inet: 172.16.255.5/32
-          # iso: 49.0001.1720.1625.5005.00
+          iso: 49.0001.1720.1625.5005.00
           inet6: fc00:dead:beef:ffff::ffff:5/128
         protocol:
           isis: passive

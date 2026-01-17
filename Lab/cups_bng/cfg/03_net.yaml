@@ -1,0 +1,24 @@
+network:
+  ethernets:
+    eth3:
+      dhcp4: false
+      mtu: 9000
+  vlans:
+    eth3v101:
+      link: eth3
+      id: 101
+      addresses:
+      - 172.16.16.0/31
+      - 2001:1010:dead:beef::1:0/127
+    eth3v102:
+      link: eth3
+      id: 102
+      addresses:
+      - 172.16.16.2/31
+      - 2001:1010:dead:beef::1:2/127
+    eth3v103:
+      link: eth3
+      id: 103
+      addresses:
+      - 172.16.16.4/31
+      - 2001:1010:dead:beef::1:4/127

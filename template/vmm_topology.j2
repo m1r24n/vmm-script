@@ -52,6 +52,10 @@ config "{{name}}" {
        memory {{vm[v]['type'].memory }};
        setvar {{vm[v]['type'].setvar }};
        setvar "attach_usb" "0";
+       {% if vm[v].i2cid -%}
+       setvar "vm_i2cid" "{{vm[v].i2cid}}";
+       setvar "vm_chassis_i2cid" "{{vm[v].i2cid}}";
+       {% endif -%}
        {% if vm[v].efi -%}
        setvar "use_uefi" "1";
        {% endif -%}

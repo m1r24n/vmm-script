@@ -46,8 +46,8 @@ vm_type={
    'bridge': {'ncpus' : 2,'memory':2048,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'cpe': {'ncpus' : 1,'memory':1024,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'vjunos_switch' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=1,product=VM-VEX"'},
-   'vjunos_router_old' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=1,product=VM-VMX,family=lab"'},
-   'vjunos_router' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx"'},
+   'vjunos_router' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=1,product=VM-VMX,family=lab"'},
+   'vjunos_router_old' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx"'},
    'vjunos_evolved': {'ncpus' : 4,'memory':8192,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=0,vendor=Bochs,version=Bochs -smbios type=3,manufacturer=Bochs -smbios type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0D20:platform=251:master=0:channelized=no"'},
    'vjunos_evolvedBX': {'ncpus' : 4,'memory':8192,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=0,vendor=Bochs,version=Bochs -smbios type=3,manufacturer=Bochs -smbios type=1,manufacturer=Bochs,product=Bochs,serial=chassis_no=0:slot=0:type=1:assembly_id=0x0DA9:platform=272:master=0:channelized=no"'},
    'vsrx': {'ncpus' : 2,'memory':4096,'setvar':'"qemu_args" "-cpu qemu64,+vmx,+ssse3,+sse4_1,+sse4_2,+aes,+avx,+pat,+pclmulqdq,+rdtscp,+syscall,+tsc-deadline,+x2apic,+xsave"'},
@@ -55,6 +55,7 @@ vm_type={
    'mx240' : {'i2cid': 48}, 
    'mx480' : {'i2cid': 33}, 
    'mx960' : {'i2cid': 21}
+   # setvar "vm_i2cid" "48"
 }
 pc_type_only = [ x for x in vm_type.keys() if 'pc' in x]
 vjunos_type = set([ x for x in vm_type.keys() if 'vjunos' in x])
