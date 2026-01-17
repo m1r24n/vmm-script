@@ -8,17 +8,17 @@ network:
       link: eth3
       id: 101
       addresses:
-      - 172.16.16.0/31
-      - 2001:1010:dead:beef::1:0/127
+      - 172.16.16.14/28
+      - 2001:1010:dead:b101::FFFF/64
     eth3v102:
       link: eth3
       id: 102
       addresses:
-      - 172.16.16.2/31
-      - 2001:1010:dead:beef::1:2/127
+      - 172.16.16.30/28
+      - 2001:1010:dead:b102::FFFF/64
     eth3v103:
       link: eth3
       id: 103
       addresses:
-      - 172.16.16.4/31
-      - 2001:1010:dead:beef::1:4/127
+      - 172.16.16.62/28
+      - 2001:1010:dead:b103::FFFF/64
