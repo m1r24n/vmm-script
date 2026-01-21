@@ -133,7 +133,7 @@
     config interface wan
         option ifname 'eth1'
         option proto 'pppoe'
-        option username 'cpe3'
+        option username 'cpe4'
         option password 'pass01'
         option ipv6 'auto'
 
@@ -147,3 +147,6 @@
 
     S-VMX-100M-P-TRIAL
     VBNG-PREF-1K_TRIAL
+
+
+

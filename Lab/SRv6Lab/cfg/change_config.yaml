@@ -1,0 +1,39 @@
+---
+- name: Config all devices
+  hosts:
+    - all
+  vars:
+    username: admin
+    backup_dir: "./junos_backup"
+    conf_file: "{{ backup_dir }}/{{ inventory_hostname }}.set"
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: set device configuration
+      juniper.device.config:
+         host: "{{ ansible_host }}"
+         user: "{{ username }}"
+         load: "set"
+         lines:
+         - "delete apply-groups"
+         - "set apply-groups srv6"
+- name: Get device configuration
+  hosts:
+    - pe1
+    - pe2
+    - pe3
+    - pe4
+  vars:
+    username: admin
+    backup_dir: "./junos_backup"
+    conf_file: "{{ backup_dir }}/{{ inventory_hostname }}.set"
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: set device configuration
+      juniper.device.config:
+         host: "{{ ansible_host }}"
+         user: "{{ username }}"
+         load: "set"
+         lines:
+         - "set apply-groups config1"
