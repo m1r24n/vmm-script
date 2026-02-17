@@ -79,8 +79,8 @@
           "name": "PE1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E5D8",
-          "site_id": "3eb1f156-bbbf-4512-89ce-6368eadc12ab",
+          "serial": "VM69899F0B60",
+          "site_id": "6f84adf2-a26a-4d18-8ffa-c662f1f25356",
           "vendor": "Juniper Networks"
         },
         {
@@ -112,8 +112,8 @@
           "name": "PE2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E699",
-          "site_id": "1919d37f-9f59-4cc1-aba2-a8b573e2bd81",
+          "serial": "VM69899F0AB2",
+          "site_id": "3ed9f5c8-6cbe-43a5-918d-fd934d86d43d",
           "vendor": "Juniper Networks"
         },
         {
@@ -145,8 +145,8 @@
           "name": "PE3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1DF64",
-          "site_id": "efc232be-5a60-46a2-aeb4-0f7113a17656",
+          "serial": "VM69899F1712",
+          "site_id": "2fe35dec-89d9-4fc9-b3b5-920fc0559352",
           "vendor": "Juniper Networks"
         },
         {
@@ -178,8 +178,8 @@
           "name": "PE4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E2AD",
-          "site_id": "d8f1dec7-a710-4411-9439-720bbfa2c6e2",
+          "serial": "VM69899F07F0",
+          "site_id": "1518f238-58a6-43a8-8813-6300bbbf6389",
           "vendor": "Juniper Networks"
         },
         {
@@ -203,8 +203,8 @@
           "name": "PE5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E4CC",
-          "site_id": "3cc0b463-6ac1-4088-bb2f-29f4255e6afb",
+          "serial": "VM69899F06E4",
+          "site_id": "ea56c74f-00d3-4f32-8be1-e1c0ed035edd",
           "vendor": "Juniper Networks"
         },
         {
@@ -252,8 +252,8 @@
           "name": "P1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1DE5C",
-          "site_id": "bbff2f62-19eb-426c-b3b8-1fead888b997",
+          "serial": "VM69899F0915",
+          "site_id": "9352aa96-2601-4e6f-ace2-924f1376dab5",
           "vendor": "Juniper Networks"
         },
         {
@@ -309,8 +309,8 @@
           "name": "P2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E54F",
-          "site_id": "7700d36b-3a02-46b6-a415-fc757e73e636",
+          "serial": "VM69899F0A47",
+          "site_id": "406d401d-fe88-44f0-ba11-ee0fa2969d15",
           "vendor": "Juniper Networks"
         },
         {
@@ -358,8 +358,8 @@
           "name": "P3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E5F5",
-          "site_id": "dbb49ee7-3807-407c-a461-cca938055f97",
+          "serial": "VM69899F07E8",
+          "site_id": "c460ba67-fc89-493b-9777-c60fa3c92a74",
           "vendor": "Juniper Networks"
         },
         {
@@ -415,8 +415,8 @@
           "name": "P4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1DD23",
-          "site_id": "0bb9d0e2-cfaa-4dc5-8610-0a7cb2ce7995",
+          "serial": "VM69899F0527",
+          "site_id": "8f7dc311-a352-41e2-b192-ed620c85d210",
           "vendor": "Juniper Networks"
         },
         {
@@ -472,8 +472,8 @@
           "name": "P5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6953C1E2B6",
-          "site_id": "fcd2a7be-957c-4ff1-b72c-cbdc32e922b8",
+          "serial": "VM69899F0721",
+          "site_id": "c3900225-a2e7-48d0-9e31-39f60ab356ee",
           "vendor": "Juniper Networks"
         }
       ]

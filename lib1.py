@@ -256,7 +256,7 @@ def read_config(config):
 		# add interface to vjunos_evolved VM
 		#print(f"password AD {adpassword_env}, VMM {vmmpassword_env}")
 		for i in d1['vm'].keys():
-			if d1['vm'][i]['os']=='vjunos_evolved':
+			if d1['vm'][i]['os'] in ['vjunos_evolved','vjunos_evolvedBX']:
 				## add interface em1, em2, em3, em4
 				d1['vm'][i]['efi']='yes'
 				# if 'vm_type' in d1['vm'][i].keys():

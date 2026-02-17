@@ -259,7 +259,7 @@ Screenshot recording for this can be found here [part1](https://asciinema.org/a/
        set deployment cluster ntp ntp-servers ntp.juniper.net
        set deployment cluster common-services ingress ingress-vip 172.16.12.1
        set deployment cluster applications active-assurance test-agent-gateway-vip 172.16.12.2
-       set deployment cluster applications web-ui web-admin-user "irzan@juniper.net"   
+       set deployment cluster applications web-ui web-admin-user "mochammad.irzan@hpe.com"   
        set deployment cluster applications web-ui web-admin-password "J4k4rt4#170845" 
        set deployment cluster applications pathfinder pce-server pce-server-vip 172.16.12.3
        set deployment cluster install enable-l3-vip true

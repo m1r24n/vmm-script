@@ -3,6 +3,7 @@ name: rdnet23 # this is rdnet
 pod: 
   type: vmm
   #vmmserver: q-pod35-vmm.englab.juniper.net
+  # vmmserver: q-pod27-vmm.englab.juniper.net
   vmmserver: q-pod23-vmm.englab.juniper.net
   user: irzan
   # adpassword: ThisIsAnaMabokCoy
