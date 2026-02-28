@@ -1,0 +1,24 @@
+set interfaces ge-0/0/0 mtu 9000
+set interfaces ge-0/0/0 unit 0 family inet address 172.16.13.254/24
+set interfaces ge-0/0/1 description "connection to port ge-0/0/0 of fw1"
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/1 unit 0 family inet address 10.100.0.1/31
+set interfaces ge-0/0/2 description "connection to port ge-0/0/0 of fw2"
+set interfaces ge-0/0/2 mtu 9000
+set interfaces ge-0/0/2 unit 0 family inet address 10.100.0.3/31
+set interfaces ge-0/0/3 description "connection to port ge-0/0/0 of fw3"
+set interfaces ge-0/0/3 mtu 9000
+set interfaces ge-0/0/3 unit 0 family inet address 10.100.0.5/31
+set interfaces ge-0/0/4 mtu 9000
+set interfaces ge-0/0/4 unit 0 family inet address 172.16.12.4/24
+set interfaces fxp0 unit 0 family inet address 172.16.11.4/24
+set routing-options router-id 10.1.255.1
+set routing-options autonomous-system 4200000001
+set protocols bgp group to_other neighbor 172.16.12.254 peer-as 4200000000
+set protocols bgp group to_other neighbor 10.100.0.0 peer-as 4200001001
+set protocols bgp group to_other neighbor 10.100.0.2 peer-as 4200001002
+set protocols bgp group to_other neighbor 10.100.0.4 peer-as 4200001003
+set routing-options static route 10.100.0.0/24 discard
+set protocols bgp group to_other neighbor 172.16.12.254 export from_static
+set policy-options policy-statement from_static term 1 from protocol static
+set policy-options policy-statement from_static term 1 then accept

@@ -1,0 +1,21 @@
+set interfaces ge-0/0/0 mtu 9000
+set interfaces ge-0/0/0 unit 0 family inet address 10.100.0.0/31
+set interfaces ge-0/0/0 description "connection to port ge-0/0/1 of nw"
+set system host-name fw1
+
+set routing-options autonomous-system 4200001001
+set protocols bgp group to_other neighbor 10.100.0.1 peer-as 4200000001
+set security zones security-zone untrust interfaces ge-0/0/0 host-inbound-traffic protocols bgp
+set security zones security-zone untrust interfaces ge-0/0/0 host-inbound-traffic system-services ping
+set system name-server 172.16.12.254
+
+
+
+set system root-authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system management-instance
+

@@ -1,0 +1,10 @@
+set system host-name fw1
+set system root-authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system management-instance
+set interfaces fxp0 unit 0 family inet address 172.16.11.1/24
+set protocols lldp interface all

@@ -1,8 +1,8 @@
 ---
-name: apstra
+name: apstra2
 pod: 
   type: vmm
-  vmmserver: q-pod29-vmm.englab.juniper.net
+  vmmserver: q-pod32-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
 images:

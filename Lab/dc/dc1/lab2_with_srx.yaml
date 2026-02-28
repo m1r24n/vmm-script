@@ -37,7 +37,7 @@ vm:
         mtu: 9000
         family:
           inet: 172.16.63.254/24
-          inet6: fc00:dead:beef:a053::FFFF/64
+          inet6: fc00:dead:beef:a063::FFFF/64
       em4:
         bridge: ext4
         mtu: 9000
@@ -65,7 +65,7 @@ vm:
         bridge: ext3
         family:
           inet: 172.16.63.1/24
-          inet6: fc00:dead:beef:a053::1/64
+          inet6: fc00:dead:beef:a063::1/64
       ge-0/0/1: 
         bridge: d1s1p9
       ge-0/0/2: 
@@ -87,7 +87,7 @@ vm:
         bridge: ext3
         family:
           inet: 172.16.63.2/24
-          inet6: fc00:dead:beef:a053::2/64
+          inet6: fc00:dead:beef:a063::2/64
       ge-0/0/1: 
         bridge: d1s1p10
       ge-0/0/2: 

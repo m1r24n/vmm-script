@@ -16,7 +16,7 @@ AllowedIPs=192.168.199.128/28,172.16.55.0/24
 EOF
 sudo systemctl enable wg-quick@wg0
 sudo systemctl start wg-quick@wg0
-sudo hostname gwdc1
+sudo hostname gwdc3
 hostname | sudo tee /etc/hostname
 sudo sed -i -e "s/gw/gwdc3/" /etc/hosts
 

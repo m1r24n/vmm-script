@@ -30,6 +30,36 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, ed25519
 from cryptography.hazmat.backends import default_backend
 
+#from pathlib import Path
+#import time
+#import pathlib
+# from jnpr.junos import Device
+# from jnpr.junos.utils.config import Config
+
+# def get_vmm_capacity(d1):
+# 	vmm_cap = {}
+# 	print("Checking capacity")
+# 	for vmm in param1.vmm_servers:
+# 		server=f"{vmm}-vmm.englab.juniper.net"
+# 		print(f"server : {server}, ", end=" ")
+# 		ssh=paramiko.SSHClient()
+# 		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 		ssh.connect(hostname=server,username=d1['pod']['user'],password=d1['pod']['vmmpassword'])
+# 		cmd1 = "vmm capacity -g vmm-default"
+# 		stdin, stdout, stderr = ssh.exec_command(cmd1, get_pty=True)
+# 		for line in iter(stdout.readline, ""):
+# 			if "Total" in line:
+# 				c1 = int(line.split(":")[1])
+# 			if "Free" in line:
+# 				f1 = int(line.split(":")[1])
+# 		# vmm_cap[vmm]={"total" : c1, "free": f1}
+# 			# print(line, end="")
+# 		ssh.close()
+# 		print(f"total {c1}, free {f1}")
+# 	# print("%10s %6d %5d" % ("server","total","free"))
+# 	# for vmm in vmm_cap.keys():
+# 	# 	print("%10s %5d %5d" % (vmm,vmm_cap[vmm]['total'],vmm_cap[vmm]['free']))
+	
 def generate_wireguard_keys():
     """
     Generate a WireGuard private & public key
@@ -63,8 +93,11 @@ EndPoint={{eth0_gw}}:443
 AllowedIPs={{allowed_ip_ws}}
 """
 	
+	#print("in the function")
+	#print(d1.keys())
 	try:
 		if 'wg' in d1.keys():
+			#print("wireguard is configured")
 			result1 = subprocess.check_output("/opt/homebrew/bin/wg", shell=True).decode("utf-8").strip()
 			if 'tunnel_ip' not in d1['wg'].keys():
 				dummy1['gw_ip'] = '192.168.199.0/31;fc00:dead:beef:ffcc::1000:0/127'
@@ -75,22 +108,34 @@ AllowedIPs={{allowed_ip_ws}}
 			
 			dummy1['gw_key'] = generate_wireguard_keys()
 			dummy1['ws_key'] = generate_wireguard_keys()
+			# print(dummy1['gw_key'],dummy1['ws_key'])
+			# print("after generat3 keys")
+			# print(len(dummy1['gw_ip'].split(';')))
 			if len(dummy1['gw_ip'].split(';')) == 1:
+				
 				dummy1['allowed_ip_gw']=f"{dummy1['ws_ip'].split('/')[0]}/32"
 			else:
+				#print("checkpoint 2")
 				t1 = dummy1['ws_ip'].split(';')
+				#print(t1)
 				dummy1['allowed_ip_gw']=f"{t1[0].split('/')[0]}/32,{t1[1].split('/')[0]}/128"
+				#print(dummy1['allowed_ip_gw'])
 
 			if len(dummy1['ws_ip'].split(';')) == 1:
 				dummy1['allowed_ip_ws']=f"{dummy1['gw_ip'].split('/')[0]}/32"
 			else:
+				#dummy1['allowed_ip_ws']=f"{dummy1['gw_ip'].split[';'][0].split('/')[0]}/32,{dummy1['gw_ip'].split[';'][1].split('/')[0]}/128"
 				t1 = dummy1['gw_ip'].split(';')
+				#print(t1)
 				dummy1['allowed_ip_ws']=f"{t1[0].split('/')[0]}/32,{t1[1].split('/')[0]}/128"
+			# dummy1['allowed_ip_ws']=f"{dummy1['gw_ip'].split('/')[0]}/32"
 			print(dummy1)
 			for i in d1['wg']['prefix_allowed']:
 				dummy1['allowed_ip_ws']+=f",{i}"
 			print("getting node gw eth0 ip address")
 			dummy1['eth0_gw']=get_ip_vm(d1,'gw')
+			# dummy1['allowd_ip_wg'].append(dummy1['ws_ip'].split('/')[0])
+			#print(dummy1)
 			dummy1['gw_ip']=dummy1['gw_ip'].replace(';',',')
 			dummy1['ws_ip']=dummy1['ws_ip'].replace(';',',')
 			gw_config=Template(gw_t1).render(dummy1)
@@ -252,7 +297,7 @@ def add_os(d1):
 
 def change_ztp(d1):
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','vsrx','aos_cx']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','vsrx']:
 			if 'ztp' not in d1['vm'][i].keys():
 				d1['vm'][i]['ztp'] = True
 			else:
@@ -688,8 +733,7 @@ def add_path(d1,path):
 		'centos': f"{path}/template/centos.j2",
 		'bridge': f"{path}/template/bridge.j2",
 		'vmmtopo': f"{path}/template/vmm_topology.j2",
-		'ssh_config': f"{path}/template/ssh_config.j2",
-		'aos_cx': f"{path}/template/aos_cx.j2"
+		'ssh_config': f"{path}/template/ssh_config.j2"
 	}
 
 # def get_private_ip_gw(d1):
@@ -786,7 +830,7 @@ def checking_config_syntax(d1):
 		# 	return 0
 	# checking interface
 	for i in d1['vm'].keys():
-		if (d1['vm'][i]['type'] in param1.vm_type.keys()) and (d1['vm'][i]['type'] not in ['vmx','vjunos_evolved','vjunos_evolvedBX','vsrx','mx240','mx480','mx960','vjunos_switch','vjunos_router','aos_cx']):
+		if (d1['vm'][i]['type'] in param1.vm_type.keys()) and (d1['vm'][i]['type'] not in ['vmx','vjunos_evolved','vjunos_evolvedBX','vsrx','mx240','mx480','mx960','vjunos_switch','vjunos_router']):
 			for j in d1['vm'][i]['interfaces'].keys():
 				if 'em' not in j:
 					print("ERROR for VM ",i)
@@ -798,6 +842,25 @@ def checking_config_syntax(d1):
 					print("duplicate interfaces " + j + " is found")
 					return 0
 	return retval
+
+# def get_ip(d1,vm):
+# 	if d1['pod']['type'] == 'vmm':
+# 		ssh=ƒ(d1)
+# 		#print('-----')
+# 		#print(" of VM")
+# 		cmd1="vmm list"
+# 		s1,s2,s3=ssh.exec_command(cmd1)
+# 		vm_list=[]
+# 		for i in s2.readlines():
+# 			vm_list.append(i.rstrip().split()[0])
+# 		if vm not in vm_list:
+# 			print(" VM {} does not exists ".format(vm))	
+# 		else:
+# 			print("VM %s %s " %(vm,get_ip_vm(d1,vm)))
+# 		ssh.close()
+# 	elif d1['pod']['type'] == 'kvm':
+# 		print("not yet implemented")
+
 
 
 def sshconnect(d1):
@@ -870,7 +933,7 @@ def connect_to_gw(d1):
 
 def get_mgmt_ip(d1,i):
 	print(f"type {d1['vm'][i]['type']} ")
-	if d1['vm'][i]['type'] in ['junos','vjunos_router','vjunos_switch','vjunos_evolved']:
+	if d1['vm'][i]['type'] in ['junos','vjunos_router','vjunos_switch']:
 		ip_vm = d1['vm'][i]['interfaces']['mgmt']['family']['inet'].split('/')[0]
 	else:
 		ip_vm = d1['vm'][i]['interfaces']['em0']['family']['inet'].split('/')[0]
@@ -989,6 +1052,20 @@ def get_ip_vm(d1,i):
 		print("not implemented for this type")
 		return ""
 
+# def get_hosts_config(d1):
+# 	host_yes=['centos','rhel','ubuntu','ubuntu2','debian','esxi','aos','aos_ztp','bridge','desktop']
+# 	host_config=['127.0.0.1 localhost','::1 ip6-localhost ip6-loopback']
+# 	for i in d1['vm'].keys():
+# 		if d1['vm'][i]['os'] in host_yes:
+# 			for j in d1['vm'][i]['interfaces'].keys():
+# 				#print(f"HOST {i}, Interfaces {j}")
+# 				if 'family' in d1['vm'][i]['interfaces'][j].keys():
+# 					if 'inet' in d1['vm'][i]['interfaces'][j]['family'].keys():
+# 						ipaddr=d1['vm'][i]['interfaces'][j]['family']['inet'].split('/')[0]
+# 						host_config.append("{} {}".format(ipaddr,i))
+# 	return host_config
+
+
 def get_dhcp_config(d1):
 	#dhcp_yes=['centos','rhel','ubuntu','ubuntu2','debian','esxi','bridge','desktop','paagent','vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos','aos_flow','aos_ztp']
 	dhcp_list=[]
@@ -1005,8 +1082,7 @@ def get_dhcp_config(d1):
 					print(f"vm {i} mac {d1['vm'][i]['interfaces']['em0']['mac']}")
 					dhcp_list.append(i)
 		elif 'mgmt' in d1['vm'][i]['interfaces']:
-			if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
-				print(f"vm {i}")
+			if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX'] and d1['vm'][i]['ztp']:
 				if 'family' in d1['vm'][i]['interfaces']['mgmt']:
 					if 'inet' in d1['vm'][i]['interfaces']['mgmt']['family']:
 						d1['vm'][i]['interfaces']['mgmt']['mac']=get_mac_vm(d1,i)
@@ -1310,7 +1386,7 @@ def set_gw_v2(d1):
 	sftp.put(file1,'set_gw.sh')
 	sftp.close()
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX'] and d1['vm'][i]['ztp']:
 			src1 = f"{param1.tmp_dir}{i}.conf"
 			dst1 = f"tftp/{i}.conf"
 			sftp=ssh.open_sftp()
@@ -1357,7 +1433,7 @@ def set_gw_v1(d1):
 	# 		print(f"upload file {i}.conf")
 	# 		sftp.put(file2,dst2)
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX'] and d1['vm'][i]['ztp']:
 			src1 = f"{param1.tmp_dir}{i}.conf"
 			dst1 = f"tftp/{i}.conf"
 			sftp=ssh.open_sftp()
@@ -1609,8 +1685,7 @@ def get_mac_vjunos(d1):
 	#print(d1['vm'].keys())
 	for i in d1['vm'].keys():
 		# if d1['vm'][i]['os'] == 'vjunos_switch':
-		# if d1['vm'][i]['type'] == 'vjunos_router' or d1['vm'][i]['type'] == 'vjunos_switch' or d1['vm'][i]['type'] == 'evo' or d1['vm'][i]['type'] == 'vjunos_evolved' or d1['vm'][i]['type'] == 'vjunos_evolvedBX':
-		if d1['vm'][i]['type'] in ['vjunos_router', 'vjunos_switch', 'vjunos_evolved' , 'vjunos_evolvedBX']:
+		if d1['vm'][i]['type'] == 'vjunos_router' or d1['vm'][i]['type'] == 'vjunos_switch' or d1['vm'][i]['type'] == 'evo' or d1['vm'][i]['type'] == 'vjunos_evolved' or d1['vm'][i]['type'] == 'vjunos_evolvedBX':
 			print(f"Getting mac of {i}")
 			mac_vjunos[i]={}
 			mac_vjunos[i]['mac']=get_mac_vm(d1,i)
@@ -1854,7 +1929,7 @@ def upload(d1,upload_status=1):
 		with open(d1['template']['vmmtopo']) as f1:
 			t1=f1.read()
 		datatopo=create_lab_config(d1)
-		#pprint.pprint(f"datatopo {datatopo}")
+		#print(f"datatopo {datatopo}")
 		c1 = Template(t1).render(datatopo)
 		#print(datatopo)
 		#print(c1)
@@ -1865,7 +1940,7 @@ def upload(d1,upload_status=1):
 		f1=param1.tmp_dir + "lab.conf"
 		with open(f1,"w") as wr1:
 			wr1.write(c1)
-		write_netdev_config(d1)
+		write_junos_config(d1)
 		write_pc_dummy_config(d1)
 		# write_inventory(d1)
 		# if 'ztp' in d1.keys():
@@ -1976,8 +2051,6 @@ def create_lab_config(d1):
 		if 'vnc' in d1['vm'][i].keys():
 			if d1['vm'][i]['vnc']:
 				d2['vm'][i].update({'vnc':True})
-		# print(i)
-		# pprint.pprint(d1['vm'][i]['interfaces'])
 		for j in  d1['vm'][i]['interfaces'].keys():
 			#print(f"interface {j}")
 			# if d1['vm'][i]['type'] in param1.pc_type:
@@ -1991,12 +2064,7 @@ def create_lab_config(d1):
 			# else:
 			# 	intf_list[intf_t1]= d1['vm'][i]['interfaces'][j]['bridge']
 			if j not in ["lo","lo0"]:
-				if d1['vm'][i]['type'] == 'aos_cx':
-					if j == 'mgmt':
-						intf1 = 'vio0'
-					else:
-						intf1 = j.replace("em","vio")
-				elif d1['vm'][i]['type'] in param1.pc_type:
+				if d1['vm'][i]['type'] in param1.pc_type:
 					intf1 = j
 				elif d1['vm'][i]['type'] in param1.junos_type:
 					if d1['vm'][i]['type'] in ['vmx','mx240','mx480','mx960']:
@@ -2028,8 +2096,6 @@ def create_lab_config(d1):
 				else:
 					intf_list[intf1]= d1['vm'][i]['interfaces'][j]['bridge']
 		d2['vm'][i]['intf']=dict(sorted(intf_list.items()))
-		#print(i)
-		# pprint.pprint(d2['vm'][i]['intf'])
 		#print(d2['vm'][i]['intf'])
 	return d2
 
@@ -2269,7 +2335,6 @@ def upload_file_to_server(d1):
 	ssh.close()
 
 def get_gateway4(d1,i):
-	print(f"hostname {i}")
 	vm_bridge = d1['vm'][i]['interfaces']['mgmt']['bridge']
 	gateway4 = '0.0.0.0'
 	for i in d1['vm']['gw']['interfaces'].keys():
@@ -2277,12 +2342,11 @@ def get_gateway4(d1,i):
 			gateway4 = d1['vm']['gw']['interfaces'][i]['family']['inet'].split('/')[0]
 	return gateway4
 
-def create_netdev_config(d1,i):
+def create_junos_config(d1,i):
 	dummy1={}
 	dummy1['hostname']=i
 	dummy1['username']=d1['junos_login']['login']
 	dummy1['password']=md5_crypt.hash(d1['junos_login']['password'])
-	dummy1['password_txt']=d1['junos_login']['password']
 	dummy1['ssh_key']=d1['pod']['ssh_key_host']
 	#print(f"VM is {i}")
 	#dummy1['ntpserver']=d1['pod']['ntp']
@@ -2304,8 +2368,6 @@ def create_netdev_config(d1,i):
 		dummy1['type']='vjunos_evolved'
 	elif d1['vm'][i]['type'] == 'vjunos_evolvedBX':
 		dummy1['type']='vjunos_evolvedBX'
-	elif d1['vm'][i]['type'] == 'aos_cx':
-		dummy1['type']='aos_cx'
 	# dummy1['gateway4']=d1['vm']['gw']['interfaces']['em1']['family']['inet'].split('/')[0]
 	dummy1['gateway4'] = get_gateway4(d1,i)
 	dummy1['mgmt_ip']=d1['vm'][i]['interfaces']['mgmt']['family']['inet']
@@ -2416,17 +2478,15 @@ def create_netdev_config(d1,i):
 	return dummy1
 
 
-def write_netdev_config(d1):
+def write_junos_config(d1):
 	data1=[]
-	print("Writing network devices configuration")
+	print("Junos config write")
 	#ssh_key = read_ssh_key(d1)
 	#print("ssh key ",ssh_key)
 	try:
 		#print("template ",param1.junos_template)
 		with open(d1['template']['junos']) as f1:
 			jt=f1.read()
-		with open(d1['template']['aos_cx']) as f1:
-			at=f1.read()
 		# with open(d1['template']['junos2']) as f1:
 		# 	jt2=f1.read()
 		# with open(d1['template']['junos3']) as f1:
@@ -2434,18 +2494,25 @@ def write_netdev_config(d1):
 		# f1=open(d1['pod']['path'] + param1.junos_template)
 		#f1.close()
 		for i in d1['vm'].keys():
-			if d1['vm'][i]['type'] in param1.netdev_type:
-				dummy1 = create_netdev_config(d1,i)
+			if d1['vm'][i]['type'] in param1.junos_type:
+				dummy1 = create_junos_config(d1,i)
+				# if 'dhcp' in d1['vm'][i].keys():
+				# 	if d1['vm'][i]['dhcp'] == 2:
+				# 		config1=Template(jt2).render(dummy1)
+				# 	elif d1['vm'][i]['dhcp'] == 3:
+				# 		config1=Template(jt3).render(dummy1)
+				# 	else:
+				# 		config1=Template(jt).render(dummy1)
+				# else:
+				# 	# print(f"template junos static {i} ")
+				#   config1=Template(jt).render(dummy1)
+				config1=Template(jt).render(dummy1)
 				f1=param1.tmp_dir + i + ".conf"
-				if d1['vm'][i]['type'] in param1.junos_type:
-					config1=Template(jt).render(dummy1)
-				if d1['vm'][i]['type'] == 'aos_cx':
-					config1=Template(at).render(dummy1)
 				with open(f1,"w") as wr1:
 					wr1.write(config1)
+				#write_to_file_config(f1,config1)
 	except PermissionError:
 		print("permission error")
-		
 
 def add_mtu(dt,intf,mtu):
 	if not dt['interfaces']:

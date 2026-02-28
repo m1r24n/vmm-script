@@ -1,0 +1,38 @@
+### by vmm-v3-script ###
+Host *
+    StrictHostKeyChecking no
+
+host vmm 
+    hostname q-pod32-vmm.englab.juniper.net
+    user irzan
+    
+host gw
+    hostname 10.39.43.97
+    user ubuntu
+    IdentityFile ~/.ssh/apstra2
+
+host apstra
+    ProxyCommand ssh -W 172.16.55.1:22 gw
+    user admin
+    IdentityFile ~/.ssh/apstra2
+
+host apstraw2
+    ProxyCommand ssh -W 172.16.55.2:22 gw
+    user admin
+    IdentityFile ~/.ssh/apstra2
+
+host apstraw3
+    ProxyCommand ssh -W 172.16.55.3:22 gw
+    user admin
+    IdentityFile ~/.ssh/apstra2
+
+host ztp
+    ProxyCommand ssh -W 172.16.55.4:22 gw
+    user admin
+    IdentityFile ~/.ssh/apstra2
+
+host flow
+    ProxyCommand ssh -W 172.16.55.5:22 gw
+    user admin
+    IdentityFile ~/.ssh/apstra2
+
