@@ -91,13 +91,13 @@ vm:
           inet: 172.16.11.2/24
           gateway4: 172.16.11.254
       em5:
-        bridge: sw2ge4
-      em6:
         bridge: sw2ge5
-      em7:
+      em6:
         bridge: sw2ge6
-      em8:
+      em7:
         bridge: sw2ge7
+      em8:
+        bridge: sw2ge8
   sw3:
     type: aos_cx
     os: aos_cx
@@ -108,13 +108,13 @@ vm:
           inet: 172.16.11.3/24
           gateway4: 172.16.11.254
       em5:
-        bridge: sw3ge4
-      em6:
         bridge: sw3ge5
-      em7:
+      em6:
         bridge: sw3ge6
-      em8:
+      em7:
         bridge: sw3ge7
+      em8:
+        bridge: sw3ge8
   svr1:
     type: pcsmall
     os: ubuntu
@@ -128,25 +128,25 @@ vm:
     os: ubuntu
     interfaces:
       em0: 
-        bridge: sw2ge4
-      em1: 
         bridge: sw2ge5
+      em1: 
+        bridge: sw2ge6
   svr3:
     type: pcsmall
     os: ubuntu
     interfaces:
       em0: 
-        bridge: sw3ge4
-      em1: 
         bridge: sw3ge5
+      em1: 
+        bridge: sw3ge6
   svr4:
     type: pcsmall
     os: ubuntu
     interfaces:
       em0: 
-        bridge: sw2ge6
+        bridge: sw2ge7
       em1: 
-        bridge: sw3ge6
+        bridge: sw3ge7
   client:
     type: pchpv1
     os: ubuntu
@@ -159,7 +159,7 @@ vm:
       em1: 
         bridge: sw1ge6
       em2: 
-        bridge: sw2ge7
+        bridge: sw2ge8
       em3: 
-        bridge: sw3ge7
+        bridge: sw3ge8
 
