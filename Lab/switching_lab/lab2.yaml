@@ -49,12 +49,14 @@ fabric:
   # SNMP trap: 172.16.255.4
   # Netflow : 172.16.255.5
   # PCE serveR: 172.16.255.6
-    - [ 0x0, sw1, ge-0/0/0, sw2, em1 ]
-    - [ 0x0, sw1, ge-0/0/1, sw2, em2 ]
-    - [ 0x0, sw1, ge-0/0/2, sw3, em1 ]
-    - [ 0x0, sw1, ge-0/0/3, sw3, em2 ]
-    - [ 0x0, sw2, em3, sw3, em3]
-    - [ 0x0, sw2, em4, sw3, em4 ]
+    - [ 0x0, sw1, ge-0/0/0, sw3, em1 ]
+    - [ 0x0, sw1, ge-0/0/1, sw3, em2 ]
+    - [ 0x0, sw2, ge-0/0/0, sw4, em1 ]
+    - [ 0x0, sw2, ge-0/0/1, sw4, em2 ]
+    - [ 0x0, sw1, ge-0/0/2, sw2, ge-0/0/2]
+    - [ 0x0, sw1, ge-0/0/3, sw2, ge-0/0/3]
+    - [ 0x0, sw3, em3, sw4, em3]
+    - [ 0x0, sw3, em4, sw4, em4]
 vm:
   gw:
     type: gw
@@ -81,23 +83,54 @@ vm:
         bridge: sw1ge5
       ge-0/0/6:
         bridge: sw1ge6
+      ge-0/0/7:
+        bridge: sw1ge7
+      ge-0/0/8:
+        bridge: sw1ge8
   sw2:
-    type: aos_cx
-    os: aos_cx
+    type: vjunos_switch
+    os: vjunos_switch
     interfaces:
       mgmt: 
         bridge: mgmt
         family:
           inet: 172.16.11.2/24
           gateway4: 172.16.11.254
-      em5:
+      ge-0/0/4:
+        bridge: sw2ge4
+      ge-0/0/5:
         bridge: sw2ge5
-      em6:
+      ge-0/0/6:
         bridge: sw2ge6
-      em7:
+      ge-0/0/7:
         bridge: sw2ge7
-      em8:
+      ge-0/0/8:
         bridge: sw2ge8
+  client1:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.11/24
+          gateway4: 172.16.11.254
+      em1: 
+        bridge: sw1ge4
+      em2: 
+        bridge: sw1ge5
+      em3: 
+        bridge: sw2ge4
+      em4: 
+        bridge: sw2ge5
+      em5: 
+        bridge: sw1ge6
+      em6: 
+        bridge: sw2ge6
+      em7: 
+        bridge: sw1ge7
+      em8: 
+        bridge: sw2ge7
   sw3:
     type: aos_cx
     os: aos_cx
@@ -115,51 +148,68 @@ vm:
         bridge: sw3ge7
       em8:
         bridge: sw3ge8
-  svr1:
-    type: pcsmall
-    os: ubuntu
+      em9:
+        bridge: sw3ge9
+  sw4:
+    type: aos_cx
+    os: aos_cx
     interfaces:
-      em0: 
-        bridge: sw1ge4
-      em1: 
-        bridge: sw1ge5
-  svr2:
-    type: pcsmall
-    os: ubuntu
-    interfaces:
-      em0: 
-        bridge: sw2ge5
-      em1: 
-        bridge: sw2ge6
-  svr3:
-    type: pcsmall
-    os: ubuntu
-    interfaces:
-      em0: 
-        bridge: sw3ge5
-      em1: 
-        bridge: sw3ge6
-  svr4:
-    type: pcsmall
-    os: ubuntu
-    interfaces:
-      em0: 
-        bridge: sw2ge7
-      em1: 
-        bridge: sw3ge7
-  client:
-    type: pchpv1
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.4/24
+          gateway4: 172.16.11.254
+      em5:
+        bridge: sw4ge5
+      em6:
+        bridge: sw4ge6
+      em7:
+        bridge: sw4ge7
+      em8:
+        bridge: sw4ge8
+      em9:
+        bridge: sw4ge9
+  client2:
+    type: pchpv2
     os: ubuntu
     interfaces:
       em0: 
         bridge: mgmt
         family:
-          inet: 172.16.11.10/24
+          inet: 172.16.11.12/24
           gateway4: 172.16.11.254
       em1: 
-        bridge: sw1ge6
+        bridge: sw3ge5
+      em2: 
+        bridge: sw3ge6
+      em3: 
+        bridge: sw4ge5
+      em4: 
+        bridge: sw4ge6
+      em5: 
+        bridge: sw3ge7
+      em6: 
+        bridge: sw4ge7
+      em7: 
+        bridge: sw3ge8
+      em8: 
+        bridge: sw4ge8
+  mon1:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.13/24
+          gateway4: 172.16.11.254
+      em1: 
+        bridge: sw1ge8
       em2: 
         bridge: sw2ge8
       em3: 
-        bridge: sw3ge8
+        bridge: sw3ge9
+      em4: 
+        bridge: sw4ge9
+  
 
