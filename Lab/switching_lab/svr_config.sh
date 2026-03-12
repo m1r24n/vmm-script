@@ -96,12 +96,12 @@ EOF
 
 # container
 
-export LXC_NAME=client2v22
+export LXC_NAME=client1v22
 export VLAN=22
-export OVS=ovs2
-export IPv4=192.168.22.12/24
+export OVS=ovs1
+export IPv4=192.168.22.11/24
 export GWv4=192.168.22.254
-export IPv6=fc00:dead:beef:a022::1000:12/64
+export IPv6=fc00:dead:beef:a022::1000:11/64
 export GWv6=fc00:dead:beef:a022::1
 
 echo "Creating VM ${LXC_NAME}"
@@ -156,7 +156,7 @@ network:
       mtu: 9000
   bonds:
     bond1:
-        macaddress: 56:04:15:00:57:60
+        macaddress: 56:04:1b:00:07:22
         interfaces:
         - eth1
         - eth2
@@ -202,102 +202,23 @@ network:
       - bond4
 EOF
 
-no interface vxlan 1
 
 
-interface vxlan 1
-    source ip 10.1.255.4
-    no shutdown
-    vni 21
-        vlan 21
-    vni 22
-        vlan 22
-    vni 23
-        vlan 23
-!
-
-!
-evpn
-  vlan 21
-  rd auto
-  route-target export auto
-  route-target import auto
-evpn
-  vlan 22
-  rd auto
-  route-target export auto
-  route-target import auto
-evpn
-  vlan 23
-  rd auto
-  route-target export auto
-  route-target import auto
-!
-!
-router bgp 4200000002
-  bgp router-id 10.1.255.4
-  neighbor 10.1.255.3 remote-as 4200000002
-  neighbor 10.1.255.3 update-source lo 0
-  address-family l2vpn evpn
-    neighbor 10.1.255.3 activate
-    neighbor 10.1.255.3 send-community
-!
-!
-ip router ospf 1
-   area 0.0.0.0
-
-interface 1/1/3
-   no lag 1
-   routing
-   ip address 10.1.255.132/31
-   exit
-interface 1/1/4
-   no lag 1
-   routing
-   ip address 10.1.255.134/31
-   exit
-no interface lag 1
-
-interface vxlan 1
-    source ip 10.1.255.3
-    no shutdown
-    vni 21
-        vlan 21
-        vtep-peer 10.1.255.4
-    vni 22
-        vlan 22
-        vtep-peer 10.1.255.4
-    vni 23
-        vlan 23
-        vtep-peer 10.1.255.4
-
-
-
-ip router ospf 1
-   area 0.0.0.0
-
-interface 1/1/3
-   no lag 1
-   routing
-   ip address 10.1.255.133/31
-   exit
-interface 1/1/4
-   no lag 1
-   routing
-   ip address 10.1.255.135/31
-   exit
-no interface lag 1
-
-interface vxlan 1
-    source ip 10.1.255.3
-    no shutdown
-    vni 21
-        vlan 21
-        vtep-peer 10.1.255.4
-    vni 22
-        vlan 22
-        vtep-peer 10.1.255.4
-    vni 23
-        vlan 23
-        vtep-peer 10.1.255.4
+cat << EOF | sudo tee /etc/netplan/02_net.yaml
+network:
+  ethernets:
+    eth1:
+      mtu: 9000
+    eth3:
+      mtu: 9000
+  bridges:
+    ovs1:
+      openvswitch: {}
+      interfaces:
+      - eth1
+    ovs2:
+      openvswitch: {}
+      interfaces:
+      - eth3
+EOF
 

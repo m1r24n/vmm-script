@@ -1,8 +1,8 @@
 ---
-name: sw1
+name: switch_lab
 pod: 
   type: vmm
-  vmmserver: q-pod21-vmm.englab.juniper.net
+  vmmserver: q-pod27-vmm.englab.juniper.net
   user: irzan
   #vmmpassword: AnaMabokCoy
   home_dir : /vmm/data/user_disks/irzan
@@ -49,14 +49,14 @@ fabric:
   # SNMP trap: 172.16.255.4
   # Netflow : 172.16.255.5
   # PCE serveR: 172.16.255.6
-    - [ 0x0, sw1, ge-0/0/0, sw3, em1 ]
-    - [ 0x0, sw1, ge-0/0/1, sw3, em2 ]
-    - [ 0x0, sw2, ge-0/0/0, sw4, em1 ]
-    - [ 0x0, sw2, ge-0/0/1, sw4, em2 ]
-    - [ 0x0, sw1, ge-0/0/2, sw2, ge-0/0/2]
-    - [ 0x0, sw1, ge-0/0/3, sw2, ge-0/0/3]
-    - [ 0x0, sw3, em3, sw4, em3]
-    - [ 0x0, sw3, em4, sw4, em4]
+    - [ 0x0, sw1, ge-0/0/0, sw2, ge-0/0/0]
+    - [ 0x0, sw1, ge-0/0/1, sw2, ge-0/0/1]
+    - [ 0x0, sw3, em1, sw4, em1]
+    - [ 0x0, sw3, em2, sw4, em2]
+    - [ 0x0, sw1, ge-0/0/2, sw3, em3 ]
+    - [ 0x0, sw1, ge-0/0/3, sw3, em4 ]
+    - [ 0x0, sw2, ge-0/0/2, sw4, em3 ]
+    - [ 0x0, sw2, ge-0/0/3, sw4, em4 ]
 vm:
   gw:
     type: gw
