@@ -63,8 +63,8 @@ if config1:
 		# 	lib1.get_vmm_capacity(d1)
 		# elif config1['cmd'] == 'get_dns':
 		# 	lib1.get_dns(d1)
-		#elif config1['cmd'] == 'get_serial':
-		#	lib1.get_serial(d1,config1['vm'])
+		elif config1['cmd'] == 'get_serial':
+			lib1.get_serial(d1)
 		#elif config1['cmd'] == 'get_vga':
 		#	lib1.get_vga(d1,config1['vm'])
 		#elif config1['cmd'] == 'get_ip':

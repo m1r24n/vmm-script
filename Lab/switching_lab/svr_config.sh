@@ -96,13 +96,13 @@ EOF
 
 # container
 
-export LXC_NAME=client1v22
-export VLAN=22
+export LXC_NAME=cl1sw1
+export VLAN=31
 export OVS=ovs1
-export IPv4=192.168.22.11/24
-export GWv4=192.168.22.254
-export IPv6=fc00:dead:beef:a022::1000:11/64
-export GWv6=fc00:dead:beef:a022::1
+export IPv4=192.168.31.11/24
+export GWv4=192.168.31.254
+export IPv6=fc00:dead:beef:a031::1000:11/64
+export GWv6=fc00:dead:beef:a031::1
 
 echo "Creating VM ${LXC_NAME}"
 lxc copy client ${LXC_NAME}
@@ -126,6 +126,7 @@ iface eth0 inet static
     gateway ${GWv4}
 iface eth0 inet6 static
     address ${IPv6}
+    gateway ${GWv4}
 EOF
 
 lxc file push ./interface.conf ${LXC_NAME}/etc/network/interfaces

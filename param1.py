@@ -4,7 +4,7 @@ kvm_dir='/disk2/vm/'
 pc_type=['gw','pctiny','pcsmall','pcmedium','pcbig','pcxbig','pchpv0','pchpv1','pchpv2','pchpv3','bridge','cpe','paagent','ssrc','ssrr','aos','aos_ztp']
 junos_template='junos.j2'
 junos_type=['vsrx','vmx','mx240','mx480','mx960','vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX']
-netdev_type=['vsrx','vmx','mx240','mx480','mx960','vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx']
+netdev_type=['vsrx','vmx','mx240','mx480','mx960','vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx','sonic']
 # vm_type_old={
 #    'gw': {'ncpus' : 2,'memory':4096},
 #    'paagent': {'ncpus' : 1,'memory':1024},
@@ -47,6 +47,7 @@ vm_type={
    'bridge': {'ncpus' : 2,'memory':2048,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'cpe': {'ncpus' : 1,'memory':1024,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'aos_cx' : {'ncpus' : 2,'memory':4096,'setvar':'"+qemu_args" "-cpu host,+vmx"'},
+   'sonic' : {'ncpus' : 2,'memory':4096,'setvar':'"+qemu_args" "-cpu host,+vmx"'},
    'vjunos_switch' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=1,product=VM-VEX"'},
    'vjunos_router' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx -smbios type=1,product=VM-VMX,family=lab"'},
    'vjunos_router_old' : {'ncpus' : 4,'memory':5120,'setvar':'"+qemu_args" "-cpu host,+vmx"'},

@@ -1,0 +1,2804 @@
+{
+  "customer_id": "6c409076-3361-11f1-8c20-3af23bbc9d1a",
+  "design_id": "infrastructure",
+  "design_version": "0.14.128",
+  "fh_config": {
+    "edited-by": "mochammad.irzan@hpe.com",
+    "status": "uploaded"
+  },
+  "infrastructure_ntw": {
+    "default_interface_profiles": [
+      "IP1"
+    ],
+    "default_node_profiles": [
+      "DP1"
+    ],
+    "default_port_profiles": [
+      "PP1"
+    ],
+    "interface_profiles": {
+      "interface_profile": [
+        {
+          "name": "IP1",
+          "templates": []
+        }
+      ]
+    },
+    "labels": {
+      "label": []
+    },
+    "network_nodes": {
+      "network_node": [
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf5230400",
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE1_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE1_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:23:04:00",
+          "model": "vMX",
+          "name": "PE1",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:43:57.442983+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:43:45.422099+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:42:23.382147+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:42:10.602472+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:42:07.077551+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:31.206949+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:28.707263+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:25.553682+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:22.741828+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:19.395735+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:03.774632+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:03.194528+00:00"
+              },
+              {
+                "reason": "Planned site 549a17de-a5ee-411f-95be-8b30c66f4ff6 and actual site 549a17de-a5ee-411f-95be-8b30c66f4ff6 matched for node PE1",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:40:02.583926+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            },
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD431D",
+          "site_id": "549a17de-a5ee-411f-95be-8b30c66f4ff6",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf5675300",
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE2_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE2_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:67:53:00",
+          "model": "vMX",
+          "name": "PE2",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:56:01.558170+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:55:52.733590+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:54:30.265738+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:54:20.469536+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:54:17.769897+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:42.528266+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:39.516425+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:36.783178+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:34.436656+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:31.312337+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:18.512044+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:17.895211+00:00"
+              },
+              {
+                "reason": "Planned site 82b73187-06c2-44fa-8a0c-d7d5aa68fc97 and actual site 82b73187-06c2-44fa-8a0c-d7d5aa68fc97 matched for node PE2",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:52:17.373026+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            },
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD5A80",
+          "site_id": "82b73187-06c2-44fa-8a0c-d7d5aa68fc97",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf56f0500",
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE3_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE3_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:6f:05:00",
+          "model": "vMX",
+          "name": "PE3",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:39:44.909426+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:39:32.622879+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:38:11.409652+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:37:59.685630+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:37:57.083638+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:36:21.949027+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:36:19.424212+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:36:16.772942+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:36:14.124594+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:36:11.231263+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:35:55.883599+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:35:55.266322+00:00"
+              },
+              {
+                "reason": "Planned site c1874458-9a12-45c6-9ee5-8bcfa7a1dc00 and actual site c1874458-9a12-45c6-9ee5-8bcfa7a1dc00 matched for node PE3",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:35:54.624674+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            },
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD4A29",
+          "site_id": "c1874458-9a12-45c6-9ee5-8bcfa7a1dc00",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf58b9400",
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE4_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE4_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:8b:94:00",
+          "model": "vMX",
+          "name": "PE4",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:29:57.478815+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:29:44.261046+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:28:31.463266+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:28:18.132513+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:28:15.142395+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:50.675557+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:47.826022+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:45.326694+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:42.517589+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:39.325868+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:23.734587+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:23.212669+00:00"
+              },
+              {
+                "reason": "Planned site 24a8cf1f-7595-44e4-a856-dff76cb06ff0 and actual site 24a8cf1f-7595-44e4-a856-dff76cb06ff0 matched for node PE4",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:26:22.622085+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            },
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD3B3C",
+          "site_id": "24a8cf1f-7595-44e4-a856-dff76cb06ff0",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf55d5b00",
+          "interfaces": {
+            "interface": [
+              {
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/0",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4094,
+                      "start": 0
+                    }
+                  ]
+                },
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE5_P5",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:5d:5b:00",
+          "model": "vMX",
+          "name": "PE5",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:41.630605+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:38.705061+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:35.856522+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:33.132442+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:30.421438+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:18.075295+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:17.494673+00:00"
+              },
+              {
+                "reason": "Planned site 968fd5f1-190f-4e24-8251-b810665ade7c and actual site 968fd5f1-190f-4e24-8251-b810665ade7c matched for node PE5",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:30:16.901325+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarding": {
+                "phys_stage": {
+                  "sub_state": "ems-template-execute"
+                },
+                "stage": "stage-phys"
+              },
+              "state": "node-state-onboarding"
+            },
+            "subsystems": {
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            },
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD3AD5",
+          "site_id": "968fd5f1-190f-4e24-8251-b810665ade7c",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf51f8800",
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE1_P1",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE2_P1",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P1_P2",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P1_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:1f:88:00",
+          "model": "vMX",
+          "name": "P1",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T17:04:17.876574+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:04:04.970207+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:02:41.855370+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:02:32.166948+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:02:28.665243+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:52.214652+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:48.814215+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:45.624551+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:42.113197+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:39.380378+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:23.101879+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:22.478304+00:00"
+              },
+              {
+                "reason": "Planned site d2d8e6f9-4400-48dc-89a7-d6fa2af1b130 and actual site d2d8e6f9-4400-48dc-89a7-d6fa2af1b130 matched for node P1",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T17:00:21.795285+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD4A7F",
+          "site_id": "d2d8e6f9-4400-48dc-89a7-d6fa2af1b130",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf5848000",
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE1_P2",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE2_P2",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P1_P2",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P2_P4",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P2_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:84:80:00",
+          "model": "vMX",
+          "name": "P2",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:51:59.310475+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:51:50.425132+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:50:27.843987+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:50:16.418885+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:50:13.753279+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:37.968413+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:35.851772+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:33.496405+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:30.567939+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:28.169062+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:15.871619+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:15.221772+00:00"
+              },
+              {
+                "reason": "Planned site eb8ba2e9-88f3-4cc1-a634-061fea6bea62 and actual site eb8ba2e9-88f3-4cc1-a634-061fea6bea62 matched for node P2",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:48:14.573822+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD4360",
+          "site_id": "eb8ba2e9-88f3-4cc1-a634-061fea6bea62",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf5914c00",
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE3_P3",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE4_P3",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P3_P4",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P3_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:91:4c:00",
+          "model": "vMX",
+          "name": "P3",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T17:00:03.625785+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:59:51.127279+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:58:28.872635+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:58:17.163723+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:58:14.332253+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:47.500363+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:44.556844+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:41.561816+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:38.850474+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:35.947555+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:20.859943+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:20.377862+00:00"
+              },
+              {
+                "reason": "Planned site 09b58a1e-f271-4f86-ad9d-6e6b10f34176 and actual site 09b58a1e-f271-4f86-ad9d-6e6b10f34176 matched for node P3",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:56:19.711143+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD5B24",
+          "site_id": "09b58a1e-f271-4f86-ad9d-6e6b10f34176",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf5554900",
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_PE3_P4",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE4_P4",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P3_P4",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P2_P4",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P4_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:55:49:00",
+          "model": "vMX",
+          "name": "P4",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:35:36.615593+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:35:26.973789+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:34:03.963976+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:33:51.605643+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:33:49.034256+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:32:12.506776+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:32:09.753108+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:32:07.035730+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:32:04.429282+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:32:02.164011+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:31:46.696443+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:31:46.114510+00:00"
+              },
+              {
+                "reason": "Planned site 24118bbe-950a-4523-a848-b469e7626137 and actual site 24118bbe-950a-4523-a848-b469e7626137 matched for node P4",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:31:45.548559+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD49FF",
+          "site_id": "24118bbe-950a-4523-a848-b469e7626137",
+          "vendor": "Juniper Networks"
+        },
+        {
+          "device_uuid": "00000000-0000-0000-1000-2c6bf58bea00",
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "interface": [
+              {
+                "link": "Link_P1_P5",
+                "name": "ge-0/0/0.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P2_P5",
+                "name": "ge-0/0/1.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P3_P5",
+                "name": "ge-0/0/2.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_P4_P5",
+                "name": "ge-0/0/3.0",
+                "profiles": []
+              },
+              {
+                "link": "Link_PE5_P5",
+                "name": "ge-0/0/4.0",
+                "profiles": []
+              }
+            ],
+            "port": []
+          },
+          "mac_address": "2c:6b:f5:8b:ea:00",
+          "model": "vMX",
+          "name": "P5",
+          "node_type": "real-node",
+          "onboard": {
+            "history": [
+              {
+                "reason": "Recorded Trust details at the end of logical stage of onboarding",
+                "state_info": {
+                  "state": "node-state-onboarded"
+                },
+                "time": "2026-04-08T16:47:56.250063+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for logical stage, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-trust"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:47:43.781455+00:00"
+              },
+              {
+                "reason": "Recorded Trust details at the end of physical stage of onboarding",
+                "state_info": {
+                  "onboarding": {
+                    "logical_stage": {
+                      "sub_state": "logical-modify"
+                    },
+                    "stage": "stage-logical"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:46:20.844849+00:00"
+              },
+              {
+                "reason": "Finished 'modify' processing for physical stage, 'active assurance' is disabled and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:46:08.411349+00:00"
+              },
+              {
+                "reason": "PAA tests configured as non-blocking, skipping test results collection",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-active-assurance"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:46:05.343093+00:00"
+              },
+              {
+                "reason": " No device EMS templates configured. No interface EMS templates configured.",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "ems-template-execute"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:39.350986+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:36.599329+00:00"
+              },
+              {
+                "reason": "No request id provided in node instance data, no software to upgrade",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-modify"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:33.849691+00:00"
+              },
+              {
+                "reason": "software image not specified",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update",
+                      "sub_sub_state": "software-update-launch"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:31.406674+00:00"
+              },
+              {
+                "reason": "Recorded Trust baseline details",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-software-update"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:28.436858+00:00"
+              },
+              {
+                "reason": "Node is a paper node, and Trust is enabled",
+                "state_info": {
+                  "onboarding": {
+                    "phys_stage": {
+                      "sub_state": "phys-trust-baseline"
+                    },
+                    "stage": "stage-phys"
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:15.567741+00:00"
+              },
+              {
+                "reason": "Planned model [vMX] matches with the installed model [VMX] Planned vendor [Juniper Networks] matches with the installed vendor [Juniper Networks]",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:14.970582+00:00"
+              },
+              {
+                "reason": "Planned site cad33146-0121-40f5-887e-66dd6789827f and actual site cad33146-0121-40f5-887e-66dd6789827f matched for node P5",
+                "state_info": {
+                  "onboarding": {
+                    "stage": "stage-verify",
+                    "verify_stage": {
+                      "sub_state": "verify"
+                    }
+                  },
+                  "state": "node-state-onboarding"
+                },
+                "time": "2026-04-08T16:44:14.387259+00:00"
+              }
+            ],
+            "state_info": {
+              "onboarded": {
+                "message": "Node has been successfully onboarded"
+              },
+              "state": "node-state-onboarded"
+            },
+            "subsystems": {
+              "active_assurance": {
+                "physical": {
+                  "active_assurance_onboard_status": "Non blocking mode enabled"
+                }
+              },
+              "trust": {
+                "baseline": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "logical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                },
+                "physical": {
+                  "authenticity": {
+                    "hardware": "trust-authenticated",
+                    "software": "trust-authenticated"
+                  },
+                  "score": {
+                    "value": 0
+                  }
+                }
+              }
+            }
+          },
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000
+          },
+          "profiles": [],
+          "serial": "VM69D3BD3DEB",
+          "site_id": "cad33146-0121-40f5-887e-66dd6789827f",
+          "vendor": "Juniper Networks"
+        }
+      ]
+    },
+    "node_profiles": {
+      "node_profile": [
+        {
+          "analytics": {
+            "traffic_engineering": {}
+          },
+          "ipv6_tunneling": {
+            "enabled": false
+          },
+          "labels": [],
+          "name": "DP1",
+          "per_flow_load_balancing": {
+            "enabled": false
+          },
+          "templates": [],
+          "trust": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    "port_profiles": {
+      "port_profile": [
+        {
+          "name": "PP1"
+        }
+      ]
+    },
+    "usecases": [
+      "active-assurance",
+      "infrastructure-configuration",
+      "observability",
+      "optimization",
+      "service-orchestration"
+    ]
+  },
+  "instance_id": "NIP1",
+  "instance_status": "feasibility_checked",
+  "instance_uuid": "583d1b46-3367-11f1-86cd-5a2c16ed623d",
+  "operation": "modify",
+  "order_id": "71bf0c0c-33af-11f1-8c20-3af23bbc9d1a",
+  "org_id": "c0350106-40e1-437f-a655-cbf7ba65e232",
+  "placement": {},
+  "upload_time": "2026-04-09T01:00:04Z",
+  "version": "1.0.0"
+}

@@ -1,0 +1,54 @@
+
+set version 25.4R1.11
+set system host-name r1
+set system root-authentication encrypted-password "$1$e3lXPToV$7di5PcSeEFggRrdeRAeae0"
+set system login user admin uid 2000
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$e3lXPToV$7di5PcSeEFggRrdeRAeae0"
+set system login user admin authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQoYmtNh2kDlhKowCSiIUgjS5+Db+sZlJ18241ZhU+Rpdt802lHvi6VE5Q/u97pzagurX23/VYYNrULc22euU2B3mjNnYwpBaQP+qOlpzz6YQmz3eJ2f4CKj7nDPyyvzEcDetPFoZBSJ3oSAntdUV/8JAJ+Xqw8ZQRzGD77A+RxPQypKJGuPmNPoWikEy5fbXobFXvmhCJHMZoTerv+gJZk1L4ZTNl9nK/9iuJT/n1a4g3EH1uPQgyX3fBGWFm7uCiLStDOV62WOeGpl1yp78CqcrCGKcVTPqHjKjtlFokFtE3ktrmsH3o1PEbfOWWeOdaZ7L5xk2CzIGfcun5IcTd"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system default-address-selection
+set system management-instance
+set system name-server 172.16.14.254
+set system syslog user * any emergency
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set chassis network-services enhanced-ip
+set interfaces ge-0/0/0 interface-transmit-statistics
+set interfaces ge-0/0/0 flexible-vlan-tagging
+set interfaces ge-0/0/0 mtu 9000
+set interfaces ge-0/0/0 encapsulation flexible-ethernet-services
+set interfaces ge-0/0/0 unit 11 vlan-id 11
+set interfaces ge-0/0/0 unit 11 family inet address 192.168.11.1/24
+set interfaces ge-0/0/0 unit 12 vlan-id 12
+set interfaces ge-0/0/0 unit 12 family inet address 192.168.12.1/24
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/1 unit 0 family inet address 172.16.255.135/31
+set interfaces ge-0/0/1 unit 0 family inet6 address fc00:dead:beef:ffff::5/127
+set interfaces ge-0/0/2 mtu 9000
+set interfaces ge-0/0/2 unit 0 family inet address 172.16.255.137/31
+set interfaces ge-0/0/2 unit 0 family inet6 address fc00:dead:beef:ffff::7/127
+set interfaces fxp0 unit 0 family inet address 172.16.11.5/24
+set policy-options policy-statement to_bgp term 1 from route-filter 192.168.11.0/24 orlonger
+set policy-options policy-statement to_bgp term 1 from route-filter 192.168.12.0/24 orlonger
+set policy-options policy-statement to_bgp term 1 then accept
+set policy-options policy-statement to_bgp term 2 from route-filter fc00:dead:beef:aa11::/64 orlonger
+set policy-options policy-statement to_bgp term 2 from route-filter fc00:dead:beef:aa12::/64 orlonger
+set policy-options policy-statement to_bgp term 2 then accept
+set policy-options policy-statement to_bgp term default then reject
+set routing-options autonomous-system 4200000100
+set protocols bgp group to_fw1 export to_bgp
+set protocols bgp group to_fw1 bfd-liveness-detection minimum-interval 100
+set protocols bgp group to_fw1 bfd-liveness-detection multiplier 3
+set protocols bgp group to_fw1 neighbor 172.16.255.134 peer-as 4200000011
+set protocols bgp group to_fw1 neighbor fc00:dead:beef:ffff::4 peer-as 4200000011
+set protocols bgp group to_fw2 export to_bgp
+set protocols bgp group to_fw2 bfd-liveness-detection minimum-interval 100
+set protocols bgp group to_fw2 bfd-liveness-detection multiplier 3
+set protocols bgp group to_fw2 neighbor 172.16.255.136 peer-as 4200000012
+set protocols bgp group to_fw2 neighbor fc00:dead:beef:ffff::6 peer-as 4200000012
+set protocols lldp interface fxp0 disable
+set protocols lldp interface all

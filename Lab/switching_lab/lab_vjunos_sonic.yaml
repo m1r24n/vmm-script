@@ -1,0 +1,216 @@
+---
+name: switch_lab
+pod: 
+  type: vmm
+  vmmserver: q-pod27-vmm.englab.juniper.net
+  user: irzan
+  #vmmpassword: AnaMabokCoy
+  home_dir : /vmm/data/user_disks/irzan
+images:
+  gw: images/gw.qcow2
+  ubuntu: images/ubuntu24.04.qcow2
+  bridge: images/bridge.qcow2
+  vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  vjunos_switch: images/vJunos-switch-25.4R1.12.qcow2
+  aos_cx: images/aos-cx.qcow2
+  sonic: images/sonic-vm.qcow2
+junos_login:
+  login: admin
+  password: pass01
+#pcep_server: 172.16.12.3
+#isis_dm: true
+#paragon_ingest: 172.16.12.1
+# snmp: 
+#   server: 172.16.255.4
+#   ro_community: public
+# wg:
+#   prefix_allowed:
+#   - 172.16.11.0/24 
+#   - 172.16.10.0/24
+#   - 172.16.12.0/24 
+#   - 10.100.255.0/24
+fabric:
+  #subnet: 10.100.0.0/24
+  topology:
+  # there are five field: status, VM node A, interface of node A, VM node Z, interface of node Z
+  # value for the field status:
+  # bit 0 : ipv4
+  # bit 1 : ipv6
+  # bit 2 : iso
+  # bit 3 : mpls
+  # bit 4 : isis
+  # bit 5 : rsvp
+  # bit 6 : ldp
+  # bit 7 : delay_measurement_rpm
+  # 0x3d means enable family ipv4, iso and mpls, and enable protocol isis and rsvp
+  # 0xbd means enable family ipv4, iso and mpls, and enable protocol isis and rsvp, and delay measurement using RPM
+  # ingress controller: 172.16.255.1
+  # NGIX ingress controller: 172.16.255.2
+  # insight : 172.16.255.3
+  # SNMP trap: 172.16.255.4
+  # Netflow : 172.16.255.5
+  # PCE serveR: 172.16.255.6
+    - [ 0x0, sw1, ge-0/0/0, sw2, ge-0/0/0]
+    - [ 0x0, sw1, ge-0/0/1, sw2, ge-0/0/1]
+    - [ 0x0, sw3, em1, sw4, em1]
+    - [ 0x0, sw3, em2, sw4, em2]
+    - [ 0x0, sw1, ge-0/0/2, sw3, em3 ]
+    - [ 0x0, sw1, ge-0/0/3, sw3, em4 ]
+    - [ 0x0, sw2, ge-0/0/2, sw4, em3 ]
+    - [ 0x0, sw2, ge-0/0/3, sw4, em4 ]
+vm:
+  gw:
+    type: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.254/24
+        dhcp_range: 172.16.11.1-172.16.11.200
+  sw1:
+    type: vjunos_switch
+    os: vjunos_switch
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.1/24
+          gateway4: 172.16.11.254
+      ge-0/0/4:
+        bridge: sw1ge4
+      ge-0/0/5:
+        bridge: sw1ge5
+      ge-0/0/6:
+        bridge: sw1ge6
+      ge-0/0/7:
+        bridge: sw1ge7
+      ge-0/0/8:
+        bridge: sw1ge8
+  sw2:
+    type: vjunos_switch
+    os: vjunos_switch
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.2/24
+          gateway4: 172.16.11.254
+      ge-0/0/4:
+        bridge: sw2ge4
+      ge-0/0/5:
+        bridge: sw2ge5
+      ge-0/0/6:
+        bridge: sw2ge6
+      ge-0/0/7:
+        bridge: sw2ge7
+      ge-0/0/8:
+        bridge: sw2ge8
+  client1:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.11/24
+          gateway4: 172.16.11.254
+      em1: 
+        bridge: sw1ge4
+      em2: 
+        bridge: sw1ge5
+      em3: 
+        bridge: sw2ge4
+      em4: 
+        bridge: sw2ge5
+      em5: 
+        bridge: sw1ge6
+      em6: 
+        bridge: sw2ge6
+      em7: 
+        bridge: sw1ge7
+      em8: 
+        bridge: sw2ge7
+  sw3:
+    type: sonic
+    os: sonic
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.3/24
+          gateway4: 172.16.11.254
+      em5:
+        bridge: sw3ge5
+      em6:
+        bridge: sw3ge6
+      em7:
+        bridge: sw3ge7
+      em8:
+        bridge: sw3ge8
+      em9:
+        bridge: sw3ge9
+  sw4:
+    type: sonic
+    os: sonic
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.4/24
+          gateway4: 172.16.11.254
+      em5:
+        bridge: sw4ge5
+      em6:
+        bridge: sw4ge6
+      em7:
+        bridge: sw4ge7
+      em8:
+        bridge: sw4ge8
+      em9:
+        bridge: sw4ge9
+  client2:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.12/24
+          gateway4: 172.16.11.254
+      em1: 
+        bridge: sw3ge5
+      em2: 
+        bridge: sw3ge6
+      em3: 
+        bridge: sw4ge5
+      em4: 
+        bridge: sw4ge6
+      em5: 
+        bridge: sw3ge7
+      em6: 
+        bridge: sw4ge7
+      em7: 
+        bridge: sw3ge8
+      em8: 
+        bridge: sw4ge8
+  mon1:
+    type: pchpv2
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.13/24
+          gateway4: 172.16.11.254
+      em1: 
+        bridge: sw1ge8
+      em2: 
+        bridge: sw2ge8
+      em3: 
+        bridge: sw3ge9
+      em4: 
+        bridge: sw4ge9
+  
+

@@ -252,7 +252,7 @@ def add_os(d1):
 
 def change_ztp(d1):
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','vsrx','aos_cx']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','vsrx','aos_cx','sonic']:
 			if 'ztp' not in d1['vm'][i].keys():
 				d1['vm'][i]['ztp'] = True
 			else:
@@ -689,7 +689,8 @@ def add_path(d1,path):
 		'bridge': f"{path}/template/bridge.j2",
 		'vmmtopo': f"{path}/template/vmm_topology.j2",
 		'ssh_config': f"{path}/template/ssh_config.j2",
-		'aos_cx': f"{path}/template/aos_cx.j2"
+		'aos_cx': f"{path}/template/aos_cx.j2",
+		'sonic': f"{path}/template/sonic.j2"
 	}
 
 # def get_private_ip_gw(d1):
@@ -750,11 +751,11 @@ def check_argv(argv):
 					retval['vm'] = argv[2]
 				else:
 					retval['vm'] = ""
-			elif retval['cmd'] == 'get_serial': 
-				if len(argv)==3:
-					retval['vm'] = argv[2]
-				else:
-					retval['vm'] = ""
+			# elif retval['cmd'] == 'get_serial': 
+			# 	if len(argv)==3:
+			# 		retval['vm'] = argv[2]
+			# 	else:
+			# 		retval['vm'] = ""
 			elif retval['cmd'] == 'init_junos': 
 				#print(f"len {len(argv)}")
 				if len(argv)==3:
@@ -786,7 +787,8 @@ def checking_config_syntax(d1):
 		# 	return 0
 	# checking interface
 	for i in d1['vm'].keys():
-		if (d1['vm'][i]['type'] in param1.vm_type.keys()) and (d1['vm'][i]['type'] not in ['vmx','vjunos_evolved','vjunos_evolvedBX','vsrx','mx240','mx480','mx960','vjunos_switch','vjunos_router','aos_cx']):
+		# if (d1['vm'][i]['type'] in param1.vm_type.keys()) and (d1['vm'][i]['type'] not in ['vmx','vjunos_evolved','vjunos_evolvedBX','vsrx','mx240','mx480','mx960','vjunos_switch','vjunos_router','aos_cx']):
+		if (d1['vm'][i]['type'] in param1.vm_type.keys()) and (d1['vm'][i]['type'] not in param1.netdev_type):
 			for j in d1['vm'][i]['interfaces'].keys():
 				if 'em' not in j:
 					print("ERROR for VM ",i)
@@ -1005,7 +1007,7 @@ def get_dhcp_config(d1):
 					print(f"vm {i} mac {d1['vm'][i]['interfaces']['em0']['mac']}")
 					dhcp_list.append(i)
 		elif 'mgmt' in d1['vm'][i]['interfaces']:
-			if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
+			if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx','sonic','vsrx'] and d1['vm'][i]['ztp']:
 				print(f"vm {i}")
 				if 'family' in d1['vm'][i]['interfaces']['mgmt']:
 					if 'inet' in d1['vm'][i]['interfaces']['mgmt']['family']:
@@ -1310,7 +1312,7 @@ def set_gw_v2(d1):
 	sftp.put(file1,'set_gw.sh')
 	sftp.close()
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx','sonic'] and d1['vm'][i]['ztp']:
 			src1 = f"{param1.tmp_dir}{i}.conf"
 			dst1 = f"tftp/{i}.conf"
 			sftp=ssh.open_sftp()
@@ -1357,7 +1359,7 @@ def set_gw_v1(d1):
 	# 		print(f"upload file {i}.conf")
 	# 		sftp.put(file2,dst2)
 	for i in d1['vm'].keys():
-		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx'] and d1['vm'][i]['ztp']:
+		if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx','sonic'] and d1['vm'][i]['ztp']:
 			src1 = f"{param1.tmp_dir}{i}.conf"
 			dst1 = f"tftp/{i}.conf"
 			sftp=ssh.open_sftp()
@@ -1664,27 +1666,58 @@ def get_mac_vm(d1,i):
 def get_vjunos_sernum(d1,i):
 	cmd1=f"cli -c \"show chassis hardware | match Chassis\" | tr -s \" \" | cut -d \" \" -f 2"
 
-def get_serial(d1,vm=""):
-	if d1['pod']['type'] == 'vmm':
-		ssh=sshconnect(d1)
-		print('-----')
-		print("serial port of VM")
-		cmd1="vmm list"
-		s1,s2,s3=ssh.exec_command(cmd1)
-		vm_list=[]
-		for i in s2.readlines():
-			vm_list.append(i.rstrip().split()[0])	
-		if vm=="":
-			print("vm list", vm_list)
-			for i in vm_list:
-				print("serial of " + i + " : " + get_serial_vm(d1,i).replace(":"," "))
-		elif vm not in vm_list:
-			print("VM %s does not exist " %(vm))
-		else:
-			print("serial of " + vm + " : " + get_serial_vm(d1,vm).replace(":"," "))
-		ssh.close()
-	elif d1['pod']['type'] == 'kvm':
-		print("not yet implemented")
+def get_serial_v0(d1):
+	ssh=sshconnect(d1)
+	print('-----')
+	print("serial port of VM")
+	cmd1="vmm list"
+	s1,s2,s3=ssh.exec_command(cmd1)
+	vm_list=[]
+	for i in s2.readlines():
+		vm_list.append(i.rstrip().split()[0])	
+	# print(vm)
+	print("vm list", vm_list)
+	alias_list=[]
+	for i in vm_list:
+		serial_data=get_serial_vm(d1,i).replace(":"," ")
+		print(f"serial of {i} : {serial_data} " )
+		alias_list.append(f"alias {i}=\"telnet {serial_data}\"")
+	ssh.close()
+	with open(param1.tmp_dir+"serial_port.sh","w") as f1:
+		f1.write("\n".join(alias_list))
+
+def get_serial(d1):
+	ssh=sshconnect(d1)
+	print('-----')
+	print("serial port of VM")
+	cmd1="vmm serial"
+	s1,s2,s3=ssh.exec_command(cmd1)
+	vm_list=[]
+	telnet_host=[]
+	telnet_port=[]
+	for i in s2.readlines():
+		vm_list.append(i.rstrip().split()[0])
+		telnet_host.append(i.rstrip().split()[1])
+		telnet_port.append(i.rstrip().split()[2])
+	alias_list = []
+	i=0
+	for x in vm_list:
+		alias_list.append(f"alias {vm_list[i]}=\"telnet {telnet_host[i]} {telnet_port[i]}\"")
+		i+=1
+	# print(vm_list)
+	# print(len(vm_list))
+	# print(telnet_port)
+	# print(len(telnet_port))
+	# # print(vm)
+	# print("vm list", vm_list)
+	# alias_list=[]
+	# for i in vm_list:
+	# 	serial_data=get_serial_vm(d1,i).replace(":"," ")
+	# 	print(f"serial of {i} : {serial_data} " )
+	# 	alias_list.append(f"alias {i}=\"telnet {serial_data}\"")
+	ssh.close()
+	with open(param1.tmp_dir+"serial_port.sh","w") as f1:
+		f1.write("\n".join(alias_list))
 
 
 def get_serial_vm(d1,i):
@@ -1990,8 +2023,11 @@ def create_lab_config(d1):
 			# 	intf_list={intf_t1 : d1['vm'][i]['interfaces'][j]['bridge'] }
 			# else:
 			# 	intf_list[intf_t1]= d1['vm'][i]['interfaces'][j]['bridge']
+			
 			if j not in ["lo","lo0"]:
-				if d1['vm'][i]['type'] == 'aos_cx':
+				if d1['vm'][i]['type'] in ['aos_cx','sonic']:
+					# if d1['vm'][i]['type'] =='sonic':
+					# 	print(f"{i} interface {j} bridge {d1['vm'][i]['interfaces'][j]['bridge']}")
 					if j == 'mgmt':
 						intf1 = 'vio0'
 					else:
@@ -2286,26 +2322,27 @@ def create_netdev_config(d1,i):
 	dummy1['ssh_key']=d1['pod']['ssh_key_host']
 	#print(f"VM is {i}")
 	#dummy1['ntpserver']=d1['pod']['ntp']
-	if d1['vm'][i]['type'] == 'vmx':
-		dummy1['type']='vmx'
-	# elif d1['vm'][i]['type'] == 'vqfx':
-	# 	dummy1['type']='vqfx'
-	elif d1['vm'][i]['type'] == 'vsrx':
-		dummy1['type']='vsrx'
-	# elif d1['vm'][i]['type'] == 'vrr':
-	# 	dummy1['type']='vrr'
-	elif d1['vm'][i]['type'] == 'vjunos_switch':
-		dummy1['type']='vjunos_switch'
-	elif d1['vm'][i]['type'] == 'vjunos_router':
-		dummy1['type']='vjunos_router'
-	# elif d1['vm'][i]['type'] == 'evo':
-	# 	dummy1['type']='evo'
-	elif d1['vm'][i]['type'] == 'vjunos_evolved':
-		dummy1['type']='vjunos_evolved'
-	elif d1['vm'][i]['type'] == 'vjunos_evolvedBX':
-		dummy1['type']='vjunos_evolvedBX'
-	elif d1['vm'][i]['type'] == 'aos_cx':
-		dummy1['type']='aos_cx'
+	dummy1['type'] = d1['vm'][i]['type']
+	# if d1['vm'][i]['type'] == 'vmx':
+	# 	dummy1['type']='vmx'
+	# # elif d1['vm'][i]['type'] == 'vqfx':
+	# # 	dummy1['type']='vqfx'
+	# elif d1['vm'][i]['type'] == 'vsrx':
+	# 	dummy1['type']='vsrx'
+	# # elif d1['vm'][i]['type'] == 'vrr':
+	# # 	dummy1['type']='vrr'
+	# elif d1['vm'][i]['type'] == 'vjunos_switch':
+	# 	dummy1['type']='vjunos_switch'
+	# elif d1['vm'][i]['type'] == 'vjunos_router':
+	# 	dummy1['type']='vjunos_router'
+	# # elif d1['vm'][i]['type'] == 'evo':
+	# # 	dummy1['type']='evo'
+	# elif d1['vm'][i]['type'] == 'vjunos_evolved':
+	# 	dummy1['type']='vjunos_evolved'
+	# elif d1['vm'][i]['type'] == 'vjunos_evolvedBX':
+	# 	dummy1['type']='vjunos_evolvedBX'
+	# elif d1['vm'][i]['type'] == 'aos_cx':
+	# 	dummy1['type']='aos_cx'
 	# dummy1['gateway4']=d1['vm']['gw']['interfaces']['em1']['family']['inet'].split('/')[0]
 	dummy1['gateway4'] = get_gateway4(d1,i)
 	dummy1['mgmt_ip']=d1['vm'][i]['interfaces']['mgmt']['family']['inet']
@@ -2427,6 +2464,8 @@ def write_netdev_config(d1):
 			jt=f1.read()
 		with open(d1['template']['aos_cx']) as f1:
 			at=f1.read()
+		with open(d1['template']['sonic']) as f1:
+			st=f1.read()
 		# with open(d1['template']['junos2']) as f1:
 		# 	jt2=f1.read()
 		# with open(d1['template']['junos3']) as f1:
@@ -2441,6 +2480,8 @@ def write_netdev_config(d1):
 					config1=Template(jt).render(dummy1)
 				if d1['vm'][i]['type'] == 'aos_cx':
 					config1=Template(at).render(dummy1)
+				if d1['vm'][i]['type'] == 'sonic':
+					config1=Template(st).render(dummy1)
 				with open(f1,"w") as wr1:
 					wr1.write(config1)
 	except PermissionError:

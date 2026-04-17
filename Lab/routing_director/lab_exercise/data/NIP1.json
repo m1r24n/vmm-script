@@ -57,20 +57,83 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE1_P1",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE1_P1"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE1_P2",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE1_P2"
+              },
+              {
+                "name": "ge-0/0/2.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
               }
             ],
             "port": []
@@ -79,9 +142,18 @@
           "name": "PE1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0B60",
-          "site_id": "6f84adf2-a26a-4d18-8ffa-c662f1f25356",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD431D",
+          "site_id": "37641127-391b-4363-8fdc-0cf2a107743a",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -90,20 +162,83 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE2_P1",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE2_P1"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE2_P2",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE2_P2"
+              },
+              {
+                "name": "ge-0/0/2.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
               }
             ],
             "port": []
@@ -112,9 +247,18 @@
           "name": "PE2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0AB2",
-          "site_id": "3ed9f5c8-6cbe-43a5-918d-fd934d86d43d",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD5A80",
+          "site_id": "82b33e88-74a3-44d5-bf3c-5e3e48d84cba",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -123,20 +267,83 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE3_P3",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE3_P3"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE3_P4",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE3_P4"
+              },
+              {
+                "name": "ge-0/0/2.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
               }
             ],
             "port": []
@@ -145,9 +352,18 @@
           "name": "PE3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F1712",
-          "site_id": "2fe35dec-89d9-4fc9-b3b5-920fc0559352",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD4A29",
+          "site_id": "c89c6380-7858-4e05-a4e0-0403e6b0eab7",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -156,20 +372,83 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE4_P3",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE4_P3"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE4_P4",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE4_P4"
+              },
+              {
+                "name": "ge-0/0/2.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
               }
             ],
             "port": []
@@ -178,9 +457,18 @@
           "name": "PE4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F07F0",
-          "site_id": "1518f238-58a6-43a8-8813-6300bbbf6389",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD3B3C",
+          "site_id": "9fb2fb6d-e518-416b-9739-ee10f88087fa",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -189,12 +477,32 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE5_P5",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE5_P5"
+              },
+              {
+                "name": "ge-0/0/0.0",
+                "profiles": [],
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/0",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "start": 1,
+                        "size": 4094
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "start": 0,
+                      "size": 4094
+                    }
+                  ]
+                }
               }
             ],
             "port": []
@@ -203,9 +511,18 @@
           "name": "PE5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F06E4",
-          "site_id": "ea56c74f-00d3-4f32-8be1-e1c0ed035edd",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD3AD5",
+          "site_id": "f476baf4-117f-4533-8340-92afc48cc0e7",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -214,36 +531,24 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE1_P1",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE1_P1"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE2_P1",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE2_P1"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P1_P2",
                 "name": "ge-0/0/2.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P1_P2"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P1_P5",
                 "name": "ge-0/0/3.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P1_P5"
               }
             ],
             "port": []
@@ -252,9 +557,18 @@
           "name": "P1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0915",
-          "site_id": "9352aa96-2601-4e6f-ace2-924f1376dab5",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD4A7F",
+          "site_id": "b98f9bc0-0a22-43d9-a748-fff97d3c7b6f",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -263,44 +577,29 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE1_P2",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE1_P2"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE2_P2",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE2_P2"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P1_P2",
                 "name": "ge-0/0/2.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P1_P2"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P2_P4",
                 "name": "ge-0/0/3.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P2_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P2_P5",
                 "name": "ge-0/0/4.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P2_P5"
               }
             ],
             "port": []
@@ -309,9 +608,18 @@
           "name": "P2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0A47",
-          "site_id": "406d401d-fe88-44f0-ba11-ee0fa2969d15",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD4360",
+          "site_id": "af97156c-b755-437a-bc44-db9b4f8aee0d",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -320,36 +628,24 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE3_P3",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE3_P3"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE4_P3",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE4_P3"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P3_P4",
                 "name": "ge-0/0/2.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P3_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P3_P5",
                 "name": "ge-0/0/3.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P3_P5"
               }
             ],
             "port": []
@@ -358,9 +654,18 @@
           "name": "P3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F07E8",
-          "site_id": "c460ba67-fc89-493b-9777-c60fa3c92a74",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD5B24",
+          "site_id": "2d11f575-8c97-4860-85ca-bd17e4b8d7d0",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -369,44 +674,29 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE3_P4",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE3_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE4_P4",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE4_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P3_P4",
                 "name": "ge-0/0/2.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P3_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P2_P4",
                 "name": "ge-0/0/3.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P2_P4"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P4_P5",
                 "name": "ge-0/0/4.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P4_P5"
               }
             ],
             "port": []
@@ -415,9 +705,18 @@
           "name": "P4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0527",
-          "site_id": "8f7dc311-a352-41e2-b192-ed620c85d210",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD49FF",
+          "site_id": "a953ff12-c9a5-4f43-a120-89fab04d878b",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         },
         {
           "installation": {
@@ -426,44 +725,29 @@
           "interfaces": {
             "interface": [
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P1_P5",
                 "name": "ge-0/0/0.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P1_P5"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P2_P5",
                 "name": "ge-0/0/1.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P2_P5"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P3_P5",
                 "name": "ge-0/0/2.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P3_P5"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_P4_P5",
                 "name": "ge-0/0/3.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_P4_P5"
               },
               {
-                "access_parameters": {
-                  "ces": []
-                },
-                "link": "Link_PE5_P5",
                 "name": "ge-0/0/4.0",
-                "profiles": []
+                "profiles": [],
+                "link": "Link_PE5_P5"
               }
             ],
             "port": []
@@ -472,9 +756,18 @@
           "name": "P5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM69899F0721",
-          "site_id": "c3900225-a2e7-48d0-9e31-39f60ab356ee",
-          "vendor": "Juniper Networks"
+          "serial": "VM69D3BD3DEB",
+          "site_id": "74286b41-4947-4582-af7c-7909c2a84b4a",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
         }
       ]
     }

@@ -38,4 +38,8 @@
 
 ## Create Network Implementation Plan (NIP), onboarding device on Routing Director, using API
 
-please follow this [document](./lab_exercise.md) to use API to create NIP 
+please follow this [document](./lab_exercise1.md) to use API  to create organization, sites and  NIP, and onboarding devices into routing director
+
+
+## Deploying L3VPN using o
+

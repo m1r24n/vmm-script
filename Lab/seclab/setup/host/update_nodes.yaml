@@ -20,7 +20,7 @@
     - name: install wireguard, novnc and websockify
       ansible.builtin.apt:
         pkg:
-        - wireguard-tools
+#        - wireguard-tools
         - novnc
         - websockify
 - name: install and lxd openvswitch on node lxd
@@ -38,4 +38,27 @@
       community.general.snap:
         name:
           - lxd
-
+    - name: create netplan /etc/netplan/02_net.yaml
+      ansible.builtin.blockinfile:
+        path: /etc/netplan/02_net.yaml
+        create: true
+        block: |
+          network:
+            bridges:
+              clientsite1:
+                openvswitch: {}
+                interfaces:
+                - eth1
+              extsvr:
+                openvswitch: {}
+                interfaces:
+                - eth2
+              clientsite2:
+                openvswitch: {}
+                interfaces:
+                - eth3
+              clientsite3:
+                openvswitch: {}
+                interfaces:
+                - eth4
+              

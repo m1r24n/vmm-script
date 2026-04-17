@@ -1,6 +1,6 @@
 [all]
 gw
-svr0
+dhcprelay
 lxd1
 lxd2
 lxd3

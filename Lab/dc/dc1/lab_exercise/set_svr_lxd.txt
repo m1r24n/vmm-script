@@ -1,11 +1,11 @@
 # node SVR
 #!/bin/bash
-VM=svr4
-MAC=56:04:1e:00:27:32
-IPv4=192.168.101.14/24
-IPv6=fc00:dead:beef:a101::1000:14/64
-GWv4=192.168.101.1
-GWv6=fc00:dead:beef:a101::1
+VM=svr3
+MAC=56:04:0d:00:49:38
+IPv4=192.168.102.13/24
+IPv6=fc00:dead:beef:a102::1000:13/64
+GWv4=192.168.102.1
+GWv6=fc00:dead:beef:a102::1
 sudo hostname ${VM}
 hostname | sudo tee /etc/hostname
 cat << EOF | sudo tee /etc/netplan/01_net.yaml
@@ -36,7 +36,7 @@ sudo netplan apply
 
 # node LXD
 #!/bin/bash
-MAC=56:04:1e:00:27:40
+MAC=56:04:0d:00:4c:ec
 cat << EOF | sudo tee /etc/netplan/02_net.yaml
 network:
   ethernets:
@@ -83,16 +83,16 @@ EOF
 
 # container
 
-export LXC_NAME=svr3v201lxd3
+export LXC_NAME=cl2lxc3v201
 export VLAN=201
 export OVS=ovs0
-export IPv4=192.168.201.113/24
+export IPv4=192.168.201.102/24
 export GWv4=192.168.201.1
-export IPv6=fc00:dead:beef:a201::1000:113/64
+export IPv6=fc00:dead:beef:a201::1000:102/64
 export GWv6=fc00:dead:beef:a201::1
 
 echo "Creating VM ${LXC_NAME}"
-lxc copy server ${LXC_NAME}
+lxc copy lxc ${LXC_NAME}
 lxc query --request PATCH /1.0/instances/${LXC_NAME} --data "{
   \"devices\": {
     \"eth0\" :{

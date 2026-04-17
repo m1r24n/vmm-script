@@ -15,4 +15,5 @@
         lines:
         - "delete groups"
         - "delete apply-groups"
+        - "delete system commit synchronize"
 

@@ -31,3 +31,23 @@ sudo netplan apply
 
 
 
+
+cat << EOF | sudo tee /etc/netplan/02_net.yaml
+network:
+  ethernets:
+    eth1:
+      mtu: 9000
+    eth2:
+      mtu: 9000
+  bridges:
+    sw1:
+      openvswitch: {}
+      interfaces: 
+      - eth1
+    sw2:
+      openvswitch: {}
+      interfaces: 
+      - eth2
+EOF
+sudo netplan apply
+

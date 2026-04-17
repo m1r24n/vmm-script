@@ -18,7 +18,9 @@ set protocols bgp group to_other neighbor 172.16.12.254 peer-as 4200000000
 set protocols bgp group to_other neighbor 10.100.0.0 peer-as 4200001001
 set protocols bgp group to_other neighbor 10.100.0.2 peer-as 4200001002
 set protocols bgp group to_other neighbor 10.100.0.4 peer-as 4200001003
+set protocols bgp group to_other neighbor 172.16.12.254 export to_gw
 set routing-options static route 10.100.0.0/24 discard
-set protocols bgp group to_other neighbor 172.16.12.254 export from_static
-set policy-options policy-statement from_static term 1 from protocol static
-set policy-options policy-statement from_static term 1 then accept
+set policy-options policy-statement to_gw term 1 from protocol bgp
+set policy-options policy-statement to_gw term 1 then accept
+set policy-options policy-statement to_gw term 2 from protocol static
+set policy-options policy-statement to_gw term 2 then accept

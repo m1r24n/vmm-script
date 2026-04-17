@@ -7,9 +7,6 @@
     lxc image copy images:alpine/edge local: --alias alpine
     lxc launch alpine client
     lxc exec client sh
-    apk add merge-usr
-    merge-usr
-    apk del merge-usr
     apk add openssh iperf
     passwd root
     cat << EOF | tee -a /etc/ssh/sshd_config
@@ -132,9 +129,9 @@
 
 # create router (with vlan)
 
-    export LXC=ce3-cust2
-    export OVS=pe3ge0
-    export IPV4WAN=192.168.255.3/31
+    export LXC=ce1cust1
+    export OVS=pe1ge3
+    export IPV4WAN=10.150.1.1/31
     export IPV6WAN=fc00:Dead:beef:ffff::3/127
     export IPV4LAN=192.168.123.1/24
     export IPV6LAN=fc00:Dead:beef:123::1/64

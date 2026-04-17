@@ -1,9 +1,9 @@
 ---
 # site1 only
-name: dc3
+name: dc1
 pod: 
   type: vmm
-  vmmserver: q-pod30-vmm.englab.juniper.net
+  vmmserver: q-pod13-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
 images:
@@ -44,7 +44,7 @@ vm:
         family:
           inet: 172.16.64.254/24
           inet6: fc00:dead:beef:a054::FFFF/64
-  svr0:
+  dhcprelay:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -116,7 +116,7 @@ vm:
         bridge: d1s3p0
       ge-0/0/4: 
         bridge: d1s4p0
-  pe1:
+    pe1:
     type: vjunos_router
     srv6-locator: fc00:dead:beef:ff01::/64
     interfaces:

@@ -1,0 +1,178 @@
+{
+	"topo": {
+		"pop": [
+			{
+				"name": "PE1",
+				"node": [
+					{
+						"name": "pe1",
+						"bandwidth": "12000",
+						"ipv4_loopback": [
+							"10.100.255.1"
+						],
+						"mac_addrs": "1000",
+						"roles": [
+							"pe"
+						],
+						"routes": "1000",
+						"irbs": {
+							"start": 0,
+							"size": 16385
+						},
+						"access": [
+							{
+								"name": "ge-0/0/2",
+								"lag": false,
+								"speed": "0",
+								"type": "ethernet",
+								"units": [
+									{
+										"name": "default",
+										"start": 0,
+										"size": 4095
+									}
+								],
+								"ces": [
+									{
+										"name": "ge-0/0/2",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									},
+									{
+										"name": "ge-0/0/3",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									},
+									{
+										"name": "ge-0/0/4",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									}
+								]
+							}
+						],
+						"node_id": "00000000-0000-0000-1000-2c6bf56fbe00"
+					}
+				],
+				"postal_code_matches": [
+					{
+						"name": "medan",
+						"country_code": "ID",
+						"regex": "20..."
+					}
+				],
+				"site_id": "a11f6475-8e85-4b46-8128-adb19ea7a436"
+			},
+			{
+				"name": "PE3",
+				"node": [
+					{
+						"name": "pe3",
+						"bandwidth": "12000",
+						"ipv4_loopback": [
+							"10.100.255.3"
+						],
+						"mac_addrs": "1000",
+						"roles": [
+							"pe"
+						],
+						"routes": "1000",
+						"irbs": {
+							"start": 0,
+							"size": 16385
+						},
+						"access": [
+							{
+								"name": "ge-0/0/2",
+								"lag": false,
+								"speed": "0",
+								"type": "ethernet",
+								"units": [
+									{
+										"name": "default",
+										"start": 0,
+										"size": 4095
+									}
+								],
+								"ces": [
+									{
+										"name": "ge-0/0/2",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									}
+								]
+							},
+							{
+								"name": "ge-0/0/3",
+								"lag": false,
+								"speed": "0",
+								"type": "ethernet",
+								"units": [
+									{
+										"name": "default",
+										"start": 0,
+										"size": 4095
+									}
+								],
+								"ces": [
+									{
+										"name": "ge-0/0/3",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									}
+								]
+							},
+							{
+								"name": "ge-0/0/4",
+								"lag": false,
+								"speed": "0",
+								"type": "ethernet",
+								"units": [
+									{
+										"name": "default",
+										"start": 0,
+										"size": 4095
+									}
+								],
+								"ces": [
+									{
+										"name": "ge-0/0/4",
+										"tag_type": "dot1q",
+										"vlans": {
+											"start": 1,
+											"size": 4094
+										}
+									}
+								]
+							}
+						],
+						"node_id": "00000000-0000-0000-1000-2c6bf5142a00"
+					}
+				],
+				"postal_code_matches": [
+					{
+						"name": "Maluku",
+						"country_code": "ID",
+						"regex": "97..."
+					}
+				],
+				"site_id": "25a33fd3-a33d-4dc9-a9ab-1f84fa124160"
+			}
+		]
+	}
+}

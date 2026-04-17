@@ -81,7 +81,8 @@ devices:
     print("Creating LXC")
     ssh=paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     cmd1 = 'sudo ovs-vsctl show | grep Bridge| sed -e "s/Bridge//"| tr -d " "'
     _,s2,_=ssh.exec_command(cmd1)
     # s2l = s2.split("\n")
@@ -221,7 +222,8 @@ devices:
 def delete_lxc(d1):
     ssh=paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     # cmd1 = 'ip link show type bridge | grep mtu | tr -d " " | cut -f 2 -d ":"'
     # _,s2,_=ssh.exec_command(cmd1)
     # # s2l = s2.split("\n")
@@ -270,7 +272,8 @@ def list_lxc(d1):
     retval=[]
     ssh=paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     cmd1 = 'lxc ls --format=json'
     _,s2,_=ssh.exec_command(cmd1)
     # s2l = s2.split("\n")
@@ -287,7 +290,8 @@ def list_lxc(d1):
 def start_lxc(d1):
     ssh=paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     cmd1=[]
     for i in d1['lxc'].keys():
         cmd = f"lxc start {i}"
@@ -301,7 +305,8 @@ def start_lxc(d1):
 def stop_lxc(d1):
     ssh=paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
+    ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     cmd1=[]
     for i in d1['lxc'].keys():
         cmd = f"lxc stop {i}"

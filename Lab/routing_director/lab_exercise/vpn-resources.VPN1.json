@@ -1,0 +1,42 @@
+{
+	"vpn_resources": {
+		"colors": [
+			{
+				"color_attribute": 1001,
+				"name": "Blue"
+			},
+			{
+				"color_attribute": 1002,
+				"name": "Red"
+			},
+			{
+				"color_attribute": 1003,
+				"name": "Yellow"
+			}
+		],
+		"community": [
+			{
+				"count": 1000,
+				"name": "target:65100"
+			}
+		],
+		"route_distinguisher": [
+			{
+				"count": 1000,
+				"name": 65200
+			}
+		],
+		"route_target": [
+			{
+				"count": 1000,
+				"name": 65300
+			}
+		],
+		"virtual_circuit_id": [
+			{
+				"count": 1000,
+				"start": 1
+			}
+		]
+	}
+}

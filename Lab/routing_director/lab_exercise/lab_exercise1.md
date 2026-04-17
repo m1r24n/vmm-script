@@ -1,4 +1,4 @@
-# lab exercise
+# lab exercise 1, Create organization, sites, NIP and onboarding devices 
 
 ## Create token for authentication
 1. use script [create_token.py](API/create_token.py) to create token for authentication. it will create output file token.sh
@@ -23,7 +23,7 @@
         ./get_sites_id.py
 
 ## creating NIP (network implementation plan)
-1. Use script [get_sernum.sh](./get_sernum.sh) to get serial number of devices on the network. It will create a file nodes_sernum.yaml, with the list of devices and its serial number
+1. Use script [get_sernum.sh](./get_sernum.sh) to get serial number of devices on the network. It will create a file data/nodes_sernum.yaml, with the list of devices and its serial number
 
         ./get_sernum.sh
 
@@ -41,10 +41,8 @@
 
 2. Edit file onboarding.set, you need to remove any line with **delete** command
 
-3. use ansible playbook [upload_config.yaml](ansible/upload_config.yaml)
+3. use ansible playbook [onboarding.yaml](ansible/onboarding.yaml]
 
-        ansible-playbook upload_config.yaml
+        ansible-playbook onboarding.yaml
 
 4. login into web dashboard of routing director, and verify that onboarding process has started, and wait until the service status **ready for service** and **put into service**
-
-

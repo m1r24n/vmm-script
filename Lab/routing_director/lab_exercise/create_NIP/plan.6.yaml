@@ -1,0 +1,74 @@
+infrastructure_ntw:
+  default_interface_profiles:
+  - IP1
+  default_node_profiles:
+  - DP1
+  default_port_profiles:
+  - PP1
+  interface_profiles:
+    interface_profile:
+    - name: IP1
+      templates: []
+  node_profiles:
+    node_profile:
+    - analytics:
+        traffic_engineering: {}
+      ipv6_tunneling:
+        enabled: false
+      labels: []
+      name: DP1
+      per_flow_load_balancing:
+        enabled: false
+      templates: []
+      trust:
+        enabled: true
+  port_profiles:
+    port_profile: 
+      - name: PP1
+  labels:
+    label: []
+  network_nodes:
+    network_node:
+    {% for node in nodes -%}
+    - installation:
+        duration: 5
+      interfaces:
+        interface: 
+        {% for interface in nodes[node].interfaces -%}
+        - name: {{interface.name}}.0
+          profiles: []
+        {% if interface.link %}
+          link: {{interface.link}}
+        {% endif -%}
+        {% if interface.access %}
+          access_parameters:
+            ces:
+            - name: {{ interface.name }}
+              tag_type: dot1q
+              vlans: 
+                start: 1
+                size: 4094
+            units:
+            - name: default
+              start: 0
+              size: 4094
+        {% endif -%}
+            
+        {% endfor -%}
+        port: []
+      model: vMX
+      name: {{node}}
+      node_type: paper-node
+      profiles: []
+      serial: {{ nodes[node].sernum}}
+      site_id: {{ nodes[node].site}}
+      vendor: Juniper Networks
+      placement_resource: 
+        bandwidth: 12000
+        mac_addrs: 1000
+        routes: 1000
+        irbs:
+          size: 1000
+          start: 1
+    {% endfor -%}
+
