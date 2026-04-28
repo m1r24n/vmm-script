@@ -40,9 +40,9 @@
           mode tcp
           balance roundrobin
           option tcp-check
-          server node0 172.16.11.10:6443 check
-          server node1 172.16.11.11:6443 check
-          server node2 172.16.11.12:6443 check
+          server node0a 172.16.11.11:6443 check
+          server node0b 172.16.11.12:6443 check
+          server node0c 172.16.11.13:6443 check
   - name: Create file /home/ubuntu/download.sh
     tags:
     - download
@@ -52,16 +52,16 @@
       content: |
         #!/usr/bin/env bash
         # script to install k8s
-        curl -L -O https://github.com/containerd/containerd/releases/download/v2.2.1/containerd-2.2.1-linux-amd64.tar.gz
+        curl -L -O https://github.com/containerd/containerd/releases/download/v2.2.3/containerd-2.2.3-linux-amd64.tar.gz
         curl -L -O https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
-        curl -L -O https://github.com/opencontainers/runc/releases/download/v1.4.0/runc.amd64
-        curl -L -O https://github.com/containernetworking/plugins/releases/download/v1.9.0/cni-plugins-linux-amd64-v1.9.0.tgz
-        for i in node{0..4}
+        curl -L -O https://github.com/opencontainers/runc/releases/download/v1.4.2/runc.amd64
+        curl -L -O https://github.com/containernetworking/plugins/releases/download/v1.9.1/cni-plugins-linux-amd64-v1.9.1.tgz
+        for i in node{1..4}
         do
-          scp containerd-2.2.1-linux-amd64.tar.gz ubuntu@${i}:~/
+          scp containerd-2.2.3-linux-amd64.tar.gz ubuntu@${i}:~/
           scp containerd.service ubuntu@${i}:~/
           scp runc.amd64 ubuntu@${i}:~/
-          scp cni-plugins-linux-amd64-v1.9.0.tgz ubuntu@${i}:~/
+          scp cni-plugins-linux-amd64-v1.9.1.tgz ubuntu@${i}:~/
         done
   # - name: Unconditionally reboot the machine with all defaults
   #   tags:
@@ -99,10 +99,10 @@
       mode: '0755'
       content: |
         #!/bin/bash
-        for i in node{0..4}
+        for i in node{1..4} node0a node0b node0c
         do
           scp ~/registry/certs/registry.crt ${i}:~/
-          ssh ${i} "sudo cp /home/ubuntu/registry.crt /etc/ssl/certs"
+          ssh ${i} "sudo cp /home/ubuntu/registry.crt /etc/ssl/certs; sudo reboot"
         done
 - name: enable ipv4/ipv6 forwarding
   hosts: k8s
@@ -134,8 +134,8 @@
       mode: '0755'
       content: |
         #!/usr/bin/env bash
-        export CTR="containerd-2.2.1-linux-amd64.tar.gz"
-        export CNI_PLUGINS="cni-plugins-linux-amd64-v1.9.0.tgz"
+        export CTR="containerd-2.2.3-linux-amd64.tar.gz"
+        export CNI_PLUGINS="cni-plugins-linux-amd64-v1.9.1.tgz"
         sudo tar Cxzvf /usr/local ${CTR}
         sudo mkdir -p /usr/local/lib/systemd/system/
         sudo cp ./containerd.service /usr/local/lib/systemd/system/

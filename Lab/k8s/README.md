@@ -1,4 +1,4 @@
-# deploying kubernetes
+# deploying kubernetes 
 
 ## configure haproxy on node gw
 
@@ -36,9 +36,9 @@ Configure HAproxy on node GW to allow load balance traffic to multiple master
            mode tcp
            balance roundrobin
            option tcp-check
-           server node0 172.16.11.10:6443 check
-           server node1 172.16.11.11:6443 check
-           server node2 172.16.11.12:6443 check
+           server node0a 172.16.11.11:6443 check
+           server node0b 172.16.11.12:6443 check
+           server node0c 172.16.11.13:6443 check
        EOF
        sudo systemctl restart haproxy
 
@@ -224,7 +224,7 @@ Documentation can be found [here](https://docs.cilium.io/en/stable/gettingstarte
 
 2. install cilium 
 
-       cilium install --version 1.18.5
+       cilium install --version 1.19.3
 
 ## install metallb as loadbalancer for k8s cluster
 
@@ -243,6 +243,8 @@ Documentation can be found [here](https://metallb.io/)
 2. Install metallab as loadbalancer
 
        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.3/config/manifests/metallb-native.yaml
+
+       kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.15.3/config/manifests/metallb-native.yaml
 
 3. configure IP pool and 
 
@@ -278,9 +280,9 @@ Documentation can be found [here](https://metallb.io/)
          peerAddress: 172.16.12.1
        EOF
        kubectl apply -f metallb_config.yaml
-
-
-kubectl label nodes node0 --overwrite node.kubernetes.io/exclude-from-external-load-balancers=false
+       kubectl label nodes node0 --overwrite node.kubernetes.io/exclude-from-external-load-balancers=false
+       kubectl label nodes node1 --overwrite node.kubernetes.io/exclude-from-external-load-balancers=false
+       kubectl label nodes node2 --overwrite node.kubernetes.io/exclude-from-external-load-balancers=false
 
 
 ## configure frr on node GW

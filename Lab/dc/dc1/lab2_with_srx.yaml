@@ -8,7 +8,8 @@ pod:
   home_dir : /vmm/data/user_disks/irzan
 images:
   gw: images/gw.qcow2
-  ubuntu: images/ubuntu24.04.qcow2
+  ubuntu: images/ubuntu26.04.qcow2
+  ubuntu2: images/ubuntu26.04_frr_ovs_lxd.qcow2
   vsrx: images/junos-vsrx3-x86-64-25.4R1.12.qcow2
   vjunos_switch: images/vJunos-switch-25.4R1.12.qcow2
   vjunos_router: images/vJunos-router-25.4R1.11.qcow2
@@ -26,7 +27,7 @@ vm:
         bridge: mgmt
         family:
           inet: 172.16.61.254/24
-        #dhcp_range: 172.16.61.1 - 172.16.61.100
+        #dhcp_range: 172.16.61.1 - 172.16.61.100  
       em2:
         bridge: mgmt_pc
         family:
@@ -569,79 +570,99 @@ vm:
         bridge: d1l7p4
       em1: 
         bridge: d1l8p4
-  lxd1:
-    type: pchpv2
+  svr6:
+    type: pcsmall
     os: ubuntu
     vnc: yes
     interfaces:
-      em0:
-        bridge: mgmt_pc
-        family:
-          inet: 172.16.62.11/24
-          gateway4: 172.16.62.254
+      em0: 
+        bridge: d1l7p5
       em1: 
+        bridge: d1l8p5
+  lxd1:
+    type: pchpv2
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0: 
         bridge: d1l1p5
-      em2: 
+      em1: 
         bridge: d1l2p5
   lxd2:
     type: pchpv2
-    os: ubuntu
+    os: ubuntu2
     vnc: yes
     interfaces:
-      em0:
-        bridge: mgmt_pc
-        family:
-          inet: 172.16.62.12/24
-          gateway4: 172.16.62.254
+      em0: 
+        bridge: d1l1p6
       em1: 
-        bridge: d1l3p5
-      em2: 
-        bridge: d1l4p5
+        bridge: d1l2p6
   lxd3:
     type: pchpv2
-    os: ubuntu
+    os: ubuntu2
     vnc: yes
     interfaces:
-      em0:
-        bridge: mgmt_pc
-        family:
-          inet: 172.16.62.13/24
-          gateway4: 172.16.62.254
+      em0: 
+        bridge: d1l3p5
       em1: 
-        bridge: d1l5p4
-      em2: 
-        bridge: d1l6p4
+        bridge: d1l4p5
   lxd4:
     type: pchpv2
-    os: ubuntu
+    os: ubuntu2
     vnc: yes
     interfaces:
-      em0:
-        bridge: mgmt_pc
-        family:
-          inet: 172.16.62.14/24
-          gateway4: 172.16.62.254
+      em0: 
+        bridge: d1l3p6
       em1: 
-        bridge: d1l7p2
-      em2: 
-        bridge: d1l8p2
+        bridge: d1l4p6
   lxd5:
     type: pchpv2
-    os: ubuntu
+    os: ubuntu2
     vnc: yes
     interfaces:
-      em0:
-        bridge: mgmt_pc
-        family:
-          inet: 172.16.62.15/24
-          gateway4: 172.16.62.254
+      em0: 
+        bridge: d1l5p4
       em1: 
-        bridge: d1l7p3
-      em2: 
-        bridge: d1l8p3
+        bridge: d1l6p4
+  lxd6:
+    type: pchpv2
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: d1l5p5
+      em1: 
+        bridge: d1l6p5
+  lxd7:
+    type: pchpv2
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: d1l7p2
+      em1: 
+        bridge: d1l8p2
   lxd8:
     type: pchpv2
-    os: ubuntu
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: d1l7p3
+      em1: 
+        bridge: d1l8p3
+  lxd9:
+    type: pchpv2
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: d1l7p6
+      em1: 
+        bridge: d1l8p6
+  lxd10:
+    type: pchpv2
+    os: ubuntu2
     vnc: yes
     interfaces:
       em0:

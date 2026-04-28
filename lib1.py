@@ -192,6 +192,7 @@ def read_config(config):
 		#print(f"adpassword ${adpassword_env}")
 		user_env=os.getenv('USER')
 		vmmpassword_env=os.getenv('VMMPASSWORD')
+		vmmsshkey_env=os.getenv('VMMSSHKEY')
 		# if 'jumpserver' in d1['pod'].keys():
 		# 	if adpassword_env:
 		# 		d1['pod']['adpassword'] = adpassword_env
@@ -203,8 +204,10 @@ def read_config(config):
 			d1['pod']['user']=user_env
 		if vmmpassword_env:
 			d1['pod']['vmmpassword'] = vmmpassword_env
+		if vmmsshkey_env:
+			d1['pod']['vmmsshkey'] = os.path.expanduser('~') + '/.ssh/' + vmmsshkey_env
 		else:
-			if 'vmmpassword' not in d1['pod']: 
+			if 'vmmpassword' not in d1['pod'] or 'vmmsshkey' not in d1['pod']: 
 				print("parameter vmmpassword is not defined on configuration ")
 				sys.exit()
 		#if not d1['']
@@ -299,7 +302,7 @@ def change_gateway4(d1):
 								d1['vm'][i]['interfaces'][j]['family']['static']=[{'to':'0.0.0.0/0','via': d1['vm'][i]['interfaces'][j]['family']['gateway4']}]
 							#d1['vm'][i]['interfaces'][j]['family'].pop('gateway4')
 						else:
-							print("no gateway4")
+							print(f"no gateway4, {i} : {j}")
 						if 'gateway6' in d1['vm'][i]['interfaces'][j]['family'].keys():
 							if 'static' in d1['vm'][i]['interfaces'][j]['family'].keys():
 								#d1['vm'][i]['interfaces'][j]['static'].append({'to':'default','via':j['gateway4']})
@@ -822,7 +825,10 @@ def sshconnect(d1):
 	# return ssh
 	ssh=paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],password=d1['pod']['vmmpassword'])
+	if 'vmmsshkey' in d1['pod'].keys():
+		ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],key_filename=d1['pod']['vmmsshkey'])
+	else:
+		ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],password=d1['pod']['vmmpassword'])
 	return ssh
 	# ssh=paramiko.SSHClient()
 	# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

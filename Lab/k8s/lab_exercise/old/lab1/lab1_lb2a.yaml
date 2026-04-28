@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: webserver2a
+  name: webserver2
 spec:
   selector:
-    app: webserver2a
+    app: webserver2
   type: LoadBalancer
   ports:
   - targetPort: 80
@@ -15,24 +15,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webserver2a
+  name: webserver2
   labels:
-    app: webserver2a
+    app: webserver2
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
-      app: webserver2a
+      app: webserver2
     matchExpressions:
-      - {key: app, operator: In, values: [webserver2a]}
+      - {key: app, operator: In, values: [webserver2]}
   template:
     metadata:
-      name: webserver2a
+      name: webserver2
       labels:
-        app: webserver2a
+        app: webserver2
     spec:
       containers: 
-      - name: webserver2a
+      - name: webserver2
         image: 172.16.13.10:5000/webserver:0.1
         imagePullPolicy: Always
         securityContext:

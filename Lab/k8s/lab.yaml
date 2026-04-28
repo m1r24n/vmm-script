@@ -2,7 +2,7 @@
 name: k8s
 pod: 
   type: vmm
-  vmmserver: q-pod25-vmm.englab.juniper.net
+  vmmserver: q-pod32-vmm.englab.juniper.net
   home_dir : /vmm/data/user_disks/irzan
   user: irzan
 images:
@@ -41,41 +41,27 @@ vm:
           inet: 172.16.13.1/24
         mtu: 9000
         dhcp_range: 172.16.13.5-172.16.13.15
-  node0:
-    type: pchpv2
+  node0a:
+    type: pcsmall
     os: ubuntu
     interfaces:
       em0: 
         bridge: lan1 
-        family:
-          inet: 172.16.11.10/24 
-          gateway4: 172.16.11.1
-        mtu: 9000
-      em1: 
-        bridge: lan2
-        family:
-          inet: 172.16.12.10/24 
-        mtu: 9000
-  node1:
-    type: pchpv2
-    os: ubuntu
-    interfaces:
-      em0: 
-        bridge: lan1
         family:
           inet: 172.16.11.11/24 
           gateway4: 172.16.11.1
         mtu: 9000
       em1: 
         bridge: lan2
-        inet: 172.16.12.11/24
+        family:
+          inet: 172.16.12.11/24 
         mtu: 9000
-  node2:
-    type: pchpv2
+  node0b:
+    type: pcsmall
     os: ubuntu
     interfaces:
       em0: 
-        bridge: lan1
+        bridge: lan1 
         family:
           inet: 172.16.11.12/24 
           gateway4: 172.16.11.1
@@ -85,12 +71,12 @@ vm:
         family:
           inet: 172.16.12.12/24 
         mtu: 9000
-  node3:
-    type: pchpv2
+  node0c:
+    type: pcsmall
     os: ubuntu
     interfaces:
       em0: 
-        bridge: lan1
+        bridge: lan1 
         family:
           inet: 172.16.11.13/24 
           gateway4: 172.16.11.1
@@ -100,20 +86,73 @@ vm:
         family:
           inet: 172.16.12.13/24 
         mtu: 9000
-  node4:
-    type: pchpv2
+  node1:
+    type: pchpv1
     os: ubuntu
+    hd2: 50g
+    hd3: 50g
     interfaces:
       em0: 
         bridge: lan1
         family:
-          inet: 172.16.11.14/24 
+          inet: 172.16.11.21/24 
           gateway4: 172.16.11.1
         mtu: 9000
       em1: 
         bridge: lan2
         family:
-          inet: 172.16.12.14/24 
+          inet: 172.16.12.21/24
+        mtu: 9000
+  node2:
+    type: pchpv1
+    os: ubuntu
+    hd2: 50g
+    hd3: 50g
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.22/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.22/24 
+        mtu: 9000
+  node3:
+    type: pchpv1
+    os: ubuntu
+    hd2: 50g
+    hd3: 50g
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.23/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.23/24 
+        mtu: 9000
+  node4:
+    type: pchpv1
+    os: ubuntu
+    hd2: 50g
+    hd3: 50g
+    interfaces:
+      em0: 
+        bridge: lan1
+        family:
+          inet: 172.16.11.24/24 
+          gateway4: 172.16.11.1
+        mtu: 9000
+      em1: 
+        bridge: lan2
+        family:
+          inet: 172.16.12.24/24 
         mtu: 9000
   registry:
     type: pcmedium
@@ -123,4 +162,13 @@ vm:
         bridge: lan3
         family:
           inet: 172.16.13.10/24 
+          gateway4: 172.16.13.1
+  ac:
+    type: pcmedium
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: lan3
+        family:
+          inet: 172.16.13.11/24 
           gateway4: 172.16.13.1
