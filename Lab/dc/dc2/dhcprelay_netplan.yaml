@@ -11,6 +11,6 @@ network:
        - to: default
          via: 172.16.61.254
 EOF
-sudo hostname svr0
+sudo hostname dhcprelay
 hostname | sudo tee /etc/hostname
 sudo netplan apply

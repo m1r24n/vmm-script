@@ -193,6 +193,7 @@ def read_config(config):
 		user_env=os.getenv('USER')
 		vmmpassword_env=os.getenv('VMMPASSWORD')
 		vmmsshkey_env=os.getenv('VMMSSHKEY')
+		sshpass_env=os.getenv('SSHPASS')
 		# if 'jumpserver' in d1['pod'].keys():
 		# 	if adpassword_env:
 		# 		d1['pod']['adpassword'] = adpassword_env
@@ -206,6 +207,8 @@ def read_config(config):
 			d1['pod']['vmmpassword'] = vmmpassword_env
 		if vmmsshkey_env:
 			d1['pod']['vmmsshkey'] = os.path.expanduser('~') + '/.ssh/' + vmmsshkey_env
+			if sshpass_env:
+				d1['pod']['sshpass']=sshpass_env
 		else:
 			if 'vmmpassword' not in d1['pod'] or 'vmmsshkey' not in d1['pod']: 
 				print("parameter vmmpassword is not defined on configuration ")
@@ -825,7 +828,9 @@ def sshconnect(d1):
 	# return ssh
 	ssh=paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	if 'vmmsshkey' in d1['pod'].keys():
+	if 'vmmsshkey' in d1['pod'].keys() and 'sshpass' in d1['pod'].keys():
+		ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],key_filename=d1['pod']['vmmsshkey'],passphrase=d1['pod']['sshpass'])
+	elif 'vmmsshkey' in d1['pod'].keys():
 		ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],key_filename=d1['pod']['vmmsshkey'])
 	else:
 		ssh.connect(hostname=d1['pod']['vmmserver'],username=d1['pod']['user'],password=d1['pod']['vmmpassword'])
@@ -1610,6 +1615,14 @@ def get_vjunos_mac(d1):
 	#print("inside get_vjunos_mac")
 	mac_vjunos = get_mac_vjunos(d1)
 	pprint.pprint(mac_vjunos)
+	l1 = []
+	for i in mac_vjunos.keys():
+		# print(mac_vjunos[i])
+		l1.append(f"- hw-address : {mac_vjunos[i]['mac']}")
+		l1.append(f"  ip-address : {mac_vjunos[i]['ip']}")
+	r1=yaml.load('\n'.join(l1),Loader=yaml.FullLoader)
+	j1 = json.dumps(r1, indent=2)
+	print(j1)
 
 def get_mac_vjunos(d1):
 	mac_vjunos={}

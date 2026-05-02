@@ -7,7 +7,7 @@ fi
 cat << EOF | sudo tee /etc/wireguard/wg0.conf
 [Interface]
 PrivateKey=AHtqwT8QXbPV9yNHkRLdFQjU/3T+qecVRSCTLK47LHg=
-Address=192.168.199.132/32
+Address=192.168.199.131/32
 [Peer]
 # gwrd
 PublicKey=5m8Fitj/sUxdcctnGs/V1RMelS2Vc1cV1mNAlGmYBW4=

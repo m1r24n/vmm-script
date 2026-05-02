@@ -7,7 +7,7 @@ fi
 cat << EOF | sudo tee /etc/wireguard/wg0.conf
 [Interface]
 PrivateKey=EJCdiVEcLifpqIcAsWKcNoQ9zU7lWiXQh8AfWA9rOGM=
-Address=192.168.199.131/32
+Address=192.168.199.130/32
 [Peer]
 # gwrd
 PublicKey=5m8Fitj/sUxdcctnGs/V1RMelS2Vc1cV1mNAlGmYBW4=
@@ -23,6 +23,5 @@ sudo sed -i -e "s/gw/gwdc1/" /etc/hosts
 
 # EJCdiVEcLifpqIcAsWKcNoQ9zU7lWiXQh8AfWA9rOGM=
 # cdOoPi0T/PyjCkgSynB4K/3+ta5Ryox0DkmK9UQLrVI=
-
 
 
