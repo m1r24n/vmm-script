@@ -563,7 +563,7 @@ vm:
         bridge: d1l3p4
   svr5:
     type: pcsmall
-    os: ubuntu
+    os: ubuntuf
     vnc: yes
     interfaces:
       em0: 
