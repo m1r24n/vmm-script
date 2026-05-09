@@ -105,3 +105,7 @@ set protocols bgp group to_fw1b neighbor fc00:dead:beef:ffff::9 peer-as 42000000
 set protocols lldp interface all
 set protocols lldp interface fxp0 disable
 set routing-options autonomous-system 4200000011
+
+
+
+
