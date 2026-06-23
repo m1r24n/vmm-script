@@ -58,21 +58,21 @@ items:
   last: 4200001110
 """
 
-asn="""
-items:
-- name: ASN_DC2_Spine
-  first: 4200002001
-  last: 4200002010
-- name: ASN_DC2_Leaf
-  first: 4200002101
-  last: 4200002110
-"""
+# asn="""
+# items:
+# - name: ASN_DC2_Spine
+#   first: 4200002001
+#   last: 4200002010
+# - name: ASN_DC2_Leaf
+#   first: 4200002101
+#   last: 4200002110
+# """
 
 
-asn_dict = yaml.load(asn,Loader=yaml.FullLoader)
-for i in asn_dict['items']:
-    print(f"creating pool {i['name']}")
-    apstra_api.create_asn_pools(i)
+# asn_dict = yaml.load(asn,Loader=yaml.FullLoader)
+# for i in asn_dict['items']:
+#     print(f"creating pool {i['name']}")
+#     apstra_api.create_asn_pools(i)
 
 # Create IP pools
 
@@ -151,41 +151,41 @@ for i in asn_dict['items']:
 # """
 
 
-# ippools="""
-# items:
-# - name: DC1_fabric_link
-#   subnets:
-#   - network: 10.1.0.0/24
-# - name: DC1_Spine_loopback
-#   subnets:
-#   - network: 10.1.1.0/24
-# - name: DC1_Leaf_loopback
-#   subnets:
-#   - network: 10.1.2.0/24
-# - name: DC1_VRF_loopback
-#   subnets:
-#   - network: 10.1.3.0/24
-# """
-
 ippools="""
 items:
-- name: DC2_fabric_link
+- name: DC1_fabric_link
   subnets:
-  - network: 10.2.0.0/24
-- name: DC2_Spine_loopback
+  - network: 10.1.0.0/24
+- name: DC1_Spine_loopback
   subnets:
-  - network: 10.2.1.0/24
-- name: DC2_Leaf_loopback
+  - network: 10.1.1.0/24
+- name: DC1_Leaf_loopback
   subnets:
-  - network: 10.2.2.0/24
-- name: DC2_VRF_loopback
+  - network: 10.1.2.0/24
+- name: DC1_VRF_loopback
   subnets:
-  - network: 10.2.3.0/24
+  - network: 10.1.3.0/24
 """
-ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
-for i in ippools_dict['items']:
-    print(f"creating ip pool {i['name']}")
-    apstra_api.create_ip_pools(i)
+
+# ippools="""
+# items:
+# - name: DC2_fabric_link
+#   subnets:
+#   - network: 10.2.0.0/24
+# - name: DC2_Spine_loopback
+#   subnets:
+#   - network: 10.2.1.0/24
+# - name: DC2_Leaf_loopback
+#   subnets:
+#   - network: 10.2.2.0/24
+# - name: DC2_VRF_loopback
+#   subnets:
+#   - network: 10.2.3.0/24
+# """
+# ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
+# for i in ippools_dict['items']:
+#     print(f"creating ip pool {i['name']}")
+#     apstra_api.create_ip_pools(i)
 
 # create IPv6 Pools
 # ippools="""
@@ -261,41 +261,41 @@ for i in ippools_dict['items']:
 #   - network: fc00:dead:beef:1003::/64
 # """
 
-# ippools="""
-# items:
-# - name: DC1_fabric_link
-#   subnets:
-#   - network: fc00:dead:beef:1000::/64
-# - name: DC1_Spine_loopback
-#   subnets:
-#   - network: fc00:dead:beef:1001::/64
-# - name: DC1_Leaf_loopback
-#   subnets:
-#   - network: fc00:dead:beef:1002::/64
-# - name: DC1_VRF_loopback
-#   subnets:
-#   - network: fc00:dead:beef:1003::/64
-# """
-
 ippools="""
 items:
-- name: DC2_fabric_link
+- name: DC1_fabric_link
   subnets:
-  - network: fc00:dead:beef:2000::/64
-- name: DC2_Spine_loopback
+  - network: fc00:dead:beef:1000::/64
+- name: DC1_Spine_loopback
   subnets:
-  - network: fc00:dead:beef:2001::/64
-- name: DC2_Leaf_loopback
+  - network: fc00:dead:beef:1001::/64
+- name: DC1_Leaf_loopback
   subnets:
-  - network: fc00:dead:beef:2002::/64
-- name: DC2_VRF_loopback
+  - network: fc00:dead:beef:1002::/64
+- name: DC1_VRF_loopback
   subnets:
-  - network: fc00:dead:beef:2003::/64
+  - network: fc00:dead:beef:1003::/64
 """
-ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
-for i in ippools_dict['items']:
-    print(f"creating ip pool {i['name']}")
-    apstra_api.create_ipv6_pools(i)
+
+# ippools="""
+# items:
+# - name: DC2_fabric_link
+#   subnets:
+#   - network: fc00:dead:beef:2000::/64
+# - name: DC2_Spine_loopback
+#   subnets:
+#   - network: fc00:dead:beef:2001::/64
+# - name: DC2_Leaf_loopback
+#   subnets:
+#   - network: fc00:dead:beef:2002::/64
+# - name: DC2_VRF_loopback
+#   subnets:
+#   - network: fc00:dead:beef:2003::/64
+# """
+# ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
+# for i in ippools_dict['items']:
+#     print(f"creating ip pool {i['name']}")
+#     apstra_api.create_ipv6_pools(i)
 
 
 #create Logical devices
@@ -324,7 +324,6 @@ items:
         schema: absolute
         start_index: 1
 """
-
-# ld_dict = yaml.load(ld,Loader=yaml.FullLoader)
-# for i in ld_dict['items']:
-#   apstra_api.create_logical_devices(i)
+ld_dict = yaml.load(ld,Loader=yaml.FullLoader)
+for i in ld_dict['items']:
+  apstra_api.create_logical_devices(i)

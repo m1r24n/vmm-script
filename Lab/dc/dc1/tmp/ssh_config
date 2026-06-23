@@ -7,7 +7,7 @@ host vmm
     user irzan
     
 host gw
-    hostname 10.49.234.181
+    hostname 10.49.246.236
     user ubuntu
     IdentityFile ~/.ssh/dc1
 

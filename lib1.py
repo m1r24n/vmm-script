@@ -1530,7 +1530,7 @@ def create_novnc(d1):
 
 
 def set_host(d1,vm=""):
-	host_yes=['centos','rhel','ubuntu','ubuntu2','debian','bridge','desktop']
+	host_yes=['centos','rhel','ubuntu','debian','bridge','desktop']
 	list_hosts=[]
 	#get_dns(d1)
 	filename1=param1.tmp_dir + 'set_host.sh'

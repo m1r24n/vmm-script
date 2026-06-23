@@ -525,7 +525,7 @@ vm:
         bridge: d1s3p8
       ge-0/0/11: 
         bridge: d1s4p8
-  svr1dc1:
+  svr1:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -534,7 +534,7 @@ vm:
         bridge: d1l1p2
       em1:
         bridge: d1l2p2
-  svr2dc1:
+  svr2:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -543,7 +543,7 @@ vm:
         bridge: d1l3p2
       em1:
         bridge: d1l4p2
-  svr3dc1:
+  svr3:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -552,7 +552,7 @@ vm:
         bridge: d1l1p3
       em1:
         bridge: d1l1p4
-  svr4dc1:
+  svr4:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -561,7 +561,7 @@ vm:
         bridge: d1l3p3
       em1:
         bridge: d1l3p4
-  svr5dc1:
+  svr5:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -570,7 +570,7 @@ vm:
         bridge: d1l7p4
       em1: 
         bridge: d1l8p4
-  svr6dc1:
+  svr6:
     type: pcsmall
     os: ubuntu
     vnc: yes
@@ -579,7 +579,7 @@ vm:
         bridge: d1l7p5
       em1: 
         bridge: d1l8p5
-  lxd1dc1:
+  lxd1:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -588,7 +588,7 @@ vm:
         bridge: d1l1p5
       em1: 
         bridge: d1l2p5
-  lxd2dc1:
+  lxd2:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -597,7 +597,7 @@ vm:
         bridge: d1l1p6
       em1: 
         bridge: d1l2p6
-  lxd3dc1:
+  lxd3:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -606,7 +606,7 @@ vm:
         bridge: d1l3p5
       em1: 
         bridge: d1l4p5
-  lxd4dc1:
+  lxd4:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -615,7 +615,7 @@ vm:
         bridge: d1l3p6
       em1: 
         bridge: d1l4p6
-  lxd5dc1:
+  lxd5:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -624,7 +624,7 @@ vm:
         bridge: d1l5p4
       em1: 
         bridge: d1l6p4
-  lxd6dc1:
+  lxd6:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -633,7 +633,7 @@ vm:
         bridge: d1l5p5
       em1: 
         bridge: d1l6p5
-  lxd7dc1:
+  lxd7:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -642,7 +642,7 @@ vm:
         bridge: d1l7p2
       em1: 
         bridge: d1l8p2
-  lxd8dc1:
+  lxd8:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -651,7 +651,7 @@ vm:
         bridge: d1l7p3
       em1: 
         bridge: d1l8p3
-  lxd9dc1:
+  lxd9:
     type: pchpv2
     os: ubuntu2
     vnc: yes
@@ -660,7 +660,7 @@ vm:
         bridge: d1l7p6
       em1: 
         bridge: d1l8p6
-  lxd1ext:
+  lxd10:
     type: pchpv2
     os: ubuntu2
     vnc: yes
