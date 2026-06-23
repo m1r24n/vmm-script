@@ -1,7 +1,0 @@
-alias gw="telnet q-pod-22l.englab.juniper.net 15054"
-alias apstra="telnet q-pod-23e.englab.juniper.net 15455"
-alias apstraw2="telnet q-pod-23n.englab.juniper.net 15162"
-alias apstraw3="telnet q-pod-23p.englab.juniper.net 15427"
-alias ztp="telnet q-pod-23v.englab.juniper.net 15302"
-alias flow="telnet q-pod-23w.englab.juniper.net 15121"
-alias ac="telnet q-pod-23w.englab.juniper.net 15122"
