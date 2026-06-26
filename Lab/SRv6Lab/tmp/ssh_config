@@ -1,0 +1,73 @@
+### by vmm-v3-script ###
+Host *
+    StrictHostKeyChecking no
+
+host vmm 
+    hostname q-pod25-vmm.englab.juniper.net
+    user irzan
+    
+host gw
+    hostname 10.54.3.91
+    user ubuntu
+    IdentityFile ~/.ssh/srv6
+
+host nms1
+    ProxyCommand ssh -W 172.16.12.11:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/srv6
+
+host nms2
+    ProxyCommand ssh -W 172.16.12.12:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/srv6
+
+host crpd
+    ProxyCommand ssh -W 172.16.11.10:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/srv6
+
+host lxc
+    ProxyCommand ssh -W 172.16.11.11:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/srv6
+
+host pe1
+    ProxyCommand ssh -W 172.16.11.21:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host pe2
+    ProxyCommand ssh -W 172.16.11.22:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host pe3
+    ProxyCommand ssh -W 172.16.11.23:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host pe4
+    ProxyCommand ssh -W 172.16.11.24:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host p1
+    ProxyCommand ssh -W 172.16.11.25:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host p2
+    ProxyCommand ssh -W 172.16.11.26:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host p3
+    ProxyCommand ssh -W 172.16.11.27:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
+host p4
+    ProxyCommand ssh -W 172.16.11.28:22 gw
+    user admin
+    IdentityFile ~/.ssh/srv6
+
