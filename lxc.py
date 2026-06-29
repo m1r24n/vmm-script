@@ -150,17 +150,14 @@ devices:
         #print(cmd1)
         for i in cmd1:
             cmd2 = i.split(" ")
-            result = subprocess.run(cmd1, capture_output=True, text=True)
+            result = subprocess.run(cmd2, capture_output=True, text=True)
     else:
         print("bridge exists")
-    exit (1)
     cmd1 =[]
-    
     lxc_temp = []
     for i in list_of_lxc:
         if i in existing_lxc:
             lxc_temp.append(i)
-
     if lxc_temp:
         for i in lxc_temp:
             print(f"LXC {i} already exists")
@@ -206,15 +203,16 @@ devices:
     cmd2 = "\n".join(cmd1)
     with open('/tmp/run1.sh',"w") as f1:
         f1.write(cmd2)
-    os.chmod("/tmp/run1.sh",0o744)
-    sftp=ssh.open_sftp()
-    sftp.put("/tmp/run1.sh","/tmp/run1.sh")
-    print("executing script")
-    cmd1 = "bash /tmp/run1.sh"
-    _,s2,_=ssh.exec_command(cmd1)
-    result = [ i.rstrip() for i in s2.readlines()]
-    print(result)
-    ssh.close()
+    
+    # os.chmod("/tmp/run1.sh",0o744)
+    # sftp=ssh.open_sftp()
+    # sftp.put("/tmp/run1.sh","/tmp/run1.sh")
+    # print("executing script")
+    # cmd1 = "bash /tmp/run1.sh"
+    # _,s2,_=ssh.exec_command(cmd1)
+    # result = [ i.rstrip() for i in s2.readlines()]
+    # print(result)
+    # ssh.close()
 
 def delete_lxc(d1):
     ssh=paramiko.SSHClient()
