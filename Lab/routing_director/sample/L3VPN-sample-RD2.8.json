@@ -1,0 +1,689 @@
+{
+  "operation": "modify",
+  "fh_config": {
+    "type": "service_order"
+  },
+  "customer_id": "0c4e965e-3ca3-11f1-8690-d240efe2fe2f",
+  "design_id": "l3vpn",
+  "instance_id": "vpn1",
+  "l3vpn_svc": {
+    "sites": {
+      "site": [
+        {
+          "locations": {
+            "location": [
+              {
+                "location_id": "id1"
+              }
+            ]
+          },
+          "maximum_routes": {
+            "address_family": [
+              {
+                "af": "ipv4",
+                "maximum_routes": 1000
+              }
+            ]
+          },
+          "site_id": "site1",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "bearer": {
+                  "requested_type": {
+                    "requested_type": "ethernet",
+                    "strict": false
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "physical_port": {
+                    "speed": 10
+                  },
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 100
+                    },
+                    "type": "dot1q"
+                  }
+                },
+                "device_reference": "sunnyvale-ce1",
+                "ip_connection": {
+                  "ipv4": {
+                    "address_allocation_type": "static-address",
+                    "addresses": {
+                      "customer_addresses": [
+                        "192.168.1.1"
+                      ],
+                      "prefix_length": 24,
+                      "provider_address": "192.168.1.2"
+                    }
+                  },
+                  "oam": {
+                    "bfd": {
+                      "enabled": false
+                    }
+                  }
+                },
+                "placement_interface": {
+                  "ce": "sunnyvale-ce1",
+                  "ifSpeed": "10",
+                  "interface": "ge-0/0/5.100",
+                  "pe": "00000000-0000-0000-1000-2c6bf58cdf00",
+                  "pop": "df1fd6ee-30b2-4cca-ad3d-f6c805297c25"
+                },
+                "placement_options": [
+                  {
+                    "ce": "sunnyvale-ce1",
+                    "ifSpeed": "10",
+                    "pe": "00000000-0000-0000-1000-2c6bf58cdf00",
+                    "pop": "df1fd6ee-30b2-4cca-ad3d-f6c805297c25",
+                    "port": "ge-0/0/5"
+                  }
+                ],
+                "routing_protocols": {
+                  "routing_protocol": [
+                    {
+                      "bgp": {
+                        "address_family": [
+                          "ipv4"
+                        ],
+                        "autonomous_system": 111,
+                        "group_name": ""
+                      },
+                      "type": "bgp"
+                    }
+                  ]
+                },
+                "site_network_access_id": "sunnyvale1",
+                "type": "regular",
+                "vpn_attachment": {
+                  "site_role": "any-to-any-role",
+                  "vpn_id": "111"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "locations": {
+            "location": [
+              {
+                "location_id": "222"
+              }
+            ]
+          },
+          "maximum_routes": {
+            "address_family": [
+              {
+                "af": "ipv4",
+                "maximum_routes": 1000
+              }
+            ]
+          },
+          "site_id": "site2",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "bearer": {
+                  "requested_type": {
+                    "requested_type": "ethernet",
+                    "strict": false
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "physical_port": {
+                    "speed": 10
+                  },
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 100
+                    },
+                    "type": "dot1q"
+                  }
+                },
+                "device_reference": "ce2",
+                "ip_connection": {
+                  "ipv4": {
+                    "address_allocation_type": "static-address",
+                    "addresses": {
+                      "customer_addresses": [
+                        "192.168.2.1"
+                      ],
+                      "prefix_length": 24,
+                      "provider_address": "192.168.2.2"
+                    }
+                  },
+                  "oam": {
+                    "bfd": {
+                      "enabled": false
+                    }
+                  }
+                },
+                "placement_interface": {
+                  "ce": "ce2",
+                  "ifSpeed": "10",
+                  "interface": "ge-0/0/5.100",
+                  "pe": "00000000-0000-0000-1000-2c6bf50e8e00",
+                  "pop": "e4fb056b-348a-48a0-aa47-3b9d3b1405e2"
+                },
+                "placement_options": [
+                  {
+                    "ce": "ce2",
+                    "ifSpeed": "10",
+                    "pe": "00000000-0000-0000-1000-2c6bf50e8e00",
+                    "pop": "e4fb056b-348a-48a0-aa47-3b9d3b1405e2",
+                    "port": "ge-0/0/5"
+                  }
+                ],
+                "routing_protocols": {
+                  "routing_protocol": [
+                    {
+                      "bgp": {
+                        "address_family": [
+                          "ipv4"
+                        ],
+                        "autonomous_system": 111,
+                        "group_name": ""
+                      },
+                      "type": "bgp"
+                    }
+                  ]
+                },
+                "site_network_access_id": "id2",
+                "type": "regular",
+                "vpn_attachment": {
+                  "site_role": "any-to-any-role",
+                  "vpn_id": "111"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "greens",
+          "route_distinguisher_type": "type0",
+          "vpn_id": "111",
+          "vpn_service_topology": "any-to-any",
+          "placement_rt": {
+            "number": 0,
+            "options_with_info": [
+              {
+                "max": 1023,
+                "name": "1234"
+              },
+              {
+                "max": 1023,
+                "name": "1235"
+              }
+            ],
+            "pool": "1234"
+          }
+        }
+      ]
+    },
+    "service_settings": {
+      "readable_router_config": true
+    }
+  },
+  "design_version": "0.8.94",
+  "instance_uuid": "2475e591-3f38-11f1-9303-fab2b5fea4f9",
+  "order_id": "194af874-3f39-11f1-824e-8af2456f0651",
+  "order_status": {
+    "components": [
+      {
+        "component_data": [
+          {
+            "message": "placed",
+            "status": "success",
+            "time": "2026-04-23T17:23:28Z"
+          }
+        ],
+        "component_type": "placement"
+      },
+      {
+        "component_data": [
+          {
+            "message": "transform service order to device config",
+            "status": "success",
+            "time": "2026-04-23T17:23:37Z"
+          },
+          {
+            "message": "applied device config to [00000000-0000-0000-1000-2c6bf58cdf00(vMX-PE1), 00000000-0000-0000-1000-2c6bf50e8e00(vMX-PE2)].",
+            "status": "success",
+            "time": "2026-04-23T17:23:52Z"
+          }
+        ],
+        "component_type": "device"
+      },
+      {
+        "component_data": [
+          {
+            "message": "transform service order to insights config",
+            "status": "success",
+            "time": "2026-04-23T17:23:58Z"
+          },
+          {
+            "message": "apply-insights-configuration",
+            "status": "success",
+            "support_hint": "insights configuration done for devices with mac addresses [2c6bf50e8e00 2c6bf58cdf00]",
+            "time": "2026-04-23T17:24:13Z"
+          }
+        ],
+        "component_type": "insights"
+      },
+      {
+        "component_data": [
+          {
+            "message": "transform service order to active assurance config",
+            "status": "success",
+            "time": "2026-04-23T17:24:19Z"
+          },
+          {
+            "message": "active-assurance-tests-initiated",
+            "status": "success",
+            "support_hint": "active assurance tests initiated on [00000000-0000-0000-1000-2c6bf58cdf00 00000000-0000-0000-1000-2c6bf50e8e00]",
+            "time": "2026-04-23T17:24:22Z"
+          }
+        ],
+        "component_type": "active assurance"
+      }
+    ],
+    "status": "success",
+    "workflow_trace": [
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "init_service_order_status",
+        "time": "2026-04-23T17:23:13.009416+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.get_and_update_topo_resource",
+        "time": "2026-04-23T17:23:21.145671+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.upload_network_resources",
+        "time": "2026-04-23T17:23:26.389518+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.place_service_order",
+        "time": "2026-04-23T17:23:29.177144+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.transform_service_order",
+        "time": "2026-04-23T17:23:31.228921+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.apply_device_config",
+        "time": "2026-04-23T17:23:52.352816+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.apply_device_done",
+        "time": "2026-04-23T17:23:54.263161+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.transform_service_order_insights",
+        "time": "2026-04-23T17:23:59.060140+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.apply_insights_config",
+        "time": "2026-04-23T17:24:13.383118+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.insight_provisioning_done",
+        "time": "2026-04-23T17:24:15.532541+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "check_paa_parameters",
+        "time": "2026-04-23T17:24:17.426941+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "transform_service_order_paa",
+        "time": "2026-04-23T17:24:20.231255+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "apply_paa_configuration",
+        "time": "2026-04-23T17:24:22.970227+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "check_paa_enable",
+        "time": "2026-04-23T17:24:25.023888+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "apply_paa_done",
+        "time": "2026-04-23T17:24:28.846946+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "service_provisioning_done",
+        "time": "2026-04-23T17:24:32.632279+00:00"
+      }
+    ]
+  },
+  "placement": {
+    "nodes": [
+      {
+        "node_id": "00000000-0000-0000-1000-2c6bf50e8e00",
+        "rd": {
+          "number": 1,
+          "options_with_info": [
+            {
+              "max": 1023,
+              "name": "1234"
+            }
+          ],
+          "pool": "1234",
+          "type": "type0"
+        }
+      },
+      {
+        "node_id": "00000000-0000-0000-1000-2c6bf58cdf00",
+        "rd": {
+          "number": 0,
+          "options_with_info": [
+            {
+              "max": 1023,
+              "name": "1234"
+            }
+          ],
+          "pool": "1234",
+          "type": "type0"
+        }
+      }
+    ]
+  },
+  "version": "1.0.0",
+  "l3vpn_ntw": {
+    "insights": {
+      "insight": [
+        {
+          "customer_neighbour_address": {
+            "address": [
+              {
+                "ip": "192.168.2.1",
+                "vpn_encoded_value": "vpn_802fe0853d73fcfdbbfc36a5523e7515e2948b08"
+              }
+            ]
+          },
+          "vna_id": "id2"
+        },
+        {
+          "customer_neighbour_address": {
+            "address": [
+              {
+                "ip": "192.168.1.1",
+                "vpn_encoded_value": "vpn_774071a0b26f72b9d628ee4fb347ef132e0ae46f"
+              }
+            ]
+          },
+          "vna_id": "sunnyvale1"
+        }
+      ]
+    },
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "bgp_link_protection": false,
+          "customer_name": "greens",
+          "enable_bgp_pic_edge": false,
+          "vpn_description": "Routing instance for VPN 111 for customer greens",
+          "vpn_id": "111",
+          "vpn_name": "vpn1",
+          "vpn_nodes": {
+            "vpn_node": [
+              {
+                "description": "VPN 111 on PE 00000000-0000-0000-1000-2c6bf50e8e00 for customer greens any-to-any-role role",
+                "ne_id": "00000000-0000-0000-1000-2c6bf50e8e00",
+                "node_role": "any-to-any-role",
+                "rd": "0:1234:1",
+                "site_id": "e4fb056b-348a-48a0-aa47-3b9d3b1405e2",
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation_type": "dot1q",
+                        "tagged_interface": {
+                          "dot1q_vlan_tagged": {
+                            "cvlan_id": 100
+                          },
+                          "type": "dot1q"
+                        }
+                      },
+                      "description": "Network access to VPN 111 for customer greens",
+                      "id": "id2",
+                      "ip_connection": {
+                        "ipv4": {
+                          "address": [
+                            {
+                              "address_id": "prim-addr-0",
+                              "s_customer_address": "192.168.2.1",
+                              "s_prefix_length": 24,
+                              "s_provider_address": "192.168.2.2"
+                            }
+                          ],
+                          "address_allocation_type": "static-address",
+                          "primary_address": "prim-addr-0"
+                        },
+                        "oam": {
+                          "bfd": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "port_id": "ge-0/0/5.100",
+                      "routing_protocols": {
+                        "routing_protocol": [
+                          {
+                            "bgp": {
+                              "address_family": [
+                                "ipv4"
+                              ],
+                              "as_override": true,
+                              "bgp_max_prefix": {
+                                "max_prefix": 1000,
+                                "restart_interval": 60,
+                                "violate_action": "restart",
+                                "warning_threshold": 75
+                              },
+                              "bgp_timer": {
+                                "hold_time": 180,
+                                "keep_alive": 60
+                              },
+                              "default_route": false,
+                              "description": "BGP neighbor for VPN 111",
+                              "multihop": 1,
+                              "neighbor": [
+                                "192.168.2.1"
+                              ],
+                              "peer_autonomous_system": 111
+                            },
+                            "id": "bgp",
+                            "type": "bgp"
+                          }
+                        ]
+                      },
+                      "service": {},
+                      "type": "regular"
+                    }
+                  ]
+                },
+                "vpn_node_id": "greens-111-00000000-0000-0000-1000-2c6bf50e8e00-any-to-any-role",
+                "vpn_targets": {
+                  "vpn_target": [
+                    {
+                      "id": 1,
+                      "route_target_type": "both",
+                      "route_targets": [
+                        {
+                          "route_target": "0:1234:0"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "description": "VPN 111 on PE 00000000-0000-0000-1000-2c6bf58cdf00 for customer greens any-to-any-role role",
+                "ne_id": "00000000-0000-0000-1000-2c6bf58cdf00",
+                "node_role": "any-to-any-role",
+                "rd": "0:1234:0",
+                "site_id": "df1fd6ee-30b2-4cca-ad3d-f6c805297c25",
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation_type": "dot1q",
+                        "tagged_interface": {
+                          "dot1q_vlan_tagged": {
+                            "cvlan_id": 100
+                          },
+                          "type": "dot1q"
+                        }
+                      },
+                      "description": "Network access to VPN 111 for customer greens",
+                      "id": "sunnyvale1",
+                      "ip_connection": {
+                        "ipv4": {
+                          "address": [
+                            {
+                              "address_id": "prim-addr-0",
+                              "s_customer_address": "192.168.1.1",
+                              "s_prefix_length": 24,
+                              "s_provider_address": "192.168.1.2"
+                            }
+                          ],
+                          "address_allocation_type": "static-address",
+                          "primary_address": "prim-addr-0"
+                        },
+                        "oam": {
+                          "bfd": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "port_id": "ge-0/0/5.100",
+                      "routing_protocols": {
+                        "routing_protocol": [
+                          {
+                            "bgp": {
+                              "address_family": [
+                                "ipv4"
+                              ],
+                              "as_override": true,
+                              "bgp_max_prefix": {
+                                "max_prefix": 1000,
+                                "restart_interval": 60,
+                                "violate_action": "restart",
+                                "warning_threshold": 75
+                              },
+                              "bgp_timer": {
+                                "hold_time": 180,
+                                "keep_alive": 60
+                              },
+                              "default_route": false,
+                              "description": "BGP neighbor for VPN 111",
+                              "multihop": 1,
+                              "neighbor": [
+                                "192.168.1.1"
+                              ],
+                              "peer_autonomous_system": 111
+                            },
+                            "id": "bgp",
+                            "type": "bgp"
+                          }
+                        ]
+                      },
+                      "service": {},
+                      "type": "regular"
+                    }
+                  ]
+                },
+                "vpn_node_id": "greens-111-00000000-0000-0000-1000-2c6bf58cdf00-any-to-any-role",
+                "vpn_targets": {
+                  "vpn_target": [
+                    {
+                      "id": 1,
+                      "route_target_type": "both",
+                      "route_targets": [
+                        {
+                          "route_target": "0:1234:0"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "vpn_service_topology": "any-to-any"
+        }
+      ]
+    }
+  }
+}

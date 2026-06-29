@@ -1,0 +1,286 @@
+{
+  "customer_id": "16204627-b63e-11f0-bd49-66ea6c8fb71d",
+  "design_id": "elan-evpn-csm",
+  "design_version": "0.5.110",
+  "fh_config": {
+    "edited-by": "jcluser@juniper.net",
+    "status": "uploaded",
+    "type": "service_order"
+  },
+  "instance_id": "ELAN-EVPN-3sites",
+  "instance_status": "feasibility_checked",
+  "instance_uuid": "2776bdf9-b64c-11f0-9fe5-0ae9da85f9ce",
+  "l2vpn_svc": {
+    "service_settings": {
+      "readable_router_config": true
+    },
+    "sites": {
+      "site": [
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce444",
+                "location": "Herdon"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "Herdon",
+                "postal_code": "20171",
+                "state": "US"
+              }
+            ]
+          },
+          "mac_loop_prevention": {
+            "frequency": 5,
+            "retry_timer": 60
+          },
+          "site_id": "Philadelphia",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "bearer": {
+                  "requested_type": {
+                    "strict": true,
+                    "type": "ethernet"
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_ids": [
+                        "305"
+                      ],
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "device_reference": "ce444",
+                "mac_addr_limit": {
+                  "action": "drop",
+                  "limit_number": 100
+                },
+                "network_access_id": "HE-PH-link444",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                },
+                "vpn_attachment": {
+                  "vpn_id": "5566"
+                }
+              }
+            ]
+          },
+          "site_vpn_flavor": "site-vpn-flavor-single"
+        },
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce333",
+                "location": "Durham"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "country_code": "US",
+                "location_id": "Durham",
+                "postal_code": "27705"
+              }
+            ]
+          },
+          "mac_loop_prevention": {
+            "frequency": 5,
+            "retry_timer": 100
+          },
+          "site_id": "Reston",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "bearer": {
+                  "requested_type": {
+                    "strict": true,
+                    "type": "ethernet"
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_ids": [
+                        "305"
+                      ],
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "device_reference": "ce333",
+                "mac_addr_limit": {
+                  "action": "drop",
+                  "limit_number": 100
+                },
+                "network_access_id": "RES-DUR-333",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                },
+                "vpn_attachment": {
+                  "vpn_id": "5566"
+                }
+              }
+            ]
+          },
+          "site_vpn_flavor": "site-vpn-flavor-single"
+        },
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce111",
+                "location": "Sunnyvale"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "Sunnyvale",
+                "postal_code": "94089",
+                "state": "US"
+              }
+            ]
+          },
+          "mac_loop_prevention": {
+            "frequency": 5,
+            "retry_timer": 60
+          },
+          "site_id": "MoutainView",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "bearer": {
+                  "requested_type": {
+                    "strict": true,
+                    "type": "ethernet"
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_ids": [
+                        "305"
+                      ],
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "device_reference": "ce111",
+                "mac_addr_limit": {
+                  "action": "drop",
+                  "limit_number": 100
+                },
+                "network_access_id": "MV-SVL-111",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                },
+                "vpn_attachment": {
+                  "vpn_id": "5566"
+                }
+              }
+            ]
+          },
+          "site_vpn_flavor": "site-vpn-flavor-single"
+        }
+      ]
+    },
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "JuniperCloudLabs",
+          "evpn_service_type": "vlan-based",
+          "multiplatform": false,
+          "route_distinguisher_type": "type0",
+          "svc_topo": "any-to-any",
+          "vpn_id": "5566",
+          "vpn_svc_type": "pbb-evpn"
+        }
+      ]
+    }
+  },
+  "operation": "create",
+  "order_id": "dedf68a2-b64d-11f0-9fe5-0ae9da85f9ce",
+  "org_id": "0feb94e2-74df-4a97-a0b0-ceedac11dbcf",
+  "upload_time": "2025-10-31T11:36:41Z",
+  "version": "1.0.0"
+}

@@ -1,0 +1,93 @@
+### by vmm-v3-script ###
+Host *
+    StrictHostKeyChecking no
+
+host vmm 
+    hostname q-pod36-vmm.englab.juniper.net
+    user irzan
+    
+host gw
+    hostname 10.38.163.133
+    user ubuntu
+    IdentityFile ~/.ssh/rdnet36
+
+host pe1
+    ProxyCommand ssh -W 172.16.10.1:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host pe2
+    ProxyCommand ssh -W 172.16.10.2:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host pe3
+    ProxyCommand ssh -W 172.16.10.3:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host pe4
+    ProxyCommand ssh -W 172.16.10.4:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host pe5
+    ProxyCommand ssh -W 172.16.10.5:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host p1
+    ProxyCommand ssh -W 172.16.10.11:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host p2
+    ProxyCommand ssh -W 172.16.10.12:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host p3
+    ProxyCommand ssh -W 172.16.10.13:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host p4
+    ProxyCommand ssh -W 172.16.10.14:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host p5
+    ProxyCommand ssh -W 172.16.10.15:22 gw
+    user admin
+    IdentityFile ~/.ssh/rdnet36
+
+host br1
+    ProxyCommand ssh -W 172.16.10.21:22 gw
+    user alpine
+    IdentityFile ~/.ssh/rdnet36
+
+host br2
+    ProxyCommand ssh -W 172.16.10.22:22 gw
+    user alpine
+    IdentityFile ~/.ssh/rdnet36
+
+host br3
+    ProxyCommand ssh -W 172.16.10.23:22 gw
+    user alpine
+    IdentityFile ~/.ssh/rdnet36
+
+host client
+    ProxyCommand ssh -W 172.16.10.24:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/rdnet36
+
+host crpd
+    ProxyCommand ssh -W 172.16.10.25:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/rdnet36
+
+host nms1
+    ProxyCommand ssh -W 172.16.10.26:22 gw
+    user ubuntu
+    IdentityFile ~/.ssh/rdnet36
+

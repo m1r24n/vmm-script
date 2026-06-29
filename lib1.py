@@ -18,17 +18,23 @@ from jinja2 import Template
 import shutil
 
 import yaml
-import pexpect
+# import pexpect
 import pprint
 from scp import SCPClient
 import random
 import subprocess
 from passlib.hash import md5_crypt
 import time
-import json
+import json, pathlib
+import pprint
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, ed25519
 from cryptography.hazmat.backends import default_backend
+
+
+# from jinja2 import Template
+# import paramiko, pprint
+
 
 def generate_wireguard_keys():
     """
@@ -185,7 +191,8 @@ def read_config(config):
             create_config_interfaces(d1)
         # pprint.pprint(d1)
         # exit()
-        d1['lxc_server'].update({'ssh_key' : f"~/.ssh/{d1['name']}" })
+        if 'lxc_server' in d1.keys():
+            d1['lxc_server'].update({'ssh_key' : f"~/.ssh/{d1['name']}" })
         change_gateway4(d1)
         change_ztp(d1)
         change_loopback(d1)
@@ -2961,9 +2968,9 @@ def connect_to_vm(d1,i):
 #!/usr/bin/env python3
 # this is to create lxc instances
 
-import sys, pathlib, yaml, subprocess, json, os
-from jinja2 import Template
-import paramiko, pprint
+# import sys, pathlib, yaml, subprocess, json, os
+# from jinja2 import Template
+# import paramiko, pprint
 
 
 
