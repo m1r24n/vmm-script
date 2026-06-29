@@ -12,6 +12,18 @@ lxc:
         bridge: ce1pe1ge1
         ipv4: 192.168.101.1/24
         ipv6: fc00:dead:Beef:a101::1/64
+    frr:
+      nd_prefix: fc00:dead:Beef:a101::/64
+      asn: 64201
+      peerasn: 4200000001
+      peerv4: 192.168.200.0
+      peerv6: fc00:dead:beef:a200::0
+      advv4: 192.168.101.0/24
+      advv6: fc00:dead:Beef:a101::/64
+    dnsmasq:
+      range: 192.168.101.10,192.168.101.100
+      router: 192.168.101.1
+      dns: 8.8.8.8
   pc1ce1:
     type: client
     ports:
@@ -35,6 +47,18 @@ lxc:
         bridge: ce2pe2ge1
         ipv4: 192.168.102.1/24
         ipv6: fc00:dead:Beef:a102::1/64
+    frr:
+      nd_prefix: fc00:dead:Beef:a102::/64
+      asn: 64202
+      peerasn: 4200000001
+      peerv4: 192.168.200.4
+      peerv6: fc00:dead:beef:a200::4
+      advv4: 192.168.102.0/24
+      advv6: fc00:dead:Beef:a102:/64
+    dnsmasq:
+      range: 192.168.102.10,192.168.102.100
+      router: 192.168.102.1
+      dns: 8.8.8.8
   pc1ce1:
     type: client
     ports:
@@ -58,6 +82,18 @@ lxc:
         bridge: ce3pe4ge1
         ipv4: 192.168.104.1/24
         ipv6: fc00:dead:Beef:a104::1/64
+    frr:
+      nd_prefix: fc00:dead:Beef:a104::/64
+      asn: 64204
+      peerasn: 4200000001
+      peerv4: 192.168.200.2
+      peerv6: fc00:dead:beef:a200::2
+      advv4: 192.168.104.0/24
+      advv6: fc00:dead:Beef:a104:/64
+    dnsmasq:
+      range: 192.168.104.10,192.168.104.100
+      router: 192.168.104.1
+      dns: 8.8.8.8
   pc1ce1:
     type: client
     ports:

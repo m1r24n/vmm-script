@@ -8,8 +8,6 @@ import paramiko, pprint
 
 
 def create_lxc(d1):
-    # print("host ",d1['lxc_server']['host'])
-    # print("list of lxc ",list(d1['lxc'].keys()))
     net0="""{% for p in ports %}
 auto {{p}}
 {% if ports[p].ipv4 -%}
@@ -98,21 +96,6 @@ devices:
             elif 'type'  not in  d1['lxc'][i]['ports'][j].keys():
                 if d1['lxc'][i]['ports'][j]['bridge'] not in br_l and d1['lxc'][i]['ports'][j]['bridge'] not in lxc_lnx_br:
                     lxc_lnx_br.append(d1['lxc'][i]['ports'][j]['bridge'] )
-
-            # j = d1['lxc'][i]['ports'][k]
-            # if 'type' in j.keys() and j['type'] == 'ovs':
-            #     if j['bridge'] not in ovs_l:
-            #         if j['bridge'] not in lxc_ovs_br:
-            #             lxc_ovs_br.append(j['bridge'])
-            # elif 'type' in j.keys() and j['type'] != 'ovs':
-            #     if j['bridge'] not in br_l:
-            #         if j['bridge'] not in lxc_lnx_br:
-            #             lxc_lnx_br.append(j['bridge'])
-            # elif j['bridge'] not in br_l:
-            #     if j['bridge'] not in lxc_lnx_br:
-            #         lxc_lnx_br.append(j['bridge'])
-    # for i in d1['lxc'].keys():
-    #exit(1)
     print(f"lxc_ovs_br {lxc_ovs_br}")
     print(f"lxc_lnx_br{lxc_lnx_br}")
     existing_lxc = list_lxc(d1)
@@ -179,9 +162,9 @@ devices:
         cmd1.append(net2)
         cmd1.append("EOF")
         cmd1.append(f"lxc file push /tmp/net.{i} {i}/etc/network/interfaces")
-        if 'bgp' in d1['lxc'][i].keys():
-            bgp = d1['lxc'][i]['bgp']
-            frr2 = frr1.render(bgp)
+        if 'frr' in d1['lxc'][i].keys():
+            frr = d1['lxc'][i]['frr']
+            frr2 = frr1.render(frr)
             cmd=f"cat << EOF | tee /tmp/frr.{i}"
             cmd1.append(cmd)
             cmd1.append(frr2)
@@ -203,49 +186,22 @@ devices:
     cmd2 = "\n".join(cmd1)
     with open('/tmp/run1.sh',"w") as f1:
         f1.write(cmd2)
-    
-    # os.chmod("/tmp/run1.sh",0o744)
-    # sftp=ssh.open_sftp()
-    # sftp.put("/tmp/run1.sh","/tmp/run1.sh")
-    # print("executing script")
-    # cmd1 = "bash /tmp/run1.sh"
+    os.chmod("/tmp/run1.sh",0o744)
+    print("executing script")
+    cmd1 = "bash /tmp/run1.sh".split(" ")
+    result = subprocess.run(cmd1, capture_output=True, text=True)
     # _,s2,_=ssh.exec_command(cmd1)
     # result = [ i.rstrip() for i in s2.readlines()]
     # print(result)
     # ssh.close()
 
 def delete_lxc(d1):
-    # ssh=paramiko.SSHClient()
-    # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
-    # cmd1 = 'ip link show type bridge | grep mtu | tr -d " " | cut -f 2 -d ":"'
-    # _,s2,_=ssh.exec_command(cmd1)
-    # # s2l = s2.split("\n")
-    # br_l = [ i.rstrip() for i in s2.readlines()]
-    # lxc_lnx_br =[]
-    # cmd1 = ""
-    # for i in d1['lxc'].keys():
-    #     cmd1 += f"lxc stop {i};"
-    #     cmd1 += f"lxc rm {i};"
-    #     for j in d1['lxc'][i]['ports']:
-    #         if 'type' in j.keys() and j['type'] != 'ovs':
-    #             if j['bridge'] in br_l:
-    #                 if j['bridge'] not in lxc_lnx_br:
-    #                     lxc_lnx_br.append(j['bridge'])
-    #         elif j['bridge'] in br_l:
-    #             if j['bridge'] not in lxc_lnx_br:
-    #                 lxc_lnx_br.append(j['bridge'])
-    #lxc_ovs_br  = []
-    # ssh=connect_to_vm(d1,d1['lxc_server']['host'])
-    # lxc_lnx_br = []
     cmd1 = []
     lxc_lnx_br =[]
     for i in d1['lxc'].keys():
         for j in d1['lxc'][i]['ports']:
             if 'type' not in  d1['lxc'][i]['ports'][j].keys():
-                if d1['lxc'][i]['ports'][j]['bridge'] not in d1['lxc_server']['list_of_bridge']:
-                    lxc_lnx_br.append(d1['lxc'][i]['ports'][j]['bridge'])
+                lxc_lnx_br.append(d1['lxc'][i]['ports'][j]['bridge'])
         cmd1.append(f"lxc stop {i}")
         cmd1.append(f"lxc rm {i}")
         for j in lxc_lnx_br:
@@ -253,8 +209,8 @@ def delete_lxc(d1):
     print(f"Deleting LXC{d1['lxc'].keys()}")
     for i in cmd1:
         cmd2 = i.split(" ")
+        print(f"running {i}")
         result = subprocess.run(cmd2, capture_output=True, text=True)
-  
 
 def list_lxc(d1):
     retval=[]
@@ -266,7 +222,7 @@ def list_lxc(d1):
     # print(retval)
     return retval
 
-def start_lxc(d1)
+def start_lxc(d1):
     print(f"starting LXC{d1['lxc'].keys()}")
     for i in d1['lxc'].keys():
         cmd = f"lxc start {i}".split(" ")
@@ -277,7 +233,7 @@ def stop_lxc(d1):
     for i in d1['lxc'].keys():
         cmd = f"lxc stop {i}".split(" ")
         result = subprocess.run(cmd, capture_output=True, text=True)
-        
+
 def check_arg(argv):
     # list_of_cmd=["create","start","delete","stop","del","lbr","list"]
     if len(argv) < 3:
