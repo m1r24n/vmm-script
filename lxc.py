@@ -1,4 +1,4 @@
-!/usr/bin/env python3
+#!/usr/bin/env python3
 # this is to create lxc instances
 
 import sys, pathlib, yaml, subprocess, json, os
