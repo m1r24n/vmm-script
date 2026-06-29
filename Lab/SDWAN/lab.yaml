@@ -232,7 +232,6 @@ lxc_server:
   host: lxd
   user: ubuntu
   password: pass01
-  ssh_key: /Users/irzan/.ssh/mhna
   list_of_bridge: [ hqlan, br1lan, br2lan, br3lan]
 lxc:
   svr1:
