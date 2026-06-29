@@ -34,6 +34,7 @@
       ansible.builtin.apt:
         pkg:
         - openvswitch-switch
+        - python3-paramiko
     - name: install lxd
       community.general.snap:
         name:

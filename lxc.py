@@ -79,27 +79,12 @@ devices:
     frr1 = Template(frr0)
     dns1 = Template(dns0)
     print("Creating LXC")
-    # ssh=paramiko.SSHClient()
-    # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
-    # print(f"open connection to {d1['lxc_server']['host']}")
-    # ssh=connect_to_vm(d1,d1['lxc_server']['host'])
-    # cmd1 = 'sudo ovs-vsctl show | grep Bridge| sed -e "s/Bridge//"| tr -d " "'
-    # _,s2,_=ssh.exec_command(cmd1)
     cmd1 = "sudo ovs-vsctl show".split(" ")
-    result0 = subprocess.run(cmd1, capture_output=True, text=True)
-    result1=str(result0).split("\\n") 
-    ovs_l=[x.replace("Bridge","").strip() for x in result1 if "Bridge" in x]
-    # # s2l = s2.split("\n")
-    # ovs_l = [ i.rstrip() for i in s2.readlines()]
-    # cmd1 = 'ip link show type bridge | grep mtu | tr -d " " | cut -f 2 -d ":"'
+    result = subprocess.run(cmd1, capture_output=True, text=True)
+    ovs_l=[x.replace("Bridge","").strip() for x in result.stdout.split("\n") if 'Bridge' in x ]
     cmd1 = "ip link show type bridge".split(" ")
-    result0 = subprocess.run(cmd1, capture_output=True, text=True)
-    result1=str(result0).split("\\n") 
-    br_l=[x.replace(":","").strip() for x in result1 if "mtu" in x]
-    # _,s2,_=ssh.exec_command(cmd1)
-    # br_l = [ i.rstrip() for i in s2.readlines()]
+    result = subprocess.run(cmd1, capture_output=True, text=True)
+    br_l=[x.split(" ")[1].replace(":","").strip() for x in result.stdout.split("\n") if 'mtu' in x ]
     print(f"opevnswitch {ovs_l}")
     print(f"linux_bridge {br_l}")
     exit(1)
