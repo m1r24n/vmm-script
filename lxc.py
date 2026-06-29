@@ -266,40 +266,18 @@ def list_lxc(d1):
     # print(retval)
     return retval
 
-def start_lxc(d1):
-    ssh=paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
-    ssh=connect_to_vm(d1,d1['lxc_server']['host'])
+def start_lxc(d1)
     print(f"starting LXC{d1['lxc'].keys()}")
-    cmd1=[]
     for i in d1['lxc'].keys():
-        cmd = f"lxc start {i}"
-        cmd1.append(cmd)
-    cmd2 = ';'.join(cmd1)
-    _,s2,_=ssh.exec_command(cmd2)
-    result = [ i.rstrip() for i in s2.readlines()]
-    print(result)
-    ssh.close()
+        cmd = f"lxc start {i}".split(" ")
+        result = subprocess.run(cmd, capture_output=True, text=True)
 
 def stop_lxc(d1):
-    ssh=paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
-    ssh=connect_to_vm(d1,d1['lxc_server']['host'])
-    cmd1=[]
     print(f"stopping LXC{d1['lxc'].keys()}")
     for i in d1['lxc'].keys():
-        cmd = f"lxc stop {i}"
-        cmd1.append(cmd)
-    cmd2 = ';'.join(cmd1)
-    _,s2,_=ssh.exec_command(cmd2)
-    result = [ i.rstrip() for i in s2.readlines()]
-    print(result)
-    ssh.close()
-    
+        cmd = f"lxc stop {i}".split(" ")
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        
 def check_arg(argv):
     # list_of_cmd=["create","start","delete","stop","del","lbr","list"]
     if len(argv) < 3:
@@ -332,7 +310,7 @@ elif d1['cmd'] == 'list':
     print(f"List of LXC : {list_lxc(d1)}")
 elif d1['cmd'] == 'stop':
     stop_lxc(d1)
-elif d1['cmd'] == ['de','delete']:
+elif d1['cmd'] in ['del','delete']:
     delete_lxc(d1)
 else:
     print(f"command {d1['cmd']} is not supported yet")
