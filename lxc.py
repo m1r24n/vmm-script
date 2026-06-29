@@ -137,22 +137,23 @@ devices:
     print("bridge used by lxc")
     print(f"ovs bridge {ovs_l}")
     print(f"linux bridge {lxc_lnx_br}")
-    exit(1)
     if lxc_ovs_br:
         for i in lxc_ovs_br:
             print(f"OpenvSwitch {i} is not defined")
         exit(1)
     if lxc_lnx_br:
         print("creating linux bridge")
-        cmd1=""
+        cmd1=[]
         for i in lxc_lnx_br:
-            cmd1+=f"sudo ip link add dev {i} type bridge;"
-            cmd1+=f"sudo ip link set dev {i} up;"
+            cmd1.append(f"sudo ip link add dev {i} type bridge")
+            cmd1.append(f"sudo ip link set dev {i} up")
         #print(cmd1)
-        _,s2,_=ssh.exec_command(cmd1)
-        result= [ i.rstrip() for i in s2.readlines()]
+        for i in cmd1:
+            cmd2 = i.split(" ")
+            result = subprocess.run(cmd1, capture_output=True, text=True)
     else:
         print("bridge exists")
+    exit (1)
     cmd1 =[]
     
     lxc_temp = []
@@ -269,7 +270,7 @@ def list_lxc(d1):
     retval=[]
     cmd1 = "lxc ls --format=json".split(" ")
     result = subprocess.run(cmd1, capture_output=True, text=True)
-    d0=json.loads(result)
+    d0=json.loads(result.stdout)
     for i in d0:
         retval.append(i['name'])
     # print(retval)
@@ -338,7 +339,7 @@ if d1['cmd'] == 'create':
 elif d1['cmd'] == 'start':
     start_lxc(d1)
 elif d1['cmd'] == 'list':
-    list_lxc(d1)
+    print(f"List of LXC : {list_lxc(d1)}")
 elif d1['cmd'] == 'stop':
     stop_lxc(d1)
 elif d1['cmd'] == ['de','delete']:
