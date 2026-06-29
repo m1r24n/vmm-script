@@ -267,19 +267,9 @@ def delete_lxc(d1):
 
 def list_lxc(d1):
     retval=[]
-    ssh=paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
-    # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
-    ssh=connect_to_vm(d1,d1['lxc_server']['host'])
-    cmd1 = 'lxc ls --format=json'
-    _,s2,_=ssh.exec_command(cmd1)
-    # s2l = s2.split("\n")
-    result = [ i.rstrip() for i in s2.readlines()]
+    cmd1 = "lxc ls --format=json".split(" ")
+    result = subprocess.run(cmd1, capture_output=True, text=True)
     d0=json.loads(result[0])
-    # print(type(d0))
-    # print(len(d0))
-    ssh.close()
     for i in d0:
         retval.append(i['name'])
     # print(retval)
@@ -348,6 +338,8 @@ if d1['cmd'] == 'create':
     start_lxc(d1)
 elif d1['cmd'] == 'start':
     start_lxc(d1)
+elif d1['cmd'] == 'list':
+    list_lxc(d1)
 elif d1['cmd'] == 'stop':
     stop_lxc(d1)
 elif d1['cmd'] == ['de','delete']:
