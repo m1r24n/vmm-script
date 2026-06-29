@@ -87,7 +87,6 @@ devices:
     br_l=[x.split(" ")[1].replace(":","").strip() for x in result.stdout.split("\n") if 'mtu' in x ]
     print(f"opevnswitch {ovs_l}")
     print(f"linux_bridge {br_l}")
-    exit(1)
     lxc_ovs_br  = []
     lxc_lnx_br = []
     for i in d1['lxc'].keys():
@@ -138,6 +137,7 @@ devices:
     print("bridge used by lxc")
     print(f"ovs bridge {ovs_l}")
     print(f"linux bridge {lxc_lnx_br}")
+    exit(1)
     if lxc_ovs_br:
         for i in lxc_ovs_br:
             print(f"OpenvSwitch {i} is not defined")
@@ -269,12 +269,11 @@ def list_lxc(d1):
     retval=[]
     cmd1 = "lxc ls --format=json".split(" ")
     result = subprocess.run(cmd1, capture_output=True, text=True)
-    d0=json.loads(result[0])
+    d0=json.loads(result)
     for i in d0:
         retval.append(i['name'])
     # print(retval)
     return retval
-
 
 def start_lxc(d1):
     ssh=paramiko.SSHClient()
