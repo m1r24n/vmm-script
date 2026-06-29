@@ -1,0 +1,14 @@
+network:
+  bridges:
+    hqlan:
+      interfaces:
+        - eth1
+    br1lan:
+      interfaces:
+        - eth2
+    br2lan:
+      interfaces:
+        - eth3
+    br3lan:
+      interfaces:
+        - eth4

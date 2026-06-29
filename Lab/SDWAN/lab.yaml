@@ -1,0 +1,273 @@
+---
+name: sdwan
+pod:
+  type: vmm
+  vmmserver: q-pod25-vmm.englab.juniper.net
+  user: irzan
+  #vmmpassword: AnaMabokCoy
+  home_dir : /vmm/data/user_disks/irzan
+images:
+  gw: images/gw.qcow2
+  ubuntu: images/ubuntu24.04.qcow2
+  # bridge: images/bridge.qcow2
+  # vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  # vjunos_evolved: images/vJunosEvolved-25.2R1.8-EVO.qcow2
+  vsrx: images/junos-vsrx3-x86-64-25.4R1.12.qcow2
+  # sd: images/sd/sd-25.4.1-disk1.qcow2
+junos_login:
+  login: admin
+  password: pass01
+#pcep_server: 172.16.12.3
+#isis_dm: true
+#paragon_ingest: 172.16.12.1
+# snmp: 
+#   server: 172.16.255.4
+#   ro_community: public
+# wg:
+#   prefix_allowed:
+#   - 172.16.11.0/24 
+#   - 172.16.10.0/24
+#   - 172.16.12.0/24 
+#   - 10.100.255.0/24
+# fabric:
+#   subnet: 10.100.0.0/24
+  # topology:
+#   # there are five field: status, VM node A, interface of node A, VM node Z, interface of node Z
+#   # value for the field status:
+#   # bit 0 : ipv4
+#   # bit 1 : ipv6
+#   # bit 2 : iso
+#   # bit 3 : mpls
+#   # bit 4 : isis
+#   # bit 5 : rsvp
+#   # bit 6 : ldp
+#   # bit 7 : delay_measurement_rpm
+#   # 0x3d means enable family ipv4, iso and mpls, and enable protocol isis and rsvp
+#   # 0xbd means enable family ipv4, iso and mpls, and enable protocol isis and rsvp, and delay measurement using RPM
+#   # ingress controller: 172.16.255.1
+#   # NGIX ingress controller: 172.16.255.2
+#   # insight : 172.16.255.3
+#   # SNMP trap: 172.16.255.4
+#   # Netflow : 172.16.255.5
+#   # PCE serveR: 172.16.255.6
+    # - [ 0x0, hq1, ge-0/0/1, nw, ge-0/0/1 ]
+    # - [ 0x1, fw2, ge-0/0/0, nw, ge-0/0/2 ]
+    # - [ 0x1, fw3, ge-0/0/0, nw, ge-0/0/3 ]
+vm:
+  gw:
+    type: gw
+    os: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.254/24
+        dhcp_range: 172.16.101.1-172.16.101.200
+      em2: 
+        bridge: hqI
+        family:
+          inet: 192.168.210.1/31
+      em3:
+        bridge: br1I
+        family:
+          inet: 192.168.210.3/31
+      em4:
+        bridge: br2I
+        family:
+          inet: 192.168.210.5/31
+      em5:
+        bridge: br3I
+        family:
+          inet: 192.168.210.7/31
+  mpls:
+    type: pcsmall
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.1/24
+          gateway4: 172.16.101.254
+      em1: 
+        bridge: hqM
+        family:
+          inet: 192.168.220.1/31
+      em2:
+        bridge: br1M
+        family:
+          inet: 192.168.220.3/31
+      em3:
+        bridge: br2M
+        family:
+          inet: 192.168.220.5/31
+      em4:
+        bridge: br3M
+        family:
+          inet: 192.168.220.7/31
+  ac:
+    type: pcmedium
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.2/24
+          gateway4: 172.16.101.254
+  hq:
+    type: vsrx
+    vnc: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.100/24
+          gateway4: 172.16.101.254
+      ge-0/0/0:
+        bridge: hqlan
+        family:
+          inet: 192.168.200.1/24
+      ge-0/0/1:
+        bridge: hqI
+        mtu: 9000
+        family:
+          inet: 192.168.210.0/31
+      ge-0/0/2:
+        bridge: hqM
+        mtu: 9000
+        family:
+          inet: 192.168.220.0/31
+  br1:
+    type: vsrx
+    vnc: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.101/24
+          gateway4: 172.16.101.254
+      ge-0/0/0:
+        bridge: br1lan
+        family:
+          inet: 192.168.201.1/24
+      ge-0/0/1:
+        bridge: br1I
+        mtu: 9000
+        family:
+          inet: 192.168.210.2/31
+      ge-0/0/2:
+        bridge: br1M
+        mtu: 9000
+        family:
+          inet: 192.168.220.2/31
+  br2:
+    type: vsrx
+    vnc: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.102/24
+          gateway4: 172.16.101.254
+      ge-0/0/0:
+        bridge: br2lan
+        family:
+          inet: 192.168.202.1/24
+      ge-0/0/1:
+        bridge: br2I
+        mtu: 9000
+        family:
+          inet: 192.168.210.4/31
+      ge-0/0/2:
+        bridge: br2M
+        mtu: 9000
+        family:
+          inet: 192.168.220.4/31
+  br3:
+    type: vsrx
+    vnc: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.103/24
+          gateway4: 172.16.101.254
+      ge-0/0/0:
+        bridge: br3lan
+        family:
+          inet: 192.168.203.1/24
+      ge-0/0/1:
+        bridge: br3I
+        mtu: 9000
+        family:
+          inet: 192.168.210.6/31
+      ge-0/0/2:
+        bridge: br3M
+        mtu: 9000
+        family:
+          inet: 192.168.220.6/31
+  lxd:
+    type: pchpv1
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.101.104/24
+          gateway4: 172.16.101.254
+      em1: 
+        bridge: hqlan
+        mtu: 9000
+      em2: 
+        bridge: br1lan
+        mtu: 9000
+      em3: 
+        bridge: br2lan
+        mtu: 9000
+      em4: 
+        bridge: br3lan
+        mtu: 9000
+lxc_server:
+  host: lxd
+  user: ubuntu
+  password: pass01
+  ssh_key: /Users/irzan/.ssh/mhna
+  list_of_bridge: [ hqlan, br1lan, br2lan, br3lan]
+lxc:
+  svr1:
+    type: client
+    ports:
+      eth0:
+        bridge: hqlan
+        ipv4: 192.168.200.11/24
+        gw4: 192.168.200.1
+  svr2:
+    type: client
+    ports:
+      eth0:
+        bridge: hqlan
+        ipv4: 192.168.200.12/24
+        gw4: 192.168.200.1
+  pc1:
+    type: client
+    ports:
+      eth0:
+        bridge: br1lan
+        ipv4: 192.168.201.11/24
+        gw4: 192.168.201.1
+  pc2:
+    type: client
+    ports:
+      eth0:
+        bridge: br2lan
+        ipv4: 192.168.202.11/24
+        gw4: 192.168.202.1
+  pc3:
+    type: client
+    ports:
+      eth0:
+        bridge: br3lan
+        ipv4: 192.168.203.11/24
+        gw4: 192.168.203.1
+ 

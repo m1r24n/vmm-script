@@ -47,36 +47,20 @@ if config1:
 			lib1.print_data(d1)
 		elif config1['cmd'] == 'get_wg_config':
 			lib1.get_wg_config(d1)
-		# elif config1['cmd'] == 'config':
-		# 	lib1.upload(d1,0)
-		# elif config1['cmd'] == 'get_vjunos_dhcp':
-		# 	lib1.get_vjunos_config(d1)
-		# elif config1['cmd'] == 'init_junos':
-		# 	lib1.init_junos(d1,config1['vm'])
-		# elif config1['cmd'] == 'init_vjunos':
-		# 	lib1.init_vjunos(d1)
-		# elif config1['cmd'] == 'config_junos':
-		# 	lib1.config_junos(d1)
-		# elif config1['cmd'] == 'get_ztp_config':
-		# 	lib1.get_ztp_config(d1)
-		# elif config1['cmd'] == 'get_vmm_capacity':
-		# 	lib1.get_vmm_capacity(d1)
-		# elif config1['cmd'] == 'get_dns':
-		# 	lib1.get_dns(d1)
 		elif config1['cmd'] == 'get_serial':
 			lib1.get_serial(d1)
-		#elif config1['cmd'] == 'get_vga':
-		#	lib1.get_vga(d1,config1['vm'])
-		#elif config1['cmd'] == 'get_ip':
-		#	lib1.get_ip(d1,config1['vm'])
-		# elif config1['cmd'] == 'test':
-		# 	lib1.test(d1)
-		# elif config1['cmd'] == 'change_dhcp':
-		# 	lib1.change_dhcp(d1)
-		# elif config1['cmd'] == 'get1':
-		# 	lib1.create_novnc(d1)
-		# elif config1['cmd'] == 'get_vnc_list':
-		# 	lib1.get_vnc_list(d1)
+		elif config1['cmd']=='lxc-create':
+			lib1.create_lxc(d1)
+			lib1.start_lxc(d1)
+		elif config1['cmd'] in ['lxc-del','lxc-delete']:
+			lib1.delete_lxc(d1)
+		elif config1['cmd']=='lxc-start':
+			lib1.start_lxc(d1)
+		elif config1['cmd']=='lxc-stop':
+			lib1.stop_lxc(d1)
+		elif config1['cmd']=='lxc-list':
+			print(f"list of LXC: {lib1.list_lxc(d1)}")
+			lib1.list_bridge(d1)
 		else:
 			print("wrong argument")
 	else:
