@@ -32,19 +32,19 @@ lxc:
         ipv4: 192.168.200.5/31
         ipv6: fc00:dead:beef:a200::5/127
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce2pe2ge1
         ipv4: 192.168.102.1/24
         ipv6: fc00:dead:Beef:a102::1/64
   pc1ce1:
     type: client
     ports:
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce2pe2ge1
   pc2ce2:
     type: client
     ports:
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce2pe2ge1
   ce3pe4:
     type: router
     ports:
@@ -55,16 +55,16 @@ lxc:
         ipv4: 192.168.200.3/31
         ipv6: fc00:dead:beef:a200::3/127
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce3pe4ge1
         ipv4: 192.168.104.1/24
         ipv6: fc00:dead:Beef:a104::1/64
   pc1ce1:
     type: client
     ports:
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce3pe4ge1
   pc2ce2:
     type: client
     ports:
       eth1:
-        bridge: ce1pe1ge1
+        bridge: ce3pe4ge1

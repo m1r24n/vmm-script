@@ -215,8 +215,8 @@ devices:
     # ssh.close()
 
 def delete_lxc(d1):
-    ssh=paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    # ssh=paramiko.SSHClient()
+    # ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     #ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],password=d1['lxc_server']['password'])
     # ssh.connect(hostname=d1['lxc_server']['host'],username=d1['lxc_server']['user'],key_filename=d1['lxc_server']['ssh_key'])
     # cmd1 = 'ip link show type bridge | grep mtu | tr -d " " | cut -f 2 -d ":"'
@@ -237,32 +237,24 @@ def delete_lxc(d1):
     #             if j['bridge'] not in lxc_lnx_br:
     #                 lxc_lnx_br.append(j['bridge'])
     #lxc_ovs_br  = []
-    ssh=connect_to_vm(d1,d1['lxc_server']['host'])
-    lxc_lnx_br = []
-    cmd1 = ""
+    # ssh=connect_to_vm(d1,d1['lxc_server']['host'])
+    # lxc_lnx_br = []
+    cmd1 = []
+    lxc_lnx_br =[]
     for i in d1['lxc'].keys():
         for j in d1['lxc'][i]['ports']:
             if 'type' not in  d1['lxc'][i]['ports'][j].keys():
                 if d1['lxc'][i]['ports'][j]['bridge'] not in d1['lxc_server']['list_of_bridge']:
                     lxc_lnx_br.append(d1['lxc'][i]['ports'][j]['bridge'])
-        cmd1 += f"lxc stop {i};lxc rm {i};"
+        cmd1.append(f"lxc stop {i}")
+        cmd1.append(f"lxc rm {i}")
         for j in lxc_lnx_br:
-            cmd1 += f"sudo ip link del dev {j};"
+            cmd1.append(f"sudo ip link del dev {j}")
     print(f"Deleting LXC{d1['lxc'].keys()}")
-    _,s2,_=ssh.exec_command(cmd1)
-    print(cmd1)
-    result = [ i.rstrip() for i in s2.readlines()]
-    print(result)
-    # cmd1=""
-    # if lxc_lnx_br:
-    #     print("Deleting linux bridge")
-    #     for i in lxc_lnx_br:
-    #         cmd1+= f"sudo ip link del dev {i};"
-    #     _,s2,_=ssh.exec_command(cmd1)
-    #     print(cmd1)
-    #     result = [ i.rstrip() for i in s2.readlines()]
-    #     print(result)
-    ssh.close()
+    for i in cmd1:
+        cmd2 = i.split(" ")
+        result = subprocess.run(cmd2, capture_output=True, text=True)
+  
 
 def list_lxc(d1):
     retval=[]
