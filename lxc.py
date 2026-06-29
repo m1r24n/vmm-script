@@ -365,7 +365,7 @@ elif d1['cmd'] == 'start':
     start_lxc(d1)
 elif d1['cmd'] == 'stop':
     stop_lxc(d1)
-elif d1['cmd'] == ['de','delete']':
+elif d1['cmd'] == ['de','delete']:
     delete_lxc(d1)
 else:
     print(f"command {d1['cmd']} is not supported yet")
