@@ -1,6 +1,0 @@
-alias gw="telnet q-pod-104g.englab.juniper.net 15173"
-alias ac="telnet q-pod-104c.englab.juniper.net 15102"
-alias node1="telnet q-pod-103l.englab.juniper.net 15101"
-alias node2="telnet q-pod-103k.englab.juniper.net 15131"
-alias node3="telnet q-pod-103i.englab.juniper.net 15090"
-alias node4="telnet q-pod-103d.englab.juniper.net 15346"
