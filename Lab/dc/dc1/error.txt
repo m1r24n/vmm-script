@@ -1,0 +1,59 @@
+2026-07-02 02:11:42,166 INFO:--- Starting pre-checks ---
+2026-07-02 02:11:42,167 INFO:Job      : install
+2026-07-02 02:11:42,167 INFO:Host     : 172.16.51.118
+2026-07-02 02:11:42,167 INFO:Ensure stable connection for 60s
+2026-07-02 02:11:42,167 INFO:TASK: Check Connectivity
+2026-07-02 02:11:42,290 INFO:Host key mismatch, will not retry.
+2026-07-02 02:11:42,291 ERROR:FAILED Host key for server '172.16.51.118' does not match: got 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCzuppEBHSiqAhKYgKZOAaF/E3JaExkwp9088KjVi1TFjluADH8bzgzDBJZvw8AxnsNSCzttdQx6oLo2WZc/r4mAa5sF5YpBxWAc+D/jSpTWdSAYAiGVr75NgCMTJ530Xk5y2B6+2R9XjUhG/2vZqk910cl5bYoIaHvh/1qfYvHoAoSxy98HiV6H1OGRliip1Ouaw2bJLiFsXFQkg586w0og9sgD0Aw3kf68c9XbyrdJs4HSNRNg2Dldfyiz/cVAEl/taR3Dgg7ctiaSKQr6FRYpK7vamU9pxvQ5mBuALd1FEquMqC/pAzRZBb/EtzeeqMEJeOr2KXCkfKUS2c2FJ31', expected 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDqJDFsahxyYUHWHx7Sn/76HUqy0MO9W3Uz5Ei+roV01s3QJHKIBNQjgSiSblbugq4Pwj8GOzZFPPF9CasSd32TgSunIlyjc4xPaBzqPa8zIVusjMDT24zEFjzfeEx6Efb5+EKige9JQtVjNBRqdQjMpqvy1CvLlFaDMd34EZg09p8YaDvSFOZALh0pds5plEOy5UWjqXNHLRuaCa6k9bAyCzMnbMbsbtXSwBWltCX7DfKDx/M8OhmLNQe4nJeEE3BjIjAz8G4qKjK4h8rVXZcxHxpw8d1mKC0k0XEZ/EMRdG29jqADk0aIQo9CKL5XQfhqVOcTVy5VA+dvCishmJIf'
+
+
+
+
+  {
+    "hw-address": "56:04:26:00:61:21",
+    "ip-address": "172.16.51.101"
+  },
+  {
+    "hw-address": "56:04:26:00:61:2e",
+    "ip-address": "172.16.51.102"
+  },
+  {
+    "hw-address": "56:04:26:00:61:36",
+    "ip-address": "172.16.51.103"
+  },
+  {
+    "hw-address": "56:04:26:00:60:92",
+    "ip-address": "172.16.51.104"
+  },
+  {
+    "hw-address": "56:04:26:00:60:da",
+    "ip-address": "172.16.51.111"
+  },
+  {
+    "hw-address": "56:04:26:00:60:d5",
+    "ip-address": "172.16.51.112"
+  },
+  {
+    "hw-address": "56:04:26:00:60:dd",
+    "ip-address": "172.16.51.113"
+  },
+  {
+    "hw-address": "56:04:26:00:34:cc",
+    "ip-address": "172.16.51.114"
+  },
+  {
+    "hw-address": "56:04:26:00:60:bc",
+    "ip-address": "172.16.51.115"
+  },
+  {
+    "hw-address": "56:04:26:00:61:08",
+    "ip-address": "172.16.51.116"
+  },
+  {
+    "hw-address": "56:04:26:00:60:c9",
+    "ip-address": "172.16.51.117"
+  },
+  {
+    "hw-address": "56:04:26:00:24:78",
+    "ip-address": "172.16.51.118"
+  }

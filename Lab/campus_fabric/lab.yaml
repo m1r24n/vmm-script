@@ -1,0 +1,173 @@
+---
+# site1 only
+name: cb1
+pod: 
+  type: vmm
+  vmmserver: q-pod21-vmm.englab.juniper.net
+  user: irzan
+  home_dir : /vmm/data/user_disks/irzan
+images:
+  gw: images/gw.qcow2
+  ubuntu: images/ubuntu26.04.qcow2
+  ubuntu2: images/ubuntu24.04.qcow2
+  vsrx: images/junos-vsrx3-x86-64-25.4R1.12.qcow2
+  vjunos_switch: images/vJunos-switch-25.4R1.12.qcow2
+  vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  #vjunos_evolved: images/vJunosEvolved-25.2R1.8-EVO.qcow2
+junos_login:
+  login: admin
+  password: pass01
+fabric:
+  # subnet: 10.100.0.0/24
+  topology:
+  - [ 0x0, fw1, ge-0/0/1, core1, ge-0/0/0 ]
+  - [ 0x0, fw1, ge-0/0/2, core2, ge-0/0/0 ]
+  - [ 0x0, core1, ge-0/0/1, dist1, ge-0/0/0 ]
+  - [ 0x0, core1, ge-0/0/2, dist2, ge-0/0/0 ]
+  - [ 0x0, core2, ge-0/0/1, dist1, ge-0/0/1 ]
+  - [ 0x0, core2, ge-0/0/2, dist2, ge-0/0/1 ]
+  - [ 0x0, dist1, ge-0/0/2, access1, ge-0/0/0 ]
+  - [ 0x0, dist1, ge-0/0/3, access2, ge-0/0/0 ]
+  - [ 0x0, dist1, ge-0/0/4, access3, ge-0/0/0 ]
+  - [ 0x0, dist1, ge-0/0/5, access4, ge-0/0/0 ]
+  - [ 0x0, dist2, ge-0/0/2, access1, ge-0/0/1 ]
+  - [ 0x0, dist2, ge-0/0/3, access2, ge-0/0/1 ]
+  - [ 0x0, dist2, ge-0/0/4, access3, ge-0/0/1 ]
+  - [ 0x0, dist2, ge-0/0/5, access4, ge-0/0/1 ]
+  - [ 0x0, access1, ge-0/0/2, client, em1 ]
+  - [ 0x0, access2, ge-0/0/2, client, em2 ]
+  - [ 0x0, access3, ge-0/0/2, client, em3 ]
+  - [ 0x0, access4, ge-0/0/2, client, em4 ]
+  - [ 0x0, access1, ge-0/0/3, client, em5 ]
+  - [ 0x0, access2, ge-0/0/3, client, em6 ]
+  - [ 0x0, access3, ge-0/0/3, client, em7 ]
+  - [ 0x0, access4, ge-0/0/3, client, em8 ]
+  - [ 0x0, access1, ge-0/0/4, client, em9 ]
+  - [ 0x0, access2, ge-0/0/4, client, em10 ]
+  - [ 0x0, access3, ge-0/0/4, client, em11 ]
+  - [ 0x0, access4, ge-0/0/4, client, em12 ]
+vm:
+  gw:
+    type: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.254/24
+        dhcp_range: 172.16.11.1 - 172.16.11.200
+      em2:
+        bridge: ext
+        family:
+          inet: 172.16.12.1/24
+  ac:
+    type: pcmedium
+    os: ubuntu2
+    vnc: yes
+    interfaces:
+      em0:
+        bridge: mgmt
+        family:
+          inet: 172.16.11.2/24
+          gateway4: 172.16.11.254
+  fw1:
+    type: vsrx
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.3/24
+      ge-0/0/0: 
+        bridge: ext
+        family:
+          inet: 172.16.12.2/24
+      ge-0/0/3: 
+        bridge: dhcp
+        family:
+          inet: 172.16.13.254/24
+  core1:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.101/24
+  core2:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.102/24
+  dist1:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.111/24
+  dist2:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.112/24
+  access1:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.121/24
+  access2:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.122/24
+  access3:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.123/24
+  access4:
+    type: vjunos_switch
+    mgmt_instc: false
+    mgmt_dhcp: false
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.124/24
+  client:
+    type: pchpv2
+    os: ubuntu
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.11.150/24
+          gateway4: 172.16.11.254
+      em13: 
+        bridge: dhcp
+      

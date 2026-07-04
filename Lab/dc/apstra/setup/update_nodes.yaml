@@ -23,4 +23,31 @@
         - wireguard-tools
         - novnc
         - websockify
-
+    - name: Add entries into /etc/coredns/vmmlab.com.db
+      ansible.builtin.blockinfile:
+        path: /etc/coredns/vmmlab.com.db
+        marker: "; {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          spine1 IN A 172.16.51.101
+          spine2 IN A 172.16.51.102
+          spine3 IN A 172.16.51.103
+          spine4 IN A 172.16.51.104
+          leaf1 IN A 172.16.51.111
+          leaf2 IN A 172.16.51.112
+          leaf3 IN A 172.16.51.113
+          leaf4 IN A 172.16.51.114
+          leaf5 IN A 172.16.51.115
+          leaf6 IN A 172.16.51.116
+          leaf7 IN A 172.16.51.117
+          leaf8 IN A 172.16.51.118
+          apstra1 IN A 172.16.55.1
+          apstra2 IN A 172.16.55.2
+          apstra3 IN A 172.16.55.3
+          ztp IN A 172.16.55.4
+          flow IN A 172.16.55.5
+          fw1 IN A 172.16.52.21
+          fw2 IN A 172.16.52.22
+          vxlangw IN A 172.16.52.2
+          pe1 IN A 172.16.52.3
+          ext IN A 172.16.52.16
+          dhcprelay IN A 172.16.51.100

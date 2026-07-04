@@ -1,8 +1,8 @@
 ---
-name: apstra
+name: apstra2
 pod: 
   type: vmm
-  vmmserver: q-pod08-vmm.englab.juniper.net
+  vmmserver: q-pod39-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
 images:
@@ -32,7 +32,7 @@ vm:
           inet: 172.16.55.254/24
           inet6: fc00:dead:beef:ff55::FFFF/64
         dhcp_range: 172.16.55.1-172.16.55.200
-  apstra:
+  apstra1:
     type: pchpv1
     os: aos
     vnc: yes
@@ -42,7 +42,7 @@ vm:
         family:
           inet: 172.16.55.1/24 
           gateway4: 172.16.55.254
-  apstraw2:
+  apstra2:
     type: pchpv1
     os: aos
     vnc: yes
@@ -52,7 +52,7 @@ vm:
         family:
           inet: 172.16.55.2/24 
           gateway4: 172.16.55.254
-  apstraw3:
+  apstra3:
     type: pchpv1
     os: aos
     vnc: yes

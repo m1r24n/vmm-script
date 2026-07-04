@@ -312,8 +312,8 @@ def change_gateway4(d1):
                                 #d1['vm'][i]['interfaces'][j]['static']=[{'to':'default','via': d1['vm'][i]['interfaces'][j]['gateway4']}]
                                 d1['vm'][i]['interfaces'][j]['family']['static']=[{'to':'0.0.0.0/0','via': d1['vm'][i]['interfaces'][j]['family']['gateway4']}]
                             #d1['vm'][i]['interfaces'][j]['family'].pop('gateway4')
-                        else:
-                            print(f"no gateway4, {i} : {j}")
+                        # else:
+                        #     print(f"no gateway4, {i} : {j}")
                         if 'gateway6' in d1['vm'][i]['interfaces'][j]['family'].keys():
                             if 'static' in d1['vm'][i]['interfaces'][j]['family'].keys():
                                 #d1['vm'][i]['interfaces'][j]['static'].append({'to':'default','via':j['gateway4']})
@@ -1537,7 +1537,7 @@ def create_novnc(d1):
 
 
 def set_host(d1,vm=""):
-    host_yes=['centos','rhel','ubuntu','debian','bridge','desktop']
+    host_yes=['centos','rhel','ubuntu','debian','bridge','desktop', 'ubuntu2']
     list_hosts=[]
     #get_dns(d1)
     filename1=param1.tmp_dir + 'set_host.sh'

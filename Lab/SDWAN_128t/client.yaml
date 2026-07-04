@@ -1,0 +1,37 @@
+lxc:
+  svr1:
+    type: client
+    ports:
+      eth0:
+        bridge: hqlanInt
+        ipv4: 192.168.200.11/24
+        gw4: 192.168.200.1
+  svr2:
+    type: client
+    ports:
+      eth0:
+        bridge: hqlanInt
+        ipv4: 192.168.200.12/24
+        gw4: 192.168.200.1
+  pc1:
+    type: client
+    ports:
+      eth0:
+        bridge: br1lan
+        ipv4: 192.168.201.11/24
+        gw4: 192.168.201.1
+  pc2:
+    type: client
+    ports:
+      eth0:
+        bridge: br2lan
+        ipv4: 192.168.202.11/24
+        gw4: 192.168.202.1
+  pc3:
+    type: client
+    ports:
+      eth0:
+        bridge: br3lan
+        ipv4: 192.168.203.11/24
+        gw4: 192.168.203.1
+ 

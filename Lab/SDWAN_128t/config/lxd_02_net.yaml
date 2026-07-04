@@ -1,6 +1,7 @@
+cat << EOF | sudo tee /etc/netplan/02_net.yaml
 network:
   bridges:
-    hqlan:
+    hqlanInt:
       interfaces:
         - eth1
     br1lan:
@@ -12,3 +13,4 @@ network:
     br3lan:
       interfaces:
         - eth4
+EOF
