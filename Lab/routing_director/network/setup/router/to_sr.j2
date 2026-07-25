@@ -1,0 +1,10 @@
+delete protocols rsvp
+delete protocols ldp
+set protocols isis level 2 wide-metrics-only
+set protocols isis source-packet-routing srgb start-label {{ label_start }}
+set protocols isis source-packet-routing srgb index-range {{ label_range }}
+set protocols isis source-packet-routing node-segment ipv4-index {{ label_index }}
+set protocols isis backup-spf-options use-post-convergence-lfa maximum-backup-paths 8
+{% for i in interfaces -%}
+set protocols isis interface {{ i }}.0 level 2 post-convergence-lfa
+{% endfor -%}

@@ -35,6 +35,7 @@
         pkg:
         - openvswitch-switch
         - python3-paramiko
+        - bridge-utils
     - name: install lxd
       community.general.snap:
         name:

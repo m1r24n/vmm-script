@@ -30,7 +30,7 @@
   vars:
     user: ubuntu
   tasks:
-    - name: install openvswitch-switch
+    - name: install application
       ansible.builtin.apt:
         pkg:
         - openvswitch-switch

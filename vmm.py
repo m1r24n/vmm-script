@@ -18,6 +18,8 @@ if config1:
 	if d1:
 		if config1['cmd'] == 'upload':
 			lib1.upload(d1)
+		elif config1['cmd'] == 'create':
+			lib1.upload(d1,upload_status=0)
 		elif config1['cmd'] == 'start':
 			lib1.start(d1)
 		elif config1['cmd'] == 'lsbr':
@@ -34,8 +36,10 @@ if config1:
 					set_gw = lib1.set_gw_v1
 				elif d1['pod']['gw_type'] == 2:
 					set_gw = lib1.set_gw_v2
+				elif d1['pod']['gw_type'] == 3:
+					set_gw = lib1.set_gw_v3
 			else:
-				set_gw = lib1.set_gw_v2
+				set_gw = lib1.set_gw_v3
 			set_gw(d1)
 		elif config1['cmd'] == 'set_host':
 			lib1.set_host(d1,config1['vm'])

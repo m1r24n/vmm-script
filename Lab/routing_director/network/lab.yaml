@@ -8,11 +8,14 @@ pod:
   user: irzan
   # adpassword: ThisIsAnaMabokCoy
   home_dir : /vmm/data/user_disks/irzan
+  gw_type: 3
 images:
-  gw: images/gw.qcow2
-  ubuntu: images/ubuntu24.04.qcow2
+  gw: images/gw3.qcow2
+  ubuntu2: images/ubuntu24.04.qcow2
+  ubuntu: images/ubuntu26.04v2.qcow2
   bridge: images/bridge.qcow2
-  vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  # vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  vjunos_router: images/vJunos-router-26.2R1.7.qcow2
 junos_login:
   login: admin
   password: pass01

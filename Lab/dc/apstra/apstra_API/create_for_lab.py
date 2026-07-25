@@ -69,10 +69,10 @@ items:
 # """
 
 
-# asn_dict = yaml.load(asn,Loader=yaml.FullLoader)
-# for i in asn_dict['items']:
-#     print(f"creating pool {i['name']}")
-#     apstra_api.create_asn_pools(i)
+asn_dict = yaml.load(asn,Loader=yaml.FullLoader)
+for i in asn_dict['items']:
+    print(f"creating pool {i['name']}")
+    apstra_api.create_asn_pools(i)
 
 # Create IP pools
 
@@ -182,10 +182,10 @@ items:
 #   subnets:
 #   - network: 10.2.3.0/24
 # """
-# ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
-# for i in ippools_dict['items']:
-#     print(f"creating ip pool {i['name']}")
-#     apstra_api.create_ip_pools(i)
+ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
+for i in ippools_dict['items']:
+    print(f"creating ip pool {i['name']}")
+    apstra_api.create_ip_pools(i)
 
 # create IPv6 Pools
 # ippools="""
@@ -292,10 +292,10 @@ items:
 #   subnets:
 #   - network: fc00:dead:beef:2003::/64
 # """
-# ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
-# for i in ippools_dict['items']:
-#     print(f"creating ip pool {i['name']}")
-#     apstra_api.create_ipv6_pools(i)
+ippools_dict = yaml.load(ippools,Loader=yaml.FullLoader)
+for i in ippools_dict['items']:
+    print(f"creating ip pool {i['name']}")
+    apstra_api.create_ipv6_pools(i)
 
 
 #create Logical devices

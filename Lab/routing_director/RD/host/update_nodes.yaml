@@ -18,12 +18,6 @@
   vars:
     user: ubuntu
   tasks:
-    - name: install software
-      ansible.builtin.apt:
-        pkg:
-        - novnc
-        - websockify
-        - wireguard-tools
     - name: Add entries into /etc/coredns/vmmlab.com.db
       ansible.builtin.blockinfile:
         path: /etc/coredns/vmmlab.com.db

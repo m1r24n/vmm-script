@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+export TOKEN_ID=df7ade0c-5643-46cd-89cf-f2061dd06663
+export TOKEN_API=aVPWMi4aSItCmE6P7B9rwQ1xhYVZndifuCCYmuUM9adrNred4gFukN42cy26tbl3CmthsLNYPNaD0GLfBC1AZbhnMq0iWuch

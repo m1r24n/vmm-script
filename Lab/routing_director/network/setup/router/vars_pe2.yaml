@@ -1,3 +1,10 @@
 asn : 4200000001
 local_address: 10.100.255.2
 rr_ip: 10.100.255.10
+pce_dest: 172.16.12.3
+label_start: 200000
+label_range: 5000
+label_index: 102
+interfaces:
+- ge-0/0/0
+- ge-0/0/1

@@ -1,9 +1,11 @@
 ---
 # site1 only
-name: cb1
+name: cb2
+# name: cb1
 pod: 
   type: vmm
-  vmmserver: q-pod21-vmm.englab.juniper.net
+  vmmserver: q-pod22-vmm.englab.juniper.net
+  # vmmserver: q-pod21-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
 images:

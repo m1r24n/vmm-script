@@ -1,0 +1,112 @@
+nodes:
+  pe1:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE1_P1
+    - name: ge-0/0/1
+      link: Link_PE1_P2
+    - name: ge-0/0/2
+      access: yes
+    - name: ge-0/0/3
+      access: yes
+    - name: ge-0/0/4
+      access: yes
+  pe2:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE2_P1
+    - name: ge-0/0/1
+      link: Link_PE2_P2
+    - name: ge-0/0/2
+      access: yes
+    - name: ge-0/0/3
+      access: yes
+    - name: ge-0/0/4
+      access: yes
+  pe3:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE3_P3
+    - name: ge-0/0/1
+      link: Link_PE3_P4
+    - name: ge-0/0/2
+      access: yes
+    - name: ge-0/0/3
+      access: yes
+    - name: ge-0/0/4
+      access: yes
+  pe4:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE4_P3
+    - name: ge-0/0/1
+      link: Link_PE4_P4
+    - name: ge-0/0/2
+      access: yes
+    - name: ge-0/0/3
+      access: yes
+    - name: ge-0/0/4
+      access: yes
+  pe5:
+    interfaces:
+    - name: ge-0/0/1
+      link: Link_PE5_P5
+    - name: ge-0/0/0
+      access: yes
+  p1:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE1_P1
+    - name: ge-0/0/1
+      link: Link_PE2_P1
+    - name: ge-0/0/2
+      link: Link_P1_P2
+    - name: ge-0/0/3
+      link: Link_P1_P5
+  p2:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE1_P2
+    - name: ge-0/0/1
+      link: Link_PE2_P2
+    - name: ge-0/0/2
+      link: Link_P1_P2
+    - name: ge-0/0/3
+      link: Link_P2_P4
+    - name: ge-0/0/4
+      link: Link_P2_P5
+  p3:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE3_P3
+    - name: ge-0/0/1
+      link: Link_PE4_P3
+    - name: ge-0/0/2
+      link: Link_P3_P4
+    - name: ge-0/0/3
+      link: Link_P3_P5
+  p4:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_PE3_P4
+    - name: ge-0/0/1
+      link: Link_PE4_P4
+    - name: ge-0/0/2
+      link: Link_P3_P4
+    - name: ge-0/0/3
+      link: Link_P2_P4
+    - name: ge-0/0/4
+      link: Link_P4_P5
+  p5:
+    interfaces:
+    - name: ge-0/0/0
+      link: Link_P1_P5
+    - name: ge-0/0/1
+      link: Link_P2_P5
+    - name: ge-0/0/2
+      link: Link_P3_P5
+    - name: ge-0/0/3
+      link: Link_P4_P5
+    - name: ge-0/0/4
+      link: Link_PE5_P5
+

@@ -47,6 +47,7 @@
           flow IN A 172.16.55.5
           fw1 IN A 172.16.52.21
           fw2 IN A 172.16.52.22
+          fwext IN A 172.16.52.23
           vxlangw IN A 172.16.52.2
           pe1 IN A 172.16.52.3
           ext IN A 172.16.52.16

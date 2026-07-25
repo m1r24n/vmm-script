@@ -1,0 +1,912 @@
+{
+  "infrastructure_ntw": {
+    "default_interface_profiles": [
+      "IP1"
+    ],
+    "default_node_profiles": [
+      "DP1"
+    ],
+    "default_port_profiles": [
+      "PP1"
+    ],
+    "interface_profiles": {
+      "interface_profile": [
+        {
+          "name": "IP1",
+          "templates": []
+        }
+      ]
+    },
+    "node_profiles": {
+      "node_profile": [
+        {
+          "analytics": {
+            "traffic_engineering": {}
+          },
+          "ipv6_tunneling": {
+            "enabled": false
+          },
+          "labels": [],
+          "name": "DP1",
+          "per_flow_load_balancing": {
+            "enabled": false
+          },
+          "templates": [],
+          "trust": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    "port_profiles": {
+      "port_profile": [
+        {
+          "name": "PP1"
+        }
+      ]
+    },
+    "labels": {
+      "label": []
+    },
+    "network_nodes": {
+      "network_node": [
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE1_P1",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE1_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "pe1",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045DE86",
+          "site_id": "0da03e20-0325-4719-ba5a-99140ff222e4",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE2_P1",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE2_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "pe2",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C3FC",
+          "site_id": "7d1935d8-67c0-4d3a-8c7d-8abb6db835ac",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE3_P3",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE3_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "pe3",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C6A7",
+          "site_id": "f4edbb0a-c316-441b-bf79-6266eed7f832",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE4_P3",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE4_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/2",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/3",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/3",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ge-0/0/4",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/4",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "pe4",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045CD67",
+          "site_id": "c6f88bf9-f7fa-42ef-9297-872184fee2e0",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE5_P5",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/0",
+                "access_parameters": {
+                  "ces": [
+                    {
+                      "name": "ge-0/0/0",
+                      "tag_type": "dot1q",
+                      "vlans": {
+                        "size": 4094,
+                        "start": 1
+                      }
+                    }
+                  ],
+                  "units": [
+                    {
+                      "name": "default",
+                      "size": 4095,
+                      "start": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "pe5",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045E077",
+          "site_id": "7297800f-1533-49fa-a848-8601107fb95f",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE1_P1",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE2_P1",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P1_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/3",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P1_P5",
+                    "unit": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "p1",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045DDFD",
+          "site_id": "e8d2bccc-b7b9-4112-86d5-14ee31213517",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE1_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE2_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P1_P2",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/3",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P2_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/4",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P2_P5",
+                    "unit": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "p2",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C5F0",
+          "site_id": "2ea9e2eb-5fff-4f64-91fe-3c7f793ed433",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE3_P3",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE4_P3",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P3_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/3",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P3_P5",
+                    "unit": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "p3",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C34F",
+          "site_id": "f2440df7-ecce-40d7-8598-181c43f7b596",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE3_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE4_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P3_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/3",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P2_P4",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/4",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P4_P5",
+                    "unit": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "p4",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C3BD",
+          "site_id": "474cc2f2-0afa-4ef2-92f7-749e63a09f31",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        },
+        {
+          "installation": {
+            "duration": 5
+          },
+          "interfaces": {
+            "port": [
+              {
+                "name": "ge-0/0/0",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P1_P5",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/1",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P2_P5",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/2",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P3_P5",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/3",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_P4_P5",
+                    "unit": 0
+                  }
+                ]
+              },
+              {
+                "name": "ge-0/0/4",
+                "ifl": [
+                  {
+                    "profiles": [],
+                    "subnet": "Link_PE5_P5",
+                    "unit": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "model": "vMX",
+          "name": "p5",
+          "node_type": "paper-node",
+          "profiles": [],
+          "serial": "VM6A6045C8EA",
+          "site_id": "1e0a63e3-6e9d-461c-b8dd-44e893b8e77e",
+          "vendor": "Juniper Networks",
+          "placement_resource": {
+            "bandwidth": 12000,
+            "mac_addrs": 1000,
+            "routes": 1000,
+            "irbs": {
+              "size": 1000,
+              "start": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

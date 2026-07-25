@@ -1,0 +1,9 @@
+set system services ssh protocol-version v2
+set system authentication-order password
+set system login user jcloud-dev class super-user
+set system login user jcloud-dev authentication encrypted-password $6$3X4P4nd8X78mtQ/e$lDKbjZAOLyiq2te8zaTxyh.lDHgc1lKkkFCTPkASrf7boxaZ/f.3iOSecDDcKXsxAIZEjNqI0/TtD8WvpqruQ1
+set system login user jcloud-dev authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcIT1Mn6BYFCdfMD6DZsqY52GNyLhkXYaFtWuiI6wXU19NPwv1LSPHTlhdOyTYYzNaaG1rRJLWVJxUtm2VuaOby+K2zWFgWUXsmHFbvFkWJ+4WrxgI0KzYKg2ep4NXNl1U2hNC93nDAhTn9F6tXZxqpcpG67+HvrLWvBnlI9n9mqxmIAs6jDu1Zg+yS0xfY280FI9NNbjohDQT0yiGsjo191A4q8DSFv0CIQB4ol2lSWNAljioDmjIHcF8/nfLEjD6F4NEZAx39qfhnVnr09ajj2qEHYkPR5HTOqnJpX8ub7RZThGN7sURGW4yHZFZrTaTEc2aSiTu7K2xOzXFfcwSdhgaVqq3023P523LoMvIO+icSYQYEGIM48iYX0fKAaBiulPGtqnoz4LaoO5Y0SSc5ra4XPQkDig7koqij5XQryKVCTtc/jLGCp0lkJivUnelooTiNmX06h6GX2nuqluOwA1/D0A8LWnspjBri4FNqjdTho1Z8fR4I2UfwAIx2Ks= jcloud-dev@fed7bd8b-824e-4604-8bf4-d521803660f5"
+set system services outbound-ssh client jcloud-dev secret ae99d92284a35ffd0675210c03f2229cd89e88840e6e10c5d8af533f51be2f92f0b33531e75cbd60ee722d5dde3ec6a99a8b75f30b3d9ad0a546a03c09dd4fc2
+set system services outbound-ssh client jcloud-dev services netconf keep-alive retry 12 timeout 5
+set system services outbound-ssh client jcloud-dev 172.16.12.1 port 2200 timeout 60 retry 1000
+set system services outbound-ssh client jcloud-dev device-id fed7bd8b-824e-4604-8bf4-d521803660f5.v4

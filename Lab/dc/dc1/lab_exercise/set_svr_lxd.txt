@@ -1,9 +1,9 @@
 # node SVR
 #!/bin/bash
-VM=svr4
-MAC=56:04:0d:00:41:02
-IPv4=192.168.102.14/24
-IPv6=fc00:dead:beef:a102::1000:14/64
+VM=svr3
+MAC=56:04:0d:00:43:25
+IPv4=192.168.102.13/24
+IPv6=fc00:dead:beef:a102::1000:13/64
 GWv4=192.168.102.1
 GWv6=fc00:dead:beef:a102::1
 sudo hostname ${VM}
@@ -36,14 +36,17 @@ sudo netplan apply
 
 # node LXD
 #!/bin/bash
-MAC=56:04:0d:00:4c:ec
+VM=lxd1
+MAC=56:04:0d:00:43:7c
+sudo hostname ${VM}
+hostname | sudo tee /etc/hostname
 cat << EOF | sudo tee /etc/netplan/02_net.yaml
 network:
   ethernets:
-    eth1:
+    eth0:
       dhcp4: no
       mtu: 9000
-    eth2:
+    eth1:
       dhcp4: no
       mtu: 9000
   bridges:
@@ -56,8 +59,8 @@ network:
       macaddress: ${MAC}
       mtu: 9000
       interfaces:
+        - eth0
         - eth1
-        - eth2
       parameters:
          mode: 802.3ad
 EOF

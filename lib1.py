@@ -693,6 +693,7 @@ def add_path(d1,path):
         'junos3': f"{path}/template/junos3.j2",
         'set_gw': f"{path}/template/set_gw.j2",
         'set_gw2': f"{path}/template/set_gw2.j2",
+        'set_gw3': f"{path}/template/set_gw3.j2",
         'kea_dhcp4': f"{path}/template/kea_dhcp4.j2",
         'ztp_dhcp': f"{path}/template/ztp_dhcp.j2",
         'dhcp': f"{path}/template/dhcp.j2",
@@ -1268,6 +1269,81 @@ def bin2quad(binvalue):
 # 	ssh.exec_command(cmd1)
 # 	sftp.close()
 # 	ssh.close()
+
+
+def set_gw_v3(d1):
+    # this function work with kea-dhcp4-server
+    print("Creating configuration for node GW")
+    set_gw_param = get_dhcp_config(d1)
+    #pprint.pprint(set_gw_param['dhcp'])
+    with open(d1['template']['kea_dhcp4']) as f1:
+        t1=f1.read()
+    kea4_script=Template(t1).render(set_gw_param['dhcp'])
+    kea4=yaml.load(kea4_script,Loader=yaml.FullLoader)
+    #kea4=yaml.safe_load(kea4_script)
+    # with open("tmp/kea-dhcp4.yaml","w") as f1:
+    # 	f1.write(kea4_script)
+    # with open("tmp/kea-dhcp4.yaml") as f1:
+    # 	kea4=yaml.load(f1,Loader=yaml.FullLoader)
+    # vm_list = []
+    # for i in set_gw_param['dhcp']['vm']:
+    # 	vm = {
+    # 		'hostname' : i, 
+    # 		'hw-address': set_gw_param['dhcp']['vm'][i]['mac'], 
+    # 		'ip-address': set_gw_param['dhcp']['vm'][i]['ip']
+    # 	}
+    # 	if set_gw_param['dhcp']['vm'][i]['type'] == 'junos':
+    # 		vm['option-data'] = [
+    # 			{ 'name': 'vendor-encapsulated-options'},
+    # 			{
+    # 				'data': i + '.conf',
+    # 				'name': 'config-file-name',
+    # 				'space': 'vendor-encapsulated-options-space'
+    # 			},
+    # 			{
+    # 				'data': 'tftp',
+    # 				'name': 'transfer-mode',
+    # 				'space': 'vendor-encapsulated-options-space'
+    # 			}
+    # 		]
+    # 	vm_list.append(vm)
+    # kea4['Dhcp4']['reservations'] = vm_list
+    kea4_json = json.dumps(kea4,indent=2)
+    # print(kea4_json)
+    file1=param1.tmp_dir + 'kea-dhcp4.conf'
+    with open(file1,"w") as f1:
+        f1.write(kea4_json)
+    print("uploading kea-dhcp4.conf to gw")
+    ssh=connect_to_gw(d1)
+    sftp=ssh.open_sftp()
+    ssh.exec_command("sudo rm  ~/kea-dhcp4.conf")
+    sftp.put(file1,'kea-dhcp4.conf')
+    sftp.close()
+    with open(d1['template']['set_gw3']) as f1:
+        t1=f1.read()
+    set_gw_script=Template(t1).render(set_gw_param)
+    file1=param1.tmp_dir + 'set_gw.sh'
+    with open(file1,"w") as f1:
+        f1.write(set_gw_script)
+    print("uploading set_gw.sh to gw")
+    ssh=connect_to_gw(d1)
+    ssh.exec_command("mkdir ~/tftp")
+    sftp=ssh.open_sftp()
+    sftp.put(file1,'set_gw.sh')
+    sftp.close()
+    for i in d1['vm'].keys():
+        if d1['vm'][i]['type'] in ['vjunos_switch','vjunos_router','vjunos_evolved','vjunos_evolvedBX','aos_cx','sonic'] and d1['vm'][i]['ztp']:
+            src1 = f"{param1.tmp_dir}{i}.conf"
+            dst1 = f"tftp/{i}.conf"
+            sftp=ssh.open_sftp()
+            print(f"uploading file {src1} to {dst1}")
+            sftp.put(src1,dst1)
+            sftp.close()
+    print("Executing script on gw")
+    cmd1="bash ~/set_gw.sh"
+    stdin_, stdout_, stderr_ = ssh.exec_command(cmd1)
+    stdout_.channel.recv_exit_status()
+    ssh.close()
 
 def set_gw_v2(d1):
     # this function work with kea-dhcp4-server
@@ -1942,6 +2018,8 @@ def upload(d1,upload_status=1):
         
         if upload_status:
             upload_file_to_server(d1)
+        else:
+            print("configuration has been created")
     elif d1['pod']['type'] == 'kvm':
         print("not yet implemented")
 

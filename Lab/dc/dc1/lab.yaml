@@ -1,18 +1,18 @@
 ---
 # site1 only
-name: dc1_2
+name: dc1
 pod: 
   type: vmm
-  vmmserver: q-pod38-vmm.englab.juniper.net
+  vmmserver: q-pod13-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
 images:
   gw: images/gw.qcow2
   ubuntu: images/ubuntu26.04.qcow2
   ubuntu2: images/ubuntu26.04_frr_ovs_lxd.qcow2
-  vsrx: images/junos-vsrx3-x86-64-25.4R1.12.qcow2
-  vjunos_switch: images/vJunos-switch-25.4R1.12.qcow2
-  vjunos_router: images/vJunos-router-25.4R1.11.qcow2
+  vsrx: images/junos-vsrx3-x86-64-26.2R1.7.qcow2
+  vjunos_switch: images/vJunos-switch-26.2R1.7.qcow2 
+  vjunos_router: images/vJunos-router-26.2R1.7.qcow2
   #vjunos_evolved: images/vJunosEvolved-25.2R1.8-EVO.qcow2
 junos_login:
   login: admin

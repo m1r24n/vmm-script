@@ -1,0 +1,46 @@
+---
+- name: Delete file
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Delete file nodes_sernum.yaml
+      ansible.builtin.copy:
+        dest: ../data/nodes_sernum.yaml
+        content: |
+          ---
+      delegate_to: localhost
+- name: get serial number of vJunosNode
+  hosts:
+  - pe
+  - p
+  connection: local
+  gather_facts: no
+  vars:
+    user: admin
+  tasks:
+    # - name: get serial number of vJunosNode
+    #   juniper.device.rpc:
+    #     rpc: get-chassis-inventory
+    #   register: chassis_inventory
+    # - name: Extract and display chassis serial number
+    #   ansible.builtin.debug:
+    #     msg: "Chassis Serial Number: {{ chassis_inventory.parsed_xml_data.serial_number }}"
+    - name: Retrieve device facts and configuration and save facts to file
+      juniper.device.facts:        
+        config_format: "json"
+      register: result
+    - name: Save the output to a local file
+      ansible.builtin.lineinfile:
+        path: ../data/nodes_sernum.yaml
+        line: "{{ inventory_hostname}}: {{ result.facts.serialnumber }}"
+        insertafter: EOF
+        create: yes
+      delegate_to: localhost
+    # - name: Print configuration
+    #   ansible.builtin.debug:
+    #     var: result.facts.serialnumber
+    # - na
+
+
+    #     data/nodes_sernum.yaml

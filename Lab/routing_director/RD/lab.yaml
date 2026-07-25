@@ -5,10 +5,11 @@ pod:
   vmmserver: q-pod35-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
+  gw_type: 3
 images:   
-  gw: images/gw2.qcow2
+  gw: images/gw3.qcow2
   ubuntu: images/ubuntu24.04.qcow2
-  rd: images/rd/rd-2.8.0.qcow2
+  rd: images/rd/rd-2.9.0.qcow2
 junos_login:
   login: admin
   password: pass01
