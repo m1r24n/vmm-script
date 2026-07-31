@@ -5,7 +5,6 @@ pod:
   vmmserver: q-pod35-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan
-  gw_type: 3
 images:   
   gw: images/gw3.qcow2
   ubuntu: images/ubuntu24.04.qcow2

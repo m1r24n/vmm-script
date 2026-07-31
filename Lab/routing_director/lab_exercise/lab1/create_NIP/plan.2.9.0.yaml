@@ -52,8 +52,8 @@ infrastructure_ntw:
                 start: 1
             units:
             - name: default 
-              size: 4095
-              start: 0
+              size: 4094
+              start: 1
         {% endif -%}
         {% endfor %}
       model: vMX

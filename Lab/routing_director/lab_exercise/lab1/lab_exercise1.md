@@ -46,3 +46,36 @@
         ansible-playbook onboarding.yaml
 
 4. login into web dashboard of routing director, and verify that onboarding process has started, and wait until the service status **ready for service** and **put into service**
+
+
+
+set protocols pcep pce rd1 local-address 10.100.255.15
+
+
+set protocols pcep pce rd1 destination-ipv4-address 172.16.12.3
+set protocols pcep pce rd1 destination-port 4189
+set protocols pcep pce rd1 pce-type active
+set protocols pcep pce rd1 pce-type stateful
+
+
+set protocols pcep pce rd1 lsp-provisioning
+set protocols pcep pce rd1 spring-capability
+set protocols pcep pce rd1 pce-traffic-steering
+
+set protocols source-packet-routing lsp-external-controller pccd
+set protocols source-packet-routing maximum-segment-list-depth 16
+set protocols source-packet-routing telemetry statistics
+set protocols source-packet-routing traffic-engineering database
+
+
+show path-computation-client status
+
+
+set protocols pcep pce rd1 local-address 10.100.255.15
+set protocols pcep pce rd1 destination-ipv4-address 172.16.12.3
+set protocols pcep pce rd1 destination-port 4189
+set protocols pcep pce rd1 pce-type active
+set protocols pcep pce rd1 pce-type stateful
+set protocols pcep pce rd1 lsp-provisioning
+set protocols pcep pce rd1 spring-capability
+set protocols pcep pce rd1 pce-traffic-steering

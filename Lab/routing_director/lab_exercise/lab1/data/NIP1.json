@@ -92,8 +92,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -114,8 +114,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -136,8 +136,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -148,8 +148,8 @@
           "name": "pe1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045DE86",
-          "site_id": "0da03e20-0325-4719-ba5a-99140ff222e4",
+          "serial": "VM6A68D304DE",
+          "site_id": "4e8c7795-d785-4c9b-a4c2-0d9a9161193c",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -203,8 +203,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -225,8 +225,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -247,8 +247,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -259,8 +259,8 @@
           "name": "pe2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C3FC",
-          "site_id": "7d1935d8-67c0-4d3a-8c7d-8abb6db835ac",
+          "serial": "VM6A68D3116A",
+          "site_id": "c74ea64b-f1a7-4e17-ab5e-730c65e3d046",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -314,8 +314,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -336,8 +336,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -358,8 +358,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -370,8 +370,8 @@
           "name": "pe3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C6A7",
-          "site_id": "f4edbb0a-c316-441b-bf79-6266eed7f832",
+          "serial": "VM6A68D305A8",
+          "site_id": "83f941ad-2833-45f2-843c-4b8224804ef7",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -425,8 +425,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -447,8 +447,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -469,8 +469,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -481,8 +481,8 @@
           "name": "pe4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045CD67",
-          "site_id": "c6f88bf9-f7fa-42ef-9297-872184fee2e0",
+          "serial": "VM6A68D3087F",
+          "site_id": "b2994d53-9670-4502-a7f7-975e4b14c7a0",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -526,8 +526,8 @@
                   "units": [
                     {
                       "name": "default",
-                      "size": 4095,
-                      "start": 0
+                      "size": 4094,
+                      "start": 1
                     }
                   ]
                 }
@@ -538,8 +538,8 @@
           "name": "pe5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045E077",
-          "site_id": "7297800f-1533-49fa-a848-8601107fb95f",
+          "serial": "VM6A68D30599",
+          "site_id": "97f2d757-4e7f-4a7c-9e4e-135b85deaa59",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -603,8 +603,8 @@
           "name": "p1",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045DDFD",
-          "site_id": "e8d2bccc-b7b9-4112-86d5-14ee31213517",
+          "serial": "VM6A68D31430",
+          "site_id": "75aa0565-1677-452b-b0b1-0116dff5079a",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -678,8 +678,8 @@
           "name": "p2",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C5F0",
-          "site_id": "2ea9e2eb-5fff-4f64-91fe-3c7f793ed433",
+          "serial": "VM6A68D3041D",
+          "site_id": "6931bf97-d61a-4d44-b569-70a1322c931e",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -743,8 +743,8 @@
           "name": "p3",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C34F",
-          "site_id": "f2440df7-ecce-40d7-8598-181c43f7b596",
+          "serial": "VM6A68D30FB2",
+          "site_id": "c411424a-3843-4923-aa42-ed2979e5058d",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -818,8 +818,8 @@
           "name": "p4",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C3BD",
-          "site_id": "474cc2f2-0afa-4ef2-92f7-749e63a09f31",
+          "serial": "VM6A68D30607",
+          "site_id": "fb81d7e0-76e8-428a-9666-2fe7f00b5041",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
@@ -893,8 +893,8 @@
           "name": "p5",
           "node_type": "paper-node",
           "profiles": [],
-          "serial": "VM6A6045C8EA",
-          "site_id": "1e0a63e3-6e9d-461c-b8dd-44e893b8e77e",
+          "serial": "VM6A68D308CB",
+          "site_id": "a50560f7-e32f-403e-8e79-2c395ca810d4",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,

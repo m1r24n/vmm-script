@@ -41,8 +41,8 @@ lxc:
         bridge: pe2ge2
         type: ovs
         vlan: 101
-        ipv4: 192.168.200.5/31
-        ipv6: fc00:dead:beef:a200::5/127
+        ipv4: 192.168.200.3/31
+        ipv6: fc00:dead:beef:a200::3/127
       eth1:
         bridge: ce2pe2ge1
         ipv4: 192.168.102.1/24
@@ -51,8 +51,8 @@ lxc:
       nd_prefix: fc00:dead:Beef:a102::/64
       asn: 4200000102
       peerasn: 4200000001
-      peerv4: 192.168.200.4
-      peerv6: fc00:dead:beef:a200::4
+      peerv4: 192.168.200.2
+      peerv6: fc00:dead:beef:a200::2
       advv4: 192.168.102.0/24
       advv6: fc00:dead:Beef:a102::/64
     dnsmasq:
@@ -76,8 +76,8 @@ lxc:
         bridge: pe3ge2
         type: ovs
         vlan: 101
-        ipv4: 192.168.200.3/31
-        ipv6: fc00:dead:beef:a200::3/127
+        ipv4: 192.168.200.5/31
+        ipv6: fc00:dead:beef:a200::5/127
       eth1:
         bridge: ce3pe3ge1
         ipv4: 192.168.103.1/24
@@ -86,8 +86,8 @@ lxc:
       nd_prefix: fc00:dead:Beef:a103::/64
       asn: 4200000103
       peerasn: 4200000001
-      peerv4: 192.168.200.2
-      peerv6: fc00:dead:beef:a200::2
+      peerv4: 192.168.200.4
+      peerv6: fc00:dead:beef:a200::4
       advv4: 192.168.103.0/24
       advv6: fc00:dead:Beef:a103::/64
     dnsmasq:

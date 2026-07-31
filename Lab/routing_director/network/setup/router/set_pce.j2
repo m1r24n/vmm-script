@@ -1,6 +1,6 @@
 set protocols mpls lsp-external-controller pccd
-set protocols pcep pce rd1 local-address {{ pce_dest }}
-set protocols pcep pce rd1 destination-ipv4-address {{ local_address }}
+set protocols pcep pce rd1 local-address {{ local_address }}
+set protocols pcep pce rd1 destination-ipv4-address {{ pce_dest }}
 set protocols pcep pce rd1 destination-port 4189
 set protocols pcep pce rd1 pce-type active
 set protocols pcep pce rd1 pce-type stateful
