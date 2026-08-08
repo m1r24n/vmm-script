@@ -1,0 +1,911 @@
+
+lsdist.0: 56 destinations, 56 routes (56 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0015.00 ISIS-L1:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.15
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p5
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 0
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0001.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.1
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: pe1
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0002.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.2
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: pe2
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0003.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.3
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: pe3
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0004.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.4
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: pe4
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0005.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.5
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: pe5
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0010.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.10
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: crpd
+                Area membership:
+                  49 
+                Node MSD:
+                 - Type: 1, Value: 0
+                 - Type: 2, Value: 8
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0011.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.11
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p1
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0012.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.12
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p2
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0013.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.13
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p3
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0014.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.14
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p4
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { ISO:0001.0001.0015.00 ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  10.100.255.15
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: p5
+                Area membership:
+                  49 00 01 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.0 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.1 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 961
+                Minimum delay: 761
+                Maximum delay: 1235
+                Delay variation: 166
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.2 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.3 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 961
+                Minimum delay: 784
+                Maximum delay: 1067
+                Delay variation: 183
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.4 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.5 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1061
+                Minimum delay: 927
+                Maximum delay: 1201
+                Delay variation: 114
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.6 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.7 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 3311
+                Minimum delay: 840
+                Maximum delay: 23780
+                Delay variation: 9141
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.8 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.9 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1057
+                Minimum delay: 915
+                Maximum delay: 1169
+                Delay variation: 121
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.10 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.11 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 2036
+                Minimum delay: 919
+                Maximum delay: 5089
+                Delay variation: 3206
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.12 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.13 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1043
+                Minimum delay: 801
+                Maximum delay: 1471
+                Delay variation: 199
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.14 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.15 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1352
+                Minimum delay: 812
+                Maximum delay: 4378
+                Delay variation: 1486
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0005.00 }.{ IPv4:10.100.0.30 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.31 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 984
+                Minimum delay: 559
+                Maximum delay: 3792
+                Delay variation: 1328
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.1 } Remote { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.0 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1080
+                Minimum delay: 885
+                Maximum delay: 1391
+                Delay variation: 246
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.5 } Remote { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.4 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1745
+                Minimum delay: 879
+                Maximum delay: 8455
+                Delay variation: 879
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.16 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.17 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1016
+                Minimum delay: 820
+                Maximum delay: 1437
+                Delay variation: 196
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.22 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.23 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1171
+                Minimum delay: 900
+                Maximum delay: 2286
+                Delay variation: 611
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.3 } Remote { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.2 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1012
+                Minimum delay: 792
+                Maximum delay: 1161
+                Delay variation: 136
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.7 } Remote { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.6 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1458
+                Minimum delay: 950
+                Maximum delay: 4634
+                Delay variation: 776
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.17 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.16 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1018
+                Minimum delay: 733
+                Maximum delay: 1106
+                Delay variation: 979
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.20 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.21 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1435
+                Minimum delay: 919
+                Maximum delay: 4865
+                Delay variation: 250
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.24 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.25 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1069
+                Minimum delay: 828
+                Maximum delay: 1336
+                Delay variation: 134
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.9 } Remote { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.8 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1250
+                Minimum delay: 891
+                Maximum delay: 2815
+                Delay variation: 863
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.13 } Remote { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.12 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1074
+                Minimum delay: 954
+                Maximum delay: 1282
+                Delay variation: 143
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.18 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.19 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1549
+                Minimum delay: 985
+                Maximum delay: 5775
+                Delay variation: 1928
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.26 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.27 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1118
+                Minimum delay: 919
+                Maximum delay: 1321
+                Delay variation: 228
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.11 } Remote { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.10 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1268
+                Minimum delay: 958
+                Maximum delay: 2104
+                Delay variation: 511
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.15 } Remote { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.14 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1021
+                Minimum delay: 935
+                Maximum delay: 1123
+                Delay variation: 78
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.19 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.18 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1063
+                Minimum delay: 855
+                Maximum delay: 1166
+                Delay variation: 155
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.21 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.20 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1077
+                Minimum delay: 811
+                Maximum delay: 1487
+                Delay variation: 336
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.28 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.29 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1052
+                Minimum delay: 797
+                Maximum delay: 1311
+                Delay variation: 115
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.23 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.22 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 971
+                Minimum delay: 841
+                Maximum delay: 1153
+                Delay variation: 268
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.25 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.24 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 2074
+                Minimum delay: 964
+                Maximum delay: 11261
+                Delay variation: 3427
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.27 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.26 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1593
+                Minimum delay: 805
+                Maximum delay: 5584
+                Delay variation: 686
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.29 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.28 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 1057
+                Minimum delay: 852
+                Maximum delay: 1218
+                Delay variation: 164
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.31 } Remote { ISO:0001.0001.0005.00 }.{ IPv4:10.100.0.30 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+                Maximum bandwidth: 1000Mbps
+                Reservable bandwidth: 1000Mbps
+                Unreserved bandwidth by priority:
+                  0   1000Mbps
+                  1   1000Mbps
+                  2   1000Mbps
+                  3   1000Mbps
+                  4   1000Mbps
+                  5   1000Mbps
+                  6   1000Mbps
+                  7   1000Mbps
+                Metric: 10
+                TE Metric: 10
+                Average delay: 673
+                Minimum delay: 540
+                Maximum delay: 870
+                Delay variation: 102
+                Link MSD:
+                 - Type: 1, Value: 3
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  PREFIX { Node { ISO:0001.0001.0015.00 } { IPv4:10.100.255.15/32 } ISIS-L1:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0001.00 } { IPv4:10.100.255.1/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0002.00 } { IPv4:10.100.255.2/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0003.00 } { IPv4:10.100.255.3/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0004.00 } { IPv4:10.100.255.4/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0005.00 } { IPv4:10.100.255.5/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0010.00 } { IPv4:10.100.255.10/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0011.00 } { IPv4:10.100.255.11/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0012.00 } { IPv4:10.100.255.12/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0013.00 } { IPv4:10.100.255.13/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0014.00 } { IPv4:10.100.255.14/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I
+  PREFIX { Node { ISO:0001.0001.0015.00 } { IPv4:10.100.255.15/32 } ISIS-L2:0 }/1216                  
+*                         Self                         100        I

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-export ORG_ID=8fc252ec-1b40-4880-b403-62f4d5f8de9c
-export ORG_NAME=lab1
+export ORG_ID=e4af2165-4f29-406f-9325-ab89a264aa16
+export ORG_NAME=vmmlab

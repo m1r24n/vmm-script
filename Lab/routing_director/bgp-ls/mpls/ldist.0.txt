@@ -1,0 +1,172 @@
+
+lsdist.0: 56 destinations, 56 routes (56 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+NODE { ISO:0001.0001.0015.00 ISIS-L1:0 }/1216              
+                   *[IS-IS/15] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0001.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0002.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0003.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0004.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0005.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0010.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0011.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0012.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0013.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0014.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+NODE { ISO:0001.0001.0015.00 ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.0 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.1 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.2 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.3 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.4 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.5 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.6 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.7 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.8 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.9 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.10 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.11 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.12 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.13 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.14 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.15 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0005.00 }.{ IPv4:10.100.0.30 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.31 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.1 } Remote { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.0 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.5 } Remote { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.4 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.16 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.17 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.22 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.23 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.3 } Remote { ISO:0001.0001.0001.00 }.{ IPv4:10.100.0.2 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.7 } Remote { ISO:0001.0001.0002.00 }.{ IPv4:10.100.0.6 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.17 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.16 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.20 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.21 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.24 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.25 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.9 } Remote { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.8 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.13 } Remote { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.12 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.18 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.19 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.26 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.27 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.11 } Remote { ISO:0001.0001.0003.00 }.{ IPv4:10.100.0.10 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.15 } Remote { ISO:0001.0001.0004.00 }.{ IPv4:10.100.0.14 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.19 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.18 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.21 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.20 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.28 } Remote { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.29 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.23 } Remote { ISO:0001.0001.0011.00 }.{ IPv4:10.100.0.22 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.25 } Remote { ISO:0001.0001.0012.00 }.{ IPv4:10.100.0.24 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.27 } Remote { ISO:0001.0001.0013.00 }.{ IPv4:10.100.0.26 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.29 } Remote { ISO:0001.0001.0014.00 }.{ IPv4:10.100.0.28 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+LINK { Local { ISO:0001.0001.0015.00 }.{ IPv4:10.100.0.31 } Remote { ISO:0001.0001.0005.00 }.{ IPv4:10.100.0.30 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0015.00 } { IPv4:10.100.255.15/32 } ISIS-L1:0 }/1216              
+                   *[IS-IS/15] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0001.00 } { IPv4:10.100.255.1/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0002.00 } { IPv4:10.100.255.2/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0003.00 } { IPv4:10.100.255.3/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0004.00 } { IPv4:10.100.255.4/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0005.00 } { IPv4:10.100.255.5/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0010.00 } { IPv4:10.100.255.10/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0011.00 } { IPv4:10.100.255.11/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0012.00 } { IPv4:10.100.255.12/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0013.00 } { IPv4:10.100.255.13/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0014.00 } { IPv4:10.100.255.14/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious
+PREFIX { Node { ISO:0001.0001.0015.00 } { IPv4:10.100.255.15/32 } ISIS-L2:0 }/1216              
+                   *[IS-IS/18] 08:53:12
+                       Fictitious

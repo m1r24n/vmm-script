@@ -1,0 +1,19 @@
+activate protocols rsvp
+activate protocols ldp
+delete protocols isis level 2 wide-metrics-only
+delete protocols isis source-packet-routing srgb start-label {{ label_start }}
+delete protocols isis source-packet-routing srgb index-range {{ label_range }}
+delete protocols isis source-packet-routing node-segment ipv4-index {{ label_index }}
+delete protocols isis backup-spf-options use-post-convergence-lfa maximum-backup-paths 8
+{% for i in interfaces -%}
+delete protocols isis interface {{ i }}.0 level 2 post-convergence-lfa
+delete protocols isis interface {{ i }}.0 level 2 ipv4-adjacency-segment protected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv6-adjacency-segment protected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv4-adjacency-segment unprotected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv6-adjacency-segment unprotected dynamic
+{% endfor -%}
+delete protocols pcep pce rd1 spring-capability
+delete protocols source-packet-routing
+delete groups
+delete apply-groups
+delete protocols isis source-packet-routing;
