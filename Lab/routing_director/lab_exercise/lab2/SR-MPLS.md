@@ -34,3 +34,8 @@
         set policy-options policy-statement TE term 1 then accept
 
         set protocols mpls traffic-engineering bgp-igp-both-ribs
+
+
+        set protocols mpls traffic-engineering database import l3-unicast-topology bgp-link-state
+        set policy-options policy-statement TE term 1 from protocol isis
+        delete  policy-options policy-statement TE term 1 from protocol isis

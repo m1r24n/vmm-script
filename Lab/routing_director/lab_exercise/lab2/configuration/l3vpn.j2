@@ -1,0 +1,82 @@
+---
+description: {{ description }}
+instance_id: {{ instance_id }}
+l3vpn_svc:
+  service_settings:
+    active_assurance:
+      monitors: true
+      on_change_tests: true
+  vpn_services:
+    vpn_service:
+    - customer_name: {{ customer_name }}
+      route_distinguisher_type: type0
+      vpn_id: {{ instance_id }}
+      vpn_service_topology: any-to-any
+  sites:
+    site:
+{% for i in sites %}
+    - locations:
+        location:
+        - country_code: {{i.country_code}}
+          location_id: {{ i.location_id }}
+      maximum_routes:
+        address_family: 
+        - af: ipv4
+          maximum_routes: {{i.maximum_routes}}
+      site_id: {{i.site_id}}
+      site_network_accesses:
+        site_network_access:
+        - access_diversity:
+            constraints:
+              constraint: []
+            groups:
+              group: []
+          bearer:
+            requested_type:
+              requested_type: ethernet
+              strict: false
+          connection:
+            eth_inf_type: tagged
+            physical_port:
+              speed: 1000
+            tagged_interface:
+              dot1q_vlan_tagged:
+                cvlan_id: {{i.vlan_id}}
+              type: dot1q
+          ip_connection:
+            ipv4:
+              address_allocation_type: static-address
+              addresses:
+                customer_addresses:
+                - address: {{i.customer_address_v4}}
+                prefix_length: {{i.prefix_length_v4}}
+                provider_address: {{i.provider_address_v4}}
+            ipv6:
+              address_allocation_type: static-address
+              addresses:
+                customer_addresses:
+                - address: {{i.customer_address_v6}}
+                prefix_length: {{i.prefix_length_v6}}
+                provider_address:  {{i.provider_address_v6}}
+            oam:
+              bfd:
+                enabled: false
+          routing_protocols:
+            routing_protocol:
+            - bgp:
+                address_family:
+                - ipv4
+                - ipv6
+                autonomous_system: {{i.ASN}}
+                description: ''
+                group_name: ''
+              type: bgp
+          service:
+            svc_input_bandwidth: {{i.svc_input_bandwidth}}
+            svc_output_bandwidth: {{i.svc_output_bandwidth}}
+          site_network_access_id: {{i.site_network_access_id}}
+          type: regular
+          vpn_attachment:
+            site_role: any-to-any-role
+            vpn_id: {{instance_id}}
+{% endfor -%}

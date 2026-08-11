@@ -149,12 +149,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8B0B",
-          "site_id": "b3c9faee-4830-402c-9901-6d0963669dd6",
+          "site_id": "71768678-cca1-4422-8fe9-d6bac3ed901f",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -260,12 +260,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8C61",
-          "site_id": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+          "site_id": "44fc2bca-593d-4023-8996-5e36ce4141a0",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -371,12 +371,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B880A",
-          "site_id": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+          "site_id": "6fc748e3-350f-4f9f-b207-a6945875ec5d",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -482,12 +482,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B86E8",
-          "site_id": "ab965e19-1a38-4041-b768-9af12190fc12",
+          "site_id": "5346e71c-d877-48bf-9208-cec747b322aa",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -539,12 +539,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8899",
-          "site_id": "53da6bbc-afb4-439e-9056-5e3a0cf511ca",
+          "site_id": "88ba8824-8a7d-428b-abed-946a9ea3e492",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -604,12 +604,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8B39",
-          "site_id": "d8de65c4-b20e-4a91-9738-37397f421722",
+          "site_id": "28ac0395-0829-43c3-959f-00ee4cee2666",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -679,12 +679,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B86AA",
-          "site_id": "dac8f813-174d-4d61-8640-b3267eb4058e",
+          "site_id": "d8f5f609-c770-4b3c-bf0a-456d4d451972",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -744,12 +744,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B87A0",
-          "site_id": "7ae2b558-ca72-405d-8d1d-e7c26f6224a0",
+          "site_id": "01c2b291-d1f4-447f-86eb-27ef9d799759",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -819,12 +819,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8593",
-          "site_id": "7c41f1c7-a2e6-42ff-9640-2e60781f826a",
+          "site_id": "5c751da0-21ea-4903-bf9f-d5bcdda81b96",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1
@@ -894,12 +894,12 @@
           "node_type": "paper-node",
           "profiles": [],
           "serial": "VM6A758B8701",
-          "site_id": "31c3ef73-69ac-444d-873c-a9a411788170",
+          "site_id": "b6d29e2a-edfa-4115-80d3-740bbc0e1603",
           "vendor": "Juniper Networks",
           "placement_resource": {
             "bandwidth": 12000,
-            "mac_addrs": 1000,
-            "routes": 1000,
+            "mac_addrs": 10000,
+            "routes": 100000,
             "irbs": {
               "size": 1000,
               "start": 1

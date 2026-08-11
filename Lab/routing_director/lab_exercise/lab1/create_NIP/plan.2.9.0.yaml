@@ -65,8 +65,8 @@ infrastructure_ntw:
       vendor: Juniper Networks
       placement_resource: 
         bandwidth: 12000
-        mac_addrs: 1000
-        routes: 1000
+        mac_addrs: 10000
+        routes: 100000
         irbs:
           size: 1000
           start: 1

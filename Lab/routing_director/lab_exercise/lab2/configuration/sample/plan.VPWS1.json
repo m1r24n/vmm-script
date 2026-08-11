@@ -1,0 +1,585 @@
+{
+  "customer_id": "612fc7e4-9408-11f1-a7af-561018b10aee",
+  "design_id": "eline-evpn-vpws-csm",
+  "design_version": "0.0.110",
+  "fh_config": {
+    "status": "network resources updated"
+  },
+  "instance_id": "VPWS1",
+  "instance_status": "active",
+  "instance_uuid": "7e5461ea-8c58-4010-b2a5-8fa135417caa",
+  "l2vpn_ntw": {
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "612fc7e4-9408-11f1-a7af-561018b10aee",
+          "parent_service_id": "7e5461ea-8c58-4010-b2a5-8fa135417caa",
+          "rt": "0:62000:1",
+          "vpn_id": "7e5461ea-8c58-4010-b2a5-8fa135417caa",
+          "vpn_name": "7e5461ea-8c58-4010-b2a5-8fa135417caa",
+          "vpn_nodes": {
+            "vpn_node": [
+              {
+                "ne_id": "00000000-0000-0000-1000-2c6bf5859a00",
+                "rd": "0:61000:3",
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 301
+                          },
+                          "l2_access_type": "dot1q"
+                        },
+                        "phy_interface": {
+                          "oam_802.3ah_link": {
+                            "enable": false
+                          },
+                          "port_speed": 1000
+                        }
+                      },
+                      "id": "site1access2",
+                      "port_id": "ge-0/0/2.301",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      },
+                      "vpws_service_id": {
+                        "local_vpws_service_id": 1001,
+                        "remote_vpws_service_id": 1002
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "VPWS1-00000000-0000-0000-1000-2c6bf5859a00"
+              },
+              {
+                "ne_id": "00000000-0000-0000-1000-2c6bf5aa3000",
+                "rd": "0:61000:4",
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 301
+                          },
+                          "l2_access_type": "dot1q"
+                        },
+                        "phy_interface": {
+                          "oam_802.3ah_link": {
+                            "enable": false
+                          },
+                          "port_speed": 1000
+                        }
+                      },
+                      "id": "site3access3",
+                      "port_id": "ge-0/0/3.301",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      },
+                      "vpws_service_id": {
+                        "local_vpws_service_id": 1002,
+                        "remote_vpws_service_id": 1001
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "VPWS1-00000000-0000-0000-1000-2c6bf5aa3000"
+              }
+            ]
+          },
+          "vpn_svc_type": "vpws-evpn"
+        }
+      ]
+    }
+  },
+  "l2vpn_svc": {
+    "service_settings": {
+      "route_distinguisher_type": "type0"
+    },
+    "sites": {
+      "site": [
+        {
+          "locations": {
+            "location": [
+              {
+                "country_code": "ID",
+                "location_id": "site1pe1"
+              }
+            ]
+          },
+          "site_id": "site1",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 301,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "local_vpws_id": 1001,
+                "network_access_id": "site1access2",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "locations": {
+            "location": [
+              {
+                "country_code": "ID",
+                "location_id": "site3p3"
+              }
+            ]
+          },
+          "site_id": "site3",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 301,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "local_vpws_id": 1002,
+                "network_access_id": "site3access3",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "operation": "modify",
+  "order_id": "1f3e62b3-94bc-11f1-a7af-561018b10aee",
+  "order_status": {
+    "components": [
+      {
+        "component_data": [
+          {
+            "message": "released",
+            "status": "success",
+            "time": "2026-08-10T13:06:15Z"
+          }
+        ],
+        "component_type": "placement"
+      },
+      {
+        "component_data": [
+          {
+            "message": "transform service order to insights config",
+            "status": "success",
+            "time": "2026-08-10T13:06:20Z"
+          },
+          {
+            "message": "apply-insights-configuration",
+            "status": "success",
+            "support_hint": "insights configuration done for devices with mac addresses [2c6bf5859a00 2c6bf5aa3000]",
+            "time": "2026-08-10T13:06:23Z"
+          }
+        ],
+        "component_type": "insights"
+      }
+    ],
+    "status": "success",
+    "workflow_trace": [
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "init_service_order_status",
+        "time": "2026-08-10T13:05:15.496224+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.get_and_update_topo_resource",
+        "time": "2026-08-10T13:05:34.963276+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.upload_network_resources",
+        "time": "2026-08-10T13:05:47.971641+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.release_resources",
+        "time": "2026-08-10T13:06:16.142379+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.transform_service_order_insights",
+        "time": "2026-08-10T13:06:21.265565+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.apply_insights_config",
+        "time": "2026-08-10T13:06:23.936981+00:00"
+      },
+      {
+        "message": "task completed successfully",
+        "runs": 1,
+        "status": "success",
+        "task": "common_fh.insight_provisioning_done",
+        "time": "2026-08-10T13:06:26.242464+00:00"
+      }
+    ]
+  },
+  "org_id": "e4af2165-4f29-406f-9325-ab89a264aa16",
+  "placement": {
+    "l2vpn_svc": {
+      "rt": {
+        "options": [
+          "62000"
+        ],
+        "selected": {
+          "number": 1,
+          "pool": "62000"
+        }
+      },
+      "sites": {
+        "site": [
+          {
+            "site_id": "site1",
+            "site_network_accesses": {
+              "site_network_access": [
+                {
+                  "access_type": "regular",
+                  "interface": {
+                    "options": [
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/0",
+                        "pe": "00000000-0000-0000-1000-2c6bf5ef3700",
+                        "pop": "53da6bbc-afb4-439e-9056-5e3a0cf511ca",
+                        "port": "ge-0/0/0",
+                        "speed": "1000"
+                      }
+                    ],
+                    "selected": {
+                      "ce": "ge-0/0/2",
+                      "interface": "ge-0/0/2.301",
+                      "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                      "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                      "speed": "1000"
+                    }
+                  },
+                  "network_access_id": "site1access2"
+                }
+              ]
+            }
+          },
+          {
+            "site_id": "site3",
+            "site_network_accesses": {
+              "site_network_access": [
+                {
+                  "access_type": "regular",
+                  "interface": {
+                    "options": [
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/0",
+                        "pe": "00000000-0000-0000-1000-2c6bf5ef3700",
+                        "pop": "53da6bbc-afb4-439e-9056-5e3a0cf511ca",
+                        "port": "ge-0/0/0",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                        "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/3",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/3",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/2",
+                        "pe": "00000000-0000-0000-1000-2c6bf5859a00",
+                        "pop": "b3c9faee-4830-402c-9901-6d0963669dd6",
+                        "port": "ge-0/0/2",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf5a92300",
+                        "pop": "ab965e19-1a38-4041-b768-9af12190fc12",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      },
+                      {
+                        "ce": "ge-0/0/4",
+                        "pe": "00000000-0000-0000-1000-2c6bf556f800",
+                        "pop": "64009f1c-0e2a-4351-8ea6-95ce94f4a86e",
+                        "port": "ge-0/0/4",
+                        "speed": "1000"
+                      }
+                    ],
+                    "selected": {
+                      "ce": "ge-0/0/3",
+                      "interface": "ge-0/0/3.301",
+                      "pe": "00000000-0000-0000-1000-2c6bf5aa3000",
+                      "pop": "f00fa0f7-7862-41e2-9030-b833ae6dd890",
+                      "speed": "1000"
+                    }
+                  },
+                  "network_access_id": "site3access3"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "nodes": [
+      {
+        "node_id": "00000000-0000-0000-1000-2c6bf5859a00",
+        "rd": {
+          "number": 3,
+          "options_with_info": [
+            {
+              "max": 999,
+              "name": "61000"
+            }
+          ],
+          "pool": "61000",
+          "type": "type0"
+        }
+      },
+      {
+        "node_id": "00000000-0000-0000-1000-2c6bf5aa3000",
+        "rd": {
+          "number": 4,
+          "options_with_info": [
+            {
+              "max": 999,
+              "name": "61000"
+            }
+          ],
+          "pool": "61000",
+          "type": "type0"
+        }
+      }
+    ],
+    "placement_mc_lag_interfaces": {}
+  },
+  "upload_time": "2026-08-10T13:06:31Z",
+  "version": "3.0.0",
+  "workflow_id": "modify-eline-evpn-vpws-csm-0_0_110",
+  "workflow_run_id": "fh.foghorn__284b7f94-e2b0-4e88-9a5c-f9bd42dcf2e6"
+}

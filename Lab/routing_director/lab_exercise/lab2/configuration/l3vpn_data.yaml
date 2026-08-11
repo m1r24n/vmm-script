@@ -1,0 +1,49 @@
+customer_name: cust1
+description: L3VPN1 for cust1
+instance_id: L3VPN1Cust1
+sites:
+- country_code: ID
+  location_id: site1pe1
+  site_id: site1
+  vlan_id: 101
+  customer_address_v4: 192.168.200.1
+  prefix_length_v4: 31
+  provider_address_v4: 192.168.200.0
+  customer_address_v6: fc00:dead:beef:a200::1
+  prefix_length_v6: 127
+  provider_address_v6: fc00:dead:beef:a200::0
+  ASN: 4200000101
+  site_network_access_id: site1pe1access1
+  maximum_routes: 200
+  svc_input_bandwidth: 100
+  svc_output_bandwidth: 100
+- country_code: ID
+  site_id: site2
+  vlan_id: 101
+  customer_address_v4: 192.168.200.3
+  prefix_length_v4: 31
+  provider_address_v4: 192.168.200.2
+  customer_address_v6: fc00:dead:beef:a200::3
+  prefix_length_v6: 127
+  provider_address_v6: fc00:dead:beef:a200::2
+  ASN: 4200000102
+  site_network_access_id: site2pe2access1
+  maximum_routes: 200
+  svc_input_bandwidth: 100
+  svc_output_bandwidth: 100
+- country_code: ID
+  location_id: site3pe3
+  site_id: site3
+  vlan_id: 101
+  customer_address_v4: 192.168.200.5
+  prefix_length_v4: 31
+  provider_address_v4: 192.168.200.4
+  customer_address_v6: fc00:dead:beef:a200::5
+  prefix_length_v6: 127
+  provider_address_v6: fc00:dead:beef:a200::5
+  ASN: 4200000103
+  site_network_access_id: site3pe3access1
+  maximum_routes: 200
+  svc_input_bandwidth: 100
+  svc_output_bandwidth: 100
+
