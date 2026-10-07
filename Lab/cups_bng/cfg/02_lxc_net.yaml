@@ -1,0 +1,17 @@
+network:
+  bridges:
+    cpe1c:
+      interfaces:
+      - eth1
+    cpe2c:
+      interfaces:
+      - eth2
+    cpe3c:
+      interfaces:
+      - eth3
+    cpe4c:
+      interfaces:
+      - eth4
+    gw:
+      interfaces:
+      - eth5

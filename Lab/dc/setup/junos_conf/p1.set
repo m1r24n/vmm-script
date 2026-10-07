@@ -1,0 +1,12 @@
+set protocols bgp group to_pe type internal
+set protocols bgp group to_pe local-address fc00:dead:beef:ffff::ffff:11
+set protocols bgp group to_pe passive
+set protocols bgp group to_pe family inet-vpn unicast extended-nexthop
+set protocols bgp group to_pe family inet-vpn unicast advertise-srv6-service
+set protocols bgp group to_pe family inet-vpn unicast accept-srv6-service
+set protocols bgp group to_pe family inet6-vpn unicast advertise-srv6-service
+set protocols bgp group to_pe family inet6-vpn unicast accept-srv6-service
+set protocols bgp group to_pe allow fc00:dead:beef:ffff::/64
+set protocols bgp group to_pe  cluster 10.100.255.11
+set protocols bgp rfc8950-compliant
+set routing-options autonomous-system 4200000001

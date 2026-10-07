@@ -1,0 +1,46 @@
+lxc:
+  c1pe2evpws1cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe2ge2
+        type: ovs
+        vlan: 202
+        ipv4: 192.168.200.1/24
+        gw4: 192.168.200.254
+        ipv6: fc00:dead:beef:a200::1000:1/64
+        gw6: fc00:dead:beef:a200::1
+  c2pe2evpws1cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe2ge2
+        type: ovs
+        vlan: 202
+        ipv4: 192.168.200.2/24
+        gw4: 192.168.200.254
+        ipv6: fc00:dead:beef:a200::1000:2/64
+        gw6: fc00:dead:beef:a200::1
+  c3pe4evpws1cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe4ge3
+        type: ovs
+        vlan: 202
+        ipv4: 192.168.200.3/24
+        gw4: 192.168.200.254
+        ipv6: fc00:dead:beef:a200::1000:3/64
+        gw6: fc00:dead:beef:a200::1
+  c4pe4evpws1cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe4ge3
+        type: ovs
+        vlan: 202
+        ipv4: 192.168.200.3/24
+        gw4: 192.168.200.254
+        ipv6: fc00:dead:beef:a200::1000:4/64
+        gw6: fc00:dead:beef:a200::1
+  

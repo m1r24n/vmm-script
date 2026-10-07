@@ -1,0 +1,5 @@
+[all]
+gw
+dhcprelay
+[all:vars]
+ansible_python_interpreter=python3

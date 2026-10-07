@@ -1,0 +1,11 @@
+lxc launch alpine --name client
+lxc exec client ssh
+apk update
+apk upgrade
+apk add openssh iperf
+passwd root 
+rc-update add sshd
+service sshd start
+cat << EOF | tee -a /etc/ssh/sshd_config
+PermitRootLogin yes
+EOF

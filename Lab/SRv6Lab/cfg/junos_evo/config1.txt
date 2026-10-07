@@ -1,0 +1,17 @@
+set system root-authentication encrypted-password $1$9MypHnvE$Mk7tDi4yNNcrmiMybSfMh.
+set system login user admin class super-user
+set system login user admin authentication encrypted-password $1$9MypHnvE$Mk7tDi4yNNcrmiMybSfMh.
+set system login user admin authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCK6O/OBtLVrPmoGNEM/VYW9INFJDk/ZpR4gYucZ9S963PAmBeq4tA0ptGA7NhCav3Xoi5KiQaIer2Sotgmi2S/BWCAF5siEv1Mnq1cJ69QbNv+9wLtzoIYxuis18ugsPFzMz4S+SQjyfu94W8FkU/lJ7xVgbY0nMS9e1gpwlvKAZsYgcGpUdOx6um1dortnuGQwH8b8ygZjEQ+5ottwDAWJ1v+e/jvO5dS+GF3MCpBN/7RmOWQzSFi/bqXyrZdTb2BBxPH2XO5fqPFNann9V+L5YAH+ImLE5ruU3fQAN1XFw/0V5y7bHWNPu6NuqKoUJm3YPVH1vlZ5lM4/e+oMsst"
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system services netconf ssh
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system management-instance
+set chassis network-services enhanced-mode
+set interfaces re0:mgmt-0 unit 0 family inet address 172.16.11.28/24
+set system host-name p4
+commit
+

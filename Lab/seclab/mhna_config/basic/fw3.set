@@ -1,0 +1,41 @@
+set interfaces ge-0/0/0 unit 0 family inet address 172.16.255.143/31
+set interfaces ge-0/0/0 unit 0 family inet6 address fc00:dead:beef:ffff::143/127
+set interfaces ge-0/0/1 vlan-tagging
+set interfaces ge-0/0/1 unit 31 family inet address 192.168.31.1/24
+set interfaces ge-0/0/1 unit 31 family inet6 addressfc00:dead:beef:aa31::1/64
+set interfaces ge-0/0/1 unit 31 vlan-id 31
+set interfaces ge-0/0/1 unit 32 family inet address 192.168.32.1/24
+set interfaces ge-0/0/1 unit 32 family inet6 addressfc00:dead:beef:aa32::1/64
+set interfaces ge-0/0/1 unit 32 vlan-id 32
+set interfaces lo0 unit 0 family inet address 172.16.255.30/32
+set protocols lldp interface all
+set protocols lldp interface fxp0 disable
+
+set security zones security-zone trust interfaces ge-0/0/1.31 
+set security zones security-zone trust interfaces ge-0/0/1.32
+set security zones security-zone trust interfaces lo0.0
+set security zones security-zone trust host-inbound-traffic system-services ping
+set security zones security-zone untrust interfaces ge-0/0/0.0
+set security zones security-zone untrust host-inbound-traffic system-services ping
+set security zones security-zone untrust host-inbound-traffic protocols bgp
+set security zones security-zone untrust host-inbound-traffic protocols bfd
+
+
+set protocols bgp group to_gw bfd-liveness-detection minimum-interval 100
+set protocols bgp group to_gw bfd-liveness-detection multiplier 3
+set protocols bgp group to_gw neighbor 172.16.255.142 peer-as 4200000001
+set protocols bgp group to_gw neighbor fc00:dead:beef:ffff::142 peer-as 4200000001
+
+set routing-options autonomous-system 4200000030
+set routing-options static route 172.16.123.0/24 discard
+
+set security nat source pool pool1 address 172.16.123.0/24
+set security nat source rule-set rs1 from zone trust
+set security nat source rule-set rs1 to zone untrust
+set security nat source rule-set rs1 rule rule1 match source-address 0.0.0.0/0
+set security nat source rule-set rs1 rule rule1 match destination-address 0.0.0.0/0
+set security nat source rule-set rs1 rule rule1 then source-nat pool pool1
+set policy-options policy-statement from_nat_pool term 1 from route-filter 172.16.123.0/24 orlonger
+set policy-options policy-statement from_nat_pool term 1 then accept
+set policy-options policy-statement from_nat_pool term default then reject
+set protocols bgp group to_gw export from_nat_pool

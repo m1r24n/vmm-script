@@ -1,0 +1,246 @@
+
+set version 25.4R1.11
+set groups config1 policy-options policy-statement nh term 1 from protocol bgp
+set groups config1 policy-options policy-statement nh term 1 then next-hop fc00:dead:beef:ff04::
+set groups config1 policy-options policy-statement nh term 1 then accept
+set groups config1 policy-options policy-statement nh term 2 from protocol evpn
+set groups config1 policy-options policy-statement nh term 2 then next-hop fc00:dead:beef:ff04::
+set groups config1 policy-options policy-statement nh term 2 then accept
+set groups config1 policy-options policy-statement nh term default then reject
+set groups config1 routing-options resolution preserve-nexthop-hierarchy
+set groups config1 routing-options autonomous-system 4200000001
+set groups config1 protocols bgp group to_rr type internal
+set groups config1 protocols bgp group to_rr local-address fc00:dead:beef:ffff::ffff:4
+set groups config1 protocols bgp group to_rr family inet unicast extended-nexthop
+set groups config1 protocols bgp group to_rr family inet unicast advertise-srv6-service
+set groups config1 protocols bgp group to_rr family inet unicast accept-srv6-service
+set groups config1 protocols bgp group to_rr family inet-vpn unicast extended-nexthop
+set groups config1 protocols bgp group to_rr family inet-vpn unicast advertise-srv6-service
+set groups config1 protocols bgp group to_rr family inet-vpn unicast accept-srv6-service
+set groups config1 protocols bgp group to_rr family inet6 unicast advertise-srv6-service
+set groups config1 protocols bgp group to_rr family inet6 unicast accept-srv6-service
+set groups config1 protocols bgp group to_rr family inet6-vpn unicast advertise-srv6-service
+set groups config1 protocols bgp group to_rr family inet6-vpn unicast accept-srv6-service
+set groups config1 protocols bgp group to_rr family evpn signaling advertise-srv6-service
+set groups config1 protocols bgp group to_rr family evpn signaling accept-srv6-service
+set groups config1 protocols bgp group to_rr export nh
+set groups config1 protocols bgp group to_rr neighbor fc00:dead:beef:ffff::ffff:10
+set groups config1 protocols bgp multipath list-nexthop
+set groups config1 protocols bgp rfc8950-compliant
+set groups config1_iprouting interfaces ge-0/0/0 flexible-vlan-tagging
+set groups config1_iprouting interfaces ge-0/0/0 encapsulation flexible-ethernet-services
+set groups config1_iprouting interfaces ge-0/0/0 unit 1000 vlan-id 1000
+set groups config1_iprouting interfaces ge-0/0/0 unit 1000 family inet address 10.1.1.4/31
+set groups config1_iprouting interfaces ge-0/0/0 unit 1000 family inet6 address fc00:deed:beef:f001::4/127
+set groups config1_iprouting protocols bgp group to_ce1_cust0 peer-as 4200009004
+set groups config1_iprouting protocols bgp group to_ce1_cust0 neighbor 10.1.1.5 family inet unicast
+set groups config1_iprouting protocols bgp group to_ce1_cust0 neighbor fc00:deed:beef:f001::5 family inet6 unicast
+set groups config1_iprouting protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
+set groups config1_evpn interfaces ge-0/0/0 flexible-vlan-tagging
+set groups config1_evpn interfaces ge-0/0/0 encapsulation flexible-ethernet-services
+set groups config1_evpn interfaces ge-0/0/0 unit 1020 encapsulation vlan-bridge
+set groups config1_evpn interfaces ge-0/0/0 unit 1020 vlan-id 1020
+set groups config1_evpn interfaces ge-0/0/0 unit 1050 vlan-id 1050
+set groups config1_evpn interfaces ge-0/0/0 unit 1050 family inet address 192.168.14.254/24
+set groups config1_evpn interfaces ge-0/0/0 unit 1050 family inet6 address fc00:dead:beef:aa14::1/64
+set groups config1_evpn interfaces ge-0/0/0 unit 1010 encapsulation vlan-bridge
+set groups config1_evpn interfaces ge-0/0/0 unit 1010 vlan-id 1010
+set groups config1_evpn interfaces irb unit 1020 family inet address 192.168.20.254/24
+set groups config1_evpn interfaces irb unit 1020 family inet6 address fc00:deed:beef:f020::1/64
+set groups config1_evpn interfaces lo0 unit 1020 family inet address 10.1.20.4/32
+set groups config1_evpn interfaces lo0 unit 1020 family inet6 address fc00:dead:beef:aff2::4/128
+set groups config1_evpn policy-options policy-statement t5-export term 1 from protocol direct
+set groups config1_evpn policy-options policy-statement t5-export term 1 then accept
+set groups config1_evpn policy-options policy-statement t5-export term default then reject
+set groups config1_evpn routing-instances evpn2 instance-type mac-vrf
+set groups config1_evpn routing-instances evpn2 protocols evpn encapsulation srv6
+set groups config1_evpn routing-instances evpn2 protocols evpn source-packet-routing srv6 locator SRV6-LOC-1
+set groups config1_evpn routing-instances evpn2 protocols evpn source-packet-routing srv6 locator end-dt2-sid
+set groups config1_evpn routing-instances evpn2 bridge-domains br1 vlan-id 1020
+set groups config1_evpn routing-instances evpn2 bridge-domains br1 interface ge-0/0/0.1020
+set groups config1_evpn routing-instances evpn2 service-type vlan-based
+set groups config1_evpn routing-instances evpn2 interface ge-0/0/0.1020
+set groups config1_evpn routing-instances evpn2 route-distinguisher 172.16.255.4:1022
+set groups config1_evpn routing-instances evpn2 vrf-target target:65000:1022
+set groups config1_evpn routing-instances evpn3 instance-type vrf
+set groups config1_evpn routing-instances evpn3 protocols evpn ip-prefix-routes advertise direct-nexthop
+set groups config1_evpn routing-instances evpn3 protocols evpn ip-prefix-routes encapsulation srv6
+set groups config1_evpn routing-instances evpn3 protocols evpn ip-prefix-routes source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
+set groups config1_evpn routing-instances evpn3 interface ge-0/0/0.1050
+set groups config1_evpn routing-instances evpn3 route-distinguisher 172.16.255.4:1050
+set groups config1_evpn routing-instances evpn3 vrf-target target:65000:1050
+set groups config1_evpn routing-instances evpn3 vrf-table-label
+set groups config1_evpn routing-instances evpn1 instance-type mac-vrf
+set groups config1_evpn routing-instances evpn1 protocols evpn encapsulation srv6
+set groups config1_evpn routing-instances evpn1 protocols evpn source-packet-routing srv6 locator SRV6-LOC-1
+set groups config1_evpn routing-instances evpn1 protocols evpn source-packet-routing srv6 locator end-dt2-sid
+set groups config1_evpn routing-instances evpn1 bridge-domains br1 vlan-id 1010
+set groups config1_evpn routing-instances evpn1 bridge-domains br1 interface ge-0/0/0.1010
+set groups config1_evpn routing-instances evpn1 service-type vlan-based
+set groups config1_evpn routing-instances evpn1 interface ge-0/0/0.1010
+set groups config1_evpn routing-instances evpn1 route-distinguisher 172.16.255.4:1010
+set groups config1_evpn routing-instances evpn1 vrf-target target:65000:1010
+set groups config1_evpn routing-instances evpn2_l3vpn instance-type vrf
+set groups config1_evpn routing-instances evpn2_l3vpn protocols evpn ip-prefix-routes advertise direct-nexthop
+set groups config1_evpn routing-instances evpn2_l3vpn protocols evpn ip-prefix-routes encapsulation srv6
+set groups config1_evpn routing-instances evpn2_l3vpn protocols evpn ip-prefix-routes export t5-export
+set groups config1_evpn routing-instances evpn2_l3vpn protocols evpn ip-prefix-routes source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
+set groups config1_evpn routing-instances evpn2_l3vpn interface irb.1020
+set groups config1_evpn routing-instances evpn2_l3vpn interface lo0.1020
+set groups config1_evpn routing-instances evpn2_l3vpn route-distinguisher 172.16.255.4:1020
+set groups config1_evpn routing-instances evpn2_l3vpn vrf-target target:65000:1020
+set groups config1_evpn routing-instances evpn2_l3vpn vrf-table-label
+set groups srv6 interfaces ge-0/0/0 description "connection to port eth4 of lxc"
+set groups srv6 interfaces ge-0/0/0 mtu 9000
+set groups srv6 interfaces ge-0/0/1 description "connection to port eth8 of lxc"
+set groups srv6 interfaces ge-0/0/1 mtu 9000
+set groups srv6 interfaces ge-0/0/2 description "connection to port ge-0/0/1 of p3"
+set groups srv6 interfaces ge-0/0/2 mtu 9000
+set groups srv6 interfaces ge-0/0/2 unit 0 family iso
+set groups srv6 interfaces ge-0/0/2 unit 0 family inet6
+set groups srv6 interfaces ge-0/0/3 description "connection to port ge-0/0/1 of p4"
+set groups srv6 interfaces ge-0/0/3 mtu 9000
+set groups srv6 interfaces ge-0/0/3 unit 0 family iso
+set groups srv6 interfaces ge-0/0/3 unit 0 family inet6
+set groups srv6 interfaces lo0 unit 0 family inet address 172.16.255.4/32 primary
+set groups srv6 interfaces lo0 unit 0 family inet address 172.16.255.4/32 preferred
+set groups srv6 interfaces lo0 unit 0 family iso address 49.0001.0001.0004.00
+set groups srv6 interfaces lo0 unit 0 family inet6 address fc00:dead:beef:ffff::ffff:4/128
+set groups srv6 policy-options policy-statement LB term 1 then load-balance per-flow
+set groups srv6 policy-options policy-statement LB term 1 then accept
+set groups srv6 routing-options source-packet-routing srv6 locator SRV6-LOC-1 fc00:dead:beef:ff04::/64
+set groups srv6 routing-options route-distinguisher-id 172.16.255.4
+set groups srv6 routing-options router-id 172.16.255.4
+set groups srv6 routing-options forwarding-table export LB
+set groups srv6 protocols isis interface ge-0/0/2.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/2.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/2.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/2.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/3.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/3.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/3.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/3.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface lo0.0 level 1 disable
+set groups srv6 protocols isis interface lo0.0 passive
+set groups srv6 protocols isis source-packet-routing srv6 locator SRV6-LOC-1 end-sid fc00:dead:beef:ff04::
+set groups srv6 protocols isis level 2 authentication-key "$9$H.fQ69A0BE9CK8LxsYTzF/9AtuO1Ec"
+set groups srv6 protocols isis level 2 authentication-type md5
+set groups srv6 protocols lldp interface all
+set groups srv6 protocols lldp interface fxp0 disable
+set groups mpls interfaces lo0 unit 0 family inet address 172.16.255.4/32 primary
+set groups mpls interfaces lo0 unit 0 family inet address 172.16.255.4/32 preferred
+set groups mpls interfaces lo0 unit 0 family iso address 49.0001.0001.0004.00
+set groups mpls interfaces ge-0/0/0 description "connection to port eth4 of lxc"
+set groups mpls interfaces ge-0/0/0 mtu 9000
+set groups mpls interfaces ge-0/0/1 description "connection to port eth8 of lxc"
+set groups mpls interfaces ge-0/0/1 mtu 9000
+set groups mpls interfaces ge-0/0/2 description "connection to port ge-0/0/1 of p3"
+set groups mpls interfaces ge-0/0/2 mtu 9000
+set groups mpls interfaces ge-0/0/2 unit 0 family inet address 172.16.20.14/31
+set groups mpls interfaces ge-0/0/2 unit 0 family iso
+set groups mpls interfaces ge-0/0/2 unit 0 family mpls
+set groups mpls interfaces ge-0/0/3 description "connection to port ge-0/0/1 of p4"
+set groups mpls interfaces ge-0/0/3 mtu 9000
+set groups mpls interfaces ge-0/0/3 unit 0 family inet address 172.16.20.16/31
+set groups mpls interfaces ge-0/0/3 unit 0 family iso
+set groups mpls interfaces ge-0/0/3 unit 0 family mpls
+set groups mpls policy-options policy-statement LB term 1 then load-balance per-flow
+set groups mpls policy-options policy-statement LB term 1 then accept
+set groups mpls routing-options route-distinguisher-id 172.16.255.4
+set groups mpls routing-options router-id 172.16.255.4
+set groups mpls routing-options forwarding-table export LB
+set groups mpls protocols isis interface lo0.0 level 1 disable
+set groups mpls protocols isis interface lo0.0 passive
+set groups mpls protocols isis interface ge-0/0/2.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/2.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/2.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/2.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/3.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/3.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/3.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/3.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis level 2 authentication-key "$9$H.fQ69A0BE9CK8LxsYTzF/9AtuO1Ec"
+set groups mpls protocols isis level 2 authentication-type md5
+set groups mpls protocols ldp interface ge-0/0/2.0
+set groups mpls protocols ldp interface ge-0/0/3.0
+set groups mpls protocols mpls statistics interval 10
+set groups mpls protocols mpls sensor-based-stats
+set groups mpls protocols mpls interface ge-0/0/2.0
+set groups mpls protocols mpls interface ge-0/0/3.0
+set groups mpls protocols rsvp interface ge-0/0/2.0
+set groups mpls protocols rsvp interface ge-0/0/3.0
+set groups mpls protocols lldp interface all
+set groups mpls protocols lldp interface fxp0 disable
+set groups config2 policy-options policy-statement nh term 1 from protocol bgp
+set groups config2 policy-options policy-statement nh term 1 from protocol evpn
+set groups config2 policy-options policy-statement nh term 1 then next-hop self
+set groups config2 policy-options policy-statement nh term 1 then accept
+set groups config2 policy-options policy-statement nh term default then reject
+set groups config2 routing-options autonomous-system 4200000001
+set groups config2 protocols bgp vpn-apply-export
+set groups config2 protocols bgp group to_rr type internal
+set groups config2 protocols bgp group to_rr local-address 172.16.255.4
+set groups config2 protocols bgp group to_rr family inet unicast
+set groups config2 protocols bgp group to_rr family inet6 labeled-unicast explicit-null
+set groups config2 protocols bgp group to_rr family evpn signaling
+set groups config2 protocols bgp group to_rr export nh
+set groups config2 protocols bgp group to_rr neighbor 172.16.255.10
+set groups config2_iprouting interfaces ge-0/0/0 flexible-vlan-tagging
+set groups config2_iprouting interfaces ge-0/0/0 encapsulation flexible-ethernet-services
+set groups config2_iprouting interfaces ge-0/0/0 unit 1000 vlan-id 1000
+set groups config2_iprouting interfaces ge-0/0/0 unit 1000 family inet address 10.1.1.4/31
+set groups config2_iprouting interfaces ge-0/0/0 unit 1000 family inet6 address fc00:deed:beef:f001::4/127
+set groups config2_iprouting interfaces ge-0/0/2 unit 0 family inet6
+set groups config2_iprouting interfaces ge-0/0/3 unit 0 family inet6
+set groups config2_iprouting protocols bgp group to_ce4_cust0 peer-as 4200009004
+set groups config2_iprouting protocols bgp group to_ce4_cust0 neighbor 10.1.1.5 family inet unicast
+set groups config2_iprouting protocols bgp group to_ce4_cust0 neighbor fc00:deed:beef:f001::5 family inet6 unicast
+set groups config2_iprouting protocols mpls explicit-null
+set groups config2_iprouting protocols mpls ipv6-tunneling
+set groups config2_evpn interfaces ge-0/0/0 flexible-vlan-tagging
+set groups config2_evpn interfaces ge-0/0/0 encapsulation flexible-ethernet-services
+set groups config2_evpn interfaces ge-0/0/0 unit 1010 encapsulation vlan-bridge
+set groups config2_evpn interfaces ge-0/0/0 unit 1010 vlan-id 1010
+set groups config2_evpn interfaces ge-0/0/0 unit 1020 encapsulation vlan-bridge
+set groups config2_evpn interfaces ge-0/0/0 unit 1020 vlan-id 1020
+set groups config2_evpn interfaces irb unit 1020 family inet address 192.168.20.254/24
+set groups config2_evpn interfaces irb unit 1020 family inet6 address fc00:deed:beef:f020::1/64
+set groups config2_evpn routing-instances evpn1 instance-type evpn
+set groups config2_evpn routing-instances evpn1 protocols evpn
+set groups config2_evpn routing-instances evpn1 interface ge-0/0/0.1010
+set groups config2_evpn routing-instances evpn1 route-distinguisher 172.16.255.4:1010
+set groups config2_evpn routing-instances evpn1 vrf-target target:65000:1010
+set groups config2_evpn routing-instances evpn2 instance-type evpn
+set groups config2_evpn routing-instances evpn2 protocols evpn
+set groups config2_evpn routing-instances evpn2 vlan-id none
+set groups config2_evpn routing-instances evpn2 routing-interface irb.1020
+set groups config2_evpn routing-instances evpn2 interface ge-0/0/0.1020
+set groups config2_evpn routing-instances evpn2 route-distinguisher 172.16.255.4:1022
+set groups config2_evpn routing-instances evpn2 vrf-target target:65000:1022
+set groups config2_evpn routing-instances evpn2_l3vpn instance-type vrf
+set groups config2_evpn routing-instances evpn2_l3vpn protocols evpn ip-prefix-routes advertise direct-nexthop
+set groups config2_evpn routing-instances evpn2_l3vpn interface irb.1020
+set groups config2_evpn routing-instances evpn2_l3vpn route-distinguisher 172.16.255.4:1020
+set groups config2_evpn routing-instances evpn2_l3vpn vrf-target target:65000:1020
+set groups config2_evpn routing-instances evpn2_l3vpn vrf-table-label
+set apply-groups srv6
+set apply-groups config1
+set apply-groups config1_iprouting
+set apply-groups config1_evpn
+set system host-name pe4
+set system root-authentication encrypted-password "$1$HlJRJEFF$z7j1xn59lBsSePQTSm8Po."
+set system login user admin uid 2000
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$HlJRJEFF$z7j1xn59lBsSePQTSm8Po."
+set system login user admin authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCK6O/OBtLVrPmoGNEM/VYW9INFJDk/ZpR4gYucZ9S963PAmBeq4tA0ptGA7NhCav3Xoi5KiQaIer2Sotgmi2S/BWCAF5siEv1Mnq1cJ69QbNv+9wLtzoIYxuis18ugsPFzMz4S+SQjyfu94W8FkU/lJ7xVgbY0nMS9e1gpwlvKAZsYgcGpUdOx6um1dortnuGQwH8b8ygZjEQ+5ottwDAWJ1v+e/jvO5dS+GF3MCpBN/7RmOWQzSFi/bqXyrZdTb2BBxPH2XO5fqPFNann9V+L5YAH+ImLE5ruU3fQAN1XFw/0V5y7bHWNPu6NuqKoUJm3YPVH1vlZ5lM4/e+oMsst"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system default-address-selection
+set system management-instance
+set system syslog user * any emergency
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set chassis network-services enhanced-ip
+set interfaces fxp0 unit 0 family inet address 172.16.11.24/24

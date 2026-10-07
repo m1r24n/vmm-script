@@ -1,0 +1,88 @@
+---
+- name: updating node with ubuntu OS on lab
+  hosts: ubuntu
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: update and upgrade repository
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: yes
+        state: latest
+- name: install software into node gw
+  hosts: 
+  - gw
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: install wireguard, novnc and websockify
+      ansible.builtin.apt:
+        pkg:
+        - wireguard-tools
+        - novnc
+        - websockify
+    - name: Add entries into /etc/coredns/vmmlab.com.db
+      ansible.builtin.blockinfile:
+        path: /etc/coredns/vmmlab.com.db
+        marker: "; {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          dc1spine1 IN A 172.16.51.101
+          dc1spine2 IN A 172.16.51.102
+          dc1spine3 IN A 172.16.51.103
+          dc1spine4 IN A 172.16.51.104
+          dc1leaf1 IN A 172.16.51.111
+          dc1leaf2 IN A 172.16.51.112
+          dc1leaf3 IN A 172.16.51.113
+          dc1leaf4 IN A 172.16.51.114
+          dc1leaf5 IN A 172.16.51.115
+          dc1leaf6 IN A 172.16.51.116
+          dc1leaf7 IN A 172.16.51.117
+          dc1leaf8 IN A 172.16.51.118
+          dc2sw1 IN A 172.16.52.101
+          dc2sw2 IN A 172.16.52.102
+          apstra1 IN A 172.16.53.1
+          apstra2 IN A 172.16.53.2
+          apstra3 IN A 172.16.53.3
+          ztp IN A 172.16.53.4
+          flow IN A 172.16.53.5
+          fw1 IN A 172.16.61.1
+          fw2 IN A 172.16.61.2
+          fwext1 IN A 172.16.61.3
+          fwext2 IN A 172.16.61.6
+          vxlangw IN A 172.16.61.4
+          pe1 IN A 172.16.61.11
+          pe2 IN A 172.16.61.12
+          pe3 IN A 172.16.61.13
+          p1 IN A 172.16.61.14
+          lxd1ext IN A 172.16.61.5
+          ac IN A 172.16.61.200
+          dhcprelay1 IN A 172.16.51.10
+          dhcprelay1 IN A 172.16.52.10
+- name: update lxd1ext
+  hosts: 
+  - lxd1ext
+  become: yes
+  vars:
+    user: ubuntu
+  tasks:
+    - name: create netplan /etc/netplan/02_net.yaml
+      ansible.builtin.blockinfile:
+        path: /etc/netplan/02_net.yaml
+        create: true
+        block: |
+          network:
+            bridges:
+                ext:
+                  interfaces: [eth2]    
+                vxlangw:
+                  interfaces: [eth1]
+    - name: chmod /etc/netplan/02_net.yaml
+      ansible.builtin.file:
+        path: /etc/netplan/02_net.yaml
+        mode: '0600'
+    - name: applying netplan
+      ansible.builtin.command: netplan apply
+      changed_when: true
+

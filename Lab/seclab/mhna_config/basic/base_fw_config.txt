@@ -1,0 +1,7 @@
+set system root-authentication encrypted-password "$6$qn7MvHzB$BX4WqegvSgrpm0Q4q7gkDpkRGt1bCbSDnSng5ohD7yhBlQxwiZYDrZChsX6TUbPmoB3uEXGwvZWpqr7ikg.AZ."
+set system login user admin class super-user authentication encrypted-password "$6$S8dXmL3E$S84hpYKHyPxFXPQv5JYfOJEan8IreZjHJBwvl1.LqsdI.OdanYj/zhwJJfnWsbDGRgUaTlg5CTqWdwBkDB0YP0"
+set system services ssh sftp-server
+set system services netconf ssh
+set system management-instance
+set interfaces fxp0 unit 0 family inet dhcp
+set system host-name fw2

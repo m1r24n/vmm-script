@@ -1,0 +1,153 @@
+
+set version 25.4R1.11
+set groups srv6 interfaces ge-0/0/0 description "connection to port ge-0/0/3 of pe1"
+set groups srv6 interfaces ge-0/0/0 mtu 9000
+set groups srv6 interfaces ge-0/0/0 unit 0 family iso
+set groups srv6 interfaces ge-0/0/0 unit 0 family inet6
+set groups srv6 interfaces ge-0/0/1 description "connection to port ge-0/0/3 of pe2"
+set groups srv6 interfaces ge-0/0/1 mtu 9000
+set groups srv6 interfaces ge-0/0/1 unit 0 family iso
+set groups srv6 interfaces ge-0/0/1 unit 0 family inet6
+set groups srv6 interfaces ge-0/0/2 description "connection to port ge-0/0/2 of p1"
+set groups srv6 interfaces ge-0/0/2 mtu 9000
+set groups srv6 interfaces ge-0/0/2 unit 0 family iso
+set groups srv6 interfaces ge-0/0/2 unit 0 family inet6
+set groups srv6 interfaces ge-0/0/3 description "connection to port ge-0/0/4 of p3"
+set groups srv6 interfaces ge-0/0/3 mtu 9000
+set groups srv6 interfaces ge-0/0/3 unit 0 family iso
+set groups srv6 interfaces ge-0/0/3 unit 0 family inet6
+set groups srv6 interfaces ge-0/0/4 description "connection to port ge-0/0/4 of p4"
+set groups srv6 interfaces ge-0/0/4 mtu 9000
+set groups srv6 interfaces ge-0/0/4 unit 0 family iso
+set groups srv6 interfaces ge-0/0/4 unit 0 family inet6
+set groups srv6 interfaces lo0 unit 0 family inet address 172.16.255.12/32 primary
+set groups srv6 interfaces lo0 unit 0 family inet address 172.16.255.12/32 preferred
+set groups srv6 interfaces lo0 unit 0 family iso address 49.0001.0001.0012.00
+set groups srv6 interfaces lo0 unit 0 family inet6 address fc00:dead:beef:ffff::ffff:12/128
+set groups srv6 policy-options policy-statement LB term 1 then load-balance per-flow
+set groups srv6 policy-options policy-statement LB term 1 then accept
+set groups srv6 routing-options source-packet-routing srv6 locator SRV6-LOC-1 fc00:dead:beef:ff12::/64
+set groups srv6 routing-options route-distinguisher-id 172.16.255.12
+set groups srv6 routing-options router-id 172.16.255.12
+set groups srv6 routing-options forwarding-table export LB
+set groups srv6 protocols isis interface ge-0/0/0.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/0.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/0.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/0.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/1.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/1.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/1.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/1.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/2.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/2.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/2.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/2.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/3.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/3.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/3.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/3.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/4.0 level 1 disable
+set groups srv6 protocols isis interface ge-0/0/4.0 point-to-point
+set groups srv6 protocols isis interface ge-0/0/4.0 family inet bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface ge-0/0/4.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups srv6 protocols isis interface lo0.0 level 1 disable
+set groups srv6 protocols isis interface lo0.0 passive
+set groups srv6 protocols isis source-packet-routing srv6 locator SRV6-LOC-1 end-sid fc00:dead:beef:ff12::
+set groups srv6 protocols isis level 2 authentication-key "$9$H.fQ69A0BE9CK8LxsYTzF/9AtuO1Ec"
+set groups srv6 protocols isis level 2 authentication-type md5
+set groups srv6 protocols lldp interface all
+set groups srv6 protocols lldp interface fxp0 disable
+set groups mpls interfaces lo0 unit 0 family inet address 172.16.255.12/32 primary
+set groups mpls interfaces lo0 unit 0 family inet address 172.16.255.12/32 preferred
+set groups mpls interfaces lo0 unit 0 family iso address 49.0001.0001.0012.00
+set groups mpls interfaces ge-0/0/0 description "connection to port ge-0/0/3 of pe1"
+set groups mpls interfaces ge-0/0/0 mtu 9000
+set groups mpls interfaces ge-0/0/0 unit 0 family inet address 172.16.20.5/31
+set groups mpls interfaces ge-0/0/0 unit 0 family iso
+set groups mpls interfaces ge-0/0/0 unit 0 family mpls
+set groups mpls interfaces ge-0/0/1 description "connection to port ge-0/0/3 of pe2"
+set groups mpls interfaces ge-0/0/1 mtu 9000
+set groups mpls interfaces ge-0/0/1 unit 0 family inet address 172.16.20.9/31
+set groups mpls interfaces ge-0/0/1 unit 0 family iso
+set groups mpls interfaces ge-0/0/1 unit 0 family mpls
+set groups mpls interfaces ge-0/0/2 description "connection to port ge-0/0/2 of p1"
+set groups mpls interfaces ge-0/0/2 mtu 9000
+set groups mpls interfaces ge-0/0/2 unit 0 family inet address 172.16.20.19/31
+set groups mpls interfaces ge-0/0/2 unit 0 family iso
+set groups mpls interfaces ge-0/0/2 unit 0 family mpls
+set groups mpls interfaces ge-0/0/3 description "connection to port ge-0/0/4 of p3"
+set groups mpls interfaces ge-0/0/3 mtu 9000
+set groups mpls interfaces ge-0/0/3 unit 0 family inet address 172.16.20.26/31
+set groups mpls interfaces ge-0/0/3 unit 0 family iso
+set groups mpls interfaces ge-0/0/3 unit 0 family mpls
+set groups mpls interfaces ge-0/0/4 description "connection to port ge-0/0/4 of p4"
+set groups mpls interfaces ge-0/0/4 mtu 9000
+set groups mpls interfaces ge-0/0/4 unit 0 family inet address 172.16.20.28/31
+set groups mpls interfaces ge-0/0/4 unit 0 family iso
+set groups mpls interfaces ge-0/0/4 unit 0 family mpls
+set groups mpls policy-options policy-statement LB term 1 then load-balance per-flow
+set groups mpls policy-options policy-statement LB term 1 then accept
+set groups mpls routing-options route-distinguisher-id 172.16.255.12
+set groups mpls routing-options router-id 172.16.255.12
+set groups mpls routing-options forwarding-table export LB
+set groups mpls protocols isis interface lo0.0 level 1 disable
+set groups mpls protocols isis interface lo0.0 passive
+set groups mpls protocols isis interface ge-0/0/0.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/0.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/0.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/0.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/1.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/1.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/1.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/1.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/2.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/2.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/2.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/2.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/3.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/3.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/3.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/3.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/4.0 level 1 disable
+set groups mpls protocols isis interface ge-0/0/4.0 point-to-point
+set groups mpls protocols isis interface ge-0/0/4.0 family inet bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis interface ge-0/0/4.0 family inet6 bfd-liveness-detection minimum-interval 100
+set groups mpls protocols isis level 2 authentication-key "$9$H.fQ69A0BE9CK8LxsYTzF/9AtuO1Ec"
+set groups mpls protocols isis level 2 authentication-type md5
+set groups mpls protocols ldp interface ge-0/0/0.0
+set groups mpls protocols ldp interface ge-0/0/1.0
+set groups mpls protocols ldp interface ge-0/0/2.0
+set groups mpls protocols ldp interface ge-0/0/3.0
+set groups mpls protocols ldp interface ge-0/0/4.0
+set groups mpls protocols mpls statistics interval 10
+set groups mpls protocols mpls sensor-based-stats
+set groups mpls protocols mpls interface ge-0/0/0.0
+set groups mpls protocols mpls interface ge-0/0/1.0
+set groups mpls protocols mpls interface ge-0/0/2.0
+set groups mpls protocols mpls interface ge-0/0/3.0
+set groups mpls protocols mpls interface ge-0/0/4.0
+set groups mpls protocols rsvp interface ge-0/0/0.0
+set groups mpls protocols rsvp interface ge-0/0/1.0
+set groups mpls protocols rsvp interface ge-0/0/2.0
+set groups mpls protocols rsvp interface ge-0/0/3.0
+set groups mpls protocols rsvp interface ge-0/0/4.0
+set groups mpls protocols lldp interface all
+set groups mpls protocols lldp interface fxp0 disable
+set apply-groups srv6
+set system host-name p2
+set system root-authentication encrypted-password "$1$lCfZEquP$cXPY53WQuVWI5NcxNG.C20"
+set system login user admin uid 2000
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$lCfZEquP$cXPY53WQuVWI5NcxNG.C20"
+set system login user admin authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCK6O/OBtLVrPmoGNEM/VYW9INFJDk/ZpR4gYucZ9S963PAmBeq4tA0ptGA7NhCav3Xoi5KiQaIer2Sotgmi2S/BWCAF5siEv1Mnq1cJ69QbNv+9wLtzoIYxuis18ugsPFzMz4S+SQjyfu94W8FkU/lJ7xVgbY0nMS9e1gpwlvKAZsYgcGpUdOx6um1dortnuGQwH8b8ygZjEQ+5ottwDAWJ1v+e/jvO5dS+GF3MCpBN/7RmOWQzSFi/bqXyrZdTb2BBxPH2XO5fqPFNann9V+L5YAH+ImLE5ruU3fQAN1XFw/0V5y7bHWNPu6NuqKoUJm3YPVH1vlZ5lM4/e+oMsst"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system default-address-selection
+set system management-instance
+set system syslog user * any emergency
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set chassis network-services enhanced-ip
+set interfaces fxp0 unit 0 family inet address 172.16.11.26/24

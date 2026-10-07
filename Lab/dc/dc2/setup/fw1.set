@@ -1,0 +1,81 @@
+set security l3vpn vrf-group group1 vrf RZ1
+set security l3vpn vrf-group group1 vrf RZ2
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/1 unit 0 family inet address 10.1.255.129/31
+set interfaces ge-0/0/2 mtu 9170
+set interfaces ge-0/0/2 unit 0 family inet address 10.1.255.131/31
+set interfaces lo0 unit 0 family inet address 10.1.255.1/32
+set policy-options policy-statement from_loopback term 1 from route-filter 10.1.255.1/32 exact
+set policy-options policy-statement from_loopback term 1 then accept
+set policy-options policy-statement from_loopback term default then reject
+
+set interfaces lo0 unit 101 family inet address 10.1.255.101/32
+set interfaces lo0 unit 101 family inet address fc00:dead:beef:f100::101/128
+set interfaces lo0 unit 102 family inet address 10.1.255.102/32
+set interfaces lo0 unit 102 family inet address fc00:dead:beef:f100::102/128
+
+set routing-instances RZ1 instance-type vrf
+set routing-instances RZ1 routing-options rib RZ1.inet6.0 static route fc00:dead:beef:a201::/64 discard
+set routing-instances RZ1 routing-options rib RZ1.inet6.0 static route fc00:dead:beef:a201::/64 preference 180
+set routing-instances RZ1 routing-options static route 192.168.201.0/24 discard
+set routing-instances RZ1 routing-options static route 192.168.201.0/24 preference 180
+set routing-instances RZ1 routing-options multipath
+set routing-instances RZ1 protocols evpn interconnect vrf-target target:10006:1
+set routing-instances RZ1 protocols evpn interconnect route-distinguisher 10.1.255.1:101
+set routing-instances RZ1 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances RZ1 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances RZ1 protocols evpn ip-prefix-routes vni 10006
+set routing-instances RZ1 interface lo0.101
+set routing-instances RZ1 route-distinguisher 10.1.255.1:1101
+set routing-instances RZ1 vrf-target target:10006:1
+set routing-instances RZ1 vrf-table-label
+
+set routing-instances RZ2 instance-type vrf
+set routing-instances RZ2 routing-options rib RZ2.inet6.0 static route fc00:dead:beef:a101::/64 discard
+set routing-instances RZ2 routing-options rib RZ2.inet6.0 static route fc00:dead:beef:a101::/64 preference 180
+set routing-instances RZ2 routing-options rib RZ2.inet6.0 static route fc00:dead:beef:a102::/64 discard
+set routing-instances RZ2 routing-options rib RZ2.inet6.0 static route fc00:dead:beef:a102::/64 preference 180
+set routing-instances RZ2 routing-options static route 192.168.101.0/24 discard
+set routing-instances RZ2 routing-options static route 192.168.101.0/24 preference 180
+set routing-instances RZ2 routing-options static route 192.168.102.0/24 discard
+set routing-instances RZ2 routing-options static route 192.168.102.0/24 preference 180
+set routing-instances RZ2 routing-options multipath
+set routing-instances RZ2 protocols evpn interconnect vrf-target target:target:10006:1
+set routing-instances RZ2 protocols evpn interconnect route-distinguisher 10.1.255.1:201
+set routing-instances RZ2 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances RZ2 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances RZ2 protocols evpn ip-prefix-routes vni 10006
+set routing-instances RZ2 route-distinguisher 10.1.255.1:1201
+set routing-instances RZ2 vrf-target target:10006:1
+set routing-instances RZ2 vrf-table-label
+set protocols bgp group to_spine type external
+set protocols bgp group to_spine multihop ttl 1
+set protocols bgp group to_spine family inet6 unicast
+set protocols bgp group to_spine export from_loopback
+set protocols bgp group to_spine multipath multiple-as
+set protocols bgp group to_spine neighbor 10.1.1.0 peer-as 4200001001
+set protocols bgp group to_spine neighbor 10.1.1.1 peer-as 4200001002
+set protocols bgp group overlay type external
+set protocols bgp group overlay multihop
+set protocols bgp group overlay advertise-peer-as
+set protocols bgp group overlay family inet unicast
+set protocols bgp group overlay family evpn signaling
+set protocols bgp group overlay multipath multiple-as
+set protocols bgp group overlay as-override
+set protocols bgp group overlay neighbor 10.1.1.0 local-address 10.1.255.1
+set protocols bgp group overlay neighbor 10.1.1.0 peer-as 4200001001
+set protocols bgp group overlay neighbor 10.1.1.1 local-address 10.1.255.1
+set protocols bgp group overlay neighbor 10.1.1.1 peer-as 4200001002
+set protocols bgp group overlay vpn-apply-export
+set protocols lldp interface all
+set routing-options router-id 10.1.255.1
+set routing-options autonomous-system 4200009001
+set security zones security-zone vrf host-inbound-traffic system-services all
+set security zones security-zone vrf host-inbound-traffic protocols all
+set security zones security-zone vrf interfaces ge-0/0/1.0
+set security zones security-zone vrf interfaces ge-0/0/2.0
+set security policies from-zone vrf to-zone vrf policy default-permit match source-address any
+set security policies from-zone vrf to-zone vrf policy default-permit match destination-address any
+set security policies from-zone vrf to-zone vrf policy default-permit match application any
+set security policies from-zone vrf to-zone vrf policy default-permit match source-l3vpn-vrf-group group1
+set security policies from-zone vrf to-zone vrf policy default-permit then permit

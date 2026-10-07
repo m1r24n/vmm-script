@@ -1,0 +1,30 @@
+set system host-name fw1
+set system root-authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$UdIF9kKl$Cv.QwIWJtaKr5et5AWQev1"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system management-instance
+set system syslog file messages authorization info
+set system license autoupdate url https://ae1.juniper.net/junos/key_retrieval
+set security pki ca-profile ISRG_Root_X1 ca-identity ISRG_Root_X1
+set security pki ca-profile ISRG_Root_X1 pre-load
+set security pki ca-profile Lets_Encrypt ca-identity Lets_Encrypt
+set security pki ca-profile Lets_Encrypt enrollment url https://acme-v02.api.letsencrypt.org/directory
+set security screen ids-option untrust-screen tcp syn-flood destination-threshold 2048
+set security screen ids-option untrust-screen tcp syn-flood queue-size 2000
+set security screen ids-option untrust-screen tcp syn-flood timeout 20
+set security screen ids-option untrust-screen tcp land
+set security zones security-zone trust tcp-rst
+set security zones security-zone untrust screen untrust-screen
+set security policies from-zone trust to-zone trust policy default-permit match source-address any
+set security policies from-zone trust to-zone trust policy default-permit match destination-address any
+set security policies from-zone trust to-zone trust policy default-permit match application any
+set security policies from-zone trust to-zone trust policy default-permit then permit
+set security policies from-zone trust to-zone untrust policy default-permit match source-address any
+set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
+set security policies from-zone trust to-zone untrust policy default-permit match application any
+set security policies from-zone trust to-zone untrust policy default-permit then permit
+set interfaces fxp0 unit 0 family inet address 172.16.62.21/24
+set protocols lldp interface all

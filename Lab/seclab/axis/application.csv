@@ -1,0 +1,8 @@
+Name,Local Address,Port,Server username (Optional),Server password (Optional),Connector Zone,Identity Provider,Tags (Optional)
+fw1a,172.16.11.1,22,admin,pass01,vmmlab,Axis IdP,seclab
+fw1b,172.16.11.2,22,admin,pass01,vmmlab,Axis IdP,seclab
+fw2,172.16.11.3,22,admin,pass01,vmmlab,Axis IdP,seclab
+fw3,172.16.11.4,22,admin,pass01,vmmlab,Axis IdP,seclab
+client1,172.16.11.6,22,ubuntu,pass01,vmmlab,Axis IdP,seclab
+gw,172.16.11.254,22,ubuntu,pass01,vmmlab,Axis IdP,seclab
+r1,172.16.11.5,22,admin,pass01,vmmlab,Axis IdP,seclab

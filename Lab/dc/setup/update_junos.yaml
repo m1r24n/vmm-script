@@ -1,0 +1,13 @@
+---
+- name: update junos
+  hosts: junos
+  connection: local
+  gather_facts: no
+  vars:
+    user: admin
+  tasks:
+    - name: load configuration into junos
+      juniper.device.config:  
+        load: set
+        src: "junos_conf/{{ inventory_hostname }}.set"
+

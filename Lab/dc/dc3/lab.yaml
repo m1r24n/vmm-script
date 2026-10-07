@@ -1,0 +1,86 @@
+---
+# site1 only
+name: dc3
+pod: 
+  type: vmm
+  vmmserver: q-pod21-vmm.englab.juniper.net
+  user: irzan
+  home_dir : /vmm/data/user_disks/irzan
+images:
+  gw: images/gw.qcow2
+  ubuntu: images/ubuntu26.04.qcow2
+  ubuntu2: images/ubuntu26.04_frr_ovs_lxd.qcow2
+  vsrx: images/junos-vsrx3-x86-64-26.2R1.7.qcow2
+  vjunos_switch: images/vJunos-switch-26.2R1.7.qcow2 
+  vjunos_router: images/vJunos-router-26.2R1.7.qcow2
+  vnexus: images/nexus9300v.9.3.8.qcow2
+  #vjunos_evolved: images/vJunosEvolved-25.2R1.8-EVO.qcow2
+junos_login:
+  login: admin
+  password: pass01
+fabric:
+  topology:
+  - [  0x0,sw1, ge1, sw2, ge1]
+  - [  0x0,sw1, ge2, sw3, ge1]
+  - [  0x0,sw2, ge2, sw3, ge1]
+vm:
+  gw:
+    type: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: mgmt
+        family:
+          inet: 172.16.51.254/24
+        dhcp_range: 172.16.51.1 - 172.16.51.100  
+  sw1:
+    type: vnexus
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.51.101/24
+      ge3: 
+        bridge: sw1ge3
+  sw2:
+    type: vnexus
+    ztp: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.51.102/24
+      ge3: 
+        bridge: sw2ge3
+  sw3:
+    type: vnexus
+    ztp: yes
+    interfaces:
+      mgmt: 
+        bridge: mgmt
+        family:
+          inet: 172.16.51.103/24
+      ge3: 
+        bridge: sw3ge3
+  svr1:
+    type: pcsmall
+    os: ubuntu
+    vnc: yes
+    interfaces: 
+      em0: 
+        bridge: sw1ge3
+  svr2:
+    type: pcsmall
+    os: ubuntu
+    vnc: yes
+    interfaces: 
+      em0: 
+        bridge: sw2ge3
+  svr3:
+    type: pcsmall
+    os: ubuntu
+    vnc: yes
+    interfaces: 
+      em0: 
+        bridge: sw3ge3

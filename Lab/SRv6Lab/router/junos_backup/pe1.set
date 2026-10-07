@@ -1,0 +1,63 @@
+
+set version 25.4R1.11
+set system host-name pe1
+set system root-authentication encrypted-password "$1$DSVZ3MaX$7mmEnsqL.7mup750r/cqm/"
+set system login user admin uid 2000
+set system login user admin class super-user
+set system login user admin authentication encrypted-password "$1$DSVZ3MaX$7mmEnsqL.7mup750r/cqm/"
+set system login user admin authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCK6O/OBtLVrPmoGNEM/VYW9INFJDk/ZpR4gYucZ9S963PAmBeq4tA0ptGA7NhCav3Xoi5KiQaIer2Sotgmi2S/BWCAF5siEv1Mnq1cJ69QbNv+9wLtzoIYxuis18ugsPFzMz4S+SQjyfu94W8FkU/lJ7xVgbY0nMS9e1gpwlvKAZsYgcGpUdOx6um1dortnuGQwH8b8ygZjEQ+5ottwDAWJ1v+e/jvO5dS+GF3MCpBN/7RmOWQzSFi/bqXyrZdTb2BBxPH2XO5fqPFNann9V+L5YAH+ImLE5ruU3fQAN1XFw/0V5y7bHWNPu6NuqKoUJm3YPVH1vlZ5lM4/e+oMsst"
+set system services netconf ssh
+set system services ssh root-login allow
+set system services ssh sftp-server
+set system default-address-selection
+set system management-instance
+set system syslog user * any emergency
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set chassis network-services enhanced-ip
+set interfaces ge-0/0/0 description "connection to port eth1 of lxc"
+set interfaces ge-0/0/0 mtu 9000
+set interfaces ge-0/0/1 description "connection to port eth5 of lxc"
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/2 description "connection to port ge-0/0/0 of p1"
+set interfaces ge-0/0/2 mtu 9000
+set interfaces ge-0/0/2 unit 0 family inet address 172.16.20.2/31
+set interfaces ge-0/0/2 unit 0 family iso
+set interfaces ge-0/0/2 unit 0 family mpls
+set interfaces ge-0/0/3 description "connection to port ge-0/0/0 of p2"
+set interfaces ge-0/0/3 mtu 9000
+set interfaces ge-0/0/3 unit 0 family inet address 172.16.20.4/31
+set interfaces ge-0/0/3 unit 0 family iso
+set interfaces ge-0/0/3 unit 0 family mpls
+set interfaces fxp0 unit 0 family inet address 172.16.11.21/24
+set interfaces lo0 unit 0 family inet address 172.16.255.1/32 primary
+set interfaces lo0 unit 0 family inet address 172.16.255.1/32 preferred
+set interfaces lo0 unit 0 family iso address 49.0001.0001.0001.00
+set policy-options policy-statement LB term 1 then load-balance per-flow
+set policy-options policy-statement LB term 1 then accept
+set routing-options route-distinguisher-id 172.16.255.1
+set routing-options router-id 172.16.255.1
+set routing-options forwarding-table export LB
+set protocols isis interface ge-0/0/2.0 level 1 disable
+set protocols isis interface ge-0/0/2.0 point-to-point
+set protocols isis interface ge-0/0/2.0 family inet bfd-liveness-detection minimum-interval 100
+set protocols isis interface ge-0/0/2.0 family inet6 bfd-liveness-detection minimum-interval 100
+set protocols isis interface ge-0/0/3.0 level 1 disable
+set protocols isis interface ge-0/0/3.0 point-to-point
+set protocols isis interface ge-0/0/3.0 family inet bfd-liveness-detection minimum-interval 100
+set protocols isis interface ge-0/0/3.0 family inet6 bfd-liveness-detection minimum-interval 100
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis interface lo0.0 passive
+set protocols isis level 2 authentication-key "$9$H.fQ69A0BE9CK8LxsYTzF/9AtuO1Ec"
+set protocols isis level 2 authentication-type md5
+set protocols ldp interface ge-0/0/2.0
+set protocols ldp interface ge-0/0/3.0
+set protocols mpls statistics interval 10
+set protocols mpls sensor-based-stats
+set protocols mpls interface ge-0/0/2.0
+set protocols mpls interface ge-0/0/3.0
+set protocols rsvp interface ge-0/0/2.0
+set protocols rsvp interface ge-0/0/3.0
+set protocols lldp interface all
+set protocols lldp interface fxp0 disable

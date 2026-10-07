@@ -1,0 +1,9 @@
+delete protocols isis backup-spf-options use-post-convergence-lfa maximum-backup-paths 8
+{% for i in interfaces -%}
+delete protocols isis interface {{ i }}.0 level 2 post-convergence-lfa
+delete protocols isis interface {{ i }}.0 level 2 ipv4-adjacency-segment protected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv6-adjacency-segment protected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv4-adjacency-segment unprotected dynamic
+delete protocols isis interface {{ i }}.0 level 2 ipv6-adjacency-segment unprotected dynamic
+{% endfor -%}
+delete protocols mpls traffic-engineering bgp-igp-both-ribs

@@ -1,0 +1,81 @@
+# lab exercise 1, Create organization, sites, NIP and onboarding devices 
+
+## Create token for authentication
+1. use script [create_token.py](API/create_token.py) to create token for authentication. it will create output file token.sh
+
+        cd API
+        source rd.sh
+        ./create_token.py
+
+## Creating organization and sites
+
+1. use script [create_org.py](API/create_org.py) to create organization on routing director. before running this script, source script token.sh to load authentication token into environment variable and create environment variable ORG_NAME
+
+        cd API
+        source token.sh
+        export ORG_NAME=vmm
+        create_org.py
+
+2.  use script [create_sites.py](API/create_sites.py) to create sites on routing director. This script requires input from file [sites.yaml](API/sites.yaml). Use script [get_sites_id.py](API/get_sites_id.py) to verify and create file sites_id.yaml, which will be used on the next step.
+
+        source org.sh
+        ./create_sites.py
+        ./get_sites_id.py
+
+## creating NIP (network implementation plan)
+1. Use script [get_sernum.sh](./get_sernum.sh) to get serial number of devices on the network. It will create a file data/nodes_sernum.yaml, with the list of devices and its serial number
+
+        ./get_sernum.sh
+
+2. use script [create_NIP/create_nip.py]. This script requires two input files, sites_id.yaml and nodes_sernum.yaml, and the name of the NIP file
+
+        cd create_NIP
+        ./create_nip.py NIP1.json
+
+3. Through the web dashboard, upload file NIP1.json into the Routing Director
+
+## onboarding devices into routing director
+1. use script [get_outbound_ssh_cmd.py](API/get_outbound_ssh_cmd.py) to get the ssh command for the network devices to be onboarded into routing director. it will generate output file onboarding.set.
+
+        ./get_outbound_ssh_cmd.py
+
+2. Edit file onboarding.set, you need to remove any line with **delete** command
+
+3. use ansible playbook [onboarding.yaml](ansible/onboarding.yaml]
+
+        ansible-playbook onboarding.yaml
+
+4. login into web dashboard of routing director, and verify that onboarding process has started, and wait until the service status **ready for service** and **put into service**
+
+
+
+set protocols pcep pce rd1 local-address 10.100.255.15
+
+
+set protocols pcep pce rd1 destination-ipv4-address 172.16.12.3
+set protocols pcep pce rd1 destination-port 4189
+set protocols pcep pce rd1 pce-type active
+set protocols pcep pce rd1 pce-type stateful
+
+
+set protocols pcep pce rd1 lsp-provisioning
+set protocols pcep pce rd1 spring-capability
+set protocols pcep pce rd1 pce-traffic-steering
+
+set protocols source-packet-routing lsp-external-controller pccd
+set protocols source-packet-routing maximum-segment-list-depth 16
+set protocols source-packet-routing telemetry statistics
+set protocols source-packet-routing traffic-engineering database
+
+
+show path-computation-client status
+
+
+set protocols pcep pce rd1 local-address 10.100.255.15
+set protocols pcep pce rd1 destination-ipv4-address 172.16.12.3
+set protocols pcep pce rd1 destination-port 4189
+set protocols pcep pce rd1 pce-type active
+set protocols pcep pce rd1 pce-type stateful
+set protocols pcep pce rd1 lsp-provisioning
+set protocols pcep pce rd1 spring-capability
+set protocols pcep pce rd1 pce-traffic-steering

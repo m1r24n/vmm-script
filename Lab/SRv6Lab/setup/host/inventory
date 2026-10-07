@@ -1,0 +1,7 @@
+[all]
+gw
+nms1
+lxc
+ac
+[all:vars]
+ansible_python_interpreter=python3

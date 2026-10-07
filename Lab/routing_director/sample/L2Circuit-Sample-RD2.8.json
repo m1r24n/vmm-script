@@ -1,0 +1,127 @@
+{
+  "customer_id": "16204627-b63e-11f0-bd49-66ea6c8fb71d",
+  "design_id": "eline-l2circuit-nsm",
+  "design_version": "0.5.46",
+  "fh_config": {
+    "edited-by": "jcluser@juniper.net",
+    "status": "uploaded",
+    "type": "service_order"
+  },
+  "instance_id": "ELINE-L2CKT",
+  "instance_status": "feasibility_checked",
+  "instance_uuid": "33689207-b650-11f0-bd49-66ea6c8fb71d",
+  "l2vpn_ntw": {
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "JuniperCloudLabs",
+          "vpn_id": "l2ckt-jcl",
+          "vpn_name": "l2ckt-jcl",
+          "vpn_nodes": {
+            "vpn_node": [
+              {
+                "description": "",
+                "ne_id": "00000000-0000-0000-1000-2c6bf5c64a00",
+                "signaling_options": [
+                  {
+                    "ac_pw_list": [
+                      {
+                        "peer_addr": "2.2.2.1",
+                        "vc_id": 0
+                      }
+                    ],
+                    "encapsulation_allow_mismatch": false,
+                    "mtu_allow_mismatch": false,
+                    "type": "ldp-signaling"
+                  }
+                ],
+                "underlay_transport": {
+                  "instance_type": "lsp",
+                  "transport_instance_id": "MPLS-MESH-from-vMX-PE1-to-vMX-PE6"
+                },
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "access_type": "regular",
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 1005
+                          },
+                          "l2_access_type": "dot1q"
+                        }
+                      },
+                      "description": "port1",
+                      "id": "111",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "vMX-PE1"
+              },
+              {
+                "description": "",
+                "ne_id": "00000000-0000-0000-1000-2c6bf507ba00",
+                "signaling_options": [
+                  {
+                    "ac_pw_list": [
+                      {
+                        "peer_addr": "1.1.192.0",
+                        "vc_id": 0
+                      }
+                    ],
+                    "encapsulation_allow_mismatch": false,
+                    "mtu_allow_mismatch": false,
+                    "type": "ldp-signaling"
+                  }
+                ],
+                "underlay_transport": {
+                  "instance_type": "lsp",
+                  "transport_instance_id": "MPLS-MESH-from-vMX-PE6-to-vMX-PE1"
+                },
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "access_type": "regular",
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 1005
+                          },
+                          "l2_access_type": "dot1q"
+                        }
+                      },
+                      "description": "port2",
+                      "id": "111",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "vMX-PE6"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "operation": "create",
+  "order_id": "336892d3-b650-11f0-bd49-66ea6c8fb71d",
+  "org_id": "0feb94e2-74df-4a97-a0b0-ceedac11dbcf",
+  "upload_time": "2025-10-31T11:53:22Z",
+  "version": "1.0.0"
+}

@@ -1,0 +1,11 @@
+[all]
+gw
+client1
+client2
+mon1
+[lxd]
+client1
+client2
+[all:vars]
+ansible_python_interpreter=python3
+

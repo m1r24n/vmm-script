@@ -1,0 +1,32 @@
+---
+lxc_server:
+  host: 172.16.11.114
+  user: ubuntu
+  password: pass01
+  ssh_key: /Users/irzan/.ssh/bng
+lxc:
+  cl1cpe1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: cpe1c
+  cl2cpe1:
+    type: client
+    ports:
+      - port: eth0
+        bridge: cpe1c
+  cl1cpe2:
+    type: client
+    ports:
+      - port: eth0
+        bridge: cpe2c
+  cl1cpe3:
+    type: client
+    ports:
+      - port: eth0
+        bridge: cpe3c
+  cl1cpe4:
+    type: client
+    ports:
+      - port: eth0
+        bridge: cpe4c

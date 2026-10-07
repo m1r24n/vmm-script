@@ -1,0 +1,10 @@
+name: cust2
+cust_intf: ge-0/0/0
+vlan: 1002
+ipv4_addr: 192.168.255.0/31
+ipv6_addr: fc00:dead:beef:ffff::0/127
+bgp_v4: 192.168.255.1
+bgp_v6: fc00:dead:beef:ffff::1
+bgp_peer_as: 4200002001
+rt: "25000:2001"
+rd: "26000:2001"

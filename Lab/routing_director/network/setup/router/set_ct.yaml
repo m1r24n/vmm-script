@@ -1,0 +1,18 @@
+---
+- name: add configuration on PE
+  hosts: 
+  - pe
+  connection: local
+  gather_facts: no
+  vars:
+    user: admin
+  tasks:
+    - name: load configuration into pe
+      juniper.device.config:  
+        load: set
+        lines:
+        - "set routing-options transport-class name gold color 2001"
+        - "set routing-options transport-class name silver color 2002"
+        - "set routing-options transport-class name bronze color 2003"
+
+

@@ -1,0 +1,326 @@
+{
+    "description": "L3VPN1 for cust2",
+    "instance_id": "L3VPN1cust2",
+    "l3vpn_svc": {
+        "service_settings": {
+            "active_assurance": {
+                "monitors": true,
+                "on_change_tests": true
+            }
+        },
+        "vpn_services": {
+            "vpn_service": [
+                {
+                    "customer_name": "cust2",
+                    "route_distinguisher_type": "type0",
+                    "vpn_id": "L3VPN1cust2",
+                    "vpn_service_topology": "any-to-any"
+                }
+            ]
+        },
+        "sites": {
+            "site": [
+                {
+                    "locations": {
+                        "location": [
+                            {
+                                "country_code": "ID",
+                                "location_id": "site1pe1"
+                            }
+                        ]
+                    },
+                    "site_id": "site1",
+                    "site_network_accesses": {
+                        "site_network_access": [
+                            {
+                                "access_diversity": {
+                                    "constraints": {
+                                        "constraint": []
+                                    },
+                                    "groups": {
+                                        "group": []
+                                    }
+                                },
+                                "bearer": {
+                                    "requested_type": {
+                                        "requested_type": "ethernet",
+                                        "strict": false
+                                    }
+                                },
+                                "connection": {
+                                    "eth_inf_type": "tagged",
+                                    "physical_port": {
+                                        "speed": 1000
+                                    },
+                                    "tagged_interface": {
+                                        "dot1q_vlan_tagged": {
+                                            "cvlan_id": 112
+                                        },
+                                        "type": "dot1q"
+                                    }
+                                },
+                                "ip_connection": {
+                                    "ipv4": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "192.168.200.1"
+                                                }
+                                            ],
+                                            "prefix_length": 31,
+                                            "provider_address": "192.168.200.0"
+                                        }
+                                    },
+                                    "ipv6": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "fc00:dead:beef:a200::1"
+                                                }
+                                            ],
+                                            "prefix_length": 127,
+                                            "provider_address": "fc00:dead:beef:a200::0"
+                                        }
+                                    },
+                                    "oam": {
+                                        "bfd": {
+                                            "enabled": false
+                                        }
+                                    }
+                                },
+                                "routing_protocols": {
+                                    "routing_protocol": [
+                                        {
+                                            "bgp": {
+                                                "address_family": [
+                                                    "ipv4",
+                                                    "ipv6"
+                                                ],
+                                                "autonomous_system": 4200000121,
+                                                "description": "",
+                                                "group_name": ""
+                                            },
+                                            "type": "bgp"
+                                        }
+                                    ]
+                                },
+                                "service": {
+                                    "svc_input_bandwidth": 100,
+                                    "svc_output_bandwidth": 100
+                                },
+                                "site_network_access_id": "site1pe1cust2",
+                                "type": "regular",
+                                "vpn_attachment": {
+                                    "site_role": "any-to-any-role",
+                                    "vpn_id": "L3VPN1cust2"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "locations": {
+                        "location": [
+                            {
+                                "country_code": "ID",
+                                "location_id": "site2pe2"
+                            }
+                        ]
+                    },
+                    "site_id": "site2",
+                    "site_network_accesses": {
+                        "site_network_access": [
+                            {
+                                "access_diversity": {
+                                    "constraints": {
+                                        "constraint": []
+                                    },
+                                    "groups": {
+                                        "group": []
+                                    }
+                                },
+                                "bearer": {
+                                    "requested_type": {
+                                        "requested_type": "ethernet",
+                                        "strict": false
+                                    }
+                                },
+                                "connection": {
+                                    "eth_inf_type": "tagged",
+                                    "physical_port": {
+                                        "speed": 1000
+                                    },
+                                    "tagged_interface": {
+                                        "dot1q_vlan_tagged": {
+                                            "cvlan_id": 112
+                                        },
+                                        "type": "dot1q"
+                                    }
+                                },
+                                "ip_connection": {
+                                    "ipv4": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "192.168.200.3"
+                                                }
+                                            ],
+                                            "prefix_length": 31,
+                                            "provider_address": "192.168.200.2"
+                                        }
+                                    },
+                                    "ipv6": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "fc00:dead:beef:a200::3"
+                                                }
+                                            ],
+                                            "prefix_length": 127,
+                                            "provider_address": "fc00:dead:beef:a200::2"
+                                        }
+                                    },
+                                    "oam": {
+                                        "bfd": {
+                                            "enabled": false
+                                        }
+                                    }
+                                },
+                                "routing_protocols": {
+                                    "routing_protocol": [
+                                        {
+                                            "bgp": {
+                                                "address_family": [
+                                                    "ipv4",
+                                                    "ipv6"
+                                                ],
+                                                "autonomous_system": 4200000122,
+                                                "description": "",
+                                                "group_name": ""
+                                            },
+                                            "type": "bgp"
+                                        }
+                                    ]
+                                },
+                                "service": {
+                                    "svc_input_bandwidth": 100,
+                                    "svc_output_bandwidth": 100
+                                },
+                                "site_network_access_id": "site2pe2cust2",
+                                "type": "regular",
+                                "vpn_attachment": {
+                                    "site_role": "any-to-any-role",
+                                    "vpn_id": "L3VPN1cust2"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "locations": {
+                        "location": [
+                            {
+                                "country_code": "ID",
+                                "location_id": "site3pe3"
+                            }
+                        ]
+                    },
+                    "site_id": "site3",
+                    "site_network_accesses": {
+                        "site_network_access": [
+                            {
+                                "access_diversity": {
+                                    "constraints": {
+                                        "constraint": []
+                                    },
+                                    "groups": {
+                                        "group": []
+                                    }
+                                },
+                                "bearer": {
+                                    "requested_type": {
+                                        "requested_type": "ethernet",
+                                        "strict": false
+                                    }
+                                },
+                                "connection": {
+                                    "eth_inf_type": "tagged",
+                                    "physical_port": {
+                                        "speed": 1000
+                                    },
+                                    "tagged_interface": {
+                                        "dot1q_vlan_tagged": {
+                                            "cvlan_id": 112
+                                        },
+                                        "type": "dot1q"
+                                    }
+                                },
+                                "ip_connection": {
+                                    "ipv4": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "192.168.200.5"
+                                                }
+                                            ],
+                                            "prefix_length": 31,
+                                            "provider_address": "192.168.200.4"
+                                        }
+                                    },
+                                    "ipv6": {
+                                        "address_allocation_type": "static-address",
+                                        "addresses": {
+                                            "customer_addresses": [
+                                                {
+                                                    "address": "fc00:dead:beef:a200::5"
+                                                }
+                                            ],
+                                            "prefix_length": 127,
+                                            "provider_address": "fc00:dead:beef:a200::5"
+                                        }
+                                    },
+                                    "oam": {
+                                        "bfd": {
+                                            "enabled": false
+                                        }
+                                    }
+                                },
+                                "routing_protocols": {
+                                    "routing_protocol": [
+                                        {
+                                            "bgp": {
+                                                "address_family": [
+                                                    "ipv4",
+                                                    "ipv6"
+                                                ],
+                                                "autonomous_system": 4200000123,
+                                                "description": "",
+                                                "group_name": ""
+                                            },
+                                            "type": "bgp"
+                                        }
+                                    ]
+                                },
+                                "service": {
+                                    "svc_input_bandwidth": 100,
+                                    "svc_output_bandwidth": 100
+                                },
+                                "site_network_access_id": "site3pe3cust2",
+                                "type": "regular",
+                                "vpn_attachment": {
+                                    "site_role": "any-to-any-role",
+                                    "vpn_id": "L3VPN1cust2"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

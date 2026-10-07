@@ -1,0 +1,16 @@
+---
+- name: remove SR
+  hosts:
+  - pe
+  - p
+  connection: local
+  gather_facts: no
+  vars:
+    user: admin
+  tasks:
+    - name: remove config
+      juniper.device.config:  
+        template: remove1.j2
+        format: set
+        load: merge
+        vars: "{{ lookup('file', playbook_dir + '/vars_' + inventory_hostname + '.yaml') | from_yaml}}"

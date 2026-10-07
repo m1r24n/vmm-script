@@ -1,0 +1,135 @@
+{
+  "customer_id": "3ecb06d7-c448-11f0-a3c1-fa571cc18f7f",
+  "design_id": "eline-evpn-vpws-csm",
+  "design_version": "0.0.57",
+  "fh_config": {
+    "edited-by": "jcluser@juniper.net",
+    "status": "uploaded",
+    "type": "service_order"
+  },
+  "instance_id": "ELINE-VPWS",
+  "instance_status": "feasibility_checked",
+  "instance_uuid": "77a1be5d-c472-11f0-a3c1-fa571cc18f7f",
+  "l2vpn_svc": {
+    "service_settings": {
+      "readable_router_config": true
+    },
+    "sites": {
+      "site": [
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce222",
+                "location": "US"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "US",
+                "postal_code": "84106"
+              }
+            ]
+          },
+          "site_id": "Seattle",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 301,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  }
+                },
+                "device_reference": "ce222",
+                "network_access_id": "SEA-SLC-VPWS",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce333",
+                "location": "US"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "US",
+                "postal_code": "27705"
+              }
+            ]
+          },
+          "site_id": "Reston",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "access_type": "regular",
+                "availability": {
+                  "access_priority": 100
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 301,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  }
+                },
+                "device_reference": "ce333",
+                "network_access_id": "RES-DUR-VPWS",
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "operation": "create",
+  "order_id": "77a1beb8-c472-11f0-a3c1-fa571cc18f7f",
+  "org_id": "3cfd017a-494e-47eb-a623-f8ef65fa8bd3",
+  "upload_time": "2025-11-18T11:33:56Z",
+  "version": "1.0.0"
+}

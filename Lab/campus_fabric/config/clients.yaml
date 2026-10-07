@@ -1,0 +1,47 @@
+lxc:
+  pc1:
+    type: client
+    ports:
+      eth0:
+        bridge: acc1ge2
+  pc2:
+    type: client
+    ports:
+      eth0:
+        bridge: acc1ge3
+  pc3:
+    type: client
+    ports:
+      eth0:
+        bridge: acc1ge4
+  pc4:
+    type: client
+    ports:
+      eth0:
+        bridge: acc2ge2
+  pc5:
+    type: client
+    ports:
+      eth0:
+        bridge: acc2ge3
+  pc6:
+    type: client
+    ports:
+      eth0:
+        bridge: acc2ge4
+  pc7:
+    type: client
+    ports:
+      eth0:
+        bridge: acc3ge2
+  pc8:
+    type: client
+    ports:
+      eth0:
+        bridge: acc3ge3
+  pc9:
+    type: client
+    ports:
+      eth0:
+        bridge: acc3ge4
+

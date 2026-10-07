@@ -1,0 +1,16 @@
+set routing-instances vrf_mgmt instance-type vrf
+set routing-instances vrf_mgmt interface ge-0/0/3.0
+set routing-instances vrf_mgmt route-distinguisher 10.100.255.1:1001
+set routing-instances vrf_mgmt vrf-target target:65000:1001
+set routing-instances vrf_mgmt vrf-table-label
+set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
+set protocols bgp group to_p1 type internal
+set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:1
+set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
+set protocols bgp group to_p1 family inet-vpn unicast advertise-srv6-service
+set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
+set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
+set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
+set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11
+set protocols bgp rfc8950-compliant
+set routing-options autonomous-system 4200000001

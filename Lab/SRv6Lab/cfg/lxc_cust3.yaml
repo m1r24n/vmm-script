@@ -1,0 +1,104 @@
+---
+# for EVPN
+lxc_server:
+  host: 172.16.11.11
+  user: ubuntu
+  password: pass01
+  ssh_key: /Users/irzan/.ssh/srv6
+lxc:
+  cl11-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe1ge0
+        ipv4: 192.168.10.1/24
+        gw4: 192.168.10.254
+        ipv6: fc00:deed:beef:f010::1000:1/64
+        gw6: fc00:deed:beef:f010::1
+        bridge: pe1ge0
+        type: ovs
+        vlan: 1020
+  cl12-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe1ge0
+        ipv4: 192.168.10.2/24
+        gw4: 192.168.10.254
+        ipv6: fc00:deed:beef:f010::1000:2/64
+        gw6: fc00:deed:beef:f010::1
+        bridge: pe1ge0
+        type: ovs
+        vlan: 1020
+  cl21-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe2ge0
+        ipv4: 192.168.20.1/24
+        gw4: 192.168.20.254
+        ipv6: fc00:deed:beef:f020::1000:1/64
+        gw6: fc00:deed:beef:f020::1
+        bridge: pe2ge0
+        type: ovs
+        vlan: 1020
+  cl22-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe2ge0
+        ipv4: 192.168.20.2/24
+        gw4: 192.168.20.254
+        ipv6: fc00:deed:beef:f020::1000:2/64
+        gw6: fc00:deed:beef:f020::1
+        bridge: pe2ge0
+        type: ovs
+        vlan: 1020
+  cl31-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe3ge0
+        ipv4: 192.168.10.3/24
+        gw4: 192.168.10.254
+        ipv6: fc00:deed:beef:f010::1000:3/64
+        gw6: fc00:deed:beef:f010::1
+        bridge: pe3ge0
+        type: ovs
+        vlan: 1020
+  cl32-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe3ge0
+        ipv4: 192.168.10.4/24
+        gw4: 192.168.10.254
+        ipv6: fc00:deed:beef:f010::1000:4/64
+        gw6: fc00:deed:beef:f010::1
+        bridge: pe3ge0
+        type: ovs
+        vlan: 1020
+  cl41-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe4ge0
+        ipv4: 192.168.20.3/24
+        gw4: 192.168.20.254
+        ipv6: fc00:deed:beef:f020::1000:3/64
+        gw6: fc00:deed:beef:f020::1
+        bridge: pe4ge0
+        type: ovs
+        vlan: 1020
+  cl42-cust3:
+    type: client
+    ports:
+      eth0:
+        bridge: pe4ge0
+        ipv4: 192.168.20.4/24
+        gw4: 192.168.20.254
+        ipv6: fc00:deed:beef:f020::1000:4/64
+        gw6: fc00:deed:beef:f020::1
+        bridge: pe4ge0
+        type: ovs
+        vlan: 1020

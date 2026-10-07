@@ -1,0 +1,169 @@
+# switch sw1
+
+set interfaces ge-0/0/0 description "connection to port eth1 of sw2"
+set interfaces ge-0/0/0 gigether-options 802.3ad ae0
+set interfaces ge-0/0/1 description "connection to port eth2 of sw2"
+set interfaces ge-0/0/1 gigether-options 802.3ad ae0
+set interfaces ge-0/0/2 description "connection to port eth1 of sw3"
+set interfaces ge-0/0/2 gigether-options 802.3ad ae2
+set interfaces ge-0/0/3 description "connection to port eth2 of sw3"
+set interfaces ge-0/0/3 gigether-options 802.3ad ae2
+set interfaces ge-0/0/4 gigether-options 802.3ad ae1
+set interfaces ge-0/0/5 gigether-options 802.3ad ae1
+set interfaces ae0 mtu 9014
+set interfaces ae0 aggregated-ether-options lacp active
+set interfaces ae0 unit 0 family inet address 10.0.0.0/31
+set interfaces ae0 unit 0 family inet6
+set interfaces ae1 aggregated-ether-options lacp active
+set interfaces ae1 unit 0 family ethernet-switching interface-mode access
+set interfaces ae1 unit 0 family ethernet-switching vlan members vlan11
+set interfaces ae2 mtu 9014
+set interfaces ae2 aggregated-ether-options lacp active
+set interfaces ae2 unit 0 family inet address 10.0.0.2/31
+set interfaces fxp0 unit 0 family inet address 172.16.11.1/24
+set interfaces irb unit 11 family inet address 192.168.11.254/24
+set interfaces lo0 unit 0 family inet address 10.0.255.1/32
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols ospf area 0.0.0.0 interface ae0.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface irb.11
+set protocols ospf area 0.0.0.0 interface ae2.0 interface-type p2p
+set protocols lldp interface all
+set vlans vlan11 vlan-id 11
+set vlans vlan11 l3-interface irb.11
+
+# switch sw2
+
+hostname sw2
+user admin group administrators password ciphertext AQBapTqxCGOBFPIU1bKn4r+Y40VMr0F1rNhXELyQbi5cAy3pYgAAAGTzSCZB+ikemPEfeIz4JTUaHO6qSHqFFj4CrbJ+i0Ray0RZL+RFCPUu9w/cSOkJ2CnIZWPW0SDwXY7LrwhPbfEDwCOI+KPWjNAjN/CNfFRuD8nrzCM9MrZNXvkqDzgG1dxn
+mvrp
+!
+ssh server vrf default
+ssh server vrf mgmt
+vlan 1,12
+router ospf 1
+    router-id 10.0.255.2
+    area 0.0.0.0
+https-server vrf mgmt
+interface mgmt
+    no shutdown
+    ip static 172.16.11.2/24
+interface lag 1
+    no shutdown
+    ip mtu 9000
+    ip address 10.0.0.1/31
+    lacp mode active
+    ip ospf 1 area 0.0.0.0
+    ip ospf network point-to-point
+interface lag 2
+    no shutdown
+    no routing
+    vlan trunk native 1
+    vlan trunk allowed all
+    lacp mode active
+interface lag 3
+    no shutdown
+    no routing
+    vlan trunk native 1
+    vlan trunk allowed all
+    lacp mode active
+interface 1/1/1
+    no shutdown
+    mtu 9000
+    lag 1
+interface 1/1/2
+    no shutdown
+    mtu 9000
+    lag 1
+interface 1/1/3
+    no shutdown
+    mtu 9000
+    lag 3
+interface 1/1/4
+    no shutdown
+    mtu 9000
+    lag 3
+interface 1/1/5
+    no shutdown
+    lag 2
+interface 1/1/6
+    no shutdown
+    lag 2
+interface loopback 0
+    ip address 10.0.255.2/32
+    ip ospf 1 area 0.0.0.0
+interface vlan 12
+    ip address 192.168.12.254/24
+    ip ospf 1 area 0.0.0.0
+
+
+# switch sw3
+
+hostname sw3
+user admin group administrators password ciphertext AQBapa1Talo7yFp4ILAoOPFq0FFT6ZykTMoC+VjG8YS6oT3FYgAAAHM8GOjDAlciYNCK9d4F976TzU9fUF87FaqevmdWSxNL+egS3E9n6BOsvl9lAmNOpl4ZyMUT1/PxlsJVTF3uvY/0XNlaLNMQflngNY3wxkmdhJhr0XdafIDs5R3Ir1qUteRL
+mvrp
+!
+router ospf 1
+    router-id 10.0.255.3
+    area 0.0.0.0
+https-server vrf mgmt
+
+
+ssh server vrf mgmt
+vlan 1,13
+interface mgmt
+    no shutdown
+    ip static 172.16.11.3/24
+interface lag 1
+    no shutdown
+    ip mtu 9000
+    ip address 10.0.0.3/31
+    lacp mode active
+    ip ospf 1 area 0.0.0.0
+    ip ospf network point-to-point
+interface lag 2
+    no shutdown
+    no routing
+    vlan trunk native 1
+    vlan trunk allowed all
+    lacp mode active
+interface lag 3
+    no shutdown
+    no routing
+    vlan trunk native 1
+    vlan trunk allowed all
+    lacp mode active
+interface 1/1/1
+    no shutdown
+    mtu 9000
+    lag 1
+interface 1/1/2
+    no shutdown
+    mtu 9000
+    lag 1
+interface 1/1/3
+    no shutdown
+    mtu 9000
+    lag 3
+interface 1/1/4
+    no shutdown
+    mtu 9000
+    lag 3
+interface 1/1/5
+    no shutdown
+    lag 2
+interface 1/1/6
+    no shutdown
+    lag 2
+interface loopback 0
+    ip address 10.0.255.2/32
+    ip ospf 1 area 0.0.0.0
+interface vlan 13
+    ip address 192.168.13.254/24
+    ip ospf 1 area 0.0.0.0
+!
+!
+!
+!
+!
+
+    

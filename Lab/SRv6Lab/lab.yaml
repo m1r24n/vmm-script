@@ -1,0 +1,301 @@
+---
+name: srv6
+pod: 
+  type: cloud
+  vmmserver: q-pod32-vmm.englab.juniper.net
+  user: irzan
+  home_dir : /vmm/data/user_disks/irzan
+  dns: 172.16.11.254
+images:
+  gw: images/gw3.qcow2
+  ubuntu: images/ubuntu26.04.qcow2
+  ubuntu2: images/ubuntu24.04.qcow2
+  vjunos_router: images/vJunos-router-26.2R1.7.qcow2
+junos_login:
+  login: admin
+  password: pass01
+wg:
+  prefix_allowed:
+  # - 172.16.10.0/24
+  # - 172.16.11.0/24 
+  # - 172.16.12.0/24 
+  # - 172.16.13.0/24 
+  - 172.16.11.0/24
+  - 172.16.12.0/24
+fabric:
+  #subnet: 172.16.20.0/24
+  #subnet6: fc00:dead:beef:ffff::/64
+  topology:
+  # there are five field: status, VM node A, interface of node A, VM node Z, interface of node Z
+  # value for the field status:
+  # bit 0 : ipv4
+  # bit 1 : ipv6
+  # bit 2 : iso
+  # bit 3 : mpls
+  # bit 4 : isis
+  # bit 5 : rsvp
+  # bit 6 : ldp
+  # bit 7 : delay_measurement_rpm
+  # 0b01111101 : mpls 0x7d
+  # srv6 : 0x16
+  # 0x3d means enable family ipv4, iso and mpls, and enable protocol isis and rsvp
+  # 0xbd means enable family ipv4, iso and mpls, and enable protocol isis and rsvp, and delay measurement using RPM
+  - [ 0x0, r1, ge-0/0/0, lxc, em1 ]
+  - [ 0x0, r2, ge-0/0/0, lxc, em2 ]
+  - [ 0x0, r3, ge-0/0/0, lxc, em3 ]
+  - [ 0x0, r4, ge-0/0/0, lxc, em4 ]
+  - [ 0x0, r5, ge-0/0/0, lxc, em5 ]
+  - [ 0x0, r6, ge-0/0/0, lxc, em6 ]
+  - [ 0x0, r7, ge-0/0/0, lxc, em7 ]
+  - [ 0x0, r8, ge-0/0/0, lxc, em8 ]
+  - [ 0x0, r9, ge-0/0/0, lxc, em9 ]
+  - [ 0x0, r10, ge-0/0/0, lxc, em10 ]
+  - [ 0x16, r1, ge-0/0/1, r2, ge-0/0/1 ]
+  - [ 0x16, r1, ge-0/0/2, r3, ge-0/0/1 ]
+  - [ 0x16, r2, ge-0/0/2, r4, ge-0/0/1 ]
+  - [ 0x16, r3, ge-0/0/2, r4, ge-0/0/2 ]
+  - [ 0x16, r3, ge-0/0/3, r5, ge-0/0/1 ]
+  - [ 0x16, r4, ge-0/0/3, r6, ge-0/0/1 ]
+  - [ 0x16, r5, ge-0/0/2, r6, ge-0/0/2 ]
+  - [ 0x16, r5, ge-0/0/3, r7, ge-0/0/1 ]
+  - [ 0x16, r6, ge-0/0/3, r8, ge-0/0/1 ]
+  - [ 0x16, r7, ge-0/0/2, r8, ge-0/0/2 ]
+  - [ 0x16, r7, ge-0/0/3, r9, ge-0/0/1 ]
+  - [ 0x16, r8, ge-0/0/3, r10, ge-0/0/1 ]
+  - [ 0x16, r9, ge-0/0/2, r10, ge-0/0/2 ]
+vm:
+  gw:
+    type: gw
+    os: gw
+    interfaces:
+      em0: 
+        bridge: external
+      em1: 
+        bridge: oob
+        family:
+          inet: 172.16.11.254/24
+        dhcp_range: 172.16.11.1-172.16.11.200
+      em2: 
+        bridge: mgmt
+        family:
+          inet: 172.16.12.254/24
+          inet6: fc00:dead:beef:12aa::1/64
+        dhcp_range: 172.16.12.1-172.16.12.100
+      em3:
+        bridge: ext
+  nms1:
+    type: pcmedium
+    os: ubuntu
+    interfaces:
+      em0: 
+        bridge: mgmt
+        family:
+          inet: 172.16.12.11/24
+          gateway4: 172.16.12.254
+  ac:
+    type: pcmedium
+    os: ubuntu2
+    interfaces:
+      em0: 
+        bridge: oob
+        family:
+          inet: 172.16.11.11/24
+          gateway4: 172.16.11.254
+  # nms2:
+  #   type: pcmedium
+  #   os: ubuntu
+  #   interfaces:
+  #     em0: 
+  #       bridge: mgmt
+  #       family:
+  #         inet: 172.16.12.12/24
+  #         gateway4: 172.16.12.254
+  # crpd:
+  #   type: pcsmall
+  #   os: ubuntu
+  #   interfaces:
+  #     em0: 
+  #       bridge: oob
+  #       family:
+  #         inet: 172.16.11.10/24
+  #         gateway4: 172.16.11.254
+  #     # lo0:
+  #     #   family:
+  #     #     inet: 172.16.255.10/32
+  #     #     iso: 49.0001.0001.0010.00
+  #     #     inet6: fc00:dead:beef:ffff::ffff:10/128
+  #     #   protocol:
+  #     #     isis: passive
+  lxc:
+    type: pchpv2
+    os: ubuntu
+    vnc: yes
+    interfaces:
+      em0: 
+        bridge: oob
+        family:
+          inet: 172.16.11.12/24
+          gateway4: 172.16.11.254
+  r1:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.101/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.1/32
+          iso: 49.0001.0001.0001.00
+          inet6: fc00:dead:beef:ffff::ffff:1/128
+        protocol:
+          isis: passive
+  r2:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.102/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.2/32
+          iso: 49.0001.0001.0002.00
+          inet6: fc00:dead:beef:ffff::ffff:2/128
+        protocol:
+          isis: passive
+  r3:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.103/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.3/32
+          iso: 49.0001.0001.0003.00
+          inet6: fc00:dead:beef:ffff::ffff:3/128
+        protocol:
+          isis: passive
+  r4:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.104/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.4/32
+          iso: 49.0001.0001.0004.00
+          inet6: fc00:dead:beef:ffff::ffff:4/128
+        protocol:
+          isis: passive
+  r5:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.105/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.5/32
+          iso: 49.0001.0001.0005.00
+          inet6: fc00:dead:beef:ffff::ffff:6/128
+        protocol:
+          isis: passive
+      ge-0/0/4:
+        bridge: ext
+  r6:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.106/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.6/32
+          iso: 49.0001.0001.0006.00
+          inet6: fc00:dead:beef:ffff::ffff:6/128
+        protocol:
+          isis: passive
+  r7:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.107/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.7/32
+          iso: 49.0001.0001.0007.00
+          inet6: fc00:dead:beef:ffff::ffff:7/128
+        protocol:
+          isis: passive
+  r8:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.108/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.8/32
+          iso: 49.0001.0001.0008.00
+          inet6: fc00:dead:beef:ffff::ffff:8/128
+        protocol:
+          isis: passive
+  r9:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.109/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.9/32
+          iso: 49.0001.0001.0003.00
+          inet6: fc00:dead:beef:ffff::ffff:9/128
+        protocol:
+          isis: passive
+  r10:
+    type: vjunos_router
+    os: vjunos_router
+    interfaces:
+      mgmt: 
+        bridge: oob
+        family:
+          inet: 172.16.11.110/24
+          gateway4: 172.16.11.254
+      lo0:
+        family:
+          inet: 172.16.255.10/32
+          iso: 49.0001.0001.0010.00
+          inet6: fc00:dead:beef:ffff::ffff:10/128
+        protocol:
+          isis: passive
+  
