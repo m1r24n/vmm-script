@@ -1,0 +1,850 @@
+
+vmm-api -- command-line client for HPE VMM Cloud
+
+Mirrors the vmm command interface.  Instead of invoking vmm binaries
+directly on a pod node, requests are sent to the capacity-aware HPE VMM Cloud
+API, which selects the best pod automatically.
+Authenticate with your JNPRLAB password (vmm-api auth).
+
+-- Mailing lists ------------------------------------------------------------
+
+  q-pod-announce   POD upgrade and maintenance announcements
+  vm-pod-users     VMX / POD users facing issues and seeking information
+                   Subscribe at https://mygroups.juniper.net
+
+-- Documentation ------------------------------------------------------------
+
+  New users guide  https://vmm-cloud.englab.juniper.net/vmm_user_guide
+
+-- Support ------------------------------------------------------------------
+
+  VMM infra issues    https://coretech-jnpr.atlassian.net/jira/
+                      (GLO Project, Virtual Junos Issue Type)
+  Junos image issues  https://gnats.juniper.net
+
+-- Warnings -----------------------------------------------------------------
+
+  User images and install files (Quincy):   /volume/qnc_user_disks/<username>/
+  User images and install files (Bangalore): /volume/bng_user_disks/<username>/
+
+-- License servers ----------------------------------------------------------
+
+  Spirent  US
+           Primary 10.49.32.70   Backup 10.49.32.93   (one active at a time)
+  Ixia     US: 10.49.32.221
+
+  Spirent  India
+           Primary 10.206.76.251  Backup 10.206.76.252  (one active at a time)
+  Ixia     India: 10.206.76.249
+
+VM names: bind, start, stop and unbind take a space-separated LIST of VM names
+(or none = every VM in the topology). The other per-VM commands (reset,
+restart, powerdown, rebuild, ping, ip, stat, serial_log, console-log ...) take
+ONE VM name, or none for all where the command says so. (UX-10: this used to
+claim every command took a list.)
+
+Versions: `vmm-api --version` / `api-version` = this CLI; `api-info` = the
+server; `version` = the VMM version of your TOPOLOGY. `whoami` = who the
+server says your token belongs to.
+
+-- Global flags -------------------------------------------------------------
+
+  --dev             Use dev API (LB :8443) with separate token file
+  --json            Emit raw API JSON instead of prose (read commands)
+  --region <id>     Send this command to one region (also $VMM_API_REGION);
+                    see `region`. VMM_API_VERBOSE=1 prints the region used.
+  -u <user>         Username                    (default: the token's subject, else $USER)
+  -tid <topo_id>    Topology to operate on. Omit it and commands that act on
+                    one topology use yours when you have exactly one, and
+                    otherwise list them and ask.
+
+Flags may appear before or after the subcommand.
+
+A raw token value may be supplied via $VMM_API_TOKEN (e.g. a PAT), or a token
+file via $VMM_API_TOKEN_FILE.
+Use 'vmm-api help <command>' for detailed help on any command.
+
+-- Getting started -----------------------------------------------------------
+
+launch -c <file> -g <group_id> [--wait] [--json] [--require key=val]...
+    Configure, bind, and start a topology in one step.
+  -c <config_file>    VMM topology config file, OR a .yml/.yaml lab
+                      definition (YAML topology-as-code: name/vms/links —
+                      keep it in git, launch it anywhere; goes through the
+                      same validation + capacity preflight as the editor)
+  -g <group_id>       Quota group for capacity allocation (default: vmm-default)
+  --timeout <secs>    Abort if launch exceeds this many seconds. The topology
+                      is left in place for debugging -- use vmm-api topos/unbind.
+  --wait              After start, block until every VM is reachable (same poll
+                      as `vmm-api wait`). On timeout the topology is left in
+                      place for debugging.
+  --wait-timeout <s>  Max seconds to wait for reachability (default 300).
+  --wait-interval <s> Seconds between reachability polls (default 10).
+  --until <state>     What --wait waits for: reachable (default), fpc-online
+                      (diagnose boot probe per VM until every FPC reports
+                      Online) or dataplane (FPC Online AND the PFE has exposed
+                      its et-/xe-/ge- ports -- createMyVMM's fpc0 check).
+                      Implies --wait.
+  --console-log <dir> After the wait, save every VM's serial console as
+                      <dir>/<vm>.con.log (same as `vmm-api console-log --dir`).
+  --json              Emit a machine-readable result (topo_id, status, vms,
+                      ips) on stdout; progress goes to stderr. Scriptable with
+                      --wait for launch-and-block automation.
+  --require key=val   Restrict pod selection by hardware attribute.
+                      May be repeated.  Valid keys:
+                      location=<site>        e.g. location=quincy
+                      building=<name>        e.g. building=sabey_bldg_a
+                      cpu=<codename>         e.g. cpu=cascade_lake
+                      manufacturer=<vendor>  e.g. manufacturer=dell
+                      domain=<lrm_domain>    e.g. domain=devtest_qnc_vmm
+                      power=<1-5>            CPU performance tier (1=haswell,
+                                             2=broadwell, 3=cascade_lake,
+                                             4=sapphire_rapids, 5=granite_rapids).
+                                             Selects that tier or newer.
+
+quickstart -g <group_id> -vm <name>:<type> [...] [-l <a>:<b>] [-t <name>] [--require key=val]...
+    Build and launch a topology by specifying VM types.
+    Performs config+bind+start in one step.
+  -g <group_id>       Quota group for capacity allocation (default: vmm-default)
+  -vm <name>:<type>[:<image>][:<opt>=<val>]...   Add a VM.
+                      A bare segment is the image file/path; the rest are
+                      key=value builder options, in any order:
+                        trio=<flavor>       MPC chip for slot 0 (EA/XL/XL-ETH)
+                        re=<n>              RE count (dual-RE chassis)
+                        slots=<A>+<B>       per-slot card flavors (slot 1..N-1); MX10004/
+                                            MX10008/MX9608/PTX10004 take more of their own
+                                            card: slots=YT+YT = 3 FPCs (BT on PTX10004)
+                        mpc=<img>+<img>     vMX: vFPC image per MPC by slot (lts19,
+                                            lts22, lts25; empty = default): mpc=+lts25
+                        install=<src>,<dst> put one of YOUR files on the VM, like a
+                                            config file's install line; repeatable:
+                                            install=/vmm/data/user_disks/me/x.py,/var/tmp/x.py
+                        version=<release>   Junos/EVO release to boot
+                        chan=1              channelized ports (vScapa, vBalerion,
+                                            vBrackla 10G, ...): the CSPP bundle
+                                            and IF_ET_CHAN port names
+                        layout=<bx0|bx1|2bx>   vBalerion: which BX slot(s) are
+                                            populated (createMyVMM vbalerion-bx*)
+                        base_slot=<n>       PTX-EVO chassis: slot of the first
+                                            line card (templates use 1, 7, 8, 15)
+                      Legacy createMyVMM --ttype names are accepted as <type>
+                      and expand to the model + these options: vscapa2,
+                      vscapa2fpcschan, vscapa162fpcs, voctomoreMIX2re,
+                      vbalerion-2bx, vbrackla10g, ... (see `vmm-api models`).
+                        setvar=<key>=<val>  per-VM setvar; REPEATABLE
+                        macro=<NAME>=<val>  image-macro override; REPEATABLE
+                      Example: -vm r1:vsrx:junos-vsrx3-x86-64-23.4R2-S3.10.vmdk
+                      Example: -vm r1:vmx240:trio=EA:setvar=use_uefi=1 \
+                                   -vm h1:ubuntu:'setvar=+qemu_args= -smp cores=2'
+                      Example: -vm r1:vmx240:macro=VMX_MPC_DISK=VMPC_LTS22_IMAGE
+                      Quote a segment whose value contains spaces. Values may
+                      NOT contain " ' ` ; $ | & < > \ or a newline -- they reach
+                      the pod's config parser AND its shell, so they are
+                      rejected, never sanitized. Which keys apply to which
+                      model, and which the chassis macro would clobber:
+                      `vmm-api setvars [<type>]`.
+  -l <a>:<b>          Private bridge link between two VMs; may be repeated
+  -l <a>@<port>:<b>[@<port>]
+                      ...pinned to a port: a number, or an interface name,
+                      e.g. -l r1@et-1/0/0:u1 lands on FPC 1 port 0
+  -t <topo_name>      Topology name (default: quickstart)
+  --preview           Print the VMM config this spec compiles to and STOP --
+                      nothing is reserved, bound or started. The way to see
+                      what your setvar=/macro=/trio= options really emit
+                      before spending a launch on them.
+  --require key=val   Restrict pod selection (see launch --require above)
+
+setvars [<vm_type>]   The per-VM setvar + macro-override catalog, grouped, with
+                      help for every key (served by GET /v1/catalog/setvars --
+                      never hardcoded here). With a <vm_type>, shows only what
+                      that model accepts and says why anything is refused.
+  --legacy            Include the legacy/deprecated keys.
+  --json              The raw catalog document.
+
+models / images       List available VM types with model, version, and image.
+models --full [text]  Full catalog, human-readable: chassis (slots/RE/releases) + linecards w/ real ports.
+                      --versions lists every release; a text arg filters to matching chassis/models.
+
+image list [-f family] [-c channel] [-v version] [--files] [-q text]
+                      Browse EVERY Junos/EVO build on the build filers -- not just
+                      the ones already staged. Aggregated by family+version+channel;
+                      --files expands to the individual artifacts.
+image request <id>    Import one into /vmm/data/user_disks/<you>/vmm-images/.
+image stage <path>    Stage a private build for image:/junos_image: -- a build-filer
+                      path (/volume/build, /volume/evoimages, /volume/evo/files;
+                      a dir means <dir>/ptx.iso) is fetched server-side AS YOU; any
+                      other path is copied from this shell into ~/vmm-images/<family>/.
+                      Says so and copies nothing if you (or the shared store)
+                      already have it. Channel defaults to release; daily,
+                      production, service and private are a flag, not a permission.
+image status [id]     Your imports in flight.   image mine   what you hold + quota.
+image rm <family> <file>   Delete one of your imports.
+image facets          The families / channels / versions `image list` can filter on.
+image cancel <id>     Abandon an import still in flight.
+image request --path <p>   Import an exact artifact path instead of a catalog id.
+image workbench <src> --name <n> -g <g>   Copy a unix image into your space and boot it READ-WRITE.
+image save -tid <id> --name <n>            Power down, release, save it as a personal flavor (versioned).
+image flavors [rm <name>[@N] [--delete-file]]   Lab flavors to start from + yours; rm tombstones one.
+image options                              Recipe options (ntp, nis, automount, dns, serial, agent, ...) + site facts.
+image fetch <id|url> [--name n] [--sha256 s]   Pull an upstream cloud image (Ubuntu 22/24, Debian 12) into your tree.
+image search <pkg> | --opt <option>        Which of your flavors has it? (from the manifest recorded at save)
+image share <name>[@N] --group <project>   Share a flavor with a project, read-only (--revoke to undo).
+image labify <src> --name <n> -g <g>       Build with the lab defaults (serial/dns/ntp/rootpw/dhcp/sysprep).
+image verify <name>[@N]                    Boot a saved flavor and prove it works (read-only COW clone).
+image publish <user>/<name>[@N] [--as id]  Admin: copy a verified flavor into shared base_disks.
+image rebuild <name>[@N] [--source <base>] -g <g>   Replay a flavor's recorded recipe, optionally on a newer base.
+image jobs [<id>]                          Long image operations (fetch) run as jobs; show them.
+image build <src> --name <n> -g <g> [--opt ..] [--pkg ..] [--ssh-key f] [--wait] [--save]   Workbench + recipe.
+image build status -tid <id> [<vm>]        The recipe's progress from the VM's console markers.
+
+pair-check [<A> <B>]   Show the requirements/caveats to make an L3 link between
+                       two VM types pass traffic (FPC boot wait, non-L3
+                       endpoints, reserved ports, known-bad pairs). Empty = OK.
+                       With NO args, lists the full type-pair blocklist (combos
+                       rejected at launch: link-defects + config conflicts).
+
+-- Topology management -------------------------------------------------------
+
+config <file> [-g <group_id>] [--require key=val]...
+    Upload a topology config.  Returns a topo_id.
+  -g <group_id>       Quota group for capacity allocation (default: vmm-default)
+  --require key=val   Restrict pod selection (see launch --require above)
+
+config-print [-p]     Display the current active config.
+  -p                  Show the backing storage location (pod/db/table/user)
+                      instead of the config contents.
+
+validate -c <file> -g <group_id> [--require key=val]...
+    Dry-run: check capacity without deploying.  Reports
+    VM count, token count, and which pods have capacity.
+  -c <config_file>    VMM topology config file (required)
+  -g <group_id>       Quota group for capacity allocation (default: vmm-default)
+  --require key=val   Filter pods by hardware attribute (see launch --require)
+
+bind [-r vm_name ...]  Bind VMs (launch QEMU processes, paused).
+    Omit vm_name to bind all; use -r for a subset.
+
+start [-r vm_name ...] Start paused VMs.  For unbound VMs, binds then starts.
+
+stop [-r vm_name ...]  Pause QEMU emulation.  Does not delete the QEMU process.
+
+unbind [-r vm_name ...] Release VMs.  Does not cleanly shut down the guest OS.
+  --purge-images      On a FULL unbind also delete the private images the
+                      topology's spec named (your user_disks / ~/vmm-images),
+                      unless another of your bound topologies still uses them.
+                      createMyVMM's --r. The shared base_disks store is never touched.
+                      (aliases: destroy, teardown)
+
+export                Print the current topology's userdb as JSON. Redirect to
+                      a file to save it.
+  vmm-api export -tid <topo_id> > topo.json
+
+import <file.json> -g <group_id> [-u <user>] [--ttl <duration>]
+    Recreate a topology from an exported JSON file.
+  -g <group_id>       Quota group for capacity allocation (default: vmm-default)
+  --ttl <duration>    Optional lease duration
+
+clone [-g <group_id>] One-shot export+import: copy the current topology's
+                      config into a NEW topo_id (config stage only — bind
+                      and start the copy yourself). Group defaults to the
+                      source's.
+
+relaunch -tid <topo_id> [-g <group_id>] [--ttl <duration>] [--no-start|--config-only]
+    Rebuild a topology you already UNBOUND, from its stored config, keeping
+    the SAME topo_id, and bring it up: config + bind + start, like launch.
+    (`bind -tid <id>` alone also rebuilds it -- legacy client_config parity.)
+  --no-start          rebuild and bind, leave the VMs paused
+  --config-only       just place it; bind and start it yourself
+    Configs are kept 60 days after teardown. The rebuild is a fresh instance:
+    new VMs, no guest state from before.
+
+yaml parse <lab.yml>  Lab YAML -> normalized quickstart spec (JSON) plus
+                      warnings on stderr. Nothing launches.
+yaml render <spec.json>   Quickstart spec (JSON) -> clean lab YAML.
+yaml convert <topology.conf>  Existing VMM config -> lab YAML via the
+                      server-side parser (unparseable pieces are warned,
+                      never dropped silently).
+
+configs [list]        Your saved-config library (what the editor's Save
+                      config writes). get <name> prints one; save <name>
+                      -f <file> stores one; rm <name> deletes.
+
+-- Lease (auto-unbind) -------------------------------------------------------
+
+A bound topology gets a 30-day lease and is unbound automatically when it
+lapses.  Every topology has a TOTAL LIFETIME BUDGET of 90 days, measured from
+when it was placed, and you may extend as often as you like inside it -- there
+is no separate limit on the NUMBER of extensions.  You are emailed a warning
+7 days and again 24 hours before the unbind.  Tooling topologies are exempt.
+
+An auto-teardown TTL (--ttl at launch) is extendable the same way: `extend`
+moves whichever clock actually ends the topology, so a `--ttl 4h` lab can be
+pushed out when you need longer instead of dying at 4h.
+
+lease                 Show lease status: expiry, the effective end (the earlier
+                      of lease and TTL), and how much of the 90-day budget is
+                      left for the current topology.
+
+lease schedule <when> Schedule the auto-unbind EARLIER than the lease expiry
+                      (shorten only — extend is `vmm-api extend`). <when> is
+                      an ISO datetime or relative: +30m, +4h, +2d.
+
+extend [--for <duration>]
+                      Push the end out, within the 90-day budget.  Moves the
+                      TTL if a TTL is what ends the topology, otherwise the
+                      lease.  --for takes the same forms as --ttl (30m, 2h,
+                      4h30m, 7d); omit it to repeat what this topology already
+                      had -- its own TTL, or the group's lease period.
+
+  vmm-api lease  -tid abcdef
+  vmm-api lease schedule +4h -tid abcdef
+  vmm-api extend -tid abcdef              # again by its own TTL / lease period
+  vmm-api extend --for 2d -tid abcdef     # ...or by an amount you choose
+
+-- Config lifecycle (running-config history) ---------------------------------
+
+Versioned `show configuration | display set` snapshots pulled off the live
+Junos REs of a running topology. The FIRST snapshot of a node is its drift
+baseline — capture right after the lab settles, then `drift` answers "what
+changed since launch". Snapshots survive teardown (query by -tid).
+
+cfg capture [vm ...] [--source <label>]
+                      Snapshot running configs (no vm = every Junos RE).
+                      Identical text dedups — re-capturing an unchanged
+                      node adds no history.
+
+cfg history [vm]      List snapshots (seq, source, size, who, when).
+
+cfg show <vm> [seq]   Print one snapshot's config text (default: latest).
+
+cfg diff <vm> [--from <seq>] [--to <seq> | --live]
+                      Unified diff between snapshots (default: baseline ->
+                      latest). --live compares against a fresh capture off
+                      the running node without storing it.
+
+
+cfg apply <vm> [--seq N] [-f <file>] [--from-tid <tid> [--from-vm <vm>]]
+          [--from-seq N] [--no-strip] [--dry-run] [--yes]
+                      Load a stored config back onto a live RE and commit.
+                      Sources, pick one: --seq (this topology's own history,
+                      default latest), --from-tid/--from-vm (another
+                      topology's -- it may already be torn down), or -f a
+                      file of `display set` lines (what `cfg show` prints).
+
+                      This is a MERGE (`load set`): it adds and changes,
+                      it never removes.  A statement you deleted on the box
+                      comes back; a statement you added since the snapshot
+                      STAYS.  It is not a revert.
+
+                      Node-identity lines -- host-name, root-authentication,
+                      licences and the management interface (fxp0, mgmt-N,
+                      reN:mgmt-N) -- are dropped by default so a config from
+                      one node cannot lock you out of another.  --no-strip
+                      sends the file verbatim.  --dry-run prints exactly what
+                      would be loaded and touches nothing.
+
+  vmm-api cfg capture -tid abcdef                    # snapshot the lab
+  vmm-api cfg show r1 -tid abcdef > r1.set           # keep it as a file
+  vmm-api cfg apply r1 -f r1.set -tid 123456 --yes   # ...onto a fresh lab
+  vmm-api cfg apply r1 --from-tid abcdef -tid 123456 --dry-run
+drift [--latest]      Live config vs baseline for every captured node —
+                      DRIFTED/clean per node with +/- line counts. --latest
+                      compares against the newest snapshot instead.
+
+  vmm-api cfg capture                      # after the lab settles = baseline
+  vmm-api drift                            # ...days later: what changed?
+  vmm-api cfg diff r1 --live               # the actual lines, one node
+
+-- Backups: save a lab, launch it again ---------------------------------------
+
+A backup is the lab's design + every device's config (without the pod's own
+management block), so it launches on any pod, in either region. Disk images
+are named, not copied.
+
+backup save [-tid <id>] [--no-capture]
+                      Save it as a .tgz in YOUR user_disks (vmm-backups/).
+backup ls             Your backup files.
+backup restore <file.tgz> [--name <n>] [--no-launch]
+                      Launch a lab from one.  backup rm <file.tgz> deletes.
+git remote set|show|test|rm, git backup, git restore
+                      The same, to and from your own git server
+                      (`vmm-api git help`; user guide section 10).
+
+  vmm-api backup save -tid abcdef          # -> vmm-backups/mylab-20260925T101500Z.tgz
+  vmm-api backup restore mylab-20260925T101500Z.tgz --name mylab-copy
+
+-- Lab validation (assertions) -----------------------------------------------
+
+A lab YAML may declare a validate: block — assertions that make the lab a
+testable artifact. Stored at launch; `verify` re-runs them any time:
+
+  validate:
+    - ping: {from: r1, to: r2}                     # to: VM name or IP
+    - interfaces: {vm: r1, up: [ge-0/0/0]}         # admin+link up/up
+    - bgp:  {vm: r1, established: 2}               # or peers: [10.0.0.2]
+    - ospf: {vm: r1, full: 1}                      # or neighbors: [...]
+    - command: {vm: r1, run: "cli -c 'show version'", expect: "23.4R2"}
+
+verify                Run the stored checks; PASS/FAIL per check, exit 1 on
+                      any failure (CI-friendly).
+verify -f lab.yml     Run a file's validate: block instead ( --save stores
+                      it on the topology without running).
+verify --show         Print the stored checks.    --clear  removes them.
+
+-- Partial bind / unbind ----------------------------------------------------
+
+-r binds or unbinds only the named VMs.  Topology state is preserved until
+  all VMs are unbound.  First partial bind uses the config-time reservation;
+  later binds re-check live capacity.
+
+  vmm-api bind   -tid abcdef -r RE PFE     # bind two VMs
+  vmm-api unbind -tid abcdef -r RE         # unbind one VM
+  vmm-api bind   -tid abcdef -r PFE2 PFE3  # bind remaining VMs
+
+-- Topology status -----------------------------------------------------------
+
+topos                 List all active topologies for the current user.
+topos --launched      List topologies this account LAUNCHED for other users
+                      (tooling accounts own none of what they launch).
+history [--days N]    List recent topologies INCLUDING torn-down ones (14d
+                      default) so you can find a gone topology's tid, then
+                      pull its logs (diagnostics) or read its events.
+
+events [-n <limit>]   Recent lifecycle events for the current topology
+                      (config/bind/start/stop/unbind, etc.).
+  -n <limit>          Max events to show (default: 100).
+
+health-history        Past health_check results for the current topology.
+  vmm-api health-history -tid <topo_id>
+
+notices               Maintenance notices for the pods your topologies are on
+                      (the same ones the console shows as a banner), including
+                      a wipe that destroyed one of yours in the last 7 days.
+
+capacity [-g <group>] Token capacity per quota group: allotted, used, free,
+                      %full, and the largest VM that still fits.
+
+telemetry -g <group>  Capacity telemetry -- the tooling BACK-OFF contract.
+                      Honor `accepting` (false = don't submit) and
+                      `retry_after_s` (when to re-poll). Reports total/used/
+                      reserved/free tokens, the largest single topology that
+                      fits RIGHT NOW (max per-pod free -- a topology lands on
+                      ONE pod), the largest single VM (per-vhost bound), when
+                      capacity next frees (lease/TTL/reservation expiry),
+                      recent churn, and YOUR own open footprint. Cheap and
+                      DB-only server-side: poll freely. The same payload is
+                      attached to capacity-503 launch rejections (`telemetry`
+                      body key + Retry-After header).
+  --tokens <n>        Preflight: would a topology of n tokens fit?
+  --max-vm <n>        ...whose largest single VM is n tokens (with --tokens).
+  --plain             Script-friendly key=value lines (stable keys, no jq
+                      needed; eval-able in shell). For raw JSON use --json.
+
+capture <vm> [opts]   Bounded packet capture on a VM interface, saved as pcap.
+                      Works on management AND private/VDE (data-plane) links.
+  --iface <name|n>    Interface NAME (em0, ge-0/0/0) or index (default 0).
+                      See the interface names in: vmm-api args <vm>
+  --filter <bpf>      pcap/BPF filter, e.g. 'tcp port 179', 'host 10.0.0.1',
+                      'udp and not port 53'. Quote it (contains spaces).
+  --seconds <n>       Capture window (default 30, max 300; also packet-capped).
+  -o <file>           Output file (default <topo>-<vm>-<iface>.pcap).
+  --stream            LIVE stream pcap bytes to stdout as packets arrive
+                      (window default/max 300s) — pipe into Wireshark:
+                        vmm-api capture r1 --stream | wireshark -k -i -
+                      Status goes to stderr; -o writes to a file instead.
+  vmm-api capture r1 --iface ge-0/0/0 --filter 'tcp port 179' -tid <topo_id>
+
+link <vm> up|down     Bring one VM interface's virtual cable admin up/down
+                      (qemu set_link on the netdev — works on management AND
+                      private/VDE data-plane links; the guest sees real
+                      carrier loss). A VM restart brings links back UP.
+  --iface <name|n>    Interface NAME (ge-0/0/0, em0) or index (default 0).
+  --persist           down only: KEEP the link down across VM start/restart/
+                      rebuild (re-applied automatically once the VM's monitor
+                      answers; shown as persistent in --list).
+  --list              List recorded admin-down links, live-verified (also
+                      the default with no VM given).
+  vmm-api link r1 down --iface ge-0/0/0 --persist -tid <topo_id>
+
+diagnostics [-o F]   Download ALL logs + diagnosis bundles for the topology
+                      as a .tar.gz (works AFTER teardown too) -- hand this to
+                      engineering / VMM Cloud admins for deep debugging.
+link-test <a> <b>     Configure a /30 on each end's revenue interface and send
+                      traffic across the link between VMs <a> and <b>.
+  --mode <m>          ping (default; rich ICMP stats) | tcp | udp | iperf
+                      (throughput — iperf3 if present, else nc). tcp/udp/iperf
+                      need linux/bsd endpoints; ping works on junos too.
+  --count <n>         ping echo count (default 10, max 100).
+  --port <n>          tcp/udp/iperf port (default 5201).
+  --seconds <n>       iperf duration (default 5, max 30).
+  --addr-a/-b <cidr>  override the /30 (default 10.99.254.1|2/30).
+  --iface-a/-b <if>   pick a specific revenue interface (default: first found).
+  vmm-api link-test r1 r2 --mode iperf --seconds 10 -tid <topo_id>
+
+webhook [list|add|test|rm]
+                      Your topology-event webhooks. The API has had these
+                      since they shipped; there was no CLI, so registering one
+                      meant hand-rolling curl with a bearer token on the argv.
+  vmm-api webhook list                      # + the subscribable event names
+  vmm-api webhook add https://host/hook --event lease_warning
+  vmm-api webhook test 3                    # send a signed sample delivery
+  vmm-api webhook rm 3
+                      add with no --event subscribes to ALL events. The
+                      signing secret is returned ONCE, at creation.
+
+notify [list|seen|prefs]
+                      Your notification bell, on the command line.
+  vmm-api notify list [--all]   # --all also shows MUTED events
+  vmm-api notify seen           # mark everything read
+  vmm-api notify prefs                      # what is muted, and what can be
+  vmm-api notify prefs --mute access        # stop console/drift access events
+  vmm-api notify prefs --unmute access
+                      Muting affects the BELL and its unread count only. It
+                      does not change webhook delivery and never deletes an
+                      event -- `notify list --all` still shows everything.
+
+pods                  (admin) Pod registry: enabled, health, server, DB.
+
+auditlog [options]    Search central logs (ELK) or trace a request.
+                      Infrastructure logs (API/pod servers) are ADMIN ONLY;
+                      regular users see only their own VM/topology logs.
+  --trace RID         Show every log line for one request id, in order.
+  --rid RID           Filter to a request id.   --pod POD   Filter by pod.
+  --status N          Filter by HTTP status (e.g. 500, 401).
+  --level L           Filter by log level (ERROR, WARNING, INFO).
+  --user U            (admin) Filter by username.
+  --since H           Look back H hours (default 24).   -n N  Max rows (50).
+                      (aliases: --hours = --since, --limit = -n, --query = -q)
+  -q TEXT             Free-text match on the message.
+  e.g.  vmm-api auditlog --status 500 --since 1
+        vmm-api auditlog --trace 7f3a9c12d4e5
+
+info [--yaml [-o FILE] [--include LIST] [--exclude LIST]]
+                      Show topo_id, pod, group, placement time, and VM IPs.
+                      --yaml: ONE YAML document for notes and LLMs; -o saves it.
+                      It carries everything `ls -a` prints -- per node
+                      type/state/uuid, login, ip, console, ncpus/memsize, the
+                      base disk, the qemu ports, every NIC (bridge/mac/ip/
+                      vde_switchid) and its setvars -- plus
+                      connections: a-b: {l1: aif-bif, ...}
+                      --include/--exclude take a comma or space separated list
+                      of SECTIONS or single field names. Default is everything.
+                        sections: identity access hardware disk ports
+                                  interfaces setvars connections
+  e.g.  vmm-api info --yaml --exclude password,setvars
+        vmm-api info --yaml --include access,interfaces
+
+stat [--simple] [vm_name]
+    Show VM status.
+  --simple            Show only VM name, server status, and reachability
+
+ls [-a|-b|-l] [vm_name]
+    List VMs in the current config.
+  -a                  All VMs with detailed config info
+  -b                  Only bound VMs
+  -l                  Long listing
+
+ip [vm_name]          IPv4 address for each VM (or the named VM).
+  ip -a               All external interfaces with names (vm iface addr).
+
+ipv6 [vm_name]        IPv6 address for each VM (or the named VM).
+  ipv6 -a             All external interfaces with names (vm iface addr).
+
+network               IPv4 and IPv6 network, subnet, and gateway (via LRM).
+
+master-ip [vm_name]   Master IPv4 address (if requested in config).
+
+master-ipv6 [vm_name] Master IPv6 address (if requested in config).
+
+wait [vm_name ...]    Poll ping until VMs are reachable.  Exits 0 when all up.
+  --timeout <secs>    Maximum wait time (default: 300)
+  --interval <secs>   Seconds between polls (default: 10)
+
+health_check [-t SECS] Per-VM liveness (state + ping). With -t, polls
+                      every 15s until all alive or timeout (vmm parity).
+                      On timeout, unreachable VMs get an automatic BOOT
+                      diagnosis (--no-diagnose opts out): process truth,
+                      console triage, serial login, IP/DHCP drill-down;
+                      evidence stored in the VM's log directory.
+           [--diagnosis]  Deep INIT battery per VM over the serial shell
+                      (failed services, journal errors, disk, FPCs, alarms)
+                      -- for the vm-init stage. Evidence stored per VM.
+           [-m]        One-shot signature scan (via the vmm wrapper): reports
+                      console-log failure buckets (bad-image/bad-setup/infra-fail)
+                      for unreachable VMs. No poll; ignores -t.
+    Management reachability and boot log check.
+-- VM information ------------------------------------------------------------
+
+ping [vm_name]        Test reachability via ICMP.
+
+ping6 [vm_name]       Test reachability via ICMPv6.
+
+uuid [vm_name]        UUID for each VM.
+
+
+disk [vm_name]        Disk details for a running VM.
+
+tt_count              Total token count for the current topology config.
+
+version [-s]          The RUNNING topology's VMM software version (needs -tid).
+                      For the CLI version, use api-version.
+  -s                  Short version number only (e.g. 3.2.1)
+
+args [vm_name]        All config info for a VM.
+
+cmdline [vm_name]     QEMU command line for a running VM.
+
+container-ip [vm_name]
+    Container IP(s) if the VM is a container host.
+
+display [vm_name]     X display for a VM if configured; attempts xterm.
+
+-- VM control ----------------------------------------------------------------
+
+reset [vm_name]       Reset a running VM (QEMU system_reset). All VMs if none.
+
+powerdown <vm_name>   ACPI power-off; QEMU process exits after powerdown.
+                      A VM name is REQUIRED (unlike reset/restart).
+
+rebuild <vm_name>     Unbind and re-bind with the same ports and vmhost.
+relaunch-vm <vm_name> The vhost under this VM died: unbind only it, bind it again on a
+                      live host (links re-plumbed) and start it; the rest stays up.
+                      A VM name is REQUIRED (unlike reset/restart).
+
+restart [vm_name]     Stop -> unbind -> bind -> start. All VMs if none.
+
+-- Console and connections ---------------------------------------------------
+
+serial [-t] [vm_name] Print serial console host:port, or connect with -t.
+  -t | --telnet       Connect to the serial console via telnet
+
+monitor [-t|-k|-p] [vm_name]
+    QEMU monitor. Connects via telnet by default (prints host:port first).
+  -t | --telnet       Connect to the monitor via telnet (default)
+  -k | --kill         Kill all connections to the monitor port
+  -p | --print        Print host:port only; do not connect
+
+gdb [-k|-p] [vm_name] GDB port for the VM. Connects gdb by default.
+  -k | --kill         Kill all connections to the GDB port
+  -p | --print        Print host:port only; do not connect
+
+vnc / vga [--kill|--debug] [vm_name]
+    VNC display info and SSH tunnel command.
+  --kill              Kill all connections to the VNC/VGA port
+  --debug             Show VNC/VGA debug output
+
+ssh <vm_name>         SSH to the VM as root.  vm_name is required.
+
+ssh_config [vm_name]  Write VM IPs to ~/.ssh/config (START_VMM block).
+
+-- Log files -----------------------------------------------------------------
+
+serial_log / consolelog [vm_name]
+    Serial console log (console.log) from NFS.
+
+debuglog / bindlog [vm_name]
+    Bind/debug log (bind.log) from NFS.
+
+vmlog [vm_name]       VM management log (vm.log) from NFS.
+
+logs [vm_name]        All log files (console.log, bind.log, vm.log).
+    Each file preceded by a === vm | file === header.
+    Redirect to a file for long-term storage.
+
+copy_logs --dir <dir> [-r <vm_name>]
+    Copy serial_log, debuglog, and vmlog for each VM to <dir>/<vm>/.
+    Each VM gets its own subdirectory; files are named serial_log,
+    debuglog, vmlog.  Use -r to restrict to a single VM.
+
+-- Network fabric ------------------------------------------------------------
+
+vde [-p|-l|--id] [bridge]
+                      Bridge info for bound VMs, or a specific bridge.
+                      -p/--print       mgt socket per bridge (the default)
+                      -l/--listactive  bridge names only
+                      --id             vde switch id per bridge
+vde -C <bridge>       Connection coordinates for a bridge.
+
+vde_hub on|off <bridge>
+    Set a bridge to hub mode (on) or switch mode (off).
+
+impair <vm> [--iface N] [--delay ms] [--jitter ms] [--loss pct] [--rate mbit]
+    Degrade a VM interface with netem. LIMITATION: reaches tap-backed
+    (management) interfaces only — VDE/private data-plane links are not
+    impairable yet. --iface is the interface index (0 = first/mgmt).
+    `impair <vm> --clear` removes it.
+
+impairments           List active impairments (LIVE column verifies the
+                      qdisc still exists — restarts silently shed them).
+
+-- Topology name ------------------------------------------------------------
+
+topo_name             Name a topology (per topo_id; needs -tid <topo_id>).
+                      A named topology can be addressed by its name anywhere
+                      a -tid is accepted (e.g. `vmm-api console -tid ospf-lab`).
+                      (alias: tag — deprecated, kept for old scripts)
+  --add 'Name'        Set this topology's name
+  --clear             Clear this topology's name
+  --display           Show this topology's name (default)
+  --clear-all         Clear the name on every topology you own
+  --display-all       List every named topology you own (topo_id + name)
+
+-- Sharing (grant access to a RUNNING topology) -----------------------------
+share                 Grant access to YOUR topology (needs -tid <topo_id>).
+  --to <username>     Grant to a user
+  --project <id>      Grant to a whole project (every member). A project in
+                      the OTHER region works too: <region>:<id> (in-bng:179),
+                      or the bare id when this region has no project with it.
+                      Its members use the lab HERE (--region <this region>);
+                      membership follows that region's project list.
+  --level read|operate|control
+                      read    = observe only (default): status, logs, events,
+                                config history, serial/VNC console
+                      operate = read + start/stop/reset, diagnose, config
+                                capture/diff/drift, verify
+                      control = operate + impair, link up/down, QEMU monitor,
+                                gdb, console kill
+                      Tiers are cumulative. NONE of them can bind, unbind,
+                      rebuild, restart, powerdown, extend or re-share -- those
+                      stay owner-only no matter what you grant.
+                      (shorthands: --read, --operate, --control)
+  --expires <when>    Optional auto-revoke: ISO time, or +7d / +24h / +30m
+                      (alias: --expire)
+unshare               Revoke a grant (--to <username> | --project <id>)
+shares                List the grants on your topology (-tid <topo_id>)
+shared-with-me        (alias: shared) Topologies others shared with you. Drive one with the
+                      usual commands + the owner's name, e.g.
+                      `vmm-api console -u <owner> -tid <topo>`
+
+-- Projects (team libraries; grantee for share --project) -------------------
+
+Identity comes from your token — no -u here.
+
+project list          Projects you belong to (id, name, your role).
+project show <id>     Members + shared items of one project.
+project create <name> [--desc <text>] [--quota-group <g>] [--share-level read|operate|control]
+                      Create a project (operator+). You become its owner.
+project rm <id>       Delete a project (owner only).
+project add <id> <username> [--role member|owner]     Add a member.
+project remove <id> <username>                        Remove a member.
+project share <id> <blueprint|design> <name> [--owner <user>]
+                      Share a blueprint/design into the project library.
+project unshare <id> <blueprint|design> <name> [--owner <user>]
+project library <id>  What's in the project's shared library.
+project gallery list <id>             The project's OWN gallery: launchable,
+                                      pre-configured labs the team published.
+project gallery publish <id> <name> -tid <topo_id> [--desc ...]
+                                      Publish a RUNNING topology as an entry.
+                                      Its spec is exported, every RE's config
+                                      captured, written into the project's
+                                      config space and wired to each VM's
+                                      base_config -- so launching it later is
+                                      an ordinary quickstart and the lab comes
+                                      up ALREADY CONFIGURED. Any member may
+                                      publish (the shared gallery is admin-only).
+project gallery show <id> <name>      VMs, types, and which carry a config.
+project gallery launch <id> <name> -g <group> [--name <topo_name>]
+                                      Build it. Same quickstart path as any
+                                      other launch -- no second code path.
+project gallery rm <id> <name>        Remove the entry (its config files stay:
+                                      another entry or design may use them).
+
+project bundle list <id>              CONFIG SETS (no topology): every VM's
+project bundle save <id> <name> -tid <topo_id> [--note ...]
+project bundle show <id> <name>       config captured under one name, to lay
+project bundle apply <id> <name> -tid <topo_id> [--vm N]... [--yes]
+                                      back down on an EXISTING topology.
+                                      Dry by default; --yes commits on live REs.
+
+project config list <id>              Day-0 configs the project's designs can install.
+project config put <id> <name> <file> [--strip-management|--allow-management]
+                      Add/replace one ('-' reads stdin). Prints the base_config
+                      reference to paste into a design: project:<id>/<name>.
+                      A day-0 config is MERGED onto the device's own baseline, so a
+                      management statement in it (fxp0, name-server, default route --
+                      everything `cfg capture` returns) would leave the launched
+                      device unreachable. Refused by default; --strip-management drops
+                      those lines, --allow-management keeps them deliberately.
+project config get <id> <name>        Print one config.
+project config rm  <id> <name>        Remove one.
+
+-- Authentication -----------------------------------------------------------
+
+auth                  Authenticate and cache a token (8h TTL).
+    Prompts for JNPRLAB password unless $VMM_API_PASSWORD is set.
+
+auth --email <you@hpe.com> [--code <6 digits>]
+    External (HPE) sign-in: no directory account needed. Emails you a
+    verification code; entering it signs you in for 30 days AND enrolls this
+    machine (a local device key silently re-auths afterwards). Running any
+    command with -u you@hpe.com starts the same flow automatically.
+
+auth status           What credential this CLI would send (kind, subject,
+                      expiry, file) and which region/endpoint it talks to.
+
+auth clear [--keep-enrollment]
+    Forget the cached token AND this machine's external (HPE) device
+    enrollment, so the next command authenticates from scratch. Clearing the
+    token alone is NOT enough to change identity: an enrollment silently
+    re-mints a token for the external identity once the cached one expires.
+    --keep-enrollment drops only the token.
+
+auth --tooling [--account <acct> --key <privkey>]
+                      Machine identity: sign a 120s assertion with the account's
+                      PRIVATE key and exchange it for a token. Defaults come from
+                      $VMM_API_TOOLING_ACCOUNT / $VMM_API_TOOLING_KEY. Never uses
+                      a password, and never rides a human's token.
+
+revoke                Revoke the cached SESSION token server-side and remove
+                      it locally. Refuses a personal access token -- those
+                      are revoked with `pat revoke <id>`.
+
+refresh               Extend the current token for another 8 hours.
+
+pat create --name N [--days D] [--scope read-only,no-admin] [--out FILE]
+                      Mint a personal access token for automation. Scopes only
+                      RESTRICT it: read-only = GET/HEAD only (any write 403s);
+                      no-admin = blocks admin endpoints even for an admin owner.
+                      The secret is printed ONCE -- store it immediately, or
+                      give --out FILE to have it written to a new mode-600
+                      file instead of the screen (then point
+                      VMM_API_TOKEN_FILE at that file).
+pat list              List your active personal access tokens.
+pat revoke <id>       Revoke one of your personal access tokens.
+
+api-version           Print the vmm-api CLI version and the build fingerprint of
+                      the script that is actually running.
+api-info              Print the server's API/app version (JSON).
+
+completion bash|zsh|fish
+                      Emit a shell completion script  (eval "$(vmm-api completion bash)").
+
+reconcile -u <vmmtestNN>
+                      Admin/test housekeeping: reconcile a test account's rows
+                      against pod reality.
+
+console-log [-r <vm>] [--dir <D>] [--follow]
+                      The VM's boot/serial console log. --dir writes one file per
+                      VM into <D> (the same output `launch --console-log` saves).
+
+-- Regions & test runner ----------------------------------------------------
+
+region [show | list | set <id> | reset | probe]
+                      Home region this CLI talks to. `show` (default) prints the
+                      cached choice (~/.vmm-api-region, 7 days; a CHANGE of home
+                      region is announced on stderr, never silent); `list` the
+                      region directory (id, endpoint, active); `set <id>` pins it;
+                      `reset` clears the cache; `probe` re-selects by latency now.
+                      Per command: --region <id> or $VMM_API_REGION; $VMM_API_URL
+                      pins an endpoint outright. VMM_API_VERBOSE=1 prints the
+                      region on every call; `auth status` shows it too.
+
+tests [list | run <name> [--yes] | status [job] | logs <job>]
+                      The runner's test suites (test-admins only). `list` (default)
+                      shows every registered suite with its destructive flag.
+                      `run <name>` launches one: DESTRUCTIVE suites (the integration
+                      suites, failover drills, load-fill, ...) cause real production
+                      impact and ask for confirmation -- --yes is required when
+                      headless. `status [job]` shows one job or the recent-jobs
+                      table; `logs <job>` a job's log. Needs a session token (the
+                      runner does not accept PATs).

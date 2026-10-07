@@ -1,0 +1,11 @@
+hostname {{ hostname }}
+user {{username }} group administrators password plaintext {{password_txt}}
+user {{username }} authorized-key {{ssh_key}} user@vmmlab
+no ntp enable
+ssh server vrf mgmt
+vlan 1
+interface mgmt
+    no shutdown
+    ip static {{mgmt_ip}}
+https-server vrf mgmt
+
