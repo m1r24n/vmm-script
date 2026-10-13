@@ -1616,18 +1616,32 @@ def create_novnc(d1):
 # 	tmp1="iqn.2004-10.com.ubuntu:01:60f35178" + a
 # 	return tmp1
 
-def set_srx(d1,vmm_key):
+def set_srx(d1,vmm_key=""):
     list_srx=[]
     for i in d1['vm'].keys():
         if d1['vm'][i]['type'] == 'vsrx':
             list_srx.append(i)
+    serial_cmd={}
     print(f"list of vsrx {list_srx}")
+    if d1['pod']['type'] == 'cloud':
+        file1 = f"tmp/lab_{d1['name']}.yaml"
+        with open(file1) as f1:
+            d2=f1.read()
+        d3=yaml.load(d2,Loader=yaml.FullLoader)
+        print(d3['vm'].keys())
+        for i in list_srx:
+            host1,port1 = d3['vm'][i]['serial_port'].split(':')
+            serial_cmd[i]=f"telnet {host1} {port1}"
+    else:
+        serial_cmd['i']=f"ssh {d1['pod']['vmmserver']} -i {vmm_key} 'vmm serial -t {i}'"
+
     my_hash = md5_crypt.hash(d1['junos_login']['password'])
 	#my_hash = md5_crypt.hash(d1['junos_login']['password'])
     for i in list_srx:
         print(f"set initial configuration for vSRX {i}")
-        cmd1 =f"ssh {d1['pod']['vmmserver']} -i {vmm_key} 'vmm serial -t {i}'"
+        cmd1 = serial_cmd[i]
         print(f"command {cmd1}")
+        ip_mgmt = d1['vm'][i]['interfaces']['mgmt']['family']['inet']
         s_e = [
             ["","login:"],
             ["root","root@:~ #"],
@@ -1640,7 +1654,7 @@ def set_srx(d1,vmm_key):
             ["set system services ssh sftp-server","root#"],
             ["set system services netconf ssh","root#"],
             ["set system management-instance","root#"],
-            ["set interfaces fxp0 unit 0 family inet dhcp","root#"],
+            [f"set interfaces fxp0 unit 0 family inet address {ip_mgmt}","root#"],
             ["commit",f"root@{i}#"],
             ["exit",f"root@{i}>"],
             ["exit","root@:~ #"],
@@ -1748,20 +1762,21 @@ def get_gateway(d1,i):
             retval=d1['vm']['gw']['interfaces'][j]['family']['inet'].split('/')[0]
     return retval
     
-def get_vjunos_mac(d1):
-    #print("inside get_vjunos_mac")
-    mac_vjunos = get_mac_vjunos(d1)
-    pprint.pprint(mac_vjunos)
-    # l1 = []
-    # for i in mac_vjunos.keys():
-    #     # print(mac_vjunos[i])
-    #     l1.append(f"- hw-address : {mac_vjunos[i]['mac']}")
-    #     l1.append(f"  ip-address : {mac_vjunos[i]['ip']}")
-    # r1=yaml.load('\n'.join(l1),Loader=yaml.FullLoader)
-    # j1 = json.dumps(r1, indent=2)
-    # print(j1)
+# def get_vjunos_mac(d1):
+#     #print("inside get_vjunos_mac")
+#     mac_vjunos = get_mac_vjunos(d1)
+#     pprint.pprint(mac_vjunos)
 
-def get_mac_vjunos(d1):
+#     # l1 = []
+#     # for i in mac_vjunos.keys():
+#     #     # print(mac_vjunos[i])
+#     #     l1.append(f"- hw-address : {mac_vjunos[i]['mac']}")
+#     #     l1.append(f"  ip-address : {mac_vjunos[i]['ip']}")
+#     # r1=yaml.load('\n'.join(l1),Loader=yaml.FullLoader)
+#     # j1 = json.dumps(r1, indent=2)
+#     # print(j1)
+
+def get_vjunos_mac(d1):
     mac_vjunos={}
     #print("inside one")
     #print(d1['vm'].keys())
@@ -1772,8 +1787,10 @@ def get_mac_vjunos(d1):
             print(f"Getting mac of {i}")
             mac_vjunos[i]={}
             mac_vjunos[i]['mac']=get_mac_vm(d1,i)
-            mac_vjunos[i]['ip']=d1['vm'][i]['interfaces']['mgmt']['family']['inet'].split('/')[0]
-    return mac_vjunos
+            mac_vjunos[i]['ip']=d1['vm'][i]['interfaces']['mgmt']['family']['inet']
+    with open(f"tmp/mac_address_{d1['name']}.yaml","w") as f1:
+        f1.write(yaml.dump(mac_vjunos))
+    # return mac_vjunos
 
 def create_ztp_config(d1):
     print("Getting vjunos mac address")
@@ -1928,34 +1945,45 @@ def stop(d1):
             with open(file1) as f1:
                 d2 = f1.read()
             d3 = yaml.load(d2,Loader=yaml.FullLoader)
-            ssh=sshconnect(d1)
             tid = d3['tid']
             print(f"stop topology {tid}")
-            cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid} stop"
-            s1,s2,s3=ssh.exec_command(cmd1)
-            for i in s2.readlines():
-                print(i.rstrip())
-            cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid}  unbind"
-            s1,s2,s3=ssh.exec_command(cmd1)
-            for i in s2.readlines():
-                print(i.rstrip())
-            ssh.close()
+            # ssh=sshconnect(d1)
+            # cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid} stop"
+            # s1,s2,s3=ssh.exec_command(cmd1)
+            # for i in s2.readlines():
+            #     print(i.rstrip())
+            # cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid}  unbind"
+            # s1,s2,s3=ssh.exec_command(cmd1)
+            # for i in s2.readlines():
+            #     print(i.rstrip())
+            # ssh.close()
+            cmd1=f"vmm-api -tid {tid} stop".split()
+            result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+            print(result.stdout)
+            cmd1=f"vmm-api -tid {tid} unbind".split()
+            result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+            print(result.stdout)
         else:
             topo = list_topology(d1)
             ls1 = list(topo.keys())
             if d1['name'] in topo.keys():
                 tid = topo[d1['name']]
                 print(f"stoping topology {d1['name']} / {tid}")
-                ssh=sshconnect(d1)
-                cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid} stop"
-                s1,s2,s3=ssh.exec_command(cmd1)
-                for i in s2.readlines():
-                    print(i.rstrip())
-                cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid}  unbind"
-                s1,s2,s3=ssh.exec_command(cmd1)
-                for i in s2.readlines():
-                    print(i.rstrip())
-                ssh.close()
+                # ssh=sshconnect(d1)
+                # cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid} stop"
+                # s1,s2,s3=ssh.exec_command(cmd1)
+                # for i in s2.readlines():
+                #     print(i.rstrip())
+                # cmd1=f"/volume/vmm-cloud/bin/vmm-api  -tid {tid}  unbind"
+                # s1,s2,s3=ssh.exec_command(cmd1)
+                # for i in s2.readlines():
+                #     print(i.rstrip())
+                # ssh.close()
+                cmd1=f"vmm-api -tid {tid} stop".split()
+                result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+                print(result.stdout)
+                cmd1=f"vmm-api -tid {tid} unbind".split()
+                result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
             else:
                 print(f"topology {d1['name']} is not running")
        
@@ -2082,68 +2110,136 @@ def start(d1):
                 for i in s2.readlines():
                     print(i.rstrip())
                 time.sleep(3)
-            cmd1=f"/volume/vmm-cloud/bin/vmm-api config {lab_conf} -g {param1.vmm_group}"
-            s1,s2,s3=ssh.exec_command(cmd1)
-            for i in s2.readlines():
-                # print(i.rstrip())
-                t1 = i.rstrip()
-                if '-tid' in t1:
-                    tid = t1.split(" ")[4]
-            print(f"topology id {tid}")
-            cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} start"
-            s1,s2,s3=ssh.exec_command(cmd1)
-            for i in s2.readlines():
-                print(i.rstrip())
-            cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} ls -a"
-            s1,s2,s3=ssh.exec_command(cmd1)
-            d2={}
-            d2['tid']=str(tid)
-            d2['vm']={}
-            for i in s2.readlines():
-                # print(i.rstrip())
-                i = i.rstrip().replace('"','')
-                if 'Running' in i:
-                    i1 = i.split()[0]
-                    d2['vm'][i1]={}
-                if 'serial_port' in i:
-                    i2 = i.split()[2]
-                    d2['vm'][i1]['serial_port']=i2
-                if 'em0' in i:
-                    i3 = i.split()
-                    d2['vm'][i1]['mac']=i3[5]
-                    if 'unknown' not in i3[7]:
-                        d2['vm'][i1]['ip']=i3[7]
-                if 'vio0' in i:
-                    i3 = i.split()
-                    d2['vm'][i1]['mac']=i3[5]
-                    # print(d2[i1]['mac'])
-                    if 'unknown' not in i3[7]:
-                        d2['vm'][i1]['ip']=i3[7]
-            lab_data = f"tmp/lab_{d1['name']}.yaml"
-            with open(lab_data,"w") as f1:
-                yaml.dump(d2,f1)
+            # cmd1=f"/volume/vmm-cloud/bin/vmm-api config {lab_conf} -g {param1.vmm_group}"
+            # s1,s2,s3=ssh.exec_command(cmd1)
+            # for i in s2.readlines():
+            #     # print(i.rstrip())
+            #     t1 = i.rstrip()
+            #     if '-tid' in t1:
+            #         tid = t1.split(" ")[4]
+            # print(f"topology id {tid}")
+            # cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} start"
+            # s1,s2,s3=ssh.exec_command(cmd1)
+            # for i in s2.readlines():
+            #     print(i.rstrip())
             ssh.close()
+
+            cmd1=f"vmm-api config ./tmp/lab.conf -g {param1.vmm_group}".split()
+            result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+            for i in result.stdout.split("\n"):
+                if '-tid' in i:
+                    tid = i.split(" ")[4]
+            print(f"topology id {tid}")
+            cmd1=f"vmm-api -tid {tid} start".split()
+            result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+            print(result.stdout)
+            # cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} ls -a"
+            # s1,s2,s3=ssh.exec_command(cmd1)
+            # d2={}
+            # d2['tid']=str(tid)
+            # d2['vm']={}
+            # for i in s2.readlines():
+            #     # print(i.rstrip())
+            #     i = i.rstrip().replace('"','')
+            #     if 'Running' in i:
+            #         i1 = i.split()[0]
+            #         d2['vm'][i1]={}
+            #     if 'serial_port' in i:
+            #         i2 = i.split()[2]
+            #         d2['vm'][i1]['serial_port']=i2
+            #     if 'em0' in i:
+            #         i3 = i.split()
+            #         d2['vm'][i1]['mac']=i3[5]
+            #         if 'unknown' not in i3[7]:
+            #             d2['vm'][i1]['ip']=i3[7]
+            #     if 'vio0' in i:
+            #         i3 = i.split()
+            #         d2['vm'][i1]['mac']=i3[5]
+            #         # print(d2[i1]['mac'])
+            #         if 'unknown' not in i3[7]:
+            #             d2['vm'][i1]['ip']=i3[7]
+            # lab_data = f"tmp/lab_{d1['name']}.yaml"
+            # with open(lab_data,"w") as f1:
+            #     yaml.dump(d2,f1)
+            write_lab_yaml(d1,tid)
             write_ssh_config(d1)
 
     elif d1['pod']['type'] == 'kvm':
         print("not yet implemented")
 
+def rewrite_lab_yaml(d1):
+    lab_data = f"tmp/lab_{d1['name']}.yaml"
+    with open(lab_data) as f1:
+        d2 = f1.read()
+    d3 = yaml.load(d2,Loader=yaml.FullLoader)
+    tid = d3['tid']
+    write_lab_yaml(d1,tid)
+
+def vmm_cloud_auth(d1):
+    pass
+
+def write_lab_yaml(d1,tid):
+    print(f"write lab.yaml for tid {tid}")
+    # ssh=sshconnect(d1)
+    # cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} ls -a"
+    # s1,s2,s3=ssh.exec_command(cmd1)
+    # ssh.close()
+    cmd1=f"vmm-api -tid {tid} ls -a".split()
+    result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+    d2={}
+    d2['tid']=str(tid)
+    d2['vm']={}
+    for i in result.stdout.split("\n"):
+        # print(i.rstrip())
+        i = i.rstrip().replace('"','')
+        if 'Running' in i:
+            i1 = i.split()[0]
+            d2['vm'][i1]={}
+        if 'serial_port' in i:
+            i2 = i.split()[2]
+            d2['vm'][i1]['serial_port']=i2
+        if 'em0' in i:
+            i3 = i.split()
+            d2['vm'][i1]['mac']=i3[5]
+            if 'unknown' not in i3[7]:
+                d2['vm'][i1]['ip']=i3[7]
+        if 'vio0' in i:
+            i3 = i.split()
+            d2['vm'][i1]['mac']=i3[5]
+            # print(d2[i1]['mac'])
+            if 'unknown' not in i3[7]:
+                d2['vm'][i1]['ip']=i3[7]
+    lab_data = f"tmp/lab_{d1['name']}.yaml"
+    with open(lab_data,"w") as f1:
+        yaml.dump(d2,f1)
+    get_serial(d1)
+    get_vjunos_mac(d1)
 
 def list_topology(d1):
     #print("checking topology")
-    ssh=sshconnect(d1)
-    cmd1="/volume/vmm-cloud/bin/vmm-api topo_name --display-all"
-    s1,s2,s3=ssh.exec_command(cmd1)
-    retval = {}
-    #print(f"len s2 {len(s2.readlines())}")
-    for i in s2.readlines():
-        # print(f"value of i {i}")
-        # if i:
-        # print(f"len of i {len(i)}")
-        d = i.rstrip().split()
-        if len(d) != 0:
-            retval[d[1]] = d[0]
-    ssh.close()
+    #ssh=sshconnect(d1)
+    # cmd1="/volume/vmm-cloud/bin/vmm-api topo_name --display-all"
+    # s1,s2,s3=ssh.exec_command(cmd1)
+    # retval = {}
+    # #print(f"len s2 {len(s2.readlines())}")
+    # for i in s2.readlines():
+    #     # print(f"value of i {i}")
+    #     # if i:
+    #     # print(f"len of i {len(i)}")
+    #     d = i.rstrip().split()
+    #     if len(d) != 0:
+    #         retval[d[1]] = d[0]
+    # ssh.close()
+    retval={}
+    cmd1="vmm-api --json topo_name --display-all".split()
+    #print(cmd1)
+    result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
+    r1 = json.loads(result.stdout)
+    #print(r1)
+    for i in r1['output'].split("\n"):
+        r2 = i.split()
+        if len(r2) != 0:
+            retval[r2[1]]=r2[0]
     return retval
 
 def list_topo(d1):
@@ -2177,52 +2273,30 @@ def check_disk2(d1):
     return d2
 
 def upload(d1,upload_status=1):
-    if d1['pod']['type'] in  ['vmm','cloud']:
-        if d1['pod']['type'] == 'cloud':
-            check_topology(d1)
-            if d1['running']:
-                print(f"topology {d1['name']} is already running on VMM")
-            else:
-                if upload_status:
-                    print('starting topology on vmm')
-                else:
-                    print('creating topology for  vmm')
-                if not checking_config_syntax(d1):
-                    return
-                with open(d1['template']['vmmtopo']) as f1:
-                    t1=f1.read()
-                datatopo=create_lab_config(d1)
-                #pprint.pprint(f"datatopo {datatopo}")
-                c1 = Template(t1).render(datatopo)
-                #print(datatopo)
-                #print(c1)
-                if os.path.exists(param1.tmp_dir):
-                    print("directory exist ")
-                    shutil.rmtree(param1.tmp_dir)
-                os.mkdir(param1.tmp_dir)
-                f1=param1.tmp_dir + "lab.conf"
-                with open(f1,"w") as wr1:
-                    wr1.write(c1)
-                write_netdev_config(d1)
-                #write_pc_dummy_config(d1)
-                # write_inventory(d1)
-                # if 'ztp' in d1.keys():
-                # 	f1 = param1.tmp_dir + "ztp_config.txt"
-                # 	ztp_config = create_ztp_config(d1)
-                # 	write_to_file(f1,ztp_config)
-
-                # cmd1=create_hd2(d1)
-                # if cmd1:
-                # 	ssh=sshconnect(d1)
-                # 	print("creating secondary disk")
-                # 	s1,s2,s3=ssh.exec_command(cmd1)
-                # 	for i in s2.readlines():
-                # 		print(i.rstrip())
-                
-                if upload_status:
-                    upload_file_to_server(d1)
-                else:
-                    print("configuration has been created")
+    if not checking_config_syntax(d1):
+        print("syntax error")
+        return
+    with open(d1['template']['vmmtopo']) as f1:
+        t1=f1.read()
+    datatopo=create_lab_config(d1)
+    c1 = Template(t1).render(datatopo)
+    if os.path.exists(param1.tmp_dir):
+        print("directory exist ")
+        shutil.rmtree(param1.tmp_dir)
+    os.mkdir(param1.tmp_dir)
+    f1=param1.tmp_dir + "lab.conf"
+    with open(f1,"w") as wr1:
+        wr1.write(c1)
+    write_netdev_config(d1)
+    if d1['pod']['type'] == 'vmm':
+        if upload_status:
+            upload_file_to_server(d1)
+        else:
+            print("configuration has been created")
+    elif d1['pod']['type'] == 'cloud':
+        check_topology(d1)
+        if d1['running']:
+            print(f"topology {d1['name']} is already running on VMM")
     elif d1['pod']['type'] == 'kvm':
         print("not yet implemented")
 

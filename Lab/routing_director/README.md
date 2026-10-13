@@ -279,7 +279,7 @@ Screenshot recording for this can be found here [part1](https://asciinema.org/a/
        set deployment cluster applications web-ui web-admin-password "J4k4rt4#170845" 
        set deployment cluster applications pathfinder pce-server pce-server-vip 172.16.12.3
        set deployment cluster install enable-l3-vip true
-       set deployment cluster common-services metallb metallb-bgp-peer peer-ip 172.16.11.254 peer-asn 65100 local-asn 65101 local-nodes 172.16.11.11 
+       set deployment cluster common-services metallb metallb-bgp-peer peer-ip 172.16.11.254 peer-asn 65100 local-asn 65101 local-nodes 172.16.11.11
        set deployment cluster common-services metallb metallb-bgp-peer peer-ip 172.16.11.254 peer-asn 65100 local-asn 65101 local-nodes 172.16.11.12
        set deployment cluster common-services metallb metallb-bgp-peer peer-ip 172.16.11.254 peer-asn 65100 local-asn 65101 local-nodes 172.16.11.13  
        set deployment cluster common-services metallb metallb-bgp-peer peer-ip 172.16.11.254 peer-asn 65100 local-asn 65101 local-nodes 172.16.11.14

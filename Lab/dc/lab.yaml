@@ -14,7 +14,7 @@ pod:
   home_dir : /vmm/data/user_disks/irzan
   dns: 172.16.62.254
 images:
-  gw: images/gw.qcow2
+  gw: images/gw3.qcow2
   aos: images/aos_server_6.2.0-117.qcow2
   aos_ztp: images/apstra-ztp-6.2.0-11.qcow2
   aos_flow: images/apstra-flow-6.2.0-ubuntu-22.04-7.26.3.qcow2

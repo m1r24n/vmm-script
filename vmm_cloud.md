@@ -21,4 +21,9 @@
 
 # all in one command 
 
-     vmm-api launch -c <config_file> -g vmm-default
+     vmm-api launch -c <config_file> -g vmm-default --wait
+
+# list topo
+
+    vmm-api topo_name --display-all
+    

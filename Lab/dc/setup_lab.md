@@ -156,8 +156,8 @@
 # node SVR
     #!/bin/bash
     VM=svr6dc1
-    MAC=56:04:20:00:25:96
-    IPv4=192.168.111.17/24
+    MAC=56:04:15:00:40:55
+    IPv4=192.168.111.16/24
     IPv6=fc00:dead:beef:a111::1000:16/64
     GWv4=192.168.111.1
     GWv6=fc00:dead:beef:a111::1
@@ -346,14 +346,22 @@ create LXC container without vlan
     !
     ipv6 route ::/0 Null0
     !
+    no router bgp 4200000001
     router bgp 4200000001
     no bgp ebgp-requires-policy
-    neighbor 172.16.63.3 remote-as 4200009000
+    neighbor 172.16.63.3 remote-as 4200009001
     neighbor 172.16.63.3 bfd
     neighbor 172.16.63.3 bfd profile BFD1
-    neighbor fc00:dead:beef:ff63::3 remote-as 4200009000
+    neighbor fc00:dead:beef:ff63::3 remote-as 4200009001
     neighbor fc00:dead:beef:ff63::3 bfd
     neighbor fc00:dead:beef:ff63::3 bfd profile BFD1
+     neighbor 172.16.63.6 remote-as 4200009002
+    neighbor 172.16.63.6 bfd
+    neighbor 172.16.63.6 bfd profile BFD1
+    neighbor fc00:dead:beef:ff63::6 remote-as 4200009002
+    neighbor fc00:dead:beef:ff63::6 bfd
+    neighbor fc00:dead:beef:ff63::6 bfd profile BFD1
+
     !
     address-family ipv4 unicast
     network 0.0.0.0/0
@@ -362,6 +370,7 @@ create LXC container without vlan
     address-family ipv6 unicast
     network ::/0
     neighbor fc00:dead:beef:ff63::3 activate
+    neighbor fc00:dead:beef:ff63::6 activate
     exit-address-family
     exit
     !
@@ -390,8 +399,7 @@ create LXC container without vlan
 
 ## fwext1
 
-
-configuration for RZ1 on **fwext1
+configuration for RZ1 on *fwext1*
 
     set interfaces ge-0/0/0 unit 0 family inet address 172.16.63.3/24
     set interfaces ge-0/0/0 unit 0 family inet6 address fc00:dead:beef:ff63::3/64
@@ -470,7 +478,7 @@ configuration for RZ1 on **fwext1
     set security policies from-zone RZ1 to-zone untrust policy policy1 match application any
     set security policies from-zone RZ1 to-zone untrust policy policy1 then permit
 
-configuration for RZ2 on **fwext1
+configuration for RZ2 on *fwext1*
 
     set interfaces ge-0/0/1 unit 1002 vlan-id 1002
     set interfaces ge-0/0/1 unit 1002 family inet address 172.16.100.5/31
@@ -494,21 +502,22 @@ configuration for RZ2 on **fwext1
 
 
     set security nat source rule-set rs1 from zone RZ2
-    set security nat destination pool dnat2 address 192.168.111.111/32
+
+    set security nat destination pool dnat2 address 192.168.111.101/32
     set security nat destination rule-set rs1 from zone untrust
     set security nat destination rule-set rs1 rule rule2 match source-address 0.0.0.0/0
     set security nat destination rule-set rs1 rule rule2 match destination-address 172.16.1.17/32
     set security nat destination rule-set rs1 rule rule2 match application junos-ssh
     set security nat destination rule-set rs1 rule rule2 then destination-nat pool dnat2
 
-    set security address-book global address lxc3lxd3v111v6 fc00:dead:beef:a111::1000:111/128
-    set security address-book global address lxc3lxd3v111v4 192.168.111.111/32
+    set security address-book global address lxc3lxd1v111v6 fc00:dead:beef:a111::1000:101/128
+    set security address-book global address lxc3lxd1v111v4 192.168.111.101/32
     set security policies from-zone untrust to-zone RZ2 policy policy1 match source-address any
-    set security policies from-zone untrust to-zone RZ2 policy policy1 match destination-address lxc3lxd3v111v4
+    set security policies from-zone untrust to-zone RZ2 policy policy1 match destination-address lxc3lxd1v111v4
     set security policies from-zone untrust to-zone RZ2 policy policy1 match application junos-ssh
     set security policies from-zone untrust to-zone RZ2 policy policy1 then permit
     set security policies from-zone untrust to-zone RZ2 policy policy2 match source-address any
-    set security policies from-zone untrust to-zone RZ2 policy policy2 match destination-address lxc3lxd3v111v6
+    set security policies from-zone untrust to-zone RZ2 policy policy2 match destination-address lxc3lxd1v111v6
     set security policies from-zone untrust to-zone RZ2 policy policy2 match application junos-ssh
     set security policies from-zone untrust to-zone RZ2 policy policy2 then permit
     set security policies from-zone RZ2 to-zone untrust policy default-permit match source-address any
@@ -517,7 +526,7 @@ configuration for RZ2 on **fwext1
     set security policies from-zone RZ2 to-zone untrust policy default-permit then permit
 
 
-configuration for RZ3 on **fwext1
+configuration for RZ3 on *fwext1*
 
     set interfaces ge-0/0/1 unit 1003 vlan-id 1003
     set interfaces ge-0/0/1 unit 1003 family inet address 172.16.100.9/31
@@ -541,24 +550,22 @@ configuration for RZ3 on **fwext1
 
 
     set security nat source rule-set rs1 from zone RZ3
-    delete  security nat destination pool dnat3 address 192.168.122.125/32
-    set security nat destination pool dnat3 address 192.168.122.1/32
+    set security nat destination pool dnat3 address 192.168.122.101/32
     set security nat destination rule-set rs1 from zone untrust
     set security nat destination rule-set rs1 rule rule3 match source-address 0.0.0.0/0
     set security nat destination rule-set rs1 rule rule3 match destination-address 172.16.1.18/32
     set security nat destination rule-set rs1 rule rule3 match application junos-ssh
     set security nat destination rule-set rs1 rule rule3 then destination-nat pool dnat3
 
-    delete security address-book global address lxc5lxd2v122v6
-    delete security address-book global address lxc5lxd2v122v4
-    set security address-book global address lxc5lxd2v122v6 fc00:dead:beef:a122::1/128
-    set security address-book global address lxc5lxd2v122v4 192.168.122.1/32
+
+    set security address-book global address lxc1lxd2v122v6 fc00:dead:beef:a122::1000:101/128
+    set security address-book global address lxc1lxd2v122v4 192.168.122.101/32
     set security policies from-zone untrust to-zone RZ3 policy policy1 match source-address any
-    set security policies from-zone untrust to-zone RZ3 policy policy1 match destination-address lxc5lxd2v122v4
+    set security policies from-zone untrust to-zone RZ3 policy policy1 match destination-address lxc1lxd2v122v4
     set security policies from-zone untrust to-zone RZ3 policy policy1 match application junos-ssh
     set security policies from-zone untrust to-zone RZ3 policy policy1 then permit
     set security policies from-zone untrust to-zone RZ3 policy policy2 match source-address any
-    set security policies from-zone untrust to-zone RZ3 policy policy2 match destination-address lxc5lxd2v122v6
+    set security policies from-zone untrust to-zone RZ3 policy policy2 match destination-address lxc1lxd2v122v6
     set security policies from-zone untrust to-zone RZ3 policy policy2 match application junos-ssh
     set security policies from-zone untrust to-zone RZ3 policy policy2 then permit
     set security policies from-zone RZ3 to-zone untrust policy default-permit match source-address any
@@ -591,7 +598,6 @@ configuration for SVRMGMT on **fwext1**
 
 
     set security nat source rule-set rs1 from zone SVRMGMT
-    delete security nat destination pool dnat4 address 192.168.1.1/32
     set security nat destination pool dnat4 address 192.168.1.101/32
     set security nat destination rule-set rs1 from zone untrust
     set security nat destination rule-set rs1 rule rule4 match source-address 0.0.0.0/0
@@ -599,15 +605,15 @@ configuration for SVRMGMT on **fwext1**
     set security nat destination rule-set rs1 rule rule4 match application junos-ssh
     set security nat destination rule-set rs1 rule rule4 then destination-nat pool dnat4
 
-    delete security address-book global address lxd1dc1v6 fc00:dead:beef:1::1000:1/128
     set security address-book global address lxd1dc1v6 fc00:dead:beef:1::1000:101/128
-    delete security address-book global address lxd1dc1v4 192.168.1.1/32
     set security address-book global address lxd1dc1v4 192.168.1.101/32
+    set security address-book global address lxds fc00:dead:beef:a001::/64
     set security policies from-zone untrust to-zone SVRMGMT policy policy1 match source-address any
     set security policies from-zone untrust to-zone SVRMGMT policy policy1 match destination-address lxd1dc1v4
     set security policies from-zone untrust to-zone SVRMGMT policy policy1 match application junos-ssh
     set security policies from-zone untrust to-zone SVRMGMT policy policy1 then permit
     set security policies from-zone untrust to-zone SVRMGMT policy policy2 match source-address any
+    set security policies from-zone untrust to-zone SVRMGMT policy policy2 match destination-address lxds
     set security policies from-zone untrust to-zone SVRMGMT policy policy2 match destination-address lxd1dc1v6
     set security policies from-zone untrust to-zone SVRMGMT policy policy2 match application junos-ssh
     set security policies from-zone untrust to-zone SVRMGMT policy policy2 then permit
@@ -705,6 +711,8 @@ configuration for SVRMGMT on **fwext1**
 
 ## HBR, LXD4dc2
 
+    sudo hostname lxd4dc1
+    hostname | sudo tee /etc/hostname
     cat << EOF | sudo tee /etc/netplan/01_net.yaml
     network:
         version: 2
@@ -725,6 +733,10 @@ configuration for SVRMGMT on **fwext1**
                 - 192.168.124.1/24
                 - fc00:dead:Beef:a124::1/64
     EOF
+    sudo netplan apply
+    sudo sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
+    sudo sed -i -e "s/bfdd=no/bfdd=yes/" /etc/frr/daemons
+    sudo systemctl restart frr
 
 
     Current configuration:
@@ -784,6 +796,9 @@ configuration for SVRMGMT on **fwext1**
 
 ## HBR, LXD6dc1
 
+    sudo hostname lxd6dc1
+    hostname | sudo tee /etc/hostname
+
     cat << EOF | sudo tee /etc/netplan/01_net.yaml
     network:
         version: 2
@@ -802,8 +817,12 @@ configuration for SVRMGMT on **fwext1**
             br0:
                 addresses:
                 - 192.168.126.1/24
-                - fc00:dead:Beef:a124::1/64
+                - fc00:dead:Beef:a126::1/64
     EOF
+    sudo netplan apply
+    sudo sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
+    sudo sed -i -e "s/bfdd=no/bfdd=yes/" /etc/frr/daemons
+    sudo systemctl restart frr
 
 
     Current configuration:
@@ -814,7 +833,7 @@ configuration for SVRMGMT on **fwext1**
     log syslog informational
     service integrated-vtysh-config
     !
-    router bgp 4200008004
+    router bgp 4200008006
     no bgp ebgp-requires-policy
     bgp bestpath as-path multipath-relax
     neighbor 192.168.11.1 remote-as 4200001105
@@ -863,7 +882,7 @@ configuration for SVRMGMT on **fwext1**
 
 
 
-## HBR, LXD9dc1
+## HBR, LXD8dc1
 
     cat << EOF | sudo tee /etc/netplan/01_net.yaml
     network:
@@ -872,28 +891,32 @@ configuration for SVRMGMT on **fwext1**
             eth0:
                 dhcp4: false
                 addresses:
-                - 192.168.11.109/24
-                - fc00:dead:beef:1011::1000:109/64
+                - 192.168.11.108/24
+                - fc00:dead:beef:1011::1000:108/64
             eth1:
                 dhcp6: false
                 addresses:
-                - 192.168.12.109/24
-                - fc00:dead:beef:1012::1000:109/64
+                - 192.168.12.108/24
+                - fc00:dead:beef:1012::1000:108/64
         bridges:
             br0:
                 addresses:
-                - 192.168.129.1/24
-                - fc00:dead:Beef:a129::1/64
+                - 192.168.128.1/24
+                - fc00:dead:Beef:a128::1/64
     EOF
     sudo netplan apply
-    sudo hostname lxd9dc1
+    sudo hostname lxd8dc1
     hostname | sudo tee /etc/hostname
+    sudo netplan apply
+    sudo sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
+    sudo sed -i -e "s/bfdd=no/bfdd=yes/" /etc/frr/daemons
+    sudo systemctl restart frr
 
     Current configuration:
     !
     
     !
-    router bgp 4200008009
+    router bgp 4200008008
     no bgp ebgp-requires-policy
     bgp bestpath as-path multipath-relax
     neighbor 192.168.11.1 remote-as 4200001107
@@ -910,14 +933,14 @@ configuration for SVRMGMT on **fwext1**
     neighbor fc00:dead:beef:1012::1 bfd profile BFD1
     !
     address-family ipv4 unicast
-    network 192.168.129.0/24
+    network 192.168.128.0/24
     neighbor 192.168.11.1 distribute-list adv1v4 out
     neighbor 192.168.12.1 distribute-list adv1v4 out
     maximum-paths 4
     exit-address-family
     !
     address-family ipv6 unicast
-    network fc00:dead:beef:a129::/64
+    network fc00:dead:beef:a128::/64
     neighbor fc00:dead:beef:1011::1 activate
     neighbor fc00:dead:beef:1011::1 distribute-list adv1v6 out
     neighbor fc00:dead:beef:1012::1 activate
@@ -926,9 +949,9 @@ configuration for SVRMGMT on **fwext1**
     exit-address-family
     exit
     !
-    access-list adv1v4 seq 5 permit 192.168.129.0/24
+    access-list adv1v4 seq 5 permit 192.168.128.0/24
     !
-    ipv6 access-list adv1v6 seq 5 permit fc00:dead:beef:a129::/64
+    ipv6 access-list adv1v6 seq 5 permit fc00:dead:beef:a128::/64
     !
     bfd
     profile BFD1
@@ -968,7 +991,7 @@ configuration for SVRMGMT on **fwext1**
     
 ## fwext2
 
-configuration for RZ1 on **fwext2
+configuration for **fwext2
 
     set interfaces ge-0/0/0 unit 0 family inet address 172.16.63.6/24
     set interfaces ge-0/0/0 unit 0 family inet6 address fc00:dead:beef:ff63::6/64
@@ -990,14 +1013,16 @@ configuration for RZ1 on **fwext2
     set policy-options policy-statement to_ext term 2 then accept
     set policy-options policy-statement to_ext term default then reject
 
+configuration for RZ4 on **fwext2**
+
     set interfaces ge-0/0/1 vlan-tagging
     set interfaces ge-0/0/1 unit 1001 vlan-id 1001
-    set interfaces ge-0/0/1 unit 1001 family inet address 172.16.100.13/31
-    set interfaces ge-0/0/1 unit 1001 family inet6 address fc00:dead:beef:f100::13/127
+    set interfaces ge-0/0/1 unit 1001 family inet address 172.16.100.17/31
+    set interfaces ge-0/0/1 unit 1001 family inet6 address fc00:dead:beef:f100::17/127
     set interfaces ge-0/0/2 vlan-tagging
     set interfaces ge-0/0/2 unit 1001 vlan-id 1001
-    set interfaces ge-0/0/2 unit 1001 family inet address 172.16.100.15/31
-    set interfaces ge-0/0/2 unit 1001 family inet6 address fc00:dead:beef:f100::15/127
+    set interfaces ge-0/0/2 unit 1001 family inet address 172.16.100.19/31
+    set interfaces ge-0/0/2 unit 1001 family inet6 address fc00:dead:beef:f100::19/127
     set security zones security-zone RZ4 host-inbound-traffic system-services ping
     set security zones security-zone RZ4 host-inbound-traffic system-services ssh
     set security zones security-zone RZ4 host-inbound-traffic protocols all
@@ -1007,10 +1032,10 @@ configuration for RZ1 on **fwext2
     set protocols bgp group to_border_leaf_RZ4 multipath multiple-as
     set protocols bgp group to_border_leaf_RZ4 bfd-liveness-detection minimum-interval 500
     set protocols bgp group to_border_leaf_RZ4 bfd-liveness-detection multiplier 3
-    set protocols bgp group to_border_leaf_RZ4 neighbor 172.16.100.12 peer-as 4200002001
-    set protocols bgp group to_border_leaf_RZ4 neighbor 172.16.100.14 peer-as 4200002002
-    set protocols bgp group to_border_leaf_RZ4 neighbor fc00:dead:beef:f100::0 peer-as 4200002001
-    set protocols bgp group to_border_leaf_RZ4 neighbor fc00:dead:beef:f100::2 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ4 neighbor 172.16.100.16 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ4 neighbor 172.16.100.18 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ4 neighbor fc00:dead:beef:f100::16 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ4 neighbor fc00:dead:beef:f100::18 peer-as 4200002002
     set policy-options policy-statement to_border_leaf term 1 from route-filter 0.0.0.0/0 exact
     set policy-options policy-statement to_border_leaf term 1 then accept
     set policy-options policy-statement to_border_leaf term 2 from route-filter ::/0 exact
@@ -1032,11 +1057,12 @@ configuration for RZ1 on **fwext2
     set security nat destination rule-set rs1 rule rule1 match application junos-ssh
     set security nat destination rule-set rs1 rule rule1 then destination-nat pool dnat1
 
-    set security address-book global address svr1dc2v6 fc00:dead:beef:a201::1000:11/128
+    set security address-book global address purple fc00:dead:beef:a201::/64
     set security address-book global address svr1dc2v4 192.168.201.11/32
     set security policies from-zone untrust to-zone RZ4 policy policy1 match source-address any
-    set security policies from-zone untrust to-zone RZ4 policy policy1 match destination-address svr1dc2v6
+    set security policies from-zone untrust to-zone RZ4 policy policy1 match destination-address purple
     set security policies from-zone untrust to-zone RZ4 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ4 policy policy1 match application junos-ping
     set security policies from-zone untrust to-zone RZ4 policy policy1 then permit
     set security policies from-zone untrust to-zone RZ4 policy policy2 match source-address any
     set security policies from-zone untrust to-zone RZ4 policy policy2 match destination-address svr1dc2v4
@@ -1046,8 +1072,163 @@ configuration for RZ1 on **fwext2
     set security policies from-zone RZ4 to-zone untrust policy policy1 match destination-address any
     set security policies from-zone RZ4 to-zone untrust policy policy1 match application any
     set security policies from-zone RZ4 to-zone untrust policy policy1 then permit
+
+
+configuration for RZ5 on **fwext2**
+
+    set interfaces ge-0/0/1 vlan-tagging
+    set interfaces ge-0/0/1 unit 1002 vlan-id 1002
+    set interfaces ge-0/0/1 unit 1002 family inet address 172.16.100.21/31
+    set interfaces ge-0/0/1 unit 1002 family inet6 address fc00:dead:beef:f100::21/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1002 vlan-id 1002
+    set interfaces ge-0/0/2 unit 1002 family inet address 172.16.100.23/31
+    set interfaces ge-0/0/2 unit 1002 family inet6 address fc00:dead:beef:f100::23/127
+    set security zones security-zone RZ5 host-inbound-traffic system-services ping
+    set security zones security-zone RZ5 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ5 host-inbound-traffic protocols all
+    set security zones security-zone RZ5 interfaces ge-0/0/1.1002
+    set security zones security-zone RZ5 interfaces ge-0/0/2.1002
+    set protocols bgp group to_border_leaf_RZ5 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ5 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ5 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ5 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ5 neighbor 172.16.100.20 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ5 neighbor 172.16.100.22 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ5 neighbor fc00:dead:beef:f100::20 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ5 neighbor fc00:dead:beef:f100::22 peer-as 4200002002
+
+
+
+    set security nat source rule-set rs1 from zone RZ5
+
+    set security nat destination pool dnat3 address 192.168.202.13/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule2 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule2 match destination-address 172.16.1.49/32
+    set security nat destination rule-set rs1 rule rule2 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule2 then destination-nat pool dnat3
+
+    set security address-book global address magenta fc00:dead:beef:a202::/64
+    set security address-book global address svr3dc2v4 192.168.202.13/32
+    set security policies from-zone untrust to-zone RZ5 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ5 policy policy1 match destination-address magenta
+    set security policies from-zone untrust to-zone RZ5 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ5 policy policy1 match application junos-ping
+    set security policies from-zone untrust to-zone RZ5 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ5 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ5 policy policy2 match destination-address svr3dc2v4
+    set security policies from-zone untrust to-zone RZ5 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ5 policy policy2 then permit
+    set security policies from-zone RZ5 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ5 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ5 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ5 to-zone untrust policy policy1 then permit
+
+
+configuration for RZ6 on **fwext2**
+
+    set interfaces ge-0/0/1 vlan-tagging
+    set interfaces ge-0/0/1 unit 1003 vlan-id 1003
+    set interfaces ge-0/0/1 unit 1003 family inet address 172.16.100.25/31
+    set interfaces ge-0/0/1 unit 1003 family inet6 address fc00:dead:beef:f100::25/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1003 vlan-id 1003
+    set interfaces ge-0/0/2 unit 1003 family inet address 172.16.100.27/31
+    set interfaces ge-0/0/2 unit 1003 family inet6 address fc00:dead:beef:f100::27/127
+    set security zones security-zone RZ6 host-inbound-traffic system-services ping
+    set security zones security-zone RZ6 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ6 host-inbound-traffic protocols all
+    set security zones security-zone RZ6 interfaces ge-0/0/1.1003
+    set security zones security-zone RZ6 interfaces ge-0/0/2.1003
+
+    set protocols bgp group to_border_leaf_RZ6 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ6 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ6 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ6 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ6 neighbor 172.16.100.24 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ6 neighbor 172.16.100.26 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ6 neighbor fc00:dead:beef:f100::24 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ6 neighbor fc00:dead:beef:f100::26 peer-as 4200002002
+
+
+    set security nat source rule-set rs1 from zone RZ6
+
+    set security nat destination pool dnat5 address 192.168.222.101/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule3 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule3 match destination-address 172.16.1.50/32
+    set security nat destination rule-set rs1 rule rule3 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule3 then destination-nat pool dnat5
+
+    set security address-book global address RZ6a222 fc00:dead:beef:a222::/64
+    set security address-book global address RZ6a224 fc00:dead:beef:a224::/64
+    set security address-book global address RZ6lxc1 192.168.222.101/32
+    set security policies from-zone untrust to-zone RZ6 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ6 policy policy1 match destination-address RZ6a222
+    set security policies from-zone untrust to-zone RZ6 policy policy1 match destination-address RZ6a224
+    set security policies from-zone untrust to-zone RZ6 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ6 policy policy1 match application junos-ping
+    set security policies from-zone untrust to-zone RZ6 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ6 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ6 policy policy2 match destination-address RZ6lxc1
+    set security policies from-zone untrust to-zone RZ6 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ6 policy policy2 then permit
+    set security policies from-zone RZ6 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ6 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ6 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ6 to-zone untrust policy policy1 then permit
     
 
 
+configuration for RZsvrmgmt on **fwext2**
+
+    set interfaces ge-0/0/1 vlan-tagging
+    set interfaces ge-0/0/1 unit 1004 vlan-id 1004
+    set interfaces ge-0/0/1 unit 1004 family inet address 172.16.100.29/31
+    set interfaces ge-0/0/1 unit 1004 family inet6 address fc00:dead:beef:f100::29/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1004 vlan-id 1004
+    set interfaces ge-0/0/2 unit 1004 family inet address 172.16.100.31/31
+    set interfaces ge-0/0/2 unit 1004 family inet6 address fc00:dead:beef:f100::31/127
+    set security zones security-zone RZsvrmgmt host-inbound-traffic system-services ping
+    set security zones security-zone RZsvrmgmt host-inbound-traffic system-services ssh
+    set security zones security-zone RZsvrmgmt host-inbound-traffic protocols all
+    set security zones security-zone RZsvrmgmt interfaces ge-0/0/1.1004
+    set security zones security-zone RZsvrmgmt interfaces ge-0/0/2.1004
+
+    set protocols bgp group to_border_leaf_RZsvrmgmt export to_border_leaf
+    set protocols bgp group to_border_leaf_RZsvrmgmt multipath multiple-as
+    set protocols bgp group to_border_leaf_RZsvrmgmt bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZsvrmgmt bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZsvrmgmt neighbor 172.16.100.28 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZsvrmgmt neighbor 172.16.100.30 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZsvrmgmt neighbor fc00:dead:beef:f100::28 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZsvrmgmt neighbor fc00:dead:beef:f100::30 peer-as 4200002002
 
 
+
+    set security nat source rule-set rs1 from zone RZsvrmgmt
+
+    set security nat destination pool dnat6 address 192.168.2.101/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule4 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule4 match destination-address 172.16.1.51/32
+    set security nat destination rule-set rs1 rule rule4 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule4 then destination-nat pool dnat5
+
+    set security address-book global address RZsvrmgmt fc00:dead:beef:a002::/64
+    set security address-book global address RZsvrmgmtlxd1 192.168.2.101/32
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy1 match destination-address RZsvrmgmt
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy1 match application junos-ping
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy1 then permit
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy2 match destination-address RZsvrmgmtlxd1
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZsvrmgmt policy policy2 then permit
+    set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 match application any
+    set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 then permit

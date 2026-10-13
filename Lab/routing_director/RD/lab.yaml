@@ -1,7 +1,7 @@
 ---
-name: rd35
+name: rd
 pod: 
-  type: vmm
+  type: cloud
   vmmserver: q-pod35-vmm.englab.juniper.net
   user: irzan
   home_dir : /vmm/data/user_disks/irzan

@@ -29,6 +29,8 @@ if config1:
 			lib1.stop(d1)
 		elif config1['cmd'] == 'list':
 			lib1.list_vm(d1)
+		elif config1['cmd'] == 'auth':
+			lib1.vmm_cloud_auth(d1)
 		elif config1['cmd'] in ['list_topo','ls_topo']:
 			lib1.list_topo(d1)
 		elif config1['cmd'] == 'set_gw':
@@ -44,16 +46,21 @@ if config1:
 			set_gw(d1)
 		elif config1['cmd'] == 'set_host':
 			lib1.set_host(d1,config1['vm'])
-		elif config1['cmd'] == 'set_srx':
-			if len(sys.argv) != 3: 
-				print("vmm key is not included")
-				print("usage: ")
-				print("vmm.py set_srx <vmm_key>")
-			else:
-				vmm_key = sys.argv[2]
-				lib1.set_srx(d1,vmm_key)
+		elif config1['cmd'] in ['set_srx','set_vsrx']:
+			if d1['pod']['type'] == 'vmm':
+				if len(sys.argv) != 3: 
+					print("vmm key is not included")
+					print("usage: ")
+					print("vmm.py set_srx <vmm_key>")
+				else:
+					vmm_key = sys.argv[2]
+					lib1.set_srx(d1,vmm_key)
+			elif d1['pod']['type'] == 'cloud':
+				lib1.set_srx(d1)
 		elif config1['cmd'] == 'ssh_config':
 			lib1.write_ssh_config(d1)
+		elif config1['cmd'] == 'rewrite_lab':
+			lib1.rewrite_lab_yaml(d1)
 		elif config1['cmd'] == 'get_vjunos_mac':
 			lib1.get_vjunos_mac(d1)
 		elif config1['cmd'] == 'print_data':

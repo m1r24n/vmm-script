@@ -1,14 +1,13 @@
 ---
-name: rdnet36 # this is rdnet
+name: rdnet # this is rdnet
 pod: 
-  type: vmm
+  type: cloud
   #vmmserver: q-pod35-vmm.englab.juniper.net
   # vmmserver: q-pod27-vmm.englab.juniper.net
-  vmmserver: q-pod36-vmm.englab.juniper.net
+  vmmserver: q-pod32-vmm.englab.juniper.net
   user: irzan
   # adpassword: ThisIsAnaMabokCoy
   home_dir : /vmm/data/user_disks/irzan
-  gw_type: 3
   dns: 172.16.11.11
 images:
   gw: images/gw3.qcow2
