@@ -2076,7 +2076,7 @@ def start(d1):
             print(i.rstrip())
         # cmd1 = check_disk2(d1)
         # print("create hd2/hd3 ")
-        cmd1=create_hd2(d1)
+        #cmd1=create_hd2(d1)
         if cmd1:
             print("creating secondary disk")
             # time.sleep(3)
@@ -2101,15 +2101,15 @@ def start(d1):
         if not d1['running']:
             print('starting cloud topology on vmm')
             lab_conf=d1['pod']['home_dir'] +'/vm/' + d1['name'] + "/lab.conf"
-            ssh=sshconnect(d1)
-            cmd1=create_hd2(d1)
-            if cmd1:
-                print("creating secondary disk")
-                # time.sleep(3)
-                s1,s2,s3=ssh.exec_command(cmd1)
-                for i in s2.readlines():
-                    print(i.rstrip())
-                time.sleep(3)
+            # ssh=sshconnect(d1)
+            # cmd1=create_hd2(d1)
+            # if cmd1:
+            #     print("creating secondary disk")
+            #     # time.sleep(3)
+            #     s1,s2,s3=ssh.exec_command(cmd1)
+            #     for i in s2.readlines():
+            #         print(i.rstrip())
+            #     time.sleep(3)
             # cmd1=f"/volume/vmm-cloud/bin/vmm-api config {lab_conf} -g {param1.vmm_group}"
             # s1,s2,s3=ssh.exec_command(cmd1)
             # for i in s2.readlines():
@@ -2122,7 +2122,7 @@ def start(d1):
             # s1,s2,s3=ssh.exec_command(cmd1)
             # for i in s2.readlines():
             #     print(i.rstrip())
-            ssh.close()
+            # ssh.close()
 
             cmd1=f"vmm-api config ./tmp/lab.conf -g {param1.vmm_group}".split()
             result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
@@ -2169,21 +2169,30 @@ def start(d1):
 
 def rewrite_lab_yaml(d1):
     lab_data = f"tmp/lab_{d1['name']}.yaml"
-    with open(lab_data) as f1:
-        d2 = f1.read()
-    d3 = yaml.load(d2,Loader=yaml.FullLoader)
-    tid = d3['tid']
+    if pathlib.Path(lab_data).is_file():
+        with open(lab_data) as f1:
+            d2 = f1.read()
+        d3 = yaml.load(d2,Loader=yaml.FullLoader)
+        tid = d3['tid']
+    else:
+        topo1 = list_topology(d1)
+        if d1['name'] in topo1.keys():
+            tid = topo1[d1['name']]
     write_lab_yaml(d1,tid)
 
 def vmm_cloud_auth(d1):
     pass
 
 def write_lab_yaml(d1,tid):
-    print(f"write lab.yaml for tid {tid}")
+    print(f"write lab_{d1['name']}.yaml for tid {tid}")
     # ssh=sshconnect(d1)
     # cmd1=f"/volume/vmm-cloud/bin/vmm-api -tid {tid} ls -a"
     # s1,s2,s3=ssh.exec_command(cmd1)
     # ssh.close()
+    if not pathlib.Path(param1.tmp_dir).is_dir():
+        print(f"Creating directory {param1.tmp_dir}")
+        tmp_dir=pathlib.Path(param1.tmp_dir)
+        tmp_dir.mkdir(parents=True, exist_ok=True)
     cmd1=f"vmm-api -tid {tid} ls -a".split()
     result = subprocess.run(cmd1, capture_output=True, text=True, check=True)
     d2={}
@@ -2336,8 +2345,10 @@ def create_lab_config(d1):
         #print(param1.vm_type)
         path1 = f"{d1['pod']['home_dir']}/vm/{d1['name']}/{i}.conf"
         #print(f"path1 ")
-        dsk2 = f"{d1['pod']['home_dir']}/vm/{d1['name']}/{i}_disk2.img"
-        dsk3 = f"{d1['pod']['home_dir']}/vm/{d1['name']}/{i}_disk3.img"
+        # dsk2 = f"{d1['pod']['home_dir']}/vm/{d1['name']}/{i}_disk2.img"
+        # dsk3 = f"{d1['pod']['home_dir']}/vm/{d1['name']}/{i}_disk3.img"
+        dsk2 = f"{d1['pod']['home_dir']}/images/hdb.qcow2"
+        dsk3 = f"{d1['pod']['home_dir']}/images/hdc.qcow2"
         if not d2['vm']:
             # if d1['vm'][i]['os'] == 'pa2':
             # 	d2['vm']={i : { 'type': param1.vm_type[type], 'disk': dsk,'disk2': dsk2,  'install':path1, 'intf':{}}}
@@ -2994,7 +3005,9 @@ def list_bridge(d1):
         for j in d1['vm'][i]['interfaces'].keys():
             if j not in ["lo0","irb"]:
                 if d1['vm'][i]['interfaces'][j]['bridge'] not in bridge1:
-                    bridge1.append(d1['vm'][i]['interfaces'][j]['bridge'])
+                    br0 = d1['vm'][i]['interfaces'][j]['bridge']
+                    if br0 != 'external':
+                        bridge1.append(br0)
     return bridge1
 
 def list_of_bridge(d1):

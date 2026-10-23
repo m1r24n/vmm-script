@@ -370,6 +370,18 @@ Screenshot recording for this can be found here [part1](https://asciinema.org/a/
 
 11. Now the Routing Director cluster is up and running.
 
+## fixing metallb bugs on RD 2.10
+
+Deployment RD with metallb using L3 VIP with BGP will fail.
+
+do the following to fix it.
+1. edit file /etc/kubernetes/po/metallb/metallb.yaml
+2. look for entry for myASN and peerASN, and change the format from **int32** to **int64**
+3. Do the following 
+   - kubectl apply -f /etc/kubernetes/po/metallb/metallb.yaml
+   - kubectl apply -f /etc/kubernetes/po/metallb/config.yaml
+4. if there is no error, then redeploy Routing director installation
+
 
 ## access the web dashboard of Routing Director appliance
 1. verify that wireguard session is up and running

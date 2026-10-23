@@ -33,57 +33,21 @@
 
 # PE3
 
+    set policy-options policy-statement NH then next-hop self
+    set policy-options policy-statement NH then accept
     set routing-instances vrf_mgmt instance-type vrf
-    set routing-instances vrf_mgmt routing-options static route 0.0.0.0/0 next-hop 172.16.62.254
-    set routing-instances vrf_mgmt interface ge-0/0/0.0
-    set routing-instances vrf_mgmt interface ge-0/0/1.0
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt4-sid
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt6-sid
+    set routing-instances vrf_mgmt interface ge-0/0/3.0
     set routing-instances vrf_mgmt route-distinguisher 10.100.255.3:1001
     set routing-instances vrf_mgmt vrf-target target:65000:1001
     set routing-instances vrf_mgmt vrf-table-label
-    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
-
-    set protocols bgp group to_p1 type internal
-    set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:3
-    set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
-    set protocols bgp group to_p1 family inet-vpn unicast advertise-srv6-service
-    set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
-    set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
-    set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
-    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11
-    set protocols bgp rfc8950-compliant
+    set routing-options source-packet-routing srv6 block USID_BLOCK 5f00:0000::/32
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 5f00:0000:0100::/48
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 micro-sid block-name USID_BLOCK
+    set routing-options route-distinguisher-id 10.100.255.1
+    set routing-options router-id 10.100.255.1
     set routing-options autonomous-system 4200000001
-
-
-# PE2
-
-    set routing-instances vrf_mgmt instance-type vrf
-    set routing-instances vrf_mgmt interface ge-0/0/3.0
-    set routing-instances vrf_mgmt route-distinguisher 10.100.255.2:1001
-    set routing-instances vrf_mgmt vrf-target target:65000:1001
-    set routing-instances vrf_mgmt vrf-table-label
-    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
-
-    set protocols bgp group to_p1 type internal
-    set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:2
-    set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
-    set protocols bgp group to_p1 family inet-vpn unicast advertise-srv6-service
-    set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
-    set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
-    set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
-    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11
-    set protocols bgp rfc8950-compliant
-    set routing-options autonomous-system 4200000001
-
-
-# PE1
-
-    set routing-instances vrf_mgmt instance-type vrf
-    set routing-instances vrf_mgmt interface ge-0/0/3.0
-    set routing-instances vrf_mgmt route-distinguisher 10.100.255.1:1001
-    set routing-instances vrf_mgmt vrf-target target:65000:1001
-    set routing-instances vrf_mgmt vrf-table-label
-    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 end-dt46-sid
-
     set protocols bgp group to_p1 type internal
     set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:1
     set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
@@ -91,26 +55,91 @@
     set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
     set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
     set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
-    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11
+    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11 export NH
     set protocols bgp rfc8950-compliant
-    set routing-options autonomous-system 4200000001
+    set protocols isis source-packet-routing srv6 locator SRV6-LOC-1 micro-node-sid
 
+# PE2
+
+
+    set policy-options policy-statement NH then next-hop self
+    set policy-options policy-statement NH then accept
+    set routing-instances vrf_mgmt instance-type vrf
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt4-sid
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt6-sid
+    set routing-instances vrf_mgmt interface ge-0/0/3.0
+    set routing-instances vrf_mgmt route-distinguisher 10.100.255.2:1001
+    set routing-instances vrf_mgmt vrf-target target:65000:1001
+    set routing-instances vrf_mgmt vrf-table-label
+    set routing-options source-packet-routing srv6 block USID_BLOCK 5f00:0000::/32
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 5f00:0000:0200::/48
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 micro-sid block-name USID_BLOCK
+    set routing-options route-distinguisher-id 10.100.255.2
+    set routing-options router-id 10.100.255.2
+    set routing-options autonomous-system 4200000001
+    set protocols bgp group to_p1 type internal
+    set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:2
+    set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
+    set protocols bgp group to_p1 family inet-vpn unicast advertise-srv6-service
+    set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
+    set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
+    set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
+    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11 export NH
+    set protocols bgp rfc8950-compliant
+    set protocols isis source-packet-routing srv6 locator SRV6-LOC-1 micro-node-sid
+
+
+
+# PE1
+
+
+    set policy-options policy-statement NH then next-hop self
+    set policy-options policy-statement NH then accept
+    set routing-instances vrf_mgmt instance-type vrf
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt4-sid
+    set routing-instances vrf_mgmt protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt6-sid
+    set routing-instances vrf_mgmt interface ge-0/0/3.0
+    set routing-instances vrf_mgmt route-distinguisher 10.100.255.1:1001
+    set routing-instances vrf_mgmt vrf-target target:65000:1001
+    set routing-instances vrf_mgmt vrf-table-label
+    set routing-options source-packet-routing srv6 block USID_BLOCK 5f00:0000::/32
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 5f00:0000:0100::/48
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 micro-sid block-name USID_BLOCK
+    set routing-options route-distinguisher-id 10.100.255.1
+    set routing-options router-id 10.100.255.1
+    set routing-options autonomous-system 4200000001
+    set protocols bgp group to_p1 type internal
+    set protocols bgp group to_p1 local-address fc00:dead:beef:ffff::ffff:1
+    set protocols bgp group to_p1 family inet-vpn unicast extended-nexthop
+    set protocols bgp group to_p1 family inet-vpn unicast advertise-srv6-service
+    set protocols bgp group to_p1 family inet-vpn unicast accept-srv6-service
+    set protocols bgp group to_p1 family inet6-vpn unicast advertise-srv6-service
+    set protocols bgp group to_p1 family inet6-vpn unicast accept-srv6-service
+    set protocols bgp group to_p1 neighbor fc00:dead:beef:ffff::ffff:11 export NH
+    set protocols bgp rfc8950-compliant
+    set protocols isis source-packet-routing srv6 locator SRV6-LOC-1 micro-node-sid
 
 
 ## P1
 
+    set policy-options policy-statement LB term 1 then load-balance per-flow
+    set policy-options policy-statement LB term 1 then accept
+    set routing-options source-packet-routing srv6 block USID_BLOCK 5f00:0000::/32
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 5f00:0000:1000::/48
+    set routing-options source-packet-routing srv6 locator SRV6-LOC-1 micro-sid block-name USID_BLOCK
+    set routing-options route-distinguisher-id 10.100.255.11
+    set routing-options router-id 10.100.255.11
+    set routing-options autonomous-system 4200000001
+    set routing-options forwarding-table export LB
     set protocols bgp group to_pe type internal
     set protocols bgp group to_pe local-address fc00:dead:beef:ffff::ffff:11
     set protocols bgp group to_pe passive
     set protocols bgp group to_pe family inet-vpn unicast extended-nexthop
-    set protocols bgp group to_pe family inet-vpn unicast advertise-srv6-service
-    set protocols bgp group to_pe family inet-vpn unicast accept-srv6-service
-    set protocols bgp group to_pe family inet6-vpn unicast advertise-srv6-service
-    set protocols bgp group to_pe family inet6-vpn unicast accept-srv6-service
+    set protocols bgp group to_pe family inet6-vpn unicast
+    set protocols bgp group to_pe cluster 10.100.255.11
     set protocols bgp group to_pe allow fc00:dead:beef:ffff::/64
-    set protocols bgp group to_pe  cluster 10.100.255.11
     set protocols bgp rfc8950-compliant
-    set routing-options autonomous-system 4200000001
+    set protocols isis source-packet-routing srv6 locator SRV6-LOC-1 micro-node-sid
 
 
 ## dhcprelay1
@@ -155,12 +184,12 @@
 ## ubuntu server configuration 
 # node SVR
     #!/bin/bash
-    VM=svr6dc1
-    MAC=56:04:15:00:40:55
-    IPv4=192.168.111.16/24
-    IPv6=fc00:dead:beef:a111::1000:16/64
-    GWv4=192.168.111.1
-    GWv6=fc00:dead:beef:a111::1
+    VM=svr3dc2
+    MAC=56:04:15:00:6c:ac
+    IPv4=192.168.202.13/24
+    IPv6=fc00:dead:beef:a202::1000:13/64
+    GWv4=192.168.202.1
+    GWv6=fc00:dead:beef:a202::1
     DNS=172.16.62.254
     sudo hostname ${VM}
     hostname | sudo tee /etc/hostname
@@ -211,14 +240,14 @@ install LXD
 create OVS bridge and LAG interface
 
     #!/bin/bash
-    export MAC=56:04:20:00:4c:3f
+    export MAC=56:04:15:00:55:d7
     export INTF1=eth0
     export INTF2=eth1
-    export IPv4=192.168.1.109/24
-    export IPv6=fc00:dead:beef:1::1000:109/64
-    export GW4=192.168.1.1
+    export IPv4=192.168.2.103/24
+    export IPv6=fc00:dead:beef:a002::1000:103/64
+    export GW4=192.168.2.1
     export DNS=172.16.62.254
-    export H1=lxc9dc1
+    export H1=lxc3dc2
     sudo hostname ${H1}
     hostname | sudo tee /etc/hostname
     cat << EOF | sudo tee /etc/netplan/02_net.yaml
@@ -412,7 +441,7 @@ configuration for RZ1 on *fwext1*
     set protocols bgp group to_ext neighbor 172.16.63.254 export to_ext
     set protocols bgp group to_ext neighbor 172.16.63.254 peer-as 4200000001
     set protocols bgp group to_ext neighbor fc00:dead:beef:ff63::ffff peer-as 4200000001
-    set routing-options autonomous-system 4200009000
+    set routing-options autonomous-system 4200009001
     set routing-options static route 172.16.1.0/28 discard
     set routing-options static route 172.16.1.16/28 discard
     set policy-options policy-statement to_ext term 1 from route-filter 172.16.1.0/28 orlonger
@@ -1232,3 +1261,401 @@ configuration for RZsvrmgmt on **fwext2**
     set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 match destination-address any
     set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 match application any
     set security policies from-zone RZsvrmgmt to-zone untrust policy policy1 then permit
+
+
+## HBR, LXD2dc2
+
+    cat << EOF | sudo tee /etc/netplan/01_net.yaml
+    network:
+        version: 2
+        ethernets:
+            eth0:
+                dhcp4: false
+                addresses:
+                - 192.168.21.102/24
+                - fc00:dead:beef:2021::1000:102/64
+            eth1:
+                dhcp6: false
+                addresses:
+                - 192.168.22.102/24
+                - fc00:dead:beef:2022::1000:102/64
+        bridges:
+            br0:
+                addresses:
+                - 192.168.222.1/24
+                - fc00:dead:Beef:a222::1/64
+    EOF
+    sudo netplan apply
+    sudo hostname lxd2dc2
+    hostname | sudo tee /etc/hostname
+    sudo netplan apply
+    sudo sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
+    sudo sed -i -e "s/bfdd=no/bfdd=yes/" /etc/frr/daemons
+    sudo systemctl restart frr
+
+    Current configuration:
+    !
+    
+    !
+    router bgp 4200008202
+    no bgp ebgp-requires-policy
+    bgp bestpath as-path multipath-relax
+    neighbor 192.168.21.1 remote-as 4200002001
+    neighbor 192.168.21.1 bfd
+    neighbor 192.168.21.1 bfd profile BFD1
+    neighbor 192.168.22.1 remote-as 4200002002
+    neighbor 192.168.22.1 bfd
+    neighbor 192.168.22.1 bfd profile BFD1
+    neighbor fc00:dead:beef:2021::1 remote-as 4200002001
+    neighbor fc00:dead:beef:2021::1 bfd
+    neighbor fc00:dead:beef:2021::1 bfd profile BFD1
+    neighbor fc00:dead:beef:2022::1 remote-as 4200002002
+    neighbor fc00:dead:beef:2022::1 bfd
+    neighbor fc00:dead:beef:2022::1 bfd profile BFD1
+    !
+    address-family ipv4 unicast
+    network 192.168.222.0/24
+    neighbor 192.168.21.1 distribute-list adv1v4 out
+    neighbor 192.168.22.1 distribute-list adv1v4 out
+    maximum-paths 4
+    exit-address-family
+    !
+    address-family ipv6 unicast
+    network fc00:dead:beef:a222::/64
+    neighbor fc00:dead:beef:2021::1 activate
+    neighbor fc00:dead:beef:2021::1 distribute-list adv1v6 out
+    neighbor fc00:dead:beef:2022::1 activate
+    neighbor fc00:dead:beef:2022::1 distribute-list adv1v6 out
+    maximum-paths 4
+    exit-address-family
+    exit
+    !
+    access-list adv1v4 seq 5 permit 192.168.222.0/24
+    !
+    ipv6 access-list adv1v6 seq 5 permit fc00:dead:beef:a222::/64
+    !
+    bfd
+    profile BFD1
+    transmit-interval 500
+    receive-interval 500
+    exit
+    !
+    exit
+    !
+    end
+
+
+## HBR, LXD4dc2
+
+    cat << EOF | sudo tee /etc/netplan/01_net.yaml
+    network:
+        version: 2
+        ethernets:
+            eth0:
+                dhcp4: false
+                addresses:
+                - 192.168.21.104/24
+                - fc00:dead:beef:2021::1000:104/64
+            eth1:
+                dhcp6: false
+                addresses:
+                - 192.168.22.104/24
+                - fc00:dead:beef:2022::1000:104/64
+        bridges:
+            br0:
+                addresses:
+                - 192.168.224.1/24
+                - fc00:dead:Beef:a224::1/64
+    EOF
+    sudo netplan apply
+    sudo hostname lxd4dc2
+    hostname | sudo tee /etc/hostname
+    sudo netplan apply
+    sudo sed -i -e "s/bgpd=no/bgpd=yes/" /etc/frr/daemons
+    sudo sed -i -e "s/bfdd=no/bfdd=yes/" /etc/frr/daemons
+    sudo systemctl restart frr
+
+    Current configuration:
+    !
+    
+    !
+    router bgp 4200008204
+    no bgp ebgp-requires-policy
+    bgp bestpath as-path multipath-relax
+    neighbor 192.168.21.1 remote-as 4200002001
+    neighbor 192.168.21.1 bfd
+    neighbor 192.168.21.1 bfd profile BFD1
+    neighbor 192.168.22.1 remote-as 4200002002
+    neighbor 192.168.22.1 bfd
+    neighbor 192.168.22.1 bfd profile BFD1
+    neighbor fc00:dead:beef:2021::1 remote-as 4200002001
+    neighbor fc00:dead:beef:2021::1 bfd
+    neighbor fc00:dead:beef:2021::1 bfd profile BFD1
+    neighbor fc00:dead:beef:2022::1 remote-as 4200002002
+    neighbor fc00:dead:beef:2022::1 bfd
+    neighbor fc00:dead:beef:2022::1 bfd profile BFD1
+    !
+    address-family ipv4 unicast
+    network 192.168.224.0/24
+    neighbor 192.168.21.1 distribute-list adv1v4 out
+    neighbor 192.168.22.1 distribute-list adv1v4 out
+    maximum-paths 4
+    exit-address-family
+    !
+    address-family ipv6 unicast
+    network fc00:dead:beef:a224::/64
+    neighbor fc00:dead:beef:2021::1 activate
+    neighbor fc00:dead:beef:2021::1 distribute-list adv1v6 out
+    neighbor fc00:dead:beef:2022::1 activate
+    neighbor fc00:dead:beef:2022::1 distribute-list adv1v6 out
+    maximum-paths 4
+    exit-address-family
+    exit
+    !
+    access-list adv1v4 seq 5 permit 192.168.224.0/24
+    !
+    ipv6 access-list adv1v6 seq 5 permit fc00:dead:beef:a224::/64
+    !
+    bfd
+    profile BFD1
+    transmit-interval 500
+    receive-interval 500
+    exit
+    !
+    exit
+    !
+    end
+
+
+# for DCI/OTT
+
+## PE1
+
+    set interfaces ge-0/0/0.0 family inet address 172.16.100.33/31
+    set interfaces ge-0/0/0 mtu 9000
+    set interfaces ge-0/0/1 mtu 9000
+    set interfaces ge-0/0/1.0 family inet address 172.16.100.35/31
+    set routing-instances underlay instance-type vrf
+    set routing-instances underlay vrf-table-label
+    set routing-instances underlay protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt4-sid
+    set routing-instances underlay interface ge-0/0/0.0
+    set routing-instances underlay interface ge-0/0/1.0
+    set routing-instances underlay route-distinguisher 10.100.255.1:1010
+    set routing-instances underlay vrf-target target:65000:1010
+    set routing-instances underlay vrf-table-label
+    set routing-instances underlay protocols bgp group to_dc1 neighbor 172.16.100.32 peer-as 4200001105
+    set routing-instances underlay protocols bgp group to_dc1 neighbor 172.16.100.34 peer-as 4200001106
+
+## PE2
+
+    set interfaces ge-0/0/0.0 family inet address 172.16.100.37/31
+    set interfaces ge-0/0/1.0 family inet address 172.16.100.39/31
+    set interfaces ge-0/0/0 mtu 9000
+    set interfaces ge-0/0/1 mtu 9000
+    set routing-instances underlay instance-type vrf
+    set routing-instances underlay vrf-table-label
+    set routing-instances underlay protocols bgp source-packet-routing srv6 locator SRV6-LOC-1 micro-dt4-sid
+    set routing-instances underlay interface ge-0/0/0.0
+    set routing-instances underlay interface ge-0/0/1.0
+    set routing-instances underlay route-distinguisher 10.100.255.2:1010
+    set routing-instances underlay vrf-target target:65000:1010
+    set routing-instances underlay vrf-table-label
+    set routing-instances underlay protocols bgp group to_dc2 neighbor 172.16.100.36 peer-as 4200002001
+    set routing-instances underlay protocols bgp group to_dc2 neighbor 172.16.100.38 peer-as 4200002002
+
+
+
+
+configuration for RZ11 on *fwext1*
+
+
+    set interfaces ge-0/0/1 unit 1005 vlan-id 1005
+    set interfaces ge-0/0/1 unit 1005 family inet address 172.16.100.41/31
+    set interfaces ge-0/0/1 unit 1005 family inet6 address fc00:dead:beef:f100::41/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1005 vlan-id 1005
+    set interfaces ge-0/0/2 unit 1005 family inet address 172.16.100.43/31
+    set interfaces ge-0/0/2 unit 1005 family inet6 address fc00:dead:beef:f100::43/127
+    set security zones security-zone RZ11 host-inbound-traffic system-services ping
+    set security zones security-zone RZ11 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ11 host-inbound-traffic protocols all
+    set security zones security-zone RZ11 interfaces ge-0/0/1.1005
+    set security zones security-zone RZ11 interfaces ge-0/0/2.1005
+    set protocols bgp group to_border_leaf_RZ11 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ11 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ11 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ11 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ11 neighbor 172.16.100.40 peer-as 4200001105
+    set protocols bgp group to_border_leaf_RZ11 neighbor 172.16.100.42 peer-as 4200001106
+    set protocols bgp group to_border_leaf_RZ11 neighbor fc00:dead:beef:f100::40 peer-as 4200001105
+    set protocols bgp group to_border_leaf_RZ11 neighbor fc00:dead:beef:f100::42 peer-as 4200001106
+
+    set security nat source rule-set rs1 from zone RZ11
+
+    set security nat destination pool dnat7 address 192.168.31.101/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule5 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule5 match destination-address 172.16.1.20/32
+    set security nat destination rule-set rs1 rule rule5 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule5 then destination-nat pool dnat7
+
+    set security address-book global address L3DC1 fc00:dead:beef:a031::/64
+    set security address-book global address lxc4lxd1dc1 192.168.31.101/32
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match destination-address L3DC1
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ11 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match destination-address lxc4lxd1dc1
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ11 policy policy2 then permit
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 then permit
+
+
+
+configuration for RZ12 on *fwext1*
+
+    set interfaces ge-0/0/1 unit 1006 vlan-id 1006
+    set interfaces ge-0/0/1 unit 1006 family inet address 172.16.100.49/31
+    set interfaces ge-0/0/1 unit 1006 family inet6 address fc00:dead:beef:f100::49/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1006 vlan-id 1006
+    set interfaces ge-0/0/2 unit 1006 family inet address 172.16.100.51/31
+    set interfaces ge-0/0/2 unit 1006 family inet6 address fc00:dead:beef:f100::51/127
+    set security zones security-zone RZ12 host-inbound-traffic system-services ping
+    set security zones security-zone RZ12 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ12 host-inbound-traffic protocols all
+    set security zones security-zone RZ12 interfaces ge-0/0/1.1006
+    set security zones security-zone RZ12 interfaces ge-0/0/2.1006
+    set protocols bgp group to_border_leaf_RZ12 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ12 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ12 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ12 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ12 neighbor 172.16.100.48 peer-as 4200001105
+    set protocols bgp group to_border_leaf_RZ12 neighbor 172.16.100.50 peer-as 4200001106
+    set protocols bgp group to_border_leaf_RZ12 neighbor fc00:dead:beef:f100::48 peer-as 4200001105
+    set protocols bgp group to_border_leaf_RZ12 neighbor fc00:dead:beef:f100::50 peer-as 4200001106
+
+    set security nat source rule-set rs1 from zone RZ12
+
+    set security nat destination pool dnat8 address 192.168.41.101/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule6 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule6 match destination-address 172.16.1.21/32
+    set security nat destination rule-set rs1 rule rule6 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule6 then destination-nat pool dnat8
+
+    set security address-book global address L2DC1 fc00:dead:beef:a041::/64
+    set security address-book global address lxc5lxd1dc1 192.168.41.101/32
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match destination-address L2DC1
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ12 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match destination-address lxc5lxd1dc1
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ12 policy policy2 then permit
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 then permit
+
+
+configuration for RZ11 on *fwext2*
+
+
+    set interfaces ge-0/0/1 unit 1005 vlan-id 1005
+    set interfaces ge-0/0/1 unit 1005 family inet address 172.16.100.45/31
+    set interfaces ge-0/0/1 unit 1005 family inet6 address fc00:dead:beef:f100::45/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1005 vlan-id 1005
+    set interfaces ge-0/0/2 unit 1005 family inet address 172.16.100.47/31
+    set interfaces ge-0/0/2 unit 1005 family inet6 address fc00:dead:beef:f100::47/127
+    set security zones security-zone RZ11 host-inbound-traffic system-services ping
+    set security zones security-zone RZ11 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ11 host-inbound-traffic protocols all
+    set security zones security-zone RZ11 interfaces ge-0/0/1.1005
+    set security zones security-zone RZ11 interfaces ge-0/0/2.1005
+    set protocols bgp group to_border_leaf_RZ11 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ11 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ11 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ11 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ11 neighbor 172.16.100.44 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ11 neighbor 172.16.100.46 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ11 neighbor fc00:dead:beef:f100::44 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ11 neighbor fc00:dead:beef:f100::46 peer-as 4200002002
+
+    set security nat source rule-set rs1 from zone RZ11
+
+    set security nat destination pool dnat7 address 192.168.32.201/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule5 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule5 match destination-address 172.16.1.52/32
+    set security nat destination rule-set rs1 rule rule5 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule5 then destination-nat pool dnat7
+
+    set security address-book global address L3DC2 fc00:dead:beef:a032::/64
+    set security address-book global address lxc4lxd1dc2 192.168.32.201/32
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match destination-address L3DC2
+    set security policies from-zone untrust to-zone RZ11 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ11 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match destination-address lxc4lxd1dc2
+    set security policies from-zone untrust to-zone RZ11 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ11 policy policy2 then permit
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ11 to-zone untrust policy policy1 then permit
+
+configuration for RZ12 on *fwext2*
+
+
+    set interfaces ge-0/0/1 unit 1006 vlan-id 1006
+    set interfaces ge-0/0/1 unit 1006 family inet address 172.16.100.53/31
+    set interfaces ge-0/0/1 unit 1006 family inet6 address fc00:dead:beef:f100::53/127
+    set interfaces ge-0/0/2 vlan-tagging
+    set interfaces ge-0/0/2 unit 1006 vlan-id 1006
+    set interfaces ge-0/0/2 unit 1006 family inet address 172.16.100.55/31
+    set interfaces ge-0/0/2 unit 1006 family inet6 address fc00:dead:beef:f100::55/127
+    set security zones security-zone RZ12 host-inbound-traffic system-services ping
+    set security zones security-zone RZ12 host-inbound-traffic system-services ssh
+    set security zones security-zone RZ12 host-inbound-traffic protocols all
+    set security zones security-zone RZ12 interfaces ge-0/0/1.1006
+    set security zones security-zone RZ12 interfaces ge-0/0/2.1006
+    set protocols bgp group to_border_leaf_RZ12 export to_border_leaf
+    set protocols bgp group to_border_leaf_RZ12 multipath multiple-as
+    set protocols bgp group to_border_leaf_RZ12 bfd-liveness-detection minimum-interval 500
+    set protocols bgp group to_border_leaf_RZ12 bfd-liveness-detection multiplier 3
+    set protocols bgp group to_border_leaf_RZ12 neighbor 172.16.100.52 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ12 neighbor 172.16.100.54 peer-as 4200002002
+    set protocols bgp group to_border_leaf_RZ12 neighbor fc00:dead:beef:f100::52 peer-as 4200002001
+    set protocols bgp group to_border_leaf_RZ12 neighbor fc00:dead:beef:f100::54 peer-as 4200002002
+
+    set security nat source rule-set rs1 from zone RZ12
+
+    set security nat destination pool dnat8 address 192.168.41.201/32
+    set security nat destination rule-set rs1 from zone untrust
+    set security nat destination rule-set rs1 rule rule6 match source-address 0.0.0.0/0
+    set security nat destination rule-set rs1 rule rule6 match destination-address 172.16.1.53/32
+    set security nat destination rule-set rs1 rule rule6 match application junos-ssh
+    set security nat destination rule-set rs1 rule rule6 then destination-nat pool dnat8
+
+    set security address-book global address L2DC2 fc00:dead:beef:a041::/64
+    set security address-book global address lxc5lxd1dc2 192.168.41.201/32
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match source-address any
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match destination-address L2DC2
+    set security policies from-zone untrust to-zone RZ12 policy policy1 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ12 policy policy1 then permit
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match source-address any
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match destination-address lxc5lxd1dc2
+    set security policies from-zone untrust to-zone RZ12 policy policy2 match application junos-ssh
+    set security policies from-zone untrust to-zone RZ12 policy policy2 then permit
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match source-address any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match destination-address any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 match application any
+    set security policies from-zone RZ12 to-zone untrust policy policy1 then permit

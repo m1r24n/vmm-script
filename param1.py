@@ -29,7 +29,7 @@ ubuntu_os=['ubuntu','ubuntu2','ubuntu3','desktop','gw']
 #    'veos': {'ncpus' : 2, 'memory':4096}
 # }
 vm_type={
-   'gw': {'ncpus' : 2,'memory':4096,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
+   'gw': {'ncpus' : 2,'memory':8192,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'pctiny': {'ncpus' : 1,'memory':4096,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'pcsmall': {'ncpus' : 2,'memory':8192,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},
    'pcmedium': {'ncpus' : 4,'memory':16384,'setvar':'"+qemu_args" "-cpu qemu64,+vmx"'},

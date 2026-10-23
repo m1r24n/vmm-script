@@ -1,15 +1,13 @@
 ---
 name: srv6
 pod: 
-  type: cloud
-  vmmserver: q-pod32-vmm.englab.juniper.net
   user: irzan
-  home_dir : /vmm/data/user_disks/irzan
+  #home_dir : /vmm/data/user_disks/mochammad.irzan
+  home_dir: /net/costco-lif/vmm/user_disks/mochammad.irzan
   dns: 172.16.11.254
 images:
-  gw: images/gw3.qcow2
-  ubuntu: images/ubuntu26.04.qcow2
-  ubuntu2: images/ubuntu24.04.qcow2
+  gw: vmm-images/unix/gw3.qcow2
+  ubuntu: vmm-images/unix/ubuntu2604.qcow2
   vjunos_router: images/vJunos-router-26.2R1.7.qcow2
 junos_login:
   login: admin
@@ -92,15 +90,15 @@ vm:
         family:
           inet: 172.16.12.11/24
           gateway4: 172.16.12.254
-  ac:
-    type: pcmedium
-    os: ubuntu2
-    interfaces:
-      em0: 
-        bridge: oob
-        family:
-          inet: 172.16.11.11/24
-          gateway4: 172.16.11.254
+  # ac:
+  #   type: pcmedium
+  #   os: ubuntu2
+  #   interfaces:
+  #     em0: 
+  #       bridge: oob
+  #       family:
+  #         inet: 172.16.11.11/24
+  #         gateway4: 172.16.11.254
   # nms2:
   #   type: pcmedium
   #   os: ubuntu
@@ -152,6 +150,8 @@ vm:
           inet6: fc00:dead:beef:ffff::ffff:1/128
         protocol:
           isis: passive
+      ge-0/0/3:
+        bridge: external
   r2:
     type: vjunos_router
     os: vjunos_router

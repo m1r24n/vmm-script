@@ -1,11 +1,11 @@
 ### by vmm-v3-script ###
 Host *
     StrictHostKeyChecking no
-
+{#
 host vmm 
     hostname {{vmm}}
     user {{ user }}
-    
+#}
 host gw
     {% if jumphost -%}
     ProxyCommand ssh -W {{ gw.ip }}:22 jumphost

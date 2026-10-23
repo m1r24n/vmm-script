@@ -22,6 +22,10 @@ so you need to upgrade ncclient to version 0.7.0, but during the upgrade, you ma
        Successfully installed ncclient-0.7.0
 
 
+## install sdk
+
+pip install -U --index-url https://vmm-cloud.englab.juniper.net/pypi/simple vmm-cloud
+
 ## update on the script
 new features has been added into the scripts :
 

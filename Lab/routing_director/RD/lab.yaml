@@ -62,7 +62,7 @@ vm:
     type: pchpv0
     vnc: yes
     os: rd
-    hd2: 100g
+    hd2: yes
     interfaces:
       em0: 
         bridge: control
@@ -74,7 +74,7 @@ vm:
     type: pchpv0
     vnc: yes
     os: rd
-    hd2: 100g
+    hd2: yes
     interfaces:
       em0: 
         bridge: control
@@ -86,7 +86,7 @@ vm:
     type: pchpv0
     vnc: yes
     os: rd
-    hd2: 100g
+    hd2: yes
     interfaces:
       em0: 
         bridge: control

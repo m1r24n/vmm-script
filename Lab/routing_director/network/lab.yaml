@@ -1,10 +1,10 @@
 ---
 name: rdnet # this is rdnet
 pod: 
-  type: cloud
+  #type: cloud
   #vmmserver: q-pod35-vmm.englab.juniper.net
-  # vmmserver: q-pod27-vmm.englab.juniper.net
-  vmmserver: q-pod32-vmm.englab.juniper.net
+  #vmmserver: q-pod27-vmm.englab.juniper.net
+  #vmmserver: q-pod32-vmm.englab.juniper.net
   user: irzan
   # adpassword: ThisIsAnaMabokCoy
   home_dir : /vmm/data/user_disks/irzan
